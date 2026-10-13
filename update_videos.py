@@ -5,7 +5,7 @@ URL = "https://www.youtube.com/feeds/videos.xml?playlist_id=UULFcxWasE5LwVCysRA5
 A = "{http://www.w3.org/2005/Atom}"
 YT = "{http://www.youtube.com/xml/schemas/2015}"
 
-def parse(xml_bytes, limit=3):
+def parse(xml_bytes, limit=4):
     root = ET.fromstring(xml_bytes)
     out = []
     for e in root.findall(A + "entry")[:limit]:
