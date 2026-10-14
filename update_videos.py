@@ -124,12 +124,39 @@ def latest_videos():
     return []
 
 
+def latest_shorts():
+    key = os.environ.get("YT_API_KEY", "").strip()
+    if key:
+        try:
+            videos = api_playlist("UUSH" + CHANNEL_ID[2:], key, LIMIT)
+            if videos:
+                return videos
+        except Exception as exc:
+            print(f"API Shorts playlist failed: {exc}")
+    data = fetch("https://www.youtube.com/feeds/videos.xml?playlist_id=UUSH" + CHANNEL_ID[2:])
+    if data:
+        try:
+            return parse(data)
+        except Exception as exc:
+            print(f"Could not read Shorts feed: {exc}")
+    return []
+
+
+def save(name, videos):
+    with open(name, "w", encoding="utf-8") as f:
+        json.dump(videos, f, ensure_ascii=False, indent=2)
+    print(f"Saved {len(videos)} items to {name}")
+
+
 if __name__ == "__main__":
     videos = latest_videos()
-    if not videos:
-        # keep the previous videos.json, do not fail the workflow
+    if videos:
+        save("videos.json", videos)
+    else:
         print("::warning::Could not update videos, keeping the old list")
-        sys.exit(0)
-    with open("videos.json", "w", encoding="utf-8") as f:
-        json.dump(videos, f, ensure_ascii=False, indent=2)
-    print(f"Saved {len(videos)} videos")
+    shorts = latest_shorts()
+    if shorts:
+        save("shorts.json", shorts)
+    else:
+        print("::warning::Could not update Shorts, keeping the old list")
+    sys.exit(0)
