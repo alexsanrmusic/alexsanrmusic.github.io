@@ -1,4 +1,4 @@
-import json, sys, time, urllib.error, urllib.request
+import json, os, sys, time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 
 CHANNEL_ID = "UCcxWasE5LwVCysRA5Dlv5IQ"
@@ -57,7 +57,56 @@ def is_short(video_id):
         return False
 
 
+API_URL = "https://www.googleapis.com/youtube/v3/playlistItems"
+
+
+def api_playlist(playlist_id, key, max_results):
+    query = urllib.parse.urlencode({
+        "part": "snippet,contentDetails",
+        "playlistId": playlist_id,
+        "maxResults": max_results,
+        "key": key,
+    })
+    req = urllib.request.Request(API_URL + "?" + query, headers=HEADERS)
+    data = json.loads(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
+    out = []
+    for item in data.get("items", []):
+        cd = item.get("contentDetails", {})
+        sn = item.get("snippet", {})
+        vid = cd.get("videoId")
+        if not vid or sn.get("title") in ("Private video", "Deleted video"):
+            continue
+        out.append({
+            "id": vid,
+            "title": sn.get("title", ""),
+            "published": cd.get("videoPublishedAt") or sn.get("publishedAt", ""),
+        })
+    return out
+
+
+def latest_from_api(key):
+    """Official API: first the long-video playlist (UULF), then all uploads (UU) without Shorts."""
+    try:
+        videos = api_playlist("UULF" + CHANNEL_ID[2:], key, LIMIT)
+        if videos:
+            return videos
+    except Exception as exc:
+        print(f"API playlist UULF failed: {exc}")
+    try:
+        videos = api_playlist("UU" + CHANNEL_ID[2:], key, 15)
+        return [v for v in videos if not is_short(v["id"])][:LIMIT]
+    except Exception as exc:
+        print(f"API uploads playlist failed: {exc}")
+    return []
+
+
 def latest_videos():
+    key = os.environ.get("YT_API_KEY", "").strip()
+    if key:
+        videos = latest_from_api(key)
+        if videos:
+            return videos
+        print("API gave nothing, trying RSS feeds")
     for url in FEEDS:
         data = fetch(url)
         if data is None:
