@@ -1,0 +1,25 @@
+{
+  "albums": [
+    {
+      "id": "echo-ua",
+      "title": "Echo UA",
+      "lang": "uk",
+      "year": 2026,
+      "audiomack": "https://audiomack.com/alexsanrmusic/playlist/echo-ua",
+      "embed": "https://audiomack.com/embed/playlist/alexsanrmusic/echo-ua",
+      "tracks": [
+        { "title": "Маленький човник", "drive": "11_ajMEUgQd8ZdDLuL1UtcYb2SCjno8V3", "clip": "https://youtu.be/hYcTye10IMo" },
+        { "title": "День дякую", "drive": "1iMkNsis0nVooKGT61G9ovnH7pMxvXTuO", "clip": "https://youtu.be/ds9OH8nwhGU" },
+        { "title": "Львівський трамвай", "drive": "1DAWM2DaX_d_c3K9D395OjwVHgh9aLyhC", "clip": "https://youtu.be/Dgvxxcjq_vo" },
+        { "title": "Моя люба", "drive": "1whsuNSXBdWZzfb_bkOcusFi6b54g_nbN", "clip": "https://youtu.be/HGZFK7io6WU" },
+        { "title": "Моя люба (Blues version)", "drive": "1GGv6JvslFI6TJDUNEuY6awEaA08WApf7", "clip": "https://youtu.be/geGwcPqI82M" },
+        { "title": "З новим роком!", "drive": "1qEwQxrxoWooHwCgnFx22KTQkwcEJSc4f", "clip": "https://youtu.be/cZWfHKZ7kJU" },
+        { "title": "Новорічна", "drive": "1UjFywfB_yIJje47aYFGIRI1EjbJQ4hlD" },
+        { "title": "Добрий вечір тобі...", "drive": "12F-Cbd72jDsX-B-a_vSH3Qggm0COOpr2", "clip": "https://youtu.be/_99Hxv2T8FA" },
+        { "title": "Новий гімн України", "drive": "1CQBA_2wBTUeJbhrGYjS_m1DMA1edcWqo" },
+        { "title": "Щедрий вечір", "drive": "1URvaGwsUndB60Y-65QjTGuFy_WE5frRB" },
+        { "title": "Romantic 404", "drive": "1RufAtGz1HAkA9Y1MGwRq238awaXvJxnI", "clip": "https://youtu.be/JVbrBIVzr3Q" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Альбоми — Alex Sanr</title>
+<meta name="description" content="Альбоми Alex Sanr: слухайте онлайн, завантажуйте треки та дивіться кліпи.">
+<meta name="theme-color" content="#0b0f1f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alex Sanr">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Альбоми — Alex Sanr">
+<meta property="og:description" content="Слухайте альбоми онлайн, завантажуйте треки та дивіться кліпи.">
+<meta property="og:url" content="https://alexsanrmusic.github.io/albums.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;800&display=swap">
+<style>
+:root {
+  --bg: #0b0f1f;
+  --surface: #151b32;
+  --fg: #edf0f9;
+  --muted: #9aa4c4;
+  --line: #272f4f;
+  --accent: #ffc83d;
+  --accent-ink: #0b0f1f;
+  --blue: #8ba4ff;
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  padding-inline: 20px;
+}
+.wrap { max-width: 1200px; margin-inline: auto; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+header { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 16px; text-decoration: none; letter-spacing: 0.02em; }
+nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover, nav a[aria-current="page"] { color: var(--fg); }
+
+main { padding-block: 48px 64px; }
+h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 6vw, 3rem); letter-spacing: -0.02em; margin: 0 0 24px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.chip { border: 1.5px solid var(--line); background: transparent; color: var(--muted); padding: 8px 18px; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; }
+.chip:hover { color: var(--fg); border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+
+.album { background: var(--surface); border-radius: 20px; margin-bottom: 16px; overflow: hidden; }
+.album-head { display: flex; align-items: center; gap: 18px; width: 100%; padding: 16px 20px; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.cover { flex: none; width: 64px; height: 64px; border-radius: 14px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--accent-ink); background: linear-gradient(135deg, var(--accent), #ff8a5c); }
+.album-info { flex: 1; min-width: 0; }
+.album-title { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.05rem, 3.4vw, 1.35rem); line-height: 1.25; }
+.album-meta { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
+.chev { flex: none; width: 12px; height: 12px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .2s; margin-right: 6px; }
+.album.open .chev { transform: rotate(-135deg); }
+.album-body { padding: 4px 20px 22px; }
+.album-body[hidden] { display: none; }
+
+.embed iframe { display: block; width: 100%; height: 420px; border: 0; border-radius: 12px; background: #0000; }
+.open-link { display: inline-block; margin: 10px 0 18px; color: var(--muted); font-size: 14px; }
+.open-link:hover { color: var(--fg); }
+
+.tracks { list-style: none; margin: 0; padding: 0; counter-reset: t; border-top: 1px solid var(--line); }
+.track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: t; }
+.track-name { flex: 1 1 220px; min-width: 0; }
+.track-name::before { content: counter(t) ". "; color: var(--muted); }
+.track-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.pill { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.pill-dl { background: var(--accent); color: var(--accent-ink); }
+.pill-dl:hover { filter: brightness(1.06); }
+.pill-clip { border: 1.5px solid var(--fg); }
+.pill-clip:hover { background: var(--bg); }
+
+.note { color: var(--muted); }
+footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+@media (max-width: 600px) {
+  body { font-size: 16px; padding-inline: 16px; }
+  .album-head { padding: 14px; gap: 14px; }
+  .album-body { padding: 4px 14px 18px; }
+  .cover { width: 52px; height: 52px; font-size: 17px; }
+  .embed iframe { height: 340px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="index.html">ALEX SANR</a>
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="albums.html" aria-current="page">Альбоми</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Альбоми</h1>
+    <div class="filters" id="filters" role="group" aria-label="Мова"></div>
+    <div id="albums"><p class="note">Завантаження…</p></div>
+    <noscript><p class="note">Для перегляду альбомів потрібен JavaScript.</p></noscript>
+  </main>
+
+  <footer>
+    <span>© <span id="year">2026</span> Alex Sanr</span>
+    <a href="https://www.youtube.com/@alexsanrmusic" target="_blank" rel="noopener">youtube.com/@alexsanrmusic</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var LANGS = { uk: 'Українська', ru: 'Русская', en: 'English' };
+  var albumsEl = document.getElementById('albums');
+  var filtersEl = document.getElementById('filters');
+  var albums = [];
+  var currentLang = 'all';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function driveLink(id) {
+    return 'https://drive.google.com/uc?export=download&id=' + encodeURIComponent(id);
+  }
+
+  function closeAlbum(card) {
+    card.classList.remove('open');
+    card.querySelector('.album-head').setAttribute('aria-expanded', 'false');
+    var body = card.querySelector('.album-body');
+    body.hidden = true;
+    var holder = body.querySelector('.embed');
+    if (holder) holder.textContent = '';
+  }
+
+  function openAlbum(card, album) {
+    Array.prototype.forEach.call(albumsEl.querySelectorAll('.album.open'), function (c) {
+      if (c !== card) closeAlbum(c);
+    });
+    card.classList.add('open');
+    card.querySelector('.album-head').setAttribute('aria-expanded', 'true');
+    var body = card.querySelector('.album-body');
+    body.hidden = false;
+    var holder = body.querySelector('.embed');
+    if (holder && !holder.firstChild && album.embed) {
+      var f = document.createElement('iframe');
+      f.src = album.embed;
+      f.title = 'Плеєр Audiomack — ' + album.title;
+      f.setAttribute('allow', 'autoplay; fullscreen');
+      f.setAttribute('loading', 'lazy');
+      holder.appendChild(f);
+    }
+  }
+
+  function buildCard(album) {
+    var card = el('article', 'album');
+    card.dataset.lang = album.lang;
+
+    var head = el('button', 'album-head');
+    head.type = 'button';
+    head.setAttribute('aria-expanded', 'false');
+    head.appendChild(el('span', 'cover', (album.lang || '').toUpperCase()));
+    var info = el('span', 'album-info');
+    info.appendChild(el('span', 'album-title', album.title));
+    info.appendChild(el('span', 'album-meta',
+      (LANGS[album.lang] || album.lang) + ' · ' + album.year + ' · ' + album.tracks.length + ' треків'));
+    head.appendChild(info);
+    head.appendChild(el('span', 'chev'));
+    card.appendChild(head);
+
+    var body = el('div', 'album-body');
+    body.hidden = true;
+    body.appendChild(el('div', 'embed'));
+    if (album.audiomack) {
+      var a = el('a', 'open-link', 'Відкрити на Audiomack →');
+      a.href = album.audiomack; a.target = '_blank'; a.rel = 'noopener';
+      body.appendChild(a);
+    }
+
+    var ul = el('ol', 'tracks');
+    album.tracks.forEach(function (t) {
+      var li = el('li', 'track');
+      li.appendChild(el('span', 'track-name', t.title));
+      var links = el('span', 'track-links');
+      if (t.drive) {
+        var d = el('a', 'pill pill-dl', '⬇ Завантажити');
+        d.href = driveLink(t.drive); d.rel = 'noopener';
+        d.setAttribute('aria-label', 'Завантажити: ' + t.title);
+        links.appendChild(d);
+      }
+      if (t.clip) {
+        var c = el('a', 'pill pill-clip', '▶ Дивитись кліп');
+        c.href = t.clip; c.target = '_blank'; c.rel = 'noopener';
+        c.setAttribute('aria-label', 'Дивитись кліп: ' + t.title);
+        links.appendChild(c);
+      }
+      li.appendChild(links);
+      ul.appendChild(li);
+    });
+    body.appendChild(ul);
+    card.appendChild(body);
+
+    head.addEventListener('click', function () {
+      if (card.classList.contains('open')) closeAlbum(card); else openAlbum(card, album);
+    });
+    return card;
+  }
+
+  function render() {
+    albumsEl.textContent = '';
+    var shown = albums.filter(function (a) { return currentLang === 'all' || a.lang === currentLang; });
+    if (!shown.length) {
+      albumsEl.appendChild(el('p', 'note', 'Альбомів цією мовою поки немає.'));
+      return;
+    }
+    shown.forEach(function (a, i) {
+      var card = buildCard(a);
+      albumsEl.appendChild(card);
+      if (i === 0) openAlbum(card, a);
+    });
+  }
+
+  function buildFilters() {
+    var present = [];
+    albums.forEach(function (a) { if (present.indexOf(a.lang) < 0) present.push(a.lang); });
+    filtersEl.textContent = '';
+    if (present.length < 2) return;
+    var items = [['all', 'Усі']].concat(present.map(function (l) { return [l, LANGS[l] || l]; }));
+    items.forEach(function (it) {
+      var b = el('button', 'chip', it[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(it[0] === currentLang));
+      b.addEventListener('click', function () {
+        currentLang = it[0];
+        Array.prototype.forEach.call(filtersEl.children, function (x, i) {
+          x.setAttribute('aria-pressed', String(items[i][0] === currentLang));
+        });
+        render();
+      });
+      filtersEl.appendChild(b);
+    });
+  }
+
+  var q = new URLSearchParams(location.search).get('lang');
+  if (q) currentLang = q;
+
+  fetch('albums.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      albums = data.albums || [];
+      if (currentLang !== 'all' && !albums.some(function (a) { return a.lang === currentLang; })) currentLang = 'all';
+      buildFilters();
+      render();
+    })
+    .catch(function () {
+      albumsEl.textContent = '';
+      albumsEl.appendChild(el('p', 'note', 'Не вдалося завантажити список альбомів. Спробуйте оновити сторінку.'));
+    });
+})();
+</script>
+</body>
+</html>
