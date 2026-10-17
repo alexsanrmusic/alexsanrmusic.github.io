@@ -116,6 +116,60 @@
       ]
     },
     {
+      "id": "tihi-momenty",
+      "title": "Тихі моменти",
+      "lang": "uk",
+      "year": 2026,
+      "cover": "images/tihi-momenty.jpg",
+      "tracks": [
+        {
+          "title": "Тримай мою долонь",
+          "drive": "10rf_v343bXT-yVfp2PVo2JvOrxBpdlO-",
+          "clip": "https://youtu.be/DRxox1Mf0PM"
+        },
+        {
+          "title": "Світло на кухні",
+          "drive": "1ztxihwwhJF4A9eZuFzTrTapV6qU9HlET"
+          "clip": "https://youtu.be/AsanVgD8YnU"
+        },
+        {
+          "title": "Батькові долоні",
+          "drive": "1TMAI078gt-CawE8JytMMhi1f68-hKLQG"
+          "clip": "https://youtu.be/hf5HxsCPvak"
+        },
+        {
+          "title": "Мама не спить",
+          "drive": "1zShluP6rw5hCoqz-f8g85LIYrEP1uaUC"
+          "clip": "https://youtu.be/mrTG8Efx1BA"
+        },
+        {
+          "title": "Кава о п'ятій",
+          "drive": "1B8Qq2nN9bDcmuzVwIdBm9ioVerKG_m64"
+          "clip": "https://youtu.be/3N7_gcuVDUg"
+        },
+        {
+          "title": "Дорога під фартухом",
+          "drive": "13H7gUw9gLwyn7PrfllhU-CLhKgypTQDO"
+          "clip": "https://youtu.be/wM_TzTZqqCo"
+        },
+        {
+          "title": "Місто крізь віки",
+          "drive": "1xUSv0TtNVXsyM--SnCncqj87MnrnK-BC"
+          "clip": "https://youtu.be/85_p7B52Uzk"
+        },
+        {
+          "title": "Залежність",
+          "drive": "1ACimO9SZob7WLMJBs3t5JfgwOCvWWdto"
+          "clip": "https://youtu.be/tgnUeL24yvk"
+        },
+        {
+          "title": "Всі дівчата гарні...",
+          "drive": "1XiRHqfff1h3qBU5mllY8I6LfpB6E16vs"
+          "clip": "https://youtu.be/eWv1b1vty3M"
+        },
+      ]
+    },
+    {
       "id": "petlia-i-svet",
       "title": "Петля и свет",
       "lang": "ru",
