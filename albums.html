@@ -13,12 +13,6 @@
 <meta property="og:title" content="Альбоми — Alex Sanr">
 <meta property="og:description" content="Слухайте альбоми онлайн, завантажуйте треки та дивіться кліпи.">
 <meta property="og:url" content="https://alexsanrmusic.github.io/albums.html">
-<meta property="og:image" content="https://alexsanrmusic.github.io/images/logo_and_name.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Alex Sanr — AI-музичний проєкт з України">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://alexsanrmusic.github.io/images/logo_and_name.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;800&display=swap">
@@ -38,12 +32,7 @@
 }
 html, body { margin: 0; }
 body {
-  background:
-    radial-gradient(900px 480px at 85% -120px, rgba(139,164,255,.16), transparent 70%),
-    radial-gradient(700px 420px at -10% 8%, rgba(255,200,61,.10), transparent 70%),
-    var(--bg);
-  background-repeat: no-repeat;
-  color: var(--fg);
+  background: var(--bg); color: var(--fg);
   font-family: var(--font-body); font-size: 17px; line-height: 1.6;
   padding-inline: 20px;
 }
@@ -51,18 +40,14 @@ body {
 a { color: inherit; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-header { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 20px; border-bottom: 1px solid var(--line); }
+header { position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 16px; border-bottom: 1px solid var(--line); background: rgba(11, 15, 31, 0.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .brand { font-family: var(--font-display); font-weight: 800; font-size: 16px; text-decoration: none; letter-spacing: 0.02em; }
 nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; }
 nav a { text-decoration: none; color: var(--muted); }
 nav a:hover, nav a[aria-current="page"] { color: var(--fg); }
 
 main { padding-block: 48px 64px; }
-h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 6vw, 3rem); letter-spacing: -0.02em; margin: 0 0 12px; background: linear-gradient(90deg, var(--fg) 40%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; }
-.lead { margin: 0 0 8px; color: var(--muted); max-width: 52ch; }
-.stats { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; min-height: 30px; }
-.stat { font-size: 13px; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid var(--line); color: var(--muted); }
-.stat b { color: var(--fg); font-weight: 600; }
+h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 6vw, 3rem); letter-spacing: -0.02em; margin: 0 0 24px; }
 
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 28px; }
 .filters-label { color: var(--muted); font-size: 15px; margin-right: 4px; }
@@ -70,20 +55,10 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .chip:hover { color: var(--fg); border-color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
 
-.album { --c1: var(--accent); --c2: #ff8a5c; position: relative; background: linear-gradient(135deg, color-mix(in srgb, var(--c1) 9%, var(--surface)), var(--surface) 55%); border: 1px solid var(--line); border-radius: 22px; margin-bottom: 16px; overflow: hidden; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; animation: rise .55s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 80ms); }
-.album[data-lang="uk"] { --c1: #ffc83d; --c2: #5b8cff; }
-.album[data-lang="en"] { --c1: #7fb2ff; --c2: #8a6bff; }
-.album[data-lang="ru"] { --c1: #ff8a5c; --c2: #e8477a; }
-.album:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c1) 55%, var(--line)); box-shadow: 0 14px 40px -18px var(--c1); }
-.album.open { border-color: color-mix(in srgb, var(--c1) 60%, var(--line)); box-shadow: 0 18px 50px -22px var(--c1); }
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.album { background: var(--surface); border-radius: 20px; margin-bottom: 16px; overflow: hidden; }
 .album-head { display: flex; align-items: center; gap: 18px; width: 100%; padding: 16px 20px; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.cover { flex: none; width: 88px; height: 88px; border-radius: 16px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--accent-ink); background: linear-gradient(135deg, var(--c1), var(--c2)); overflow: hidden; box-shadow: 0 10px 26px -10px var(--c1); transition: transform .3s ease; }
+.cover { flex: none; width: 64px; height: 64px; border-radius: 14px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--accent-ink); background: linear-gradient(135deg, var(--accent), #ff8a5c); overflow: hidden; }
 .cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.album:hover .cover { transform: scale(1.04) rotate(-1.5deg); }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.badge { font-size: 12.5px; line-height: 1; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid transparent; }
-.badge-lang { color: var(--accent-ink); background: var(--c1); font-weight: 600; }
 .album-info { flex: 1; min-width: 0; }
 .album-title { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.05rem, 3.4vw, 1.35rem); line-height: 1.25; }
 .album-meta { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
@@ -91,26 +66,10 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .album.open .chev { transform: rotate(-135deg); }
 .album-body { padding: 4px 20px 22px; }
 .album-body[hidden] { display: none; }
-.album.open .album-body { animation: unfold .35s ease both; }
-@keyframes unfold { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-.track { transition: background .2s ease; border-radius: 10px; }
-.track:hover { background: rgba(255,255,255,.035); }
-.track.playing .track-name { color: var(--c1); font-weight: 500; }
-.eq { display: none; align-items: flex-end; gap: 2px; height: 14px; margin-left: 8px; vertical-align: middle; }
-.track.playing .eq { display: inline-flex; }
-.eq i { display: block; width: 3px; height: 100%; background: var(--c1); border-radius: 2px; transform-origin: bottom; animation: eq .9s ease-in-out infinite; }
-.eq i:nth-child(2) { animation-delay: -.3s; }
-.eq i:nth-child(3) { animation-delay: -.6s; }
-@keyframes eq { 0%, 100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
-@media (prefers-reduced-motion: reduce) {
-  .album, .album.open .album-body, .eq i { animation: none; }
-  .album, .cover { transition: none; }
-  .album:hover, .album:hover .cover { transform: none; }
-}
 
 
 .tracks { list-style: none; margin: 0; padding: 0; counter-reset: t; border-top: 1px solid var(--line); }
-.track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 10px; border-bottom: 1px solid var(--line); counter-increment: t; }
+.track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: t; }
 .track-name { flex: 1 1 200px; min-width: 0; }
 .pill-play { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 .pill-play:hover { background: var(--bg); border-color: var(--fg); }
@@ -133,8 +92,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   body { font-size: 16px; padding-inline: 16px; }
   .album-head { padding: 14px; gap: 14px; }
   .album-body { padding: 4px 14px 18px; }
-  .cover { width: 64px; height: 64px; font-size: 19px; border-radius: 14px; }
-  .track { padding-inline: 4px; }
+  .cover { width: 52px; height: 52px; font-size: 17px; }
   .pill-ghost { display: none; }
   .track-links { order: 3; }
 }
@@ -152,8 +110,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
   <main>
     <h1>Альбоми</h1>
-    <p class="lead">Слухайте онлайн, завантажуйте треки та дивіться кліпи.</p>
-    <div class="stats" id="stats"></div>
     <div class="filters" id="filters" role="group" aria-label="Мова"></div>
     <div id="albums"><p class="note">Завантаження…</p></div>
     <noscript><p class="note">Для перегляду альбомів потрібен JavaScript.</p></noscript>
@@ -190,7 +146,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   function closeDrivePlayer(h) {
     h.hidden = true;
     h.textContent = '';
-    if (h.parentNode) h.parentNode.classList.remove('playing');
     if (h.btn) h.btn.textContent = '♪ Слухати';
   }
 
@@ -205,7 +160,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     f.setAttribute('frameborder', '0');
     holder.appendChild(f);
     holder.hidden = false;
-    if (holder.parentNode) holder.parentNode.classList.add('playing');
     holder.btn.textContent = '■ Закрити';
   }
 
@@ -245,11 +199,8 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     head.appendChild(cover);
     var info = el('span', 'album-info');
     info.appendChild(el('span', 'album-title', album.title));
-    var badges = el('span', 'badges');
-    badges.appendChild(el('span', 'badge badge-lang', LANGS[album.lang] || album.lang));
-    badges.appendChild(el('span', 'badge', String(album.year)));
-    badges.appendChild(el('span', 'badge', album.tracks.length + ' треків'));
-    info.appendChild(badges);
+    info.appendChild(el('span', 'album-meta',
+      (LANGS[album.lang] || album.lang) + ' · ' + album.year + ' · ' + album.tracks.length + ' треків'));
     head.appendChild(info);
     head.appendChild(el('span', 'chev'));
     card.appendChild(head);
@@ -260,14 +211,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var ul = el('ol', 'tracks');
     album.tracks.forEach(function (t) {
       var li = el('li', 'track');
-      var nameEl = el('span', 'track-name', t.title);
-      var eq = el('span', 'eq');
-      eq.setAttribute('aria-hidden', 'true');
-      eq.appendChild(document.createElement('i'));
-      eq.appendChild(document.createElement('i'));
-      eq.appendChild(document.createElement('i'));
-      nameEl.appendChild(eq);
-      li.appendChild(nameEl);
+      li.appendChild(el('span', 'track-name', t.title));
       var links = el('span', 'track-links');
       var holder = el('div', 'drive-player');
       holder.hidden = true;
@@ -315,22 +259,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     }
     shown.forEach(function (a, i) {
       var card = buildCard(a);
-      card.style.setProperty('--i', i);
       albumsEl.appendChild(card);
-    });
-  }
-
-  function buildStats() {
-    var statsEl = document.getElementById('stats');
-    if (!statsEl) return;
-    var total = albums.reduce(function (n, a) { return n + a.tracks.length; }, 0);
-    var langs = [];
-    albums.forEach(function (a) { if (langs.indexOf(a.lang) < 0) langs.push(a.lang); });
-    [[albums.length, 'альбомів'], [total, 'треків'], [langs.length, 'мови']].forEach(function (s) {
-      var chip = el('span', 'stat');
-      chip.appendChild(el('b', null, String(s[0])));
-      chip.appendChild(document.createTextNode(' ' + s[1]));
-      statsEl.appendChild(chip);
     });
   }
 
@@ -370,7 +299,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     .then(function (data) {
       albums = data.albums || [];
       if (currentLang !== 'all' && !albums.some(function (a) { return a.lang === currentLang; })) currentLang = 'all';
-      buildStats();
       buildFilters();
       render();
     })
