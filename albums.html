@@ -66,10 +66,6 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .album-body { padding: 4px 20px 22px; }
 .album-body[hidden] { display: none; }
 
-.embed iframe { display: block; width: 100%; height: 420px; border: 0; border-radius: 12px; background: #0000; }
-.player-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 14px 0 20px; }
-.reload { background: none; border: 0; padding: 0; color: var(--muted); font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
-.reload:hover { color: var(--fg); }
 
 .tracks { list-style: none; margin: 0; padding: 0; counter-reset: t; border-top: 1px solid var(--line); }
 .track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: t; }
@@ -78,7 +74,7 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .drive-player { flex: 1 1 100%; }
 .drive-player[hidden] { display: none; }
-.drive-player iframe { display: block; width: 100%; height: 120px; border: 0; border-radius: 10px; background: #0000; }
+.drive-player iframe { display: block; width: 100%; height: 260px; border: 0; border-radius: 10px; background: #0000; }
 .track-name::before { content: counter(t) ". "; color: var(--muted); }
 .track-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .pill { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
@@ -98,7 +94,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   .cover { width: 52px; height: 52px; font-size: 17px; }
   .pill-ghost { display: none; }
   .track-links { order: 3; }
-  .embed iframe { height: 340px; }
 }
 </style>
 </head>
@@ -166,24 +161,12 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     holder.btn.textContent = '■ Закрити';
   }
 
-  function mountPlayer(holder, album) {
-    holder.textContent = '';
-    if (!album.embed) return;
-    var f = document.createElement('iframe');
-    f.src = album.embed;
-    f.title = 'Плеєр Audiomack — ' + album.title;
-    f.setAttribute('scrolling', 'no');
-    f.setAttribute('frameborder', '0');
-    holder.appendChild(f);
-  }
-
   function closeAlbum(card) {
     card.classList.remove('open');
     card.querySelector('.album-head').setAttribute('aria-expanded', 'false');
     var body = card.querySelector('.album-body');
     body.hidden = true;
-    var holder = body.querySelector('.embed');
-    if (holder) holder.textContent = '';
+    Array.prototype.forEach.call(body.querySelectorAll('.drive-player'), closeDrivePlayer);
   }
 
   function openAlbum(card, album) {
@@ -194,8 +177,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     card.querySelector('.album-head').setAttribute('aria-expanded', 'true');
     var body = card.querySelector('.album-body');
     body.hidden = false;
-    var holder = body.querySelector('.embed');
-    if (holder && !holder.firstChild) mountPlayer(holder, album);
   }
 
   function buildCard(album) {
@@ -224,18 +205,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
     var body = el('div', 'album-body');
     body.hidden = true;
-    body.appendChild(el('div', 'embed'));
-    var tools = el('div', 'player-tools');
-    if (album.audiomack) {
-      var a = el('a', 'pill pill-clip', '▶ Слухати на Audiomack');
-      a.href = album.audiomack; a.target = '_blank'; a.rel = 'noopener';
-      tools.appendChild(a);
-    }
-    var rl = el('button', 'reload', '↻ Плеєр не завантажився? Оновити');
-    rl.type = 'button';
-    rl.addEventListener('click', function () { mountPlayer(body.querySelector('.embed'), album); });
-    tools.appendChild(rl);
-    body.appendChild(tools);
 
     var ul = el('ol', 'tracks');
     album.tracks.forEach(function (t) {
