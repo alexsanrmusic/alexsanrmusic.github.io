@@ -79,6 +79,7 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .pill-dl:hover { filter: brightness(1.06); }
 .pill-clip { border: 1.5px solid var(--fg); }
 .pill-clip:hover { background: var(--bg); }
+.pill-ghost { visibility: hidden; border: 1.5px solid transparent; }
 
 .note { color: var(--muted); }
 footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
@@ -88,6 +89,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   .album-head { padding: 14px; gap: 14px; }
   .album-body { padding: 4px 14px 18px; }
   .cover { width: 52px; height: 52px; font-size: 17px; }
+  .pill-ghost { display: none; }
   .embed iframe { height: 340px; }
 }
 </style>
@@ -205,6 +207,10 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         c.href = t.clip; c.target = '_blank'; c.rel = 'noopener';
         c.setAttribute('aria-label', 'Дивитись кліп: ' + t.title);
         links.appendChild(c);
+      } else {
+        var g = el('span', 'pill pill-ghost', '▶ Дивитись кліп');
+        g.setAttribute('aria-hidden', 'true');
+        links.appendChild(g);
       }
       li.appendChild(links);
       ul.appendChild(li);
