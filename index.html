@@ -175,6 +175,48 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 12px; display: f
 .author .player iframe { height: auto; aspect-ratio: 16 / 9; }
 .author .yt-link { display: inline-block; margin-top: 12px; color: var(--muted); font-size: 15px; }
 .author .yt-link:hover { color: var(--fg); }
+
+/* ===== Стиль як на albums.html ===== */
+body {
+  background:
+    radial-gradient(900px 480px at 85% -120px, rgba(139,164,255,.16), transparent 70%),
+    radial-gradient(700px 420px at -10% 8%, rgba(255,200,61,.10), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+}
+h1 { background: linear-gradient(90deg, var(--fg) 40%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; max-width: 100%; }
+h1 span { color: var(--accent); }
+h2 { background: linear-gradient(90deg, var(--fg) 40%, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; max-width: 100%; }
+.section-head h2 { margin: 0; }
+
+main > section {
+  position: relative;
+  margin-block: 16px;
+  padding: 28px 24px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, var(--surface)), var(--surface) 55%);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  animation: rise .55s cubic-bezier(.2,.7,.2,1) both;
+}
+main > section:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: 0 14px 40px -18px var(--accent); }
+main > section:nth-of-type(even) { background: linear-gradient(135deg, color-mix(in srgb, var(--blue) 10%, var(--surface)), var(--surface) 55%); }
+main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); box-shadow: 0 14px 40px -18px var(--blue); }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+.grid > div { border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: rgba(255,255,255,.03); transition: background .2s ease, border-color .2s ease; }
+.grid > div:hover { background: rgba(255,255,255,.06); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.tags li { background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--muted); font-size: 13.5px; padding: 6px 12px; }
+.player { background: rgba(0,0,0,.18); border: 1px solid var(--line); }
+.photo img { border: 1px solid var(--line); box-shadow: 0 18px 50px -22px var(--accent); }
+.releases img, .shorts img { border-radius: 16px; border: 1px solid var(--line); }
+.releases a:hover img, .shorts a:hover img { box-shadow: 0 12px 32px -14px var(--accent); }
+.btn { font-size: 14px; font-weight: 600; padding: 10px 20px; }
+.btn-ghost { border: 1.5px solid var(--fg); }
+.btn-ghost:hover { background: var(--bg); }
+.form input, .form select, .form textarea { background: rgba(0,0,0,.2); }
+@media (max-width: 640px) { main > section { padding: 20px 16px; } }
+@media (prefers-reduced-motion: reduce) { main > section { animation: none; transition: none; } }
 </style>
 </head>
 <body>
