@@ -74,9 +74,11 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .tracks { list-style: none; margin: 0; padding: 0; counter-reset: t; border-top: 1px solid var(--line); }
 .track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: t; }
 .track-name { flex: 1 1 200px; min-width: 0; }
-.track-audio { flex: 0 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.track-audio audio { width: 100%; height: 38px; }
-.audio-err { color: var(--muted); font-size: 13px; }
+.pill-play { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pill-play:hover { background: var(--bg); border-color: var(--fg); }
+.drive-player { flex: 1 1 100%; }
+.drive-player[hidden] { display: none; }
+.drive-player iframe { display: block; width: 100%; height: 120px; border: 0; border-radius: 10px; background: #0000; }
 .track-name::before { content: counter(t) ". "; color: var(--muted); }
 .track-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .pill { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
@@ -95,7 +97,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   .album-body { padding: 4px 14px 18px; }
   .cover { width: 52px; height: 52px; font-size: 17px; }
   .pill-ghost { display: none; }
-  .track-audio { flex: 1 1 100%; order: 2; }
   .track-links { order: 3; }
   .embed iframe { height: 340px; }
 }
@@ -143,6 +144,26 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
   function driveLink(id) {
     return 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
+  }
+
+  function closeDrivePlayer(h) {
+    h.hidden = true;
+    h.textContent = '';
+    if (h.btn) h.btn.textContent = '♪ Слухати';
+  }
+
+  function toggleDrivePlayer(holder, t) {
+    var wasOpen = !holder.hidden;
+    Array.prototype.forEach.call(document.querySelectorAll('.drive-player'), closeDrivePlayer);
+    if (wasOpen) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://drive.google.com/file/d/' + encodeURIComponent(t.drive) + '/preview';
+    f.title = 'Плеєр Google Drive — ' + t.title;
+    f.setAttribute('allow', 'autoplay');
+    f.setAttribute('frameborder', '0');
+    holder.appendChild(f);
+    holder.hidden = false;
+    holder.btn.textContent = '■ Закрити';
   }
 
   function mountPlayer(holder, album) {
@@ -220,22 +241,16 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     album.tracks.forEach(function (t) {
       var li = el('li', 'track');
       li.appendChild(el('span', 'track-name', t.title));
-      if (t.drive) {
-        var wrap = el('span', 'track-audio');
-        var au = document.createElement('audio');
-        au.controls = true;
-        au.preload = 'none';
-        au.src = driveLink(t.drive);
-        au.setAttribute('aria-label', 'Слухати: ' + t.title);
-        au.addEventListener('error', function () {
-          if (wrap.querySelector('.audio-err')) return;
-          wrap.appendChild(el('span', 'audio-err', 'Не вдалося відтворити. Спробуйте плеєр Audiomack вище або завантажте трек.'));
-        });
-        wrap.appendChild(au);
-        li.appendChild(wrap);
-      }
       var links = el('span', 'track-links');
+      var holder = el('div', 'drive-player');
+      holder.hidden = true;
       if (t.drive) {
+        var pb = el('button', 'pill pill-play', '♪ Слухати');
+        pb.type = 'button';
+        pb.setAttribute('aria-label', 'Слухати: ' + t.title);
+        holder.btn = pb;
+        pb.addEventListener('click', function () { toggleDrivePlayer(holder, t); });
+        links.appendChild(pb);
         var d = el('a', 'pill pill-dl', '⬇ Завантажити');
         d.href = driveLink(t.drive); d.rel = 'noopener';
         d.setAttribute('aria-label', 'Завантажити: ' + t.title);
@@ -252,6 +267,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         links.appendChild(g);
       }
       li.appendChild(links);
+      li.appendChild(holder);
       ul.appendChild(li);
     });
     body.appendChild(ul);
