@@ -1,278 +1,327 @@
 {
-  "albums": [
+ "albums": [
+  {
+   "id": "echo-ua",
+   "title": "Echo UA",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/echo-ua.jpg",
+   "audiomack": "https://audiomack.com/alexsanrmusic/playlist/echo-ua",
+   "tracks": [
     {
-      "id": "echo-ua",
-      "title": "Echo UA",
-      "lang": "uk",
-      "year": 2026,
-      "cover": "images/echo-ua.jpg",
-      "audiomack": "https://audiomack.com/alexsanrmusic/playlist/echo-ua",
-      "tracks": [
-        {
-          "title": "Маленький човник",
-          "drive": "11_ajMEUgQd8ZdDLuL1UtcYb2SCjno8V3",
-          "clip": "https://youtu.be/hYcTye10IMo"
-        },
-        {
-          "title": "День дякую",
-          "drive": "1iMkNsis0nVooKGT61G9ovnH7pMxvXTuO",
-          "clip": "https://youtu.be/ds9OH8nwhGU"
-        },
-        {
-          "title": "Львівський трамвай",
-          "drive": "1DAWM2DaX_d_c3K9D395OjwVHgh9aLyhC",
-          "clip": "https://youtu.be/Dgvxxcjq_vo"
-        },
-        {
-          "title": "Моя люба",
-          "drive": "1whsuNSXBdWZzfb_bkOcusFi6b54g_nbN",
-          "clip": "https://youtu.be/HGZFK7io6WU"
-        },
-        {
-          "title": "Моя люба (Blues version)",
-          "drive": "1GGv6JvslFI6TJDUNEuY6awEaA08WApf7",
-          "clip": "https://youtu.be/geGwcPqI82M"
-        },
-        {
-          "title": "З новим роком!",
-          "drive": "1qEwQxrxoWooHwCgnFx22KTQkwcEJSc4f",
-          "clip": "https://youtu.be/cZWfHKZ7kJU"
-        },
-        {
-          "title": "Новорічна",
-          "drive": "1UjFywfB_yIJje47aYFGIRI1EjbJQ4hlD"
-        },
-        {
-          "title": "Добрий вечір тобі...",
-          "drive": "12F-Cbd72jDsX-B-a_vSH3Qggm0COOpr2",
-          "clip": "https://youtu.be/_99Hxv2T8FA"
-        },
-        {
-          "title": "Новий гімн України",
-          "drive": "1CQBA_2wBTUeJbhrGYjS_m1DMA1edcWqo"
-        },
-        {
-          "title": "Щедрий вечір",
-          "drive": "1URvaGwsUndB60Y-65QjTGuFy_WE5frRB"
-        },
-        {
-          "title": "Romantic 404",
-          "drive": "1RufAtGz1HAkA9Y1MGwRq238awaXvJxnI",
-          "clip": "https://youtu.be/JVbrBIVzr3Q"
-        }
-      ]
+     "title": "Маленький човник",
+     "drive": "11_ajMEUgQd8ZdDLuL1UtcYb2SCjno8V3",
+     "clip": "https://youtu.be/hYcTye10IMo"
     },
     {
-      "id": "matrix-for-trader",
-      "title": "Matrix for trader",
-      "lang": "en",
-      "year": 2026,
-      "cover": "images/matrix-for-trader.jpeg",
-      "tracks": [
-        {
-          "title": "Awakening",
-          "drive": "168Xmf6XiIHQE6CDovva-4e5mX4jM8SXL",
-          "clip": "https://youtu.be/x5qi94VPm2k"
-        },
-        {
-          "title": "Energy of Qatar",
-          "drive": "1USUjZ4VKvbRwDcFFu_dzYR8ktt8m_43V"
-        },
-        {
-          "title": "Overheated system",
-          "drive": "1TaIf5cDMUbkYuGd5OrmeYgFrROPjXT3p"
-        },
-        {
-          "title": "Legitimate inflation",
-          "drive": "1pbhqEHdFWnA9vu87NZPbDOJ4SNKkprIf"
-        },
-        {
-          "title": "Atlantic solidarity",
-          "drive": "1u6rjFcC8bLJnNLyM1l1BpGLHDA3FSFmq"
-        },
-        {
-          "title": "Military vitamin",
-          "drive": "1376TKyqW_dY4SC4L1SgKivjApz4qH788"
-        },
-        {
-          "title": "Controlled enemy",
-          "drive": "1J35pyfSDYr6dVyh5ovQ6DjCIBmU_OrGc"
-        },
-        {
-          "title": "Architect without faces",
-          "drive": "1mVBHOL0A971UbtJaOrhPQ5YAzPj8MdTi"
-        },
-        {
-          "title": "2,5% - The peace rate",
-          "drive": "1lGjo_Ob4oorToL6EomIBL_GmLnzzzZNB"
-        },
-        {
-          "title": "Marshall plan 2.0",
-          "drive": "1sbp9intER06RDktLbNQ7xnyxAihtkuKl"
-        },
-        {
-          "title": "The world as a reboot",
-          "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
-        }
-      ]
+     "title": "День дякую",
+     "drive": "1iMkNsis0nVooKGT61G9ovnH7pMxvXTuO",
+     "clip": "https://youtu.be/ds9OH8nwhGU"
     },
     {
-      "id": "petlia-i-svet",
-      "title": "Петля и свет",
-      "lang": "ru",
-      "year": 2026,
-      "cover": "images/petlia-i-svet.jpeg",
-      "tracks": [
-        {
-          "title": "Осознание сна",
-          "drive": "1UREoCapEabwbg17DJE7vfnUljpLjMPsi"
-        },
-        {
-          "title": "Калибровка",
-          "drive": "1_7hYM2h4MdSC6VEHOBe1g8eX1A6G_NIT"
-        },
-        {
-          "title": "Синхронизация",
-          "drive": "1DjozDOEIS5JJKO0zJiRBUuv4I-LYPW4G"
-        },
-        {
-          "title": "Перепрошивка",
-          "drive": "1GWqmUTrPN7lg8wEuiwWQ6CozCfGiXLwD"
-        },
-        {
-          "title": "В поток",
-          "drive": "1OIaBGt1DPSOvxvNhLD3bx-ot2095q_4h"
-        },
-        {
-          "title": "Обнуление дуальности",
-          "drive": "1kdrBfghYNfuFIKg2Km3lFYEyMT3ZEHy2"
-        },
-        {
-          "title": "Возвращение к себе",
-          "drive": "1irb-xzytARFtGdphlPH_QxYovNZ8dkFF"
-        }
-      ]
+     "title": "Львівський трамвай",
+     "drive": "1DAWM2DaX_d_c3K9D395OjwVHgh9aLyhC",
+     "clip": "https://youtu.be/Dgvxxcjq_vo"
     },
     {
-      "id": "tihi-momenty",
-      "title": "Тихі моменти",
-      "lang": "uk",
-      "year": 2026,
-      "cover": "images/tihi-momenty.jpg",
-      "tracks": [
-        {
-          "title": "Тримай мою долонь",
-          "drive": "10rf_v343bXT-yVfp2PVo2JvOrxBpdlO-",
-          "clip": "https://youtu.be/DRxox1Mf0PM"
-        },
-        {
-          "title": "Світло на кухні",
-          "drive": "1ztxihwwhJF4A9eZuFzTrTapV6qU9HlET",
-          "clip": "https://youtu.be/AsanVgD8YnU"
-        },
-        {
-          "title": "Батькові долоні",
-          "drive": "1TMAI078gt-CawE8JytMMhi1f68-hKLQG",
-          "clip": "https://youtu.be/hf5HxsCPvak"
-        },
-        {
-          "title": "Мама не спить",
-          "drive": "1zShluP6rw5hCoqz-f8g85LIYrEP1uaUC",
-          "clip": "https://youtu.be/mrTG8Efx1BA"
-        },
-        {
-          "title": "Кава о п'ятій",
-          "drive": "1B8Qq2nN9bDcmuzVwIdBm9ioVerKG_m64",
-          "clip": "https://youtu.be/3N7_gcuVDUg"
-        },
-        {
-          "title": "Дорога під фартухом",
-          "drive": "13H7gUw9gLwyn7PrfllhU-CLhKgypTQDO",
-          "clip": "https://youtu.be/wM_TzTZqqCo"
-        },
-        {
-          "title": "Місто крізь віки",
-          "drive": "1xUSv0TtNVXsyM--SnCncqj87MnrnK-BC",
-          "clip": "https://youtu.be/85_p7B52Uzk"
-        },
-        {
-          "title": "Залежність",
-          "drive": "1ACimO9SZob7WLMJBs3t5JfgwOCvWWdto",
-          "clip": "https://youtu.be/tgnUeL24yvk"
-        },
-        {
-          "title": "Всі дівчата гарні...",
-          "drive": "1XiRHqfff1h3qBU5mllY8I6LfpB6E16vs",
-          "clip": "https://youtu.be/eWv1b1vty3M"
-        }
-      ]
+     "title": "Моя люба",
+     "drive": "1whsuNSXBdWZzfb_bkOcusFi6b54g_nbN",
+     "clip": "https://youtu.be/HGZFK7io6WU"
     },
     {
-      "id": "between-entry-points",
-      "title": "Between entry points: Testament of the living",
-      "lang": "en",
-      "year": 2026,
-      "cover": "images/between-entry.jpg",
-      "tracks": [
-        {
-          "title": "Entry Into Exit",
-          "drive": "1qWYKZLgSq3_hupcIoUepgPqW_ml4Jcwe",
-          "clip": "https://youtu.be/7mGVoKiuoA8"
-        },
-        {
-          "title": "Through Sparks",
-          "drive": "1C7gWZy_lzYSdsJN5eo-x1M3SpOtSoIX3"
-        },
-        {
-          "title": "Return from Nonexistence",
-          "drive": "1GTnX3cUNkat2SzlPCMlKASmbzDJskcZ8"
-        },
-        {
-          "title": "Four Sides",
-          "drive": "1AVQshfUOy4i9boclo_klA5EYsO7m1bHm"
-        },
-        {
-          "title": "Acceptance. Pain as a Guide",
-          "drive": "12gbvEeFWwmsguwYJ0L3PuDQ4FO0cwbji"
-        },
-        {
-          "title": "Strength Without Force",
-          "drive": "1-dj3u7Xpmy0qucNuwCVN2gqsWq6ohBbB"
-        },
-        {
-          "title": "The Return",
-          "drive": "1slrBHBNgIoTjRA_Hjwbu-u69E6Tz-Leh"
-        },
-        {
-          "title": "Rising",
-          "drive": "1dU7NcwZvQbeIEEabatzijIl1VaGRLvkk"
-        },
-        {
-          "title": "Spirit of the Market",
-          "drive": "1PPbVzZQVurP2cAVDNyrhHcLg6nVvQ85i",
-          "clip": "https://youtu.be/YbLa_hP0h90"
-        },
-        {
-          "title": "Home Beyond Time",
-          "drive": "1kMWy6oOMkOrSkQ7rXjIUNb3bBWfbZrzJ"
-        },
-        {
-          "title": "Backbone of Silent Choices",
-          "drive": "1I4Q2lsSE36Obk8S0oDSd6Oh2uhaeFyVj"
-        },
-        {
-          "title": "Life Between Entry Points",
-          "drive": "1-e3yf_S9FuObAP3tcxX4mXoPUoTdoHOw"
-        },
-        {
-          "title": "Afterword. Gratitude",
-          "drive": "1ZRI2aNPIuQJOkhjmQRFfMqlTbIhEiqi4"
-        },
-        {
-          "title": "Testament of the Living",
-          "drive": "1OImNLz8l4nRAKeaXUjouEY_HBvF3mvwJ"
-        }
-      ]
+     "title": "Моя люба (Blues version)",
+     "drive": "1GGv6JvslFI6TJDUNEuY6awEaA08WApf7",
+     "clip": "https://youtu.be/geGwcPqI82M"
+    },
+    {
+     "title": "З новим роком!",
+     "drive": "1qEwQxrxoWooHwCgnFx22KTQkwcEJSc4f",
+     "clip": "https://youtu.be/cZWfHKZ7kJU"
+    },
+    {
+     "title": "Новорічна",
+     "drive": "1UjFywfB_yIJje47aYFGIRI1EjbJQ4hlD"
+    },
+    {
+     "title": "Добрий вечір тобі...",
+     "drive": "12F-Cbd72jDsX-B-a_vSH3Qggm0COOpr2",
+     "clip": "https://youtu.be/_99Hxv2T8FA"
+    },
+    {
+     "title": "Новий гімн України",
+     "drive": "1CQBA_2wBTUeJbhrGYjS_m1DMA1edcWqo"
+    },
+    {
+     "title": "Щедрий вечір",
+     "drive": "1URvaGwsUndB60Y-65QjTGuFy_WE5frRB"
+    },
+    {
+     "title": "Romantic 404",
+     "drive": "1RufAtGz1HAkA9Y1MGwRq238awaXvJxnI",
+     "clip": "https://youtu.be/JVbrBIVzr3Q"
     }
-  ]
+   ]
+  },
+  {
+   "id": "matrix-for-trader",
+   "title": "Matrix for trader",
+   "lang": "en",
+   "year": 2026,
+   "cover": "images/matrix-for-trader.jpeg",
+   "tracks": [
+    {
+     "title": "Awakening",
+     "drive": "168Xmf6XiIHQE6CDovva-4e5mX4jM8SXL",
+     "clip": "https://youtu.be/x5qi94VPm2k"
+    },
+    {
+     "title": "Energy of Qatar",
+     "drive": "1USUjZ4VKvbRwDcFFu_dzYR8ktt8m_43V"
+    },
+    {
+     "title": "Overheated system",
+     "drive": "1TaIf5cDMUbkYuGd5OrmeYgFrROPjXT3p"
+    },
+    {
+     "title": "Legitimate inflation",
+     "drive": "1pbhqEHdFWnA9vu87NZPbDOJ4SNKkprIf"
+    },
+    {
+     "title": "Atlantic solidarity",
+     "drive": "1u6rjFcC8bLJnNLyM1l1BpGLHDA3FSFmq"
+    },
+    {
+     "title": "Military vitamin",
+     "drive": "1376TKyqW_dY4SC4L1SgKivjApz4qH788"
+    },
+    {
+     "title": "Controlled enemy",
+     "drive": "1J35pyfSDYr6dVyh5ovQ6DjCIBmU_OrGc"
+    },
+    {
+     "title": "Architect without faces",
+     "drive": "1mVBHOL0A971UbtJaOrhPQ5YAzPj8MdTi"
+    },
+    {
+     "title": "2,5% - The peace rate",
+     "drive": "1lGjo_Ob4oorToL6EomIBL_GmLnzzzZNB"
+    },
+    {
+     "title": "Marshall plan 2.0",
+     "drive": "1sbp9intER06RDktLbNQ7xnyxAihtkuKl"
+    },
+    {
+     "title": "The world as a reboot",
+     "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
+    }
+   ]
+  },
+  {
+   "id": "petlia-i-svet",
+   "title": "Петля и свет",
+   "lang": "ru",
+   "year": 2026,
+   "cover": "images/petlia-i-svet.jpeg",
+   "tracks": [
+    {
+     "title": "Осознание сна",
+     "drive": "1UREoCapEabwbg17DJE7vfnUljpLjMPsi"
+    },
+    {
+     "title": "Калибровка",
+     "drive": "1_7hYM2h4MdSC6VEHOBe1g8eX1A6G_NIT"
+    },
+    {
+     "title": "Синхронизация",
+     "drive": "1DjozDOEIS5JJKO0zJiRBUuv4I-LYPW4G"
+    },
+    {
+     "title": "Перепрошивка",
+     "drive": "1GWqmUTrPN7lg8wEuiwWQ6CozCfGiXLwD"
+    },
+    {
+     "title": "В поток",
+     "drive": "1OIaBGt1DPSOvxvNhLD3bx-ot2095q_4h"
+    },
+    {
+     "title": "Обнуление дуальности",
+     "drive": "1kdrBfghYNfuFIKg2Km3lFYEyMT3ZEHy2"
+    },
+    {
+     "title": "Возвращение к себе",
+     "drive": "1irb-xzytARFtGdphlPH_QxYovNZ8dkFF"
+    }
+   ]
+  },
+  {
+   "id": "tihi-momenty",
+   "title": "Тихі моменти",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/tihi-momenty.jpg",
+   "tracks": [
+    {
+     "title": "Тримай мою долонь",
+     "drive": "10rf_v343bXT-yVfp2PVo2JvOrxBpdlO-",
+     "clip": "https://youtu.be/DRxox1Mf0PM"
+    },
+    {
+     "title": "Світло на кухні",
+     "drive": "1ztxihwwhJF4A9eZuFzTrTapV6qU9HlET",
+     "clip": "https://youtu.be/AsanVgD8YnU"
+    },
+    {
+     "title": "Батькові долоні",
+     "drive": "1TMAI078gt-CawE8JytMMhi1f68-hKLQG",
+     "clip": "https://youtu.be/hf5HxsCPvak"
+    },
+    {
+     "title": "Мама не спить",
+     "drive": "1zShluP6rw5hCoqz-f8g85LIYrEP1uaUC",
+     "clip": "https://youtu.be/mrTG8Efx1BA"
+    },
+    {
+     "title": "Кава о п'ятій",
+     "drive": "1B8Qq2nN9bDcmuzVwIdBm9ioVerKG_m64",
+     "clip": "https://youtu.be/3N7_gcuVDUg"
+    },
+    {
+     "title": "Дорога під фартухом",
+     "drive": "13H7gUw9gLwyn7PrfllhU-CLhKgypTQDO",
+     "clip": "https://youtu.be/wM_TzTZqqCo"
+    },
+    {
+     "title": "Місто крізь віки",
+     "drive": "1xUSv0TtNVXsyM--SnCncqj87MnrnK-BC",
+     "clip": "https://youtu.be/85_p7B52Uzk"
+    },
+    {
+     "title": "Залежність",
+     "drive": "1ACimO9SZob7WLMJBs3t5JfgwOCvWWdto",
+     "clip": "https://youtu.be/tgnUeL24yvk"
+    },
+    {
+     "title": "Всі дівчата гарні...",
+     "drive": "1XiRHqfff1h3qBU5mllY8I6LfpB6E16vs",
+     "clip": "https://youtu.be/eWv1b1vty3M"
+    }
+   ]
+  },
+  {
+   "id": "between-entry-points",
+   "title": "Between entry points: Testament of the living",
+   "lang": "en",
+   "year": 2026,
+   "cover": "images/between-entry.jpg",
+   "tracks": [
+    {
+     "title": "Entry Into Exit",
+     "drive": "1qWYKZLgSq3_hupcIoUepgPqW_ml4Jcwe",
+     "clip": "https://youtu.be/7mGVoKiuoA8"
+    },
+    {
+     "title": "Through Sparks",
+     "drive": "1C7gWZy_lzYSdsJN5eo-x1M3SpOtSoIX3"
+    },
+    {
+     "title": "Return from Nonexistence",
+     "drive": "1GTnX3cUNkat2SzlPCMlKASmbzDJskcZ8"
+    },
+    {
+     "title": "Four Sides",
+     "drive": "1AVQshfUOy4i9boclo_klA5EYsO7m1bHm"
+    },
+    {
+     "title": "Acceptance. Pain as a Guide",
+     "drive": "12gbvEeFWwmsguwYJ0L3PuDQ4FO0cwbji"
+    },
+    {
+     "title": "Strength Without Force",
+     "drive": "1-dj3u7Xpmy0qucNuwCVN2gqsWq6ohBbB"
+    },
+    {
+     "title": "The Return",
+     "drive": "1slrBHBNgIoTjRA_Hjwbu-u69E6Tz-Leh"
+    },
+    {
+     "title": "Rising",
+     "drive": "1dU7NcwZvQbeIEEabatzijIl1VaGRLvkk"
+    },
+    {
+     "title": "Spirit of the Market",
+     "drive": "1PPbVzZQVurP2cAVDNyrhHcLg6nVvQ85i",
+     "clip": "https://youtu.be/YbLa_hP0h90"
+    },
+    {
+     "title": "Home Beyond Time",
+     "drive": "1kMWy6oOMkOrSkQ7rXjIUNb3bBWfbZrzJ"
+    },
+    {
+     "title": "Backbone of Silent Choices",
+     "drive": "1I4Q2lsSE36Obk8S0oDSd6Oh2uhaeFyVj"
+    },
+    {
+     "title": "Life Between Entry Points",
+     "drive": "1-e3yf_S9FuObAP3tcxX4mXoPUoTdoHOw"
+    },
+    {
+     "title": "Afterword. Gratitude",
+     "drive": "1ZRI2aNPIuQJOkhjmQRFfMqlTbIhEiqi4"
+    },
+    {
+     "title": "Testament of the Living",
+     "drive": "1OImNLz8l4nRAKeaXUjouEY_HBvF3mvwJ"
+    }
+   ]
+  },
+  {
+   "id": "prosto-zhyvy",
+   "title": "Просто живи",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/prostojivi.jpeg",
+   "tracks": [
+    {
+     "title": "П'ятниця",
+     "drive": "105P7GDnJLJLEsAeG74ZOoc7V3eJ8j4yP",
+     "clip": "https://youtu.be/NjkFYmni5qs"
+    },
+    {
+     "title": "Давай втечемо",
+     "drive": "1-b50KJWB87zm3XWLcXEjiudsH7j2fNQJ",
+     "clip": "https://youtu.be/YGpjOapZUhM"
+    },
+    {
+     "title": "Байдуже",
+     "drive": "18B4EtlHQ2JjafZwRuxjkzJrWGOyC3wNm",
+     "clip": "https://youtu.be/uvvAbnhS-TA"
+    },
+    {
+     "title": "Ще буде, все буде.",
+     "drive": "18AV1EXZLuze4wWURJ81JoeBvbN7RLsvb",
+     "clip": "https://youtu.be/u5i7SzUqKNM"
+    },
+    {
+     "title": "До ранку",
+     "drive": "13qTZLeHjN7QYhy49eZb5oVeBlHuZdMPL",
+     "clip": "https://youtu.be/hiuPMgAr5Hc"
+    },
+    {
+     "title": "Напиши мені",
+     "drive": "1-ATOdsg67E1v1UIquMQT9RlkMQbnt1B5",
+     "clip": "https://youtu.be/E8XBEc3REj0"
+    },
+    {
+     "title": "Залишся",
+     "drive": "1y4RoM9-TcPDn9L-FYTXxfXTe61bGU95I",
+     "clip": "https://youtu.be/6fdRY9fPcgY"
+    },
+    {
+     "title": "Сьогодні хороший день",
+     "drive": "1u9Sq5ST0PKhSIjLivqnp0H7_XhRWFzTx",
+     "clip": "https://youtu.be/5gSN6slbsXA"
+    }
+   ]
+  }
+ ]
 }
