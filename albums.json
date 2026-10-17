@@ -7,19 +7,113 @@
       "year": 2026,
       "cover": "images/echo-ua.jpg",
       "audiomack": "https://audiomack.com/alexsanrmusic/playlist/echo-ua",
-      "embed": "https://audiomack.com/embed/alexsanrmusic/playlist/echo-ua",
       "tracks": [
-        { "title": "Маленький човник", "drive": "11_ajMEUgQd8ZdDLuL1UtcYb2SCjno8V3", "clip": "https://youtu.be/hYcTye10IMo" },
-        { "title": "День дякую", "drive": "1iMkNsis0nVooKGT61G9ovnH7pMxvXTuO", "clip": "https://youtu.be/ds9OH8nwhGU" },
-        { "title": "Львівський трамвай", "drive": "1DAWM2DaX_d_c3K9D395OjwVHgh9aLyhC", "clip": "https://youtu.be/Dgvxxcjq_vo" },
-        { "title": "Моя люба", "drive": "1whsuNSXBdWZzfb_bkOcusFi6b54g_nbN", "clip": "https://youtu.be/HGZFK7io6WU" },
-        { "title": "Моя люба (Blues version)", "drive": "1GGv6JvslFI6TJDUNEuY6awEaA08WApf7", "clip": "https://youtu.be/geGwcPqI82M" },
-        { "title": "З новим роком!", "drive": "1qEwQxrxoWooHwCgnFx22KTQkwcEJSc4f", "clip": "https://youtu.be/cZWfHKZ7kJU" },
-        { "title": "Новорічна", "drive": "1UjFywfB_yIJje47aYFGIRI1EjbJQ4hlD" },
-        { "title": "Добрий вечір тобі...", "drive": "12F-Cbd72jDsX-B-a_vSH3Qggm0COOpr2", "clip": "https://youtu.be/_99Hxv2T8FA" },
-        { "title": "Новий гімн України", "drive": "1CQBA_2wBTUeJbhrGYjS_m1DMA1edcWqo" },
-        { "title": "Щедрий вечір", "drive": "1URvaGwsUndB60Y-65QjTGuFy_WE5frRB" },
-        { "title": "Romantic 404", "drive": "1RufAtGz1HAkA9Y1MGwRq238awaXvJxnI", "clip": "https://youtu.be/JVbrBIVzr3Q" }
+        {
+          "title": "Маленький човник",
+          "drive": "11_ajMEUgQd8ZdDLuL1UtcYb2SCjno8V3",
+          "clip": "https://youtu.be/hYcTye10IMo"
+        },
+        {
+          "title": "День дякую",
+          "drive": "1iMkNsis0nVooKGT61G9ovnH7pMxvXTuO",
+          "clip": "https://youtu.be/ds9OH8nwhGU"
+        },
+        {
+          "title": "Львівський трамвай",
+          "drive": "1DAWM2DaX_d_c3K9D395OjwVHgh9aLyhC",
+          "clip": "https://youtu.be/Dgvxxcjq_vo"
+        },
+        {
+          "title": "Моя люба",
+          "drive": "1whsuNSXBdWZzfb_bkOcusFi6b54g_nbN",
+          "clip": "https://youtu.be/HGZFK7io6WU"
+        },
+        {
+          "title": "Моя люба (Blues version)",
+          "drive": "1GGv6JvslFI6TJDUNEuY6awEaA08WApf7",
+          "clip": "https://youtu.be/geGwcPqI82M"
+        },
+        {
+          "title": "З новим роком!",
+          "drive": "1qEwQxrxoWooHwCgnFx22KTQkwcEJSc4f",
+          "clip": "https://youtu.be/cZWfHKZ7kJU"
+        },
+        {
+          "title": "Новорічна",
+          "drive": "1UjFywfB_yIJje47aYFGIRI1EjbJQ4hlD"
+        },
+        {
+          "title": "Добрий вечір тобі...",
+          "drive": "12F-Cbd72jDsX-B-a_vSH3Qggm0COOpr2",
+          "clip": "https://youtu.be/_99Hxv2T8FA"
+        },
+        {
+          "title": "Новий гімн України",
+          "drive": "1CQBA_2wBTUeJbhrGYjS_m1DMA1edcWqo"
+        },
+        {
+          "title": "Щедрий вечір",
+          "drive": "1URvaGwsUndB60Y-65QjTGuFy_WE5frRB"
+        },
+        {
+          "title": "Romantic 404",
+          "drive": "1RufAtGz1HAkA9Y1MGwRq238awaXvJxnI",
+          "clip": "https://youtu.be/JVbrBIVzr3Q"
+        }
+      ]
+    },
+    {
+      "id": "matrix-for-trader",
+      "title": "Matrix for trader",
+      "lang": "en",
+      "year": 2026,
+      "cover": "images/matrix-for-trader.jpeg",
+      "tracks": [
+        {
+          "title": "Awakening",
+          "drive": "168Xmf6XiIHQE6CDovva-4e5mX4jM8SXL",
+          "clip": "https://youtu.be/x5qi94VPm2k"
+        },
+        {
+          "title": "Energy of Qatar",
+          "drive": "1USUjZ4VKvbRwDcFFu_dzYR8ktt8m_43V"
+        },
+        {
+          "title": "Overheated system",
+          "drive": "1TaIf5cDMUbkYuGd5OrmeYgFrROPjXT3p"
+        },
+        {
+          "title": "Legitimate inflation",
+          "drive": "1pbhqEHdFWnA9vu87NZPbDOJ4SNKkprIf"
+        },
+        {
+          "title": "Atlantic solidarity",
+          "drive": "1u6rjFcC8bLJnNLyM1l1BpGLHDA3FSFmq"
+        },
+        {
+          "title": "Military vitamin",
+          "drive": "1376TKyqW_dY4SC4L1SgKivjApz4qH788"
+        },
+        {
+          "title": "Controlled enemy",
+          "drive": "1J35pyfSDYr6dVyh5ovQ6DjCIBmU_OrGc"
+        },
+        {
+          "title": "Architect without faces",
+          "drive": "1mVBHOL0A971UbtJaOrhPQ5YAzPj8MdTi"
+        },
+        {
+          "title": "2,5% - The peace rate",
+          "drive": "1lGjo_Ob4oorToL6EomIBL_GmLnzzzZNB"
+        },
+        {
+          "title": "Marshall plan 2.0",
+          "drive": "1sbp9intER06RDktLbNQ7xnyxAihtkuKl"
+        },
+        {
+          "title": "The world as a reboot",
+          "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
+        }
       ]
     }
   ]
