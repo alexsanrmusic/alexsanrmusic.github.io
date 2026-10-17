@@ -260,7 +260,6 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     shown.forEach(function (a, i) {
       var card = buildCard(a);
       albumsEl.appendChild(card);
-      if (i === 0) openAlbum(card, a);
     });
   }
 
@@ -270,7 +269,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     filtersEl.textContent = '';
     if (present.length < 2) return;
     filtersEl.appendChild(el('span', 'filters-label', 'Мова пісень:'));
-    var items = [['all', 'Усі']].concat(present.map(function (l) { return [l, LANG_CODES[l] || l.toUpperCase()]; }));
+    var items = [['all', 'ALL']].concat(present.map(function (l) { return [l, LANG_CODES[l] || l.toUpperCase()]; }));
     items.forEach(function (it) {
       var b = el('button', 'chip', it[1]);
       b.type = 'button';
