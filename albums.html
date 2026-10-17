@@ -49,7 +49,8 @@ nav a:hover, nav a[aria-current="page"] { color: var(--fg); }
 main { padding-block: 48px 64px; }
 h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem, 6vw, 3rem); letter-spacing: -0.02em; margin: 0 0 24px; }
 
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 28px; }
+.filters-label { color: var(--muted); font-size: 15px; margin-right: 4px; }
 .chip { border: 1.5px solid var(--line); background: transparent; color: var(--muted); padding: 8px 18px; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; }
 .chip:hover { color: var(--fg); border-color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
@@ -122,7 +123,8 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
 <script>
 (function () {
-  var LANGS = { uk: 'Українська', ru: 'Русская', en: 'English' };
+  var LANG_CODES = { uk: 'UA', en: 'EN', ru: 'RU' };
+  var LANGS = { uk: 'Українська', ru: 'Російська', en: 'Англійська' };
   var albumsEl = document.getElementById('albums');
   var filtersEl = document.getElementById('filters');
   var albums = [];
@@ -186,7 +188,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var head = el('button', 'album-head');
     head.type = 'button';
     head.setAttribute('aria-expanded', 'false');
-    var cover = el('span', 'cover', (album.lang || '').toUpperCase());
+    var cover = el('span', 'cover', LANG_CODES[album.lang] || (album.lang || '').toUpperCase());
     if (album.cover) {
       var img = document.createElement('img');
       img.src = album.cover;
@@ -267,14 +269,15 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     albums.forEach(function (a) { if (present.indexOf(a.lang) < 0) present.push(a.lang); });
     filtersEl.textContent = '';
     if (present.length < 2) return;
-    var items = [['all', 'Усі']].concat(present.map(function (l) { return [l, LANGS[l] || l]; }));
+    filtersEl.appendChild(el('span', 'filters-label', 'Мова пісень:'));
+    var items = [['all', 'Усі']].concat(present.map(function (l) { return [l, LANG_CODES[l] || l.toUpperCase()]; }));
     items.forEach(function (it) {
       var b = el('button', 'chip', it[1]);
       b.type = 'button';
       b.setAttribute('aria-pressed', String(it[0] === currentLang));
       b.addEventListener('click', function () {
         currentLang = it[0];
-        Array.prototype.forEach.call(filtersEl.children, function (x, i) {
+        Array.prototype.forEach.call(filtersEl.querySelectorAll('.chip'), function (x, i) {
           x.setAttribute('aria-pressed', String(items[i][0] === currentLang));
         });
         render();

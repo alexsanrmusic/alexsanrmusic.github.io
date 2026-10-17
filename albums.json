@@ -115,6 +115,43 @@
           "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
         }
       ]
+    },
+    {
+      "id": "petlia-i-svet",
+      "title": "Петля и свет",
+      "lang": "ru",
+      "year": 2026,
+      "cover": "images/petlia-i-svet.jpeg",
+      "tracks": [
+        {
+          "title": "Осознание сна",
+          "drive": "1UREoCapEabwbg17DJE7vfnUljpLjMPsi"
+        },
+        {
+          "title": "Калибровка",
+          "drive": "1_7hYM2h4MdSC6VEHOBe1g8eX1A6G_NIT"
+        },
+        {
+          "title": "Синхронизация",
+          "drive": "1DjozDOEIS5JJKO0zJiRBUuv4I-LYPW4G"
+        },
+        {
+          "title": "Перепрошивка",
+          "drive": "1GWqmUTrPN7lg8wEuiwWQ6CozCfGiXLwD"
+        },
+        {
+          "title": "В поток",
+          "drive": "1OIaBGt1DPSOvxvNhLD3bx-ot2095q_4h"
+        },
+        {
+          "title": "Обнуление дуальности",
+          "drive": "1kdrBfghYNfuFIKg2Km3lFYEyMT3ZEHy2"
+        },
+        {
+          "title": "Возвращение к себе",
+          "drive": "1irb-xzytARFtGdphlPH_QxYovNZ8dkFF"
+        }
+      ]
     }
   ]
 }
