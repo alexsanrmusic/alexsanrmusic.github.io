@@ -67,12 +67,16 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .album-body[hidden] { display: none; }
 
 .embed iframe { display: block; width: 100%; height: 420px; border: 0; border-radius: 12px; background: #0000; }
-.open-link { display: inline-block; margin: 10px 0 18px; color: var(--muted); font-size: 14px; }
-.open-link:hover { color: var(--fg); }
+.player-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin: 14px 0 20px; }
+.reload { background: none; border: 0; padding: 0; color: var(--muted); font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
+.reload:hover { color: var(--fg); }
 
 .tracks { list-style: none; margin: 0; padding: 0; counter-reset: t; border-top: 1px solid var(--line); }
 .track { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: t; }
-.track-name { flex: 1 1 220px; min-width: 0; }
+.track-name { flex: 1 1 200px; min-width: 0; }
+.track-audio { flex: 0 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.track-audio audio { width: 100%; height: 38px; }
+.audio-err { color: var(--muted); font-size: 13px; }
 .track-name::before { content: counter(t) ". "; color: var(--muted); }
 .track-links { display: flex; gap: 10px; flex-wrap: wrap; }
 .pill { display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
@@ -91,6 +95,8 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   .album-body { padding: 4px 14px 18px; }
   .cover { width: 52px; height: 52px; font-size: 17px; }
   .pill-ghost { display: none; }
+  .track-audio { flex: 1 1 100%; order: 2; }
+  .track-links { order: 3; }
   .embed iframe { height: 340px; }
 }
 </style>
@@ -139,6 +145,17 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     return 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
   }
 
+  function mountPlayer(holder, album) {
+    holder.textContent = '';
+    if (!album.embed) return;
+    var f = document.createElement('iframe');
+    f.src = album.embed;
+    f.title = 'Плеєр Audiomack — ' + album.title;
+    f.setAttribute('scrolling', 'no');
+    f.setAttribute('frameborder', '0');
+    holder.appendChild(f);
+  }
+
   function closeAlbum(card) {
     card.classList.remove('open');
     card.querySelector('.album-head').setAttribute('aria-expanded', 'false');
@@ -157,14 +174,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var body = card.querySelector('.album-body');
     body.hidden = false;
     var holder = body.querySelector('.embed');
-    if (holder && !holder.firstChild && album.embed) {
-      var f = document.createElement('iframe');
-      f.src = album.embed;
-      f.title = 'Плеєр Audiomack — ' + album.title;
-      f.setAttribute('scrolling', 'no');
-      f.setAttribute('frameborder', '0');
-      holder.appendChild(f);
-    }
+    if (holder && !holder.firstChild) mountPlayer(holder, album);
   }
 
   function buildCard(album) {
@@ -194,16 +204,36 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var body = el('div', 'album-body');
     body.hidden = true;
     body.appendChild(el('div', 'embed'));
+    var tools = el('div', 'player-tools');
     if (album.audiomack) {
-      var a = el('a', 'open-link', 'Відкрити на Audiomack →');
+      var a = el('a', 'pill pill-clip', '▶ Слухати на Audiomack');
       a.href = album.audiomack; a.target = '_blank'; a.rel = 'noopener';
-      body.appendChild(a);
+      tools.appendChild(a);
     }
+    var rl = el('button', 'reload', '↻ Плеєр не завантажився? Оновити');
+    rl.type = 'button';
+    rl.addEventListener('click', function () { mountPlayer(body.querySelector('.embed'), album); });
+    tools.appendChild(rl);
+    body.appendChild(tools);
 
     var ul = el('ol', 'tracks');
     album.tracks.forEach(function (t) {
       var li = el('li', 'track');
       li.appendChild(el('span', 'track-name', t.title));
+      if (t.drive) {
+        var wrap = el('span', 'track-audio');
+        var au = document.createElement('audio');
+        au.controls = true;
+        au.preload = 'none';
+        au.src = driveLink(t.drive);
+        au.setAttribute('aria-label', 'Слухати: ' + t.title);
+        au.addEventListener('error', function () {
+          if (wrap.querySelector('.audio-err')) return;
+          wrap.appendChild(el('span', 'audio-err', 'Не вдалося відтворити. Спробуйте плеєр Audiomack вище або завантажте трек.'));
+        });
+        wrap.appendChild(au);
+        li.appendChild(wrap);
+      }
       var links = el('span', 'track-links');
       if (t.drive) {
         var d = el('a', 'pill pill-dl', '⬇ Завантажити');
@@ -267,6 +297,12 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
       filtersEl.appendChild(b);
     });
   }
+
+  document.addEventListener('play', function (e) {
+    Array.prototype.forEach.call(document.querySelectorAll('audio'), function (a) {
+      if (a !== e.target) a.pause();
+    });
+  }, true);
 
   var q = new URLSearchParams(location.search).get('lang');
   if (q) currentLang = q;
