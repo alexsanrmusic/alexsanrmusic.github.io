@@ -217,6 +217,23 @@ main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--
 .form input, .form select, .form textarea { background: rgba(0,0,0,.2); }
 @media (max-width: 640px) { main > section { padding: 20px 16px; } }
 @media (prefers-reduced-motion: reduce) { main > section { animation: none; transition: none; } }
+
+/* ===== Плаваюче верхнє меню ===== */
+html { scroll-padding-top: 84px; }
+header {
+  position: sticky; top: 0; z-index: 50;
+  margin-inline: -20px; padding-inline: 20px;
+  background: rgba(11,15,31,.82);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+@supports not (backdrop-filter: blur(1px)) { header { background: rgba(11,15,31,.96); } }
+nav a { transition: color .2s ease; }
+nav a.active { color: var(--accent); }
+@media (max-width: 640px) {
+  html { scroll-padding-top: 110px; }
+  header { padding-block: 12px; gap: 6px 16px; }
+  nav { gap: 6px 14px; font-size: 14px; }
+}
 </style>
 </head>
 <body>
@@ -422,6 +439,19 @@ main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--
       a.append(img, h); li.appendChild(a); sl.appendChild(li);
     });
   }).catch(function () { se.hidden = false; });
+
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
+    var map = links.map(function (a) { return { a: a, s: document.getElementById(a.getAttribute('href').slice(1)) }; }).filter(function (x) { return x.s; });
+    if (!map.length || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        map.forEach(function (x) { x.a.classList.toggle('active', x.s === e.target); });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    map.forEach(function (x) { io.observe(x.s); });
+  })();
 })();
 </script>
 
