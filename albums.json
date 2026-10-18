@@ -361,6 +361,65 @@
      "drive": "1Ns1a-e0VXiWBVluQMvyyU1wHcSVJhyLJ"
     }
    ]
+  },
+  {
+   "id": "khroniky-khaosu",
+   "title": "Хроніки хаосу",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/chronicles.jpeg",
+   "tracks": [
+    {
+     "title": "Хроніки хаосу - Світ на межі",
+     "drive": "1iqbnr9wvHr37V0vWBjkxG5nthkggP1SP"
+    },
+    {
+     "title": "Хроніки хаосу - Біржовий шторм",
+     "drive": "1n-Qnz1AoNBpAdXyQZHNZxWBS69SnxScV"
+    },
+    {
+     "title": "Хроніки хаосу - Енергокриза",
+     "drive": "12Plef1SxHDbmxprSdc5XEDhFizZze1tA"
+    },
+    {
+     "title": "Хроніки хаосу - Енергокриза (rev2)",
+     "drive": "1y_OqDMo3FVDgTqNvPpGiAR4RjiIoNTYS"
+    },
+    {
+     "title": "Хроніки хаосу - Дипломатичний фронт",
+     "drive": "10fhIjQ9FtHgBLnJGVtW-2kJHzGJltsnT"
+    },
+    {
+     "title": "Хроніки хаосу - Дипломатичний фронт (rev2)",
+     "drive": "1BRZgV7p-7WC2MNfF5OH9USGRPkLKBzlH",
+     "clip": "https://youtu.be/vNhNJ1sdy0o"
+    },
+    {
+     "title": "Хроніки хаосу - Ефір без правил",
+     "drive": "1yiAVxm8J8cVoAvqBc496bJbCcVsJtNx2"
+    },
+    {
+     "title": "Хроніки хаосу - Медіашторм",
+     "drive": "1p0fqv3oqZOf4M3aXmm7s_mz_R0O4JnuC"
+    },
+    {
+     "title": "Хроніки хаосу - Новий фінал",
+     "drive": "1UaroXouz7DVDTf5e0VATNnnE5UCNzj6z"
+    },
+    {
+     "title": "Хроніки хаосу - Штучний інтелект",
+     "drive": "1IZyGF17ST4Xx4_BxyYfHzbu5CNTU6WuU",
+     "clip": "https://youtu.be/cBKL5zB9CLY"
+    },
+    {
+     "title": "Хроніки хаосу - Повний цикл",
+     "drive": "1TMgendpOxgYK7UlX9ADqB_NdOnfUSaX1"
+    },
+    {
+     "title": "Хроніки хаосу - Світ у вогні",
+     "drive": "1GQS1KuUr9u3mCd1uzdoK6Bpq4ekIH9w5"
+    }
+   ]
   }
  ]
 }
