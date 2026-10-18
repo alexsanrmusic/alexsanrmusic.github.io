@@ -37,6 +37,7 @@
   color-scheme: dark;
 }
 html, body { margin: 0; }
+html { overflow-x: clip; }
 body {
   background:
     radial-gradient(900px 480px at 85% -120px, rgba(139,164,255,.16), transparent 70%),
@@ -51,7 +52,8 @@ body {
 a { color: inherit; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-header { position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 16px; border-bottom: 1px solid var(--line); background: rgba(11, 15, 31, 0.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+header { position: sticky; top: 0; z-index: 100; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; padding-block: 16px; }
+header::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); border-bottom: 1px solid var(--line); background: rgba(11, 15, 31, 0.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .brand { font-family: var(--font-display); font-weight: 800; font-size: 16px; text-decoration: none; letter-spacing: 0.02em; }
 nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15px; }
 nav a { text-decoration: none; color: var(--muted); }
