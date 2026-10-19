@@ -93,25 +93,26 @@ def read_text(path):
 # ---------- общее оформление ----------
 EXTRA_CSS = """
 /* ===== Страницы текстов (создано build_lyrics.py) ===== */
+.album { scroll-margin-top: 84px; }
 .lib-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .lib-album-actions { margin: 14px 0 12px; }
-.lib-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 4px 10px; border-bottom: 1px solid var(--line); border-radius: 10px; transition: background .2s ease; }
-.lib-row:hover { background: rgba(255,255,255,.035); }
-.lib-row.open { background: rgba(255,255,255,.04); }
-.lib-toggle { display: flex; align-items: center; gap: 12px; flex: 1 1 0; min-width: 0; padding: 10px 0; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.lib-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 14px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.lib-toggle { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 8px 0; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
 .lib-toggle .num { flex: none; min-width: 2.4ch; color: var(--muted); }
 .lib-title { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
-.lib-row.open .lib-title { color: var(--c1); font-weight: 500; }
+.lib-row.open .lib-title { color: var(--c1); }
 .album.open .lib-toggle .chev { flex: none; width: 9px; height: 9px; margin-right: 4px; transform: rotate(45deg); }
 .album.open .lib-row.open .lib-toggle .chev { transform: rotate(-135deg); }
-.lib-row .pill-play { flex: none; white-space: nowrap; text-decoration: none; }
+.lib-actions { justify-self: end; }
+.lib-row .pill-play, .lib-album-actions .pill-play { text-decoration: none; white-space: nowrap; }
 a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
-.lib-text { flex: 1 1 100%; padding: 4px 0 14px; }
+.lib-text { grid-column: 1 / -1; padding: 4px 0 18px; }
 .lib-text[hidden] { display: none; }
-.lib-text .lyrics { margin-top: 4px; }
-.lib-links { margin: 10px 0 0; font-size: 14px; }
-.lib-links a { color: var(--muted); }
-.lib-links a:hover { color: var(--fg); }
+.lib-text .lyrics { margin: 0; padding: 0; border: 0; border-radius: 0; background: none; animation: none; }
+.lib-text .lyrics-label { display: none; }
+.lib-links { margin: 14px 0 0; font-size: 14px; }
+.lib-links a { color: var(--muted); text-decoration: none; }
+.lib-links a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
 .lib-nojs { color: var(--muted); }
 
 .crumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; color: var(--muted); font-size: 14px; margin-bottom: 18px; }
@@ -353,13 +354,13 @@ LIB_JS = """<script>
 
   Array.prototype.forEach.call(cards, function (card) {
     card.querySelector('.album-head').addEventListener('click', function () {
-      if (card.classList.contains('open')) setAlbum(card, false); else openAlbum(card);
+      if (card.classList.contains('open')) { setAlbum(card, false); return; }
+      openAlbum(card);
+      setTimeout(function () { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30);
     });
     Array.prototype.forEach.call(card.querySelectorAll('.lib-row'), function (row) {
       row.querySelector('.lib-toggle').addEventListener('click', function () {
-        var open = !row.classList.contains('open');
-        Array.prototype.forEach.call(card.querySelectorAll('.lib-row.open'), function (r) { if (r !== row) setRow(r, false); });
-        setRow(row, open);
+        setRow(row, !row.classList.contains('open'));
       });
     });
   });
@@ -420,10 +421,9 @@ def lyrics_page(lib):
             nojs.append(f'<li><a href="{song_url}">{e(tr["title"])}</a> ({e(a["title"])})</li>')
             rows.append(f"""            <li class="lib-row" id="{rid}" data-key="{e(tr['title'])}">
               <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-{rid}"><span class="num">{tr['n']}.</span><span class="lib-title" lang="{lang}">{e(tr['title'])}</span><span class="chev" aria-hidden="true"></span></button>
-              <a class="pill pill-play" href="{listen_url(a, tr['n'])}" aria-label="Слухати: {e(tr['title'])}">♪ Слухати</a>
+              <div class="lib-actions"><a class="pill pill-play" href="{listen_url(a, tr['n'])}" aria-label="Слухати: {e(tr['title'])}">♪ Слухати</a></div>
               <div class="lib-text" id="t-{rid}" hidden>
-                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="{lang}"></p></div>
-                <p class="lib-links"><a href="{song_url}">Окрема сторінка пісні →</a></p>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="{lang}"></p><p class="lib-links"><a href="{song_url}">Окрема сторінка пісні →</a></p></div>
               </div>
             </li>""")
         cards.append(f"""      <article class="album" id="{aid}" data-id="{aid}" data-lang="{lang}" style="--i:{i}">
