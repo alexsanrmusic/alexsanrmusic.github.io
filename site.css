@@ -121,7 +121,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 }
 
 /* ===== Страницы текстов (создано build_lyrics.py) ===== */
-.album-head.static { cursor: default; flex-wrap: wrap; }
+.album-head.static { box-sizing: border-box; cursor: default; flex-wrap: wrap; }
 .album-head.static .album-info { flex: 1 1 200px; }
 .lib-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .lib-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 14px; padding: 12px 10px; border-bottom: 1px solid var(--line); border-radius: 10px; transition: background .2s ease; }
