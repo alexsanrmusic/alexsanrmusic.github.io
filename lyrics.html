@@ -38,59 +38,209 @@
 
   <main>
     <h1>Тексти</h1>
-    <p class="lead">Тексти пісень Alex Sanr. Відкрийте пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
-    <div class="stats"><span class="stat"><b>21</b> текстів</span><span class="stat"><b>2</b> альбомів</span></div>
+    <p class="lead">Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
+    <div class="stats"><span class="stat"><b>21</b> текст</span><span class="stat"><b>2</b> альбоми</span></div>
     <div id="lib">
-      <article class="album" id="prosto-zhyvy" data-lang="uk" style="--i:0">
-        <div class="album-head static">
+      <article class="album" id="prosto-zhyvy" data-id="prosto-zhyvy" data-lang="uk" style="--i:0">
+        <button type="button" class="album-head" aria-expanded="false" aria-controls="b-prosto-zhyvy">
           <span class="cover"><img src="images/prostojivi.jpeg" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('UA'))"></span>
           <span class="album-info">
             <span class="album-title">Просто живи</span>
             <span class="badges"><span class="badge badge-lang">🇺🇦 Українська</span><span class="badge">2026</span><span class="badge">8 текстів</span></span>
           </span>
-          <a class="pill pill-play" href="albums.html?album=prosto-zhyvy">♪ Слухати альбом</a>
-        </div>
-        <div class="album-body">
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div class="album-body" id="b-prosto-zhyvy" hidden>
+          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album=prosto-zhyvy">♪ Слухати альбом</a></div>
           <ol class="lib-list">
-        <li class="lib-row"><span class="num">1.</span><a class="lib-title" href="songs/prosto-zhyvy/pyatnytsya.html" lang="uk">П&#x27;ятниця</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=1" aria-label="Слухати: П&#x27;ятниця">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">2.</span><a class="lib-title" href="songs/prosto-zhyvy/davai-vtechemo.html" lang="uk">Давай втечемо</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=2" aria-label="Слухати: Давай втечемо">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">3.</span><a class="lib-title" href="songs/prosto-zhyvy/baiduzhe.html" lang="uk">Байдуже</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=3" aria-label="Слухати: Байдуже">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">4.</span><a class="lib-title" href="songs/prosto-zhyvy/shche-bude-vse-bude.html" lang="uk">Ще буде, все буде.</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=4" aria-label="Слухати: Ще буде, все буде.">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">5.</span><a class="lib-title" href="songs/prosto-zhyvy/do-ranku.html" lang="uk">До ранку</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=5" aria-label="Слухати: До ранку">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">6.</span><a class="lib-title" href="songs/prosto-zhyvy/napyshy-meni.html" lang="uk">Напиши мені</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=6" aria-label="Слухати: Напиши мені">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">7.</span><a class="lib-title" href="songs/prosto-zhyvy/zalyshsya.html" lang="uk">Залишся</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=7" aria-label="Слухати: Залишся">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">8.</span><a class="lib-title" href="songs/prosto-zhyvy/sohodni-khoroshyi-den.html" lang="uk">Сьогодні хороший день</a><a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=8" aria-label="Слухати: Сьогодні хороший день">♪ Слухати</a></li>
+            <li class="lib-row" id="prosto-zhyvy--pyatnytsya" data-key="П&#x27;ятниця">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--pyatnytsya"><span class="num">1.</span><span class="lib-title" lang="uk">П&#x27;ятниця</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=1" aria-label="Слухати: П&#x27;ятниця">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--pyatnytsya" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/pyatnytsya.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--davai-vtechemo" data-key="Давай втечемо">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--davai-vtechemo"><span class="num">2.</span><span class="lib-title" lang="uk">Давай втечемо</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=2" aria-label="Слухати: Давай втечемо">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--davai-vtechemo" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/davai-vtechemo.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--baiduzhe" data-key="Байдуже">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--baiduzhe"><span class="num">3.</span><span class="lib-title" lang="uk">Байдуже</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=3" aria-label="Слухати: Байдуже">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--baiduzhe" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/baiduzhe.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--shche-bude-vse-bude" data-key="Ще буде, все буде.">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--shche-bude-vse-bude"><span class="num">4.</span><span class="lib-title" lang="uk">Ще буде, все буде.</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=4" aria-label="Слухати: Ще буде, все буде.">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--shche-bude-vse-bude" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/shche-bude-vse-bude.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--do-ranku" data-key="До ранку">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--do-ranku"><span class="num">5.</span><span class="lib-title" lang="uk">До ранку</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=5" aria-label="Слухати: До ранку">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--do-ranku" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/do-ranku.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--napyshy-meni" data-key="Напиши мені">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--napyshy-meni"><span class="num">6.</span><span class="lib-title" lang="uk">Напиши мені</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=6" aria-label="Слухати: Напиши мені">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--napyshy-meni" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/napyshy-meni.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--zalyshsya" data-key="Залишся">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--zalyshsya"><span class="num">7.</span><span class="lib-title" lang="uk">Залишся</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=7" aria-label="Слухати: Залишся">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--zalyshsya" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/zalyshsya.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="prosto-zhyvy--sohodni-khoroshyi-den" data-key="Сьогодні хороший день">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-prosto-zhyvy--sohodni-khoroshyi-den"><span class="num">8.</span><span class="lib-title" lang="uk">Сьогодні хороший день</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=prosto-zhyvy&amp;track=8" aria-label="Слухати: Сьогодні хороший день">♪ Слухати</a>
+              <div class="lib-text" id="t-prosto-zhyvy--sohodni-khoroshyi-den" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/prosto-zhyvy/sohodni-khoroshyi-den.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
           </ol>
         </div>
       </article>
-      <article class="album" id="khroniky-khaosu" data-lang="uk" style="--i:1">
-        <div class="album-head static">
+      <article class="album" id="khroniky-khaosu" data-id="khroniky-khaosu" data-lang="uk" style="--i:1">
+        <button type="button" class="album-head" aria-expanded="false" aria-controls="b-khroniky-khaosu">
           <span class="cover"><img src="images/chronicles.jpeg" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('UA'))"></span>
           <span class="album-info">
             <span class="album-title">Хроніки хаосу</span>
             <span class="badges"><span class="badge badge-lang">🇺🇦 Українська</span><span class="badge">2026</span><span class="badge">13 текстів</span></span>
           </span>
-          <a class="pill pill-play" href="albums.html?album=khroniky-khaosu">♪ Слухати альбом</a>
-        </div>
-        <div class="album-body">
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div class="album-body" id="b-khroniky-khaosu" hidden>
+          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album=khroniky-khaosu">♪ Слухати альбом</a></div>
           <ol class="lib-list">
-        <li class="lib-row"><span class="num">1.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-svit-na-mezhi.html" lang="uk">Хроніки хаосу - Світ на межі</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=1" aria-label="Слухати: Хроніки хаосу - Світ на межі">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">2.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-birzhovyi-shtorm.html" lang="uk">Хроніки хаосу - Біржовий шторм</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=2" aria-label="Слухати: Хроніки хаосу - Біржовий шторм">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">3.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza.html" lang="uk">Хроніки хаосу - Енергокриза</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=3" aria-label="Слухати: Хроніки хаосу - Енергокриза">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">4.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza-rev2.html" lang="uk">Хроніки хаосу - Енергокриза (rev2)</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=4" aria-label="Слухати: Хроніки хаосу - Енергокриза (rev2)">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">5.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front.html" lang="uk">Хроніки хаосу - Дипломатичний фронт</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=5" aria-label="Слухати: Хроніки хаосу - Дипломатичний фронт">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">6.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front-rev2.html" lang="uk">Хроніки хаосу - Дипломатичний фронт (rev2)</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=6" aria-label="Слухати: Хроніки хаосу - Дипломатичний фронт (rev2)">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">7.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-efir-bez-pravyl.html" lang="uk">Хроніки хаосу - Ефір без правил</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=7" aria-label="Слухати: Хроніки хаосу - Ефір без правил">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">8.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-mediashtorm.html" lang="uk">Хроніки хаосу - Медіашторм</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=8" aria-label="Слухати: Хроніки хаосу - Медіашторм">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">9.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-novyi-final.html" lang="uk">Хроніки хаосу - Новий фінал</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=9" aria-label="Слухати: Хроніки хаосу - Новий фінал">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">10.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-shtuchnyi-intelekt.html" lang="uk">Хроніки хаосу - Штучний інтелект</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=10" aria-label="Слухати: Хроніки хаосу - Штучний інтелект">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">11.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-povnyi-tsykl.html" lang="uk">Хроніки хаосу - Повний цикл</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=11" aria-label="Слухати: Хроніки хаосу - Повний цикл">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">12.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-svit-u-vohni.html" lang="uk">Хроніки хаосу - Світ у вогні</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=12" aria-label="Слухати: Хроніки хаосу - Світ у вогні">♪ Слухати</a></li>
-        <li class="lib-row"><span class="num">13.</span><a class="lib-title" href="songs/khroniky-khaosu/khroniky-khaosu-hlobalnyi-peredil.html" lang="uk">Хроніки хаосу - Глобальний переділ</a><a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=13" aria-label="Слухати: Хроніки хаосу - Глобальний переділ">♪ Слухати</a></li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-svit-na-mezhi" data-key="Хроніки хаосу - Світ на межі">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-svit-na-mezhi"><span class="num">1.</span><span class="lib-title" lang="uk">Хроніки хаосу - Світ на межі</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=1" aria-label="Слухати: Хроніки хаосу - Світ на межі">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-svit-na-mezhi" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-na-mezhi.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-birzhovyi-shtorm" data-key="Хроніки хаосу - Біржовий шторм">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-birzhovyi-shtorm"><span class="num">2.</span><span class="lib-title" lang="uk">Хроніки хаосу - Біржовий шторм</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=2" aria-label="Слухати: Хроніки хаосу - Біржовий шторм">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-birzhovyi-shtorm" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-birzhovyi-shtorm.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-enerhokryza" data-key="Хроніки хаосу - Енергокриза">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-enerhokryza"><span class="num">3.</span><span class="lib-title" lang="uk">Хроніки хаосу - Енергокриза</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=3" aria-label="Слухати: Хроніки хаосу - Енергокриза">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-enerhokryza" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-enerhokryza-rev2" data-key="Хроніки хаосу - Енергокриза (rev2)">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-enerhokryza-rev2"><span class="num">4.</span><span class="lib-title" lang="uk">Хроніки хаосу - Енергокриза (rev2)</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=4" aria-label="Слухати: Хроніки хаосу - Енергокриза (rev2)">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-enerhokryza-rev2" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza-rev2.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front" data-key="Хроніки хаосу - Дипломатичний фронт">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front"><span class="num">5.</span><span class="lib-title" lang="uk">Хроніки хаосу - Дипломатичний фронт</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=5" aria-label="Слухати: Хроніки хаосу - Дипломатичний фронт">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front-rev2" data-key="Хроніки хаосу - Дипломатичний фронт (rev2)">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front-rev2"><span class="num">6.</span><span class="lib-title" lang="uk">Хроніки хаосу - Дипломатичний фронт (rev2)</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=6" aria-label="Слухати: Хроніки хаосу - Дипломатичний фронт (rev2)">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-dyplomatychnyi-front-rev2" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front-rev2.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-efir-bez-pravyl" data-key="Хроніки хаосу - Ефір без правил">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-efir-bez-pravyl"><span class="num">7.</span><span class="lib-title" lang="uk">Хроніки хаосу - Ефір без правил</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=7" aria-label="Слухати: Хроніки хаосу - Ефір без правил">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-efir-bez-pravyl" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-efir-bez-pravyl.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-mediashtorm" data-key="Хроніки хаосу - Медіашторм">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-mediashtorm"><span class="num">8.</span><span class="lib-title" lang="uk">Хроніки хаосу - Медіашторм</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=8" aria-label="Слухати: Хроніки хаосу - Медіашторм">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-mediashtorm" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-mediashtorm.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-novyi-final" data-key="Хроніки хаосу - Новий фінал">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-novyi-final"><span class="num">9.</span><span class="lib-title" lang="uk">Хроніки хаосу - Новий фінал</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=9" aria-label="Слухати: Хроніки хаосу - Новий фінал">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-novyi-final" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-novyi-final.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-shtuchnyi-intelekt" data-key="Хроніки хаосу - Штучний інтелект">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-shtuchnyi-intelekt"><span class="num">10.</span><span class="lib-title" lang="uk">Хроніки хаосу - Штучний інтелект</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=10" aria-label="Слухати: Хроніки хаосу - Штучний інтелект">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-shtuchnyi-intelekt" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-shtuchnyi-intelekt.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-povnyi-tsykl" data-key="Хроніки хаосу - Повний цикл">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-povnyi-tsykl"><span class="num">11.</span><span class="lib-title" lang="uk">Хроніки хаосу - Повний цикл</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=11" aria-label="Слухати: Хроніки хаосу - Повний цикл">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-povnyi-tsykl" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-povnyi-tsykl.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-svit-u-vohni" data-key="Хроніки хаосу - Світ у вогні">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-svit-u-vohni"><span class="num">12.</span><span class="lib-title" lang="uk">Хроніки хаосу - Світ у вогні</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=12" aria-label="Слухати: Хроніки хаосу - Світ у вогні">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-svit-u-vohni" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-u-vohni.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
+            <li class="lib-row" id="khroniky-khaosu--khroniky-khaosu-hlobalnyi-peredil" data-key="Хроніки хаосу - Глобальний переділ">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-khroniky-khaosu--khroniky-khaosu-hlobalnyi-peredil"><span class="num">13.</span><span class="lib-title" lang="uk">Хроніки хаосу - Глобальний переділ</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="albums.html?album=khroniky-khaosu&amp;track=13" aria-label="Слухати: Хроніки хаосу - Глобальний переділ">♪ Слухати</a>
+              <div class="lib-text" id="t-khroniky-khaosu--khroniky-khaosu-hlobalnyi-peredil" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="uk"></p></div>
+                <p class="lib-links"><a href="songs/khroniky-khaosu/khroniky-khaosu-hlobalnyi-peredil.html">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>
           </ol>
         </div>
       </article>
     </div>
+    <noscript><p class="note">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs"><li><a href="songs/prosto-zhyvy/pyatnytsya.html">П&#x27;ятниця</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/davai-vtechemo.html">Давай втечемо</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/baiduzhe.html">Байдуже</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/shche-bude-vse-bude.html">Ще буде, все буде.</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/do-ranku.html">До ранку</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/napyshy-meni.html">Напиши мені</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/zalyshsya.html">Залишся</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/sohodni-khoroshyi-den.html">Сьогодні хороший день</a> (Просто живи)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-na-mezhi.html">Хроніки хаосу - Світ на межі</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-birzhovyi-shtorm.html">Хроніки хаосу - Біржовий шторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza.html">Хроніки хаосу - Енергокриза</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza-rev2.html">Хроніки хаосу - Енергокриза (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front.html">Хроніки хаосу - Дипломатичний фронт</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front-rev2.html">Хроніки хаосу - Дипломатичний фронт (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-efir-bez-pravyl.html">Хроніки хаосу - Ефір без правил</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-mediashtorm.html">Хроніки хаосу - Медіашторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-novyi-final.html">Хроніки хаосу - Новий фінал</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-shtuchnyi-intelekt.html">Хроніки хаосу - Штучний інтелект</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-povnyi-tsykl.html">Хроніки хаосу - Повний цикл</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-u-vohni.html">Хроніки хаосу - Світ у вогні</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-hlobalnyi-peredil.html">Хроніки хаосу - Глобальний переділ</a> (Хроніки хаосу)</li></ul></noscript>
   </main>
 
   <footer>
@@ -99,5 +249,78 @@
   </footer>
 </div>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+(function () {
+  var lib = document.getElementById('lib');
+  var chips = document.querySelectorAll('#filters .chip');
+  var cards = lib.querySelectorAll('.album');
+  var lyricsPromise = null;
+
+  function getLyrics() {
+    if (!lyricsPromise) {
+      lyricsPromise = fetch('lyrics.json')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function () { return {}; });
+    }
+    return lyricsPromise;
+  }
+
+  function setAlbum(card, open) {
+    card.classList.toggle('open', open);
+    card.querySelector('.album-head').setAttribute('aria-expanded', String(open));
+    card.querySelector('.album-body').hidden = !open;
+  }
+  function openAlbum(card) {
+    Array.prototype.forEach.call(lib.querySelectorAll('.album.open'), function (c) { if (c !== card) setAlbum(c, false); });
+    setAlbum(card, true);
+  }
+  function setRow(row, open) {
+    row.classList.toggle('open', open);
+    row.querySelector('.lib-toggle').setAttribute('aria-expanded', String(open));
+    var panel = row.querySelector('.lib-text');
+    panel.hidden = !open;
+    if (!open) return;
+    var body = panel.querySelector('.lyrics-text');
+    if (body.textContent) return;
+    body.textContent = 'Завантаження…';
+    getLyrics().then(function (all) {
+      var album = all[row.closest('.album').dataset.id];
+      var text = album && album[row.dataset.key];
+      if (text) { body.textContent = text; } else { body.textContent = ''; panel.querySelector('.lyrics').hidden = true; }
+    });
+  }
+
+  Array.prototype.forEach.call(cards, function (card) {
+    card.querySelector('.album-head').addEventListener('click', function () {
+      if (card.classList.contains('open')) setAlbum(card, false); else openAlbum(card);
+    });
+    Array.prototype.forEach.call(card.querySelectorAll('.lib-row'), function (row) {
+      row.querySelector('.lib-toggle').addEventListener('click', function () {
+        var open = !row.classList.contains('open');
+        Array.prototype.forEach.call(card.querySelectorAll('.lib-row.open'), function (r) { if (r !== row) setRow(r, false); });
+        setRow(row, open);
+      });
+    });
+  });
+
+  function applyLang(l) {
+    Array.prototype.forEach.call(cards, function (c) { c.hidden = !(l === 'all' || c.dataset.lang === l); });
+    Array.prototype.forEach.call(chips, function (x) { x.setAttribute('aria-pressed', String(x.dataset.lang === l)); });
+  }
+  Array.prototype.forEach.call(chips, function (b) { b.addEventListener('click', function () { applyLang(b.dataset.lang); }); });
+  var q = new URLSearchParams(location.search).get('lang');
+  if (q && document.querySelector('#filters .chip[data-lang="' + q.replace(/[^a-z]/g, '') + '"]')) applyLang(q);
+
+  var h = decodeURIComponent(location.hash.slice(1));
+  var target = h ? document.getElementById(h) : null;
+  var card = target && target.closest('.album');
+  if (card) {
+    card.hidden = false;
+    openAlbum(card);
+    if (target.classList.contains('lib-row')) setRow(target, true);
+    setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+  }
+})();
+</script>
 </body>
 </html>
