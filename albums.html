@@ -119,6 +119,10 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .drive-player { flex: 1 1 100%; }
 .drive-player[hidden] { display: none; }
+.lyrics { margin-top: 12px; padding: 16px 20px 18px; border-left: 3px solid var(--c1); border-radius: 0 14px 14px 0; background: rgba(255,255,255,.04); animation: unfold .35s ease both; }
+.lyrics[hidden] { display: none; }
+.lyrics-label { display: block; margin-bottom: 8px; color: var(--c1); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.lyrics-text { margin: 0; font-size: 16px; line-height: 1.75; white-space: pre-line; overflow-wrap: anywhere; }
 .drive-player iframe { display: block; width: 100%; height: 260px; border: 0; border-radius: 10px; background: #0000; }
 .track-name::before { content: counter(t) ". "; color: var(--muted); }
 .track-links { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -150,6 +154,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     <nav>
       <a href="index.html">Головна</a>
       <a href="albums.html" aria-current="page">Альбоми</a>
+      <a href="lyrics.html">Тексти</a>
     </nav>
   </header>
 
@@ -171,6 +176,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 <script>
 (function () {
   var LANG_CODES = { uk: 'UA', en: 'EN', ru: 'RU' };
+  var FLAGS = { uk: '🇺🇦', en: '🇬🇧', ru: '🇷🇺' };
   var LANGS = { uk: 'Українська', ru: 'Російська', en: 'Англійська' };
   var albumsEl = document.getElementById('albums');
   var filtersEl = document.getElementById('filters');
@@ -197,7 +203,17 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     if (h.btn) h.btn.textContent = '♪ Слухати';
   }
 
-  function toggleDrivePlayer(holder, t) {
+  var lyricsPromise = null;
+  function getLyrics() {
+    if (!lyricsPromise) {
+      lyricsPromise = fetch('lyrics.json')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function () { return {}; });
+    }
+    return lyricsPromise;
+  }
+
+  function toggleDrivePlayer(holder, t, album) {
     var wasOpen = !holder.hidden;
     Array.prototype.forEach.call(document.querySelectorAll('.drive-player'), closeDrivePlayer);
     if (wasOpen) return;
@@ -207,6 +223,16 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     f.setAttribute('allow', 'autoplay');
     f.setAttribute('frameborder', '0');
     holder.appendChild(f);
+    var ly = el('div', 'lyrics');
+    ly.hidden = true;
+    holder.appendChild(ly);
+    getLyrics().then(function (all) {
+      var txt = all[album.id] && all[album.id][t.title];
+      if (!txt || !ly.parentNode) return;
+      ly.appendChild(el('span', 'lyrics-label', 'Текст пісні'));
+      ly.appendChild(el('p', 'lyrics-text', txt));
+      ly.hidden = false;
+    });
     holder.hidden = false;
     if (holder.parentNode) holder.parentNode.classList.add('playing');
     holder.btn.textContent = '■ Закрити';
@@ -233,6 +259,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   function buildCard(album) {
     var card = el('article', 'album');
     card.dataset.lang = album.lang;
+    card.dataset.id = album.id;
 
     var head = el('button', 'album-head');
     head.type = 'button';
@@ -249,7 +276,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var info = el('span', 'album-info');
     info.appendChild(el('span', 'album-title', album.title));
     var badges = el('span', 'badges');
-    badges.appendChild(el('span', 'badge badge-lang', LANGS[album.lang] || album.lang));
+    badges.appendChild(el('span', 'badge badge-lang', (FLAGS[album.lang] ? FLAGS[album.lang] + ' ' : '') + (LANGS[album.lang] || album.lang)));
     badges.appendChild(el('span', 'badge', String(album.year)));
     badges.appendChild(el('span', 'badge', album.tracks.length + ' треків'));
     info.appendChild(badges);
@@ -261,8 +288,9 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     body.hidden = true;
 
     var ul = el('ol', 'tracks');
-    album.tracks.forEach(function (t) {
+    album.tracks.forEach(function (t, idx) {
       var li = el('li', 'track');
+      li.dataset.n = String(idx + 1);
       var nameEl = el('span', 'track-name', t.title);
       var eq = el('span', 'eq');
       eq.setAttribute('aria-hidden', 'true');
@@ -279,7 +307,8 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         pb.type = 'button';
         pb.setAttribute('aria-label', 'Слухати: ' + t.title);
         holder.btn = pb;
-        pb.addEventListener('click', function () { toggleDrivePlayer(holder, t); });
+        li._play = function () { toggleDrivePlayer(holder, t, album); };
+        pb.addEventListener('click', li._play);
         links.appendChild(pb);
         var d = el('a', 'pill pill-dl', '⬇ Завантажити');
         d.href = driveLink(t.drive); d.rel = 'noopener';
@@ -343,7 +372,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     filtersEl.textContent = '';
     if (present.length < 2) return;
     filtersEl.appendChild(el('span', 'filters-label', 'Мова пісень:'));
-    var items = [['all', 'ALL']].concat(present.map(function (l) { return [l, LANG_CODES[l] || l.toUpperCase()]; }));
+    var items = [['all', 'ALL']].concat(present.map(function (l) { return [l, (FLAGS[l] ? FLAGS[l] + ' ' : '') + (LANG_CODES[l] || l.toUpperCase())]; }));
     items.forEach(function (it) {
       var b = el('button', 'chip', it[1]);
       b.type = 'button';
@@ -359,6 +388,21 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     });
   }
 
+  function openFromQuery() {
+    var p = new URLSearchParams(location.search);
+    var id = (p.get('album') || '').replace(/[^\w-]/g, '');
+    if (!id) return;
+    var card = albumsEl.querySelector('.album[data-id="' + id + '"]');
+    if (!card) return;
+    card.querySelector('.album-head').click();
+    var n = parseInt(p.get('track'), 10);
+    var row = n ? card.querySelector('.track[data-n="' + n + '"]') : null;
+    if (row && row._play) row._play();
+    setTimeout(function () {
+      (row || card).scrollIntoView({ behavior: 'smooth', block: row ? 'center' : 'start' });
+    }, 80);
+  }
+
   document.addEventListener('play', function (e) {
     Array.prototype.forEach.call(document.querySelectorAll('audio'), function (a) {
       if (a !== e.target) a.pause();
@@ -367,6 +411,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
   var q = new URLSearchParams(location.search).get('lang');
   if (q) currentLang = q;
+  if (new URLSearchParams(location.search).get('album')) currentLang = 'all';
 
   fetch('albums.json')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -376,6 +421,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
       buildStats();
       buildFilters();
       render();
+      openFromQuery();
     })
     .catch(function () {
       albumsEl.textContent = '';
