@@ -489,6 +489,113 @@
      "drive": "1RO0JM8Gmp0PIqI51Ugsd6FIVM0eu67b-"
     }
    ]
+  },
+  {
+   "id": "matritsa-treydera",
+   "title": "Матрица трейдера",
+   "lang": "ru",
+   "year": 2026,
+   "cover": "images/matrix_traders.jpeg",
+   "tracks": [
+    {
+     "title": "Пробуждение",
+     "drive": "1HdF4hJchDdwsB17TxinknXo-jXJj-o1E"
+    },
+    {
+     "title": "Энергия Катара",
+     "drive": "1YJTaWOPzPf_0qUbd10KZeZXd77LOtDn8"
+    },
+    {
+     "title": "Система перегрева",
+     "drive": "1aObU62Vin9J9664X3IZR6mH2BMsCOnZd"
+    },
+    {
+     "title": "Легитимная инфляция",
+     "drive": "1oi5uTQkLKPEH2nEvQjTMuOQF--iiHr96"
+    },
+    {
+     "title": "Атлантическая солидарность",
+     "drive": "1cWj54cUU8uE5DLEG38p3zzyCL8TVnbW8"
+    },
+    {
+     "title": "Витамин ВПК",
+     "drive": "1FfiWfiJPRb4M_DPDt-WNRYESrhVPY7ck"
+    },
+    {
+     "title": "Управляемый враг",
+     "drive": "1y51YrnzcXkLPqR-F3V_T7frIcsdVMewu"
+    },
+    {
+     "title": "Архитекторы",
+     "drive": "1_sOInUlJUvc9lGraodDYRkRS2_JzLweX"
+    },
+    {
+     "title": "2,5% - Мирная ставка",
+     "drive": "1PgWjSckU1KEqebMoH_DnooerOEDQQiG3"
+    },
+    {
+     "title": "План Маршала 2.0",
+     "drive": "1H-SG1uFdh-6m1uKDwTHUgXHThkfYSZvo"
+    },
+    {
+     "title": "Мир как перезапуск",
+     "drive": "19fPBmKzCnAbwlKJb6vlKk3Q473jKty9M"
+    }
+   ]
+  },
+  {
+   "id": "pomizh-tochkamy-vkhodu",
+   "title": "Поміж точками входу. Заповіт живого",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/pomij-tochkami-vhodu.png",
+   "tracks": [
+    {
+     "title": "Вхід у вихід",
+     "drive": "1JfPFARegEbJV8dbuBPrHy7hZZuMSI7Kn",
+     "clip": "https://youtu.be/Zra9OzwNxvo"
+    },
+    {
+     "title": "Крізь іскри",
+     "drive": "1qRgZlJgCFGbs65aCqf39t04KRcVCx6z-",
+     "clip": "https://youtu.be/SDg01YGNGNY"
+    },
+    {
+     "title": "Повернення із небуття",
+     "drive": "1eCik2UueIQmRSGGcWxe74ehCpWvMYS28",
+     "clip": "https://youtu.be/yGcdQxw0bl0"
+    },
+    {
+     "title": "Чотири сторони",
+     "drive": "18-Ev9h2EmN584XBOQQx_T08Iwa3UoERK",
+     "clip": "https://youtu.be/wYQ2AtXfQk0"
+    },
+    {
+     "title": "Прийняття. Біль як провідник",
+     "drive": "1XDuQ7LDl32odOJWniLV7N6sfuX67P8rh",
+     "clip": "https://youtu.be/iDY0j8CHzuE"
+    },
+    {
+     "title": "Сила без сили",
+     "drive": "1vS3toXaFOOyGwIBK_8YxNrDq7XQXaWev",
+     "clip": "https://youtu.be/qhiO6Q3Y7WY"
+    },
+    {
+     "title": "Повернення",
+     "drive": "1_73mp09jjXd3Prf5htN4BKcJhNOZqum0",
+     "clip": "https://youtu.be/_K7Xdtebxfc"
+    },
+    {
+     "title": "Пробудження. Голоси Всесвіту",
+     "drive": "1aIqtC_Te33sOguttcGFFE4bsvsjCHJ_j",
+     "clip": "https://youtu.be/uAF_VxA326U"
+    },
+    {
+     "title": "Дух біржі",
+     "drive": "1gTIqq9o6Ji3q65nqrKEj8W7BOWQrC_cQ",
+     "clip": "https://youtu.be/QOjAmSlLCCU"
+    }
+   ]
   }
  ]
 }
