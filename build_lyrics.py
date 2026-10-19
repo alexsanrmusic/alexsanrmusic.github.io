@@ -41,6 +41,15 @@ def e(s):
     return html.escape(str(s), quote=True)
 
 
+def plural(n, one, few, many):
+    """Українська множина: 1 текст, 2 тексти, 5 текстів."""
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
 # ---------- транслітерація для адрес ----------
 COMMON = {
     "а": "a", "б": "b", "в": "v", "д": "d", "е": "e", "ё": "yo", "ж": "zh",
@@ -84,17 +93,26 @@ def read_text(path):
 # ---------- общее оформление ----------
 EXTRA_CSS = """
 /* ===== Страницы текстов (создано build_lyrics.py) ===== */
-.album-head.static { box-sizing: border-box; cursor: default; flex-wrap: wrap; }
-.album-head.static .album-info { flex: 1 1 200px; }
 .lib-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.lib-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 14px; padding: 12px 10px; border-bottom: 1px solid var(--line); border-radius: 10px; transition: background .2s ease; }
+.lib-album-actions { margin: 14px 0 12px; }
+.lib-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 4px 10px; border-bottom: 1px solid var(--line); border-radius: 10px; transition: background .2s ease; }
 .lib-row:hover { background: rgba(255,255,255,.035); }
-.lib-row .num { color: var(--muted); min-width: 2.4ch; }
-.lib-title { flex: 1 1 0; min-width: 0; text-decoration: none; overflow-wrap: anywhere; }
-.lib-title:hover { color: var(--c1); text-decoration: underline; text-underline-offset: 3px; }
-.lib-row .num, .lib-row .pill-play { flex: none; white-space: nowrap; }
-a.pill-play { text-decoration: none; }
+.lib-row.open { background: rgba(255,255,255,.04); }
+.lib-toggle { display: flex; align-items: center; gap: 12px; flex: 1 1 0; min-width: 0; padding: 10px 0; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.lib-toggle .num { flex: none; min-width: 2.4ch; color: var(--muted); }
+.lib-title { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.lib-row.open .lib-title { color: var(--c1); font-weight: 500; }
+.album.open .lib-toggle .chev { flex: none; width: 9px; height: 9px; margin-right: 4px; transform: rotate(45deg); }
+.album.open .lib-row.open .lib-toggle .chev { transform: rotate(-135deg); }
+.lib-row .pill-play { flex: none; white-space: nowrap; text-decoration: none; }
 a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
+.lib-text { flex: 1 1 100%; padding: 4px 0 14px; }
+.lib-text[hidden] { display: none; }
+.lib-text .lyrics { margin-top: 4px; }
+.lib-links { margin: 10px 0 0; font-size: 14px; }
+.lib-links a { color: var(--muted); }
+.lib-links a:hover { color: var(--fg); }
+.lib-nojs { color: var(--muted); }
 
 .crumbs { display: flex; flex-wrap: wrap; gap: 6px 10px; color: var(--muted); font-size: 14px; margin-bottom: 18px; }
 .crumbs a { text-decoration: none; }
@@ -292,12 +310,90 @@ def song_page(album, tr, prev, nxt):
 
 
 # ---------- страница «Тексти» ----------
+LIB_JS = """<script>
+(function () {
+  var lib = document.getElementById('lib');
+  var chips = document.querySelectorAll('#filters .chip');
+  var cards = lib.querySelectorAll('.album');
+  var lyricsPromise = null;
+
+  function getLyrics() {
+    if (!lyricsPromise) {
+      lyricsPromise = fetch('lyrics.json')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function () { return {}; });
+    }
+    return lyricsPromise;
+  }
+
+  function setAlbum(card, open) {
+    card.classList.toggle('open', open);
+    card.querySelector('.album-head').setAttribute('aria-expanded', String(open));
+    card.querySelector('.album-body').hidden = !open;
+  }
+  function openAlbum(card) {
+    Array.prototype.forEach.call(lib.querySelectorAll('.album.open'), function (c) { if (c !== card) setAlbum(c, false); });
+    setAlbum(card, true);
+  }
+  function setRow(row, open) {
+    row.classList.toggle('open', open);
+    row.querySelector('.lib-toggle').setAttribute('aria-expanded', String(open));
+    var panel = row.querySelector('.lib-text');
+    panel.hidden = !open;
+    if (!open) return;
+    var body = panel.querySelector('.lyrics-text');
+    if (body.textContent) return;
+    body.textContent = 'Завантаження…';
+    getLyrics().then(function (all) {
+      var album = all[row.closest('.album').dataset.id];
+      var text = album && album[row.dataset.key];
+      if (text) { body.textContent = text; } else { body.textContent = ''; panel.querySelector('.lyrics').hidden = true; }
+    });
+  }
+
+  Array.prototype.forEach.call(cards, function (card) {
+    card.querySelector('.album-head').addEventListener('click', function () {
+      if (card.classList.contains('open')) setAlbum(card, false); else openAlbum(card);
+    });
+    Array.prototype.forEach.call(card.querySelectorAll('.lib-row'), function (row) {
+      row.querySelector('.lib-toggle').addEventListener('click', function () {
+        var open = !row.classList.contains('open');
+        Array.prototype.forEach.call(card.querySelectorAll('.lib-row.open'), function (r) { if (r !== row) setRow(r, false); });
+        setRow(row, open);
+      });
+    });
+  });
+
+  function applyLang(l) {
+    Array.prototype.forEach.call(cards, function (c) { c.hidden = !(l === 'all' || c.dataset.lang === l); });
+    Array.prototype.forEach.call(chips, function (x) { x.setAttribute('aria-pressed', String(x.dataset.lang === l)); });
+  }
+  Array.prototype.forEach.call(chips, function (b) { b.addEventListener('click', function () { applyLang(b.dataset.lang); }); });
+  var q = new URLSearchParams(location.search).get('lang');
+  if (q && document.querySelector('#filters .chip[data-lang="' + q.replace(/[^a-z]/g, '') + '"]')) applyLang(q);
+
+  var h = decodeURIComponent(location.hash.slice(1));
+  var target = h ? document.getElementById(h) : null;
+  var card = target && target.closest('.album');
+  if (card) {
+    card.hidden = false;
+    openAlbum(card);
+    if (target.classList.contains('lib-row')) setRow(target, true);
+    setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
+  }
+})();
+</script>
+"""
+
+
 def lyrics_page(lib):
     total = sum(len(a["tracks"]) for a in lib)
     langs = []
     for a in lib:
         if a["lang"] not in langs:
             langs.append(a["lang"])
+    order = ["uk", "en", "ru"]
+    langs.sort(key=lambda l: order.index(l) if l in order else len(order))
 
     filters = ""
     if len(langs) > 1:
@@ -309,31 +405,38 @@ def lyrics_page(lib):
             '      <span class="filters-label">Мова пісень:</span>\n      ' + "\n      ".join(chips) + "\n    </div>\n"
         )
 
-    cards = []
+    cards, nojs = [], []
     for i, a in enumerate(lib):
-        rows = []
-        for tr in a["tracks"]:
-            rows.append(
-                f'        <li class="lib-row"><span class="num">{tr["n"]}.</span>'
-                f'<a class="lib-title" href="songs/{e(a["id"])}/{tr["slug"]}.html" lang="{e(a["lang"])}">{e(tr["title"])}</a>'
-                f'<a class="pill pill-play" href="{listen_url(a, tr["n"])}" aria-label="Слухати: {e(tr["title"])}">♪ Слухати</a></li>'
-            )
+        aid, lang = e(a["id"]), e(a["lang"])
         code = CODES.get(a["lang"], a["lang"].upper())
-        cover = ""
         if a.get("cover"):
             cover = f'<img src="{e(a["cover"])}" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode(\'{code}\'))">'
         else:
             cover = code
-        cards.append(f"""      <article class="album" id="{e(a['id'])}" data-lang="{e(a['lang'])}" style="--i:{i}">
-        <div class="album-head static">
+        rows = []
+        for tr in a["tracks"]:
+            song_url = f'songs/{aid}/{tr["slug"]}.html'
+            rid = f'{aid}--{tr["slug"]}'
+            nojs.append(f'<li><a href="{song_url}">{e(tr["title"])}</a> ({e(a["title"])})</li>')
+            rows.append(f"""            <li class="lib-row" id="{rid}" data-key="{e(tr['title'])}">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-{rid}"><span class="num">{tr['n']}.</span><span class="lib-title" lang="{lang}">{e(tr['title'])}</span><span class="chev" aria-hidden="true"></span></button>
+              <a class="pill pill-play" href="{listen_url(a, tr['n'])}" aria-label="Слухати: {e(tr['title'])}">♪ Слухати</a>
+              <div class="lib-text" id="t-{rid}" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="{lang}"></p></div>
+                <p class="lib-links"><a href="{song_url}">Окрема сторінка пісні →</a></p>
+              </div>
+            </li>""")
+        cards.append(f"""      <article class="album" id="{aid}" data-id="{aid}" data-lang="{lang}" style="--i:{i}">
+        <button type="button" class="album-head" aria-expanded="false" aria-controls="b-{aid}">
           <span class="cover">{cover}</span>
           <span class="album-info">
             <span class="album-title">{e(a['title'])}</span>
-            {badges(a['lang'], [a.get('year', ''), f"{len(a['tracks'])} текстів"])}
+            {badges(a['lang'], [a.get('year', ''), f"{len(a['tracks'])} {plural(len(a['tracks']), 'текст', 'тексти', 'текстів')}"])}
           </span>
-          <a class="pill pill-play" href="albums.html?album={e(a['id'])}">♪ Слухати альбом</a>
-        </div>
-        <div class="album-body">
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div class="album-body" id="b-{aid}" hidden>
+          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album={aid}">♪ Слухати альбом</a></div>
           <ol class="lib-list">
 {chr(10).join(rows)}
           </ol>
@@ -343,31 +446,16 @@ def lyrics_page(lib):
     body = nav_html("", "lyrics") + f"""
   <main>
     <h1>Тексти</h1>
-    <p class="lead">Тексти пісень Alex Sanr. Відкрийте пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
-    <div class="stats"><span class="stat"><b>{total}</b> текстів</span><span class="stat"><b>{len(lib)}</b> альбомів</span></div>
+    <p class="lead">Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
+    <div class="stats"><span class="stat"><b>{total}</b> {plural(total, 'текст', 'тексти', 'текстів')}</span><span class="stat"><b>{len(lib)}</b> {plural(len(lib), 'альбом', 'альбоми', 'альбомів')}</span></div>
 {filters}    <div id="lib">
 {chr(10).join(cards)}
     </div>
+    <noscript><p class="note">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs">{''.join(nojs)}</ul></noscript>
   </main>
 """
-    script = ""
-    if filters:
-        script = """<script>
-(function () {
-  var chips = document.querySelectorAll('#filters .chip');
-  var cards = document.querySelectorAll('#lib .album');
-  function apply(l) {
-    Array.prototype.forEach.call(cards, function (c) { c.hidden = !(l === 'all' || c.dataset.lang === l); });
-    Array.prototype.forEach.call(chips, function (x) { x.setAttribute('aria-pressed', String(x.dataset.lang === l)); });
-  }
-  Array.prototype.forEach.call(chips, function (b) { b.addEventListener('click', function () { apply(b.dataset.lang); }); });
-  var q = new URLSearchParams(location.search).get('lang');
-  if (q && document.querySelector('#filters .chip[data-lang="' + q.replace(/[^a-z]/g, '') + '"]')) apply(q);
-})();
-</script>
-"""
     desc = "Тексти пісень Alex Sanr українською, англійською та російською. Читайте онлайн і слухайте пісні на сайті."
-    return page("", "Тексти пісень — Alex Sanr", desc, "lyrics.html", body, "", script)
+    return page("", "Тексти пісень — Alex Sanr", desc, "lyrics.html", body, "", LIB_JS)
 
 
 # ---------- карта сайту ----------
