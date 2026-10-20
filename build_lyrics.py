@@ -23,7 +23,9 @@ import html
 import json
 import re
 import shutil
+import subprocess
 import unicodedata
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -123,6 +125,8 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-card[data-lang="en"] { --c1: #7fb2ff; --c2: #8a6bff; }
 .song-card[data-lang="ru"] { --c1: #ff8a5c; --c2: #e8477a; }
 .song-card h1 { margin-bottom: 14px; overflow-wrap: anywhere; }
+.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pill-share:hover { border-color: var(--fg); }
 .song-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 6px; }
 .song-card .lyrics { margin-top: 22px; animation: none; }
 .song-card .lyrics-text { white-space: normal; font-size: 18px; line-height: 1.8; }
@@ -181,8 +185,12 @@ FOOTER = (
 YEAR_JS = "<script>document.getElementById('year').textContent = new Date().getFullYear();</script>"
 
 
-def page(rel, title, desc, path, body, extra_head="", extra_script=""):
+def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=None):
     url = SITE + "/" + path
+    og_square = bool(og_image)
+    og_image = og_image or OG_IMAGE
+    og_size = '<meta property="og:image:width" content="600">\n<meta property="og:image:height" content="600">' if og_square else '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">'
+    tw_card = "summary" if og_square else "summary_large_image"
     return f"""<!doctype html>
 <html lang="uk">
 <head>
@@ -199,12 +207,11 @@ def page(rel, title, desc, path, body, extra_head="", extra_script=""):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{e(url)}">
-<meta property="og:image" content="{OG_IMAGE}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="{e(og_image)}">
+{og_size}
 <meta property="og:image:alt" content="{ARTIST} — AI-музичний проєкт з України">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{OG_IMAGE}">
+<meta name="twitter:card" content="{tw_card}">
+<meta name="twitter:image" content="{e(og_image)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;800&display=swap">
@@ -246,6 +253,21 @@ def listen_url(album, n):
 
 
 # ---------- страница песни ----------
+SHARE_JS = """<script>
+(function () {
+  var b = document.getElementById('share');
+  if (!b) return;
+  var label = b.textContent;
+  function done() { b.textContent = b.getAttribute('data-done'); setTimeout(function () { b.textContent = label; }, 2000); }
+  b.addEventListener('click', function () {
+    var data = { title: document.title, url: location.href.split('#')[0] };
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    try { navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('', data.url); }); }
+    catch (e) { window.prompt('', data.url); }
+  });
+})();
+</script>"""
+
 def song_page(album, tr, prev, nxt):
     lang = album["lang"]
     word = LYRICS_WORD.get(lang, "lyrics")
@@ -258,6 +280,7 @@ def song_page(album, tr, prev, nxt):
         desc = f"Текст пісні «{tr['title']}» — {ARTIST}, альбом «{album['title']}». Слухайте на сайті."
     path = f"songs/{album['id']}/{tr['slug']}.html"
     rel = "../../"
+    cover = SITE + "/" + album["cover"] if album.get("cover") else None
 
     ld = {
         "@context": "https://schema.org",
@@ -265,7 +288,7 @@ def song_page(album, tr, prev, nxt):
         "name": tr["title"],
         "url": SITE + "/" + path,
         "inLanguage": lang,
-        "image": OG_IMAGE,
+        "image": cover or OG_IMAGE,
         "byArtist": {"@type": "MusicGroup", "name": ARTIST, "url": SITE + "/"},
         "inAlbum": {"@type": "MusicAlbum", "name": album["title"], "byArtist": {"@type": "MusicGroup", "name": ARTIST}},
         "recordingOf": {
@@ -281,6 +304,8 @@ def song_page(album, tr, prev, nxt):
     actions = f'<a class="pill pill-dl" href="{rel}{listen_url(album, tr["n"])}">♪ Слухати</a>'
     if tr.get("clip"):
         actions += f'\n      <a class="pill pill-clip" href="{e(tr["clip"])}" target="_blank" rel="noopener">▶ Дивитись кліп</a>'
+
+    actions += '\n      <button class="pill pill-share" type="button" id="share" data-done="Скопійовано">↗ Поділитися</button>'
 
     nav_cards = ""
     if prev:
@@ -313,7 +338,7 @@ def song_page(album, tr, prev, nxt):
     <p class="song-more"><a href="{rel}lyrics.html">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}">Альбом «{e(album['title'])}»</a></p>
   </main>
 """
-    return page(rel, title, desc, path, body, extra_head)
+    return page(rel, title, desc, path, body, extra_head, SHARE_JS, cover)
 
 
 # ---------- страница «Тексти» ----------
@@ -465,9 +490,32 @@ def lyrics_page(lib):
 
 
 # ---------- карта сайту ----------
+def lastmod(url):
+    """Дата последнего изменения файла из git (YYYY-MM-DD).
+    Файл изменён, но ещё не закоммичен, или новый: сегодняшняя дата.
+    Нет git или истории: дату не указываем."""
+    rel = url[len(SITE):].lstrip("/") or "index.html"
+    if not (ROOT / rel).exists():
+        return None
+    try:
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", rel], cwd=ROOT,
+                               capture_output=True, text=True, check=True).stdout.strip()
+        if dirty:
+            return date.today().isoformat()
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel], cwd=ROOT,
+                             capture_output=True, text=True, check=True).stdout.strip()
+        return out or None
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
 def sitemap(urls):
-    items = "\n".join(f"  <url>\n    <loc>{e(u)}</loc>\n  </url>" for u in urls)
-    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + items + "\n</urlset>\n"
+    rows = []
+    for u in urls:
+        lm = lastmod(u)
+        tag = f"\n    <lastmod>{lm}</lastmod>" if lm else ""
+        rows.append(f"  <url>\n    <loc>{e(u)}</loc>{tag}\n  </url>")
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
 
 
 def main():
@@ -478,7 +526,7 @@ def main():
     if songs_dir.exists():
         shutil.rmtree(songs_dir)
 
-    report, lib, lyrics_json, urls = [], [], {}, [SITE + "/", SITE + "/albums.html", SITE + "/lyrics.html"]
+    report, lib, lyrics_json, urls = [], [], {}, [SITE + "/", SITE + "/albums.html", SITE + "/lyrics.html", SITE + "/install.html"]
     lyric_dirs = {p.name for p in (ROOT / "lyrics").iterdir() if p.is_dir()} if (ROOT / "lyrics").is_dir() else set()
     used_dirs = set()
 
