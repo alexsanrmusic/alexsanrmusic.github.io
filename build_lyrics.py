@@ -209,6 +209,12 @@ def page(rel, title, desc, path, body, extra_head="", extra_script=""):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;800&display=swap">
 <link rel="stylesheet" href="{rel}site.css">
+<link rel="manifest" href="{rel}manifest.webmanifest">
+<link rel="apple-touch-icon" href="{rel}icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Alex Sanr">
+<script src="{rel}pwa.js" defer></script>
 {extra_head}</head>
 <body>
 <div class="wrap">
