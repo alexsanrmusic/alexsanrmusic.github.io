@@ -43,6 +43,7 @@
   function css() {
     var s = document.createElement('style');
     s.textContent =
+      '.pwa-brand{display:flex;align-items:center;gap:12px}' +
       '.pwa-btn{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1px solid var(--line,rgba(255,255,255,.16));border-radius:999px;background:rgba(255,255,255,.04);color:var(--fg,#e8ecff);font:inherit;font-size:14px;line-height:1;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}' +
       '.pwa-btn:hover{border-color:var(--accent,#7c8cff);background:rgba(255,255,255,.08)}' +
       '.pwa-btn:active{transform:scale(.97)}' +
@@ -70,7 +71,17 @@
     btn.title = t.title;
     btn.setAttribute('aria-label', t.title);
     btn.innerHTML = '<img src="' + url('icons/icon-192.png') + '" alt="" width="30" height="30"><span>' + t.label + '</span>';
-    header.appendChild(btn);
+    var brand = header.querySelector('.brand');
+    if (brand && brand.parentNode === header) {
+      // логотип-кнопка стоит рядом с названием, в первой строке шапки
+      var group = document.createElement('div');
+      group.className = 'pwa-brand';
+      header.insertBefore(group, brand);
+      group.appendChild(brand);
+      group.appendChild(btn);
+    } else {
+      header.appendChild(btn);
+    }
     btn.addEventListener('click', onClick);
     if (isIOS || deferred) btn.hidden = false;   // на iPhone події встановлення немає — показуємо підказку
   }
