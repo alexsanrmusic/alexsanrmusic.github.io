@@ -151,6 +151,8 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-card[data-lang="en"] { --c1: #7fb2ff; --c2: #8a6bff; }
 .song-card[data-lang="ru"] { --c1: #ff8a5c; --c2: #e8477a; }
 .song-card h1 { margin-bottom: 14px; overflow-wrap: anywhere; }
+.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pill-share:hover { border-color: var(--fg); }
 .song-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 6px; }
 .song-card .lyrics { margin-top: 22px; animation: none; }
 .song-card .lyrics-text { white-space: normal; font-size: 18px; line-height: 1.8; }
