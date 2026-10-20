@@ -38,12 +38,12 @@
 
   if (isStandalone()) return;
 
-  var deferred = null, btn = null, pop = null, group = null, nav = null;
+  var deferred = null, btn = null, pop = null, brand = null, nav = null;
 
   function css() {
     var s = document.createElement('style');
     s.textContent =
-      '.pwa-brand{display:flex;align-items:center;gap:12px}' +
+      '.pwa-wrap .brand{order:1}.pwa-wrap .pwa-btn{order:2}.pwa-wrap nav{order:3;flex-basis:100%}' +
       '.pwa-btn{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1px solid var(--line,rgba(255,255,255,.16));border-radius:999px;background:rgba(255,255,255,.04);color:var(--fg,#e8ecff);font:inherit;font-size:14px;line-height:1;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}' +
       '.pwa-btn:hover{border-color:var(--accent,#7c8cff);background:rgba(255,255,255,.08)}' +
       '.pwa-btn:active{transform:scale(.97)}' +
@@ -71,14 +71,7 @@
     btn.title = t.title;
     btn.setAttribute('aria-label', t.title);
     btn.innerHTML = '<img src="' + url('icons/icon-192.png') + '" alt="" width="30" height="30"><span>' + t.label + '</span>';
-    // название сайта лежит в группе; кнопка либо справа в шапке, либо рядом с названием
-    var brand = header.querySelector('.brand');
-    if (brand && brand.parentNode === header) {
-      group = document.createElement('div');
-      group.className = 'pwa-brand';
-      header.insertBefore(group, brand);
-      group.appendChild(brand);
-    }
+    brand = header.querySelector('.brand');
     nav = header.querySelector('nav');
     header.appendChild(btn);
     btn.addEventListener('click', onClick);
@@ -86,14 +79,15 @@
   }
 
 
-  // Всё влезает в одну строку: кнопка справа. Не влезает: кнопка остаётся рядом с названием, меню уходит вниз.
+  // Всё влезает в одну строку: кнопка справа от меню. Не влезает: меню уходит на вторую строку,
+  // а кнопка остаётся в первой строке справа.
   function layout() {
-    if (!btn || btn.hidden || !group) return;
-    var header = group.parentNode;
-    header.appendChild(btn);
-    var top = group.getBoundingClientRect().top;
+    if (!btn || btn.hidden || !brand) return;
+    var header = btn.parentNode;
+    header.classList.remove('pwa-wrap');
+    var top = brand.getBoundingClientRect().top;
     var wrapped = btn.getBoundingClientRect().top > top + 6 || (nav && nav.getBoundingClientRect().top > top + 6);
-    if (wrapped) group.appendChild(btn);
+    if (wrapped) header.classList.add('pwa-wrap');
   }
   var layoutTimer = null;
   function relayout() { clearTimeout(layoutTimer); layoutTimer = setTimeout(layout, 60); }
