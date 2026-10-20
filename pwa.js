@@ -38,7 +38,7 @@
 
   if (isStandalone()) return;
 
-  var deferred = null, btn = null, pop = null;
+  var deferred = null, btn = null, pop = null, group = null, nav = null;
 
   function css() {
     var s = document.createElement('style');
@@ -71,20 +71,35 @@
     btn.title = t.title;
     btn.setAttribute('aria-label', t.title);
     btn.innerHTML = '<img src="' + url('icons/icon-192.png') + '" alt="" width="30" height="30"><span>' + t.label + '</span>';
+    // название сайта лежит в группе; кнопка либо справа в шапке, либо рядом с названием
     var brand = header.querySelector('.brand');
     if (brand && brand.parentNode === header) {
-      // логотип-кнопка стоит рядом с названием, в первой строке шапки
-      var group = document.createElement('div');
+      group = document.createElement('div');
       group.className = 'pwa-brand';
       header.insertBefore(group, brand);
       group.appendChild(brand);
-      group.appendChild(btn);
-    } else {
-      header.appendChild(btn);
     }
+    nav = header.querySelector('nav');
+    header.appendChild(btn);
     btn.addEventListener('click', onClick);
-    if (isIOS || deferred) btn.hidden = false;   // на iPhone події встановлення немає — показуємо підказку
+    if (isIOS || deferred) { btn.hidden = false; relayout(); }   // на iPhone події встановлення немає — показуємо підказку
   }
+
+
+  // Всё влезает в одну строку: кнопка справа. Не влезает: кнопка остаётся рядом с названием, меню уходит вниз.
+  function layout() {
+    if (!btn || btn.hidden || !group) return;
+    var header = group.parentNode;
+    header.appendChild(btn);
+    var top = group.getBoundingClientRect().top;
+    var wrapped = btn.getBoundingClientRect().top > top + 6 || (nav && nav.getBoundingClientRect().top > top + 6);
+    if (wrapped) group.appendChild(btn);
+  }
+  var layoutTimer = null;
+  function relayout() { clearTimeout(layoutTimer); layoutTimer = setTimeout(layout, 60); }
+  window.addEventListener('resize', relayout);
+  window.addEventListener('load', relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 
   function showPop() {
     if (!pop) {
@@ -117,7 +132,7 @@
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferred = e;
-    if (btn) btn.hidden = false;
+    if (btn) { btn.hidden = false; relayout(); }
   });
   window.addEventListener('appinstalled', function () {
     deferred = null;
