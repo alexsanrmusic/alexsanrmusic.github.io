@@ -1,11 +1,12 @@
 /* Alex Sanr — мінімальний service worker.
    Спочатку мережа (завжди свіжий сайт), кеш лише як запасний варіант без інтернету.
    Чужі запити (YouTube, Google Drive, шрифти) не чіпає. */
-const CACHE = 'alexsanr-v1';
-const SHELL = ['./', 'index.html', 'albums.html', 'lyrics.html', 'albums.json', 'lyrics.json', 'favicon.png', 'icons/icon-192.png'];
+const CACHE = 'alexsanr-v2';
+const SHELL = ['./', 'index.html', 'albums.html', 'lyrics.html', 'albums.json', 'lyrics.json', 'favicon.png', 'icons/icon-192.png', 'site.css', 'fonts/fonts.css', 'images/hero.jpg'];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).catch(() => {}));
+  // каждый файл отдельно: если одного нет, остальные всё равно кэшируются
+  e.waitUntil(caches.open(CACHE).then((c) => Promise.all(SHELL.map((u) => c.add(u).catch(() => {})))));
   self.skipWaiting();
 });
 

@@ -212,9 +212,7 @@ def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=
 <meta property="og:image:alt" content="{ARTIST} — AI-музичний проєкт з України">
 <meta name="twitter:card" content="{tw_card}">
 <meta name="twitter:image" content="{e(og_image)}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;800&display=swap">
+<link rel="stylesheet" href="{rel}fonts/fonts.css">
 <link rel="stylesheet" href="{rel}site.css">
 <link rel="manifest" href="{rel}manifest.webmanifest">
 <link rel="apple-touch-icon" href="{rel}icons/apple-touch-icon.png">
@@ -252,6 +250,25 @@ def listen_url(album, n):
     return f"albums.html?album={album['id']}&amp;track={n}"
 
 
+# ---------- переводы одной песни (hreflang) ----------
+def alternates_for(album, tr, built):
+    """Те же песни на других языках: альбомы с одинаковым полем "group" в albums.json,
+    трек сопоставляется по номеру в альбоме. Возвращает [(язык, адрес), ...] включая саму страницу."""
+    group = album.get("group")
+    if not group:
+        return []
+    res, langs = [], set()
+    for a, found in built:
+        if a.get("group") != group or a["lang"] in langs:
+            continue
+        for t in found:
+            if t["n"] == tr["n"]:
+                langs.add(a["lang"])
+                res.append((a["lang"], f"{SITE}/songs/{a['id']}/{t['slug']}.html"))
+                break
+    return res if len(res) > 1 else []
+
+
 # ---------- страница песни ----------
 SHARE_JS = """<script>
 (function () {
@@ -268,7 +285,7 @@ SHARE_JS = """<script>
 })();
 </script>"""
 
-def song_page(album, tr, prev, nxt):
+def song_page(album, tr, prev, nxt, alternates=()):
     lang = album["lang"]
     word = LYRICS_WORD.get(lang, "lyrics")
     title = f"{tr['title']} — {word} | {ARTIST}"
@@ -300,6 +317,8 @@ def song_page(album, tr, prev, nxt):
     }
     ld_json = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
     extra_head = f'<script type="application/ld+json">{ld_json}</script>\n'
+    if len(alternates) > 1:
+        extra_head += "".join(f'<link rel="alternate" hreflang="{l}" href="{e(u)}">\n' for l, u in alternates)
 
     actions = f'<a class="pill pill-dl" href="{rel}{listen_url(album, tr["n"])}">♪ Слухати</a>'
     if tr.get("clip"):
@@ -529,6 +548,7 @@ def main():
     report, lib, lyrics_json, urls = [], [], {}, [SITE + "/", SITE + "/albums.html", SITE + "/lyrics.html", SITE + "/install.html"]
     lyric_dirs = {p.name for p in (ROOT / "lyrics").iterdir() if p.is_dir()} if (ROOT / "lyrics").is_dir() else set()
     used_dirs = set()
+    built = []
 
     for a in data["albums"]:
         folder = a.get("lyrics_dir") or a["id"]
@@ -564,12 +584,16 @@ def main():
             continue
         lib.append({**a, "tracks": found})
         lyrics_json[a["id"]] = {t["title"]: t["text"] for t in found}
+        built.append((a, found))
+
+    # страницы песен пишем после обхода всех альбомов: для hreflang нужны адреса переводов
+    for a, found in built:
         for idx, tr in enumerate(found):
             prev = found[idx - 1] if idx > 0 else None
             nxt = found[idx + 1] if idx + 1 < len(found) else None
             out = songs_dir / a["id"] / f"{tr['slug']}.html"
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(song_page(a, tr, prev, nxt), encoding="utf-8")
+            out.write_text(song_page(a, tr, prev, nxt, alternates_for(a, tr, built)), encoding="utf-8")
             urls.append(f"{SITE}/songs/{a['id']}/{tr['slug']}.html")
 
     for name in sorted(lyric_dirs - used_dirs):

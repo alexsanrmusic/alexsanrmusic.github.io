@@ -63,6 +63,7 @@
   },
   {
    "id": "petlia-i-svet",
+   "group": "loop-and-light",
    "title": "Петля и свет",
    "lang": "ru",
    "year": 2026,
@@ -158,6 +159,7 @@
   },
   {
    "id": "between-entry-points",
+   "group": "entry-points",
    "title": "Between entry points: Testament of the living",
    "lang": "en",
    "year": 2026,
@@ -274,6 +276,7 @@
   },
   {
    "id": "zeroing-return-to-self",
+   "group": "loop-and-light",
    "title": "Zeroing. Return to Self",
    "lang": "en",
    "year": 2026,
@@ -377,6 +380,7 @@
   },
   {
    "id": "mezhdu-tochkami-vkhoda",
+   "group": "entry-points",
    "title": "Между точками входа. Завещание живого",
    "lang": "ru",
    "year": 2026,
@@ -442,6 +446,7 @@
   },
   {
    "id": "pomizh-tochkamy-vkhodu",
+   "group": "entry-points",
    "title": "Поміж точками входу. Заповіт живого",
    "lang": "uk",
    "year": 2026,
@@ -498,6 +503,7 @@
  "_hidden": [
   {
    "id": "matrix-for-trader",
+   "group": "trader-matrix",
    "title": "Matrix for trader",
    "lang": "en",
    "year": 2026,
@@ -552,6 +558,7 @@
   },
   {
    "id": "matritsa-treydera",
+   "group": "trader-matrix",
    "title": "Матрица трейдера",
    "lang": "ru",
    "year": 2026,
