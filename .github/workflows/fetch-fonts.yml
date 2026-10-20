@@ -1,0 +1,23 @@
+name: Fetch fonts
+
+# Запускается вручную: Actions -> Fetch fonts -> Run workflow.
+# Скачивает шрифты Onest и Unbounded в папку fonts/ и делает коммит.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fonts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download fonts
+        run: python3 tools/fetch_fonts.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add fonts
+          git diff --cached --quiet || (git commit -m "Add self-hosted fonts" && git pull --rebase && git push)
