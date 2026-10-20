@@ -62,60 +62,6 @@
    ]
   },
   {
-   "id": "matrix-for-trader",
-   "title": "Matrix for trader",
-   "lang": "en",
-   "year": 2026,
-   "cover": "images/matrix-for-trader.jpeg",
-   "tracks": [
-    {
-     "title": "Awakening",
-     "drive": "168Xmf6XiIHQE6CDovva-4e5mX4jM8SXL",
-     "clip": "https://youtu.be/x5qi94VPm2k"
-    },
-    {
-     "title": "Energy of Qatar",
-     "drive": "1USUjZ4VKvbRwDcFFu_dzYR8ktt8m_43V"
-    },
-    {
-     "title": "Overheated system",
-     "drive": "1TaIf5cDMUbkYuGd5OrmeYgFrROPjXT3p"
-    },
-    {
-     "title": "Legitimate inflation",
-     "drive": "1pbhqEHdFWnA9vu87NZPbDOJ4SNKkprIf"
-    },
-    {
-     "title": "Atlantic solidarity",
-     "drive": "1u6rjFcC8bLJnNLyM1l1BpGLHDA3FSFmq"
-    },
-    {
-     "title": "Military vitamin",
-     "drive": "1376TKyqW_dY4SC4L1SgKivjApz4qH788"
-    },
-    {
-     "title": "Controlled enemy",
-     "drive": "1J35pyfSDYr6dVyh5ovQ6DjCIBmU_OrGc"
-    },
-    {
-     "title": "Architect without faces",
-     "drive": "1mVBHOL0A971UbtJaOrhPQ5YAzPj8MdTi"
-    },
-    {
-     "title": "2,5% - The peace rate",
-     "drive": "1lGjo_Ob4oorToL6EomIBL_GmLnzzzZNB"
-    },
-    {
-     "title": "Marshall plan 2.0",
-     "drive": "1sbp9intER06RDktLbNQ7xnyxAihtkuKl"
-    },
-    {
-     "title": "The world as a reboot",
-     "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
-    }
-   ]
-  },
-  {
    "id": "petlia-i-svet",
    "title": "Петля и свет",
    "lang": "ru",
@@ -495,59 +441,6 @@
    ]
   },
   {
-   "id": "matritsa-treydera",
-   "title": "Матрица трейдера",
-   "lang": "ru",
-   "year": 2026,
-   "cover": "images/matrix_traders.jpeg",
-   "tracks": [
-    {
-     "title": "Пробуждение",
-     "drive": "1HdF4hJchDdwsB17TxinknXo-jXJj-o1E"
-    },
-    {
-     "title": "Энергия Катара",
-     "drive": "1YJTaWOPzPf_0qUbd10KZeZXd77LOtDn8"
-    },
-    {
-     "title": "Система перегрева",
-     "drive": "1aObU62Vin9J9664X3IZR6mH2BMsCOnZd"
-    },
-    {
-     "title": "Легитимная инфляция",
-     "drive": "1oi5uTQkLKPEH2nEvQjTMuOQF--iiHr96"
-    },
-    {
-     "title": "Атлантическая солидарность",
-     "drive": "1cWj54cUU8uE5DLEG38p3zzyCL8TVnbW8"
-    },
-    {
-     "title": "Витамин ВПК",
-     "drive": "1FfiWfiJPRb4M_DPDt-WNRYESrhVPY7ck"
-    },
-    {
-     "title": "Управляемый враг",
-     "drive": "1y51YrnzcXkLPqR-F3V_T7frIcsdVMewu"
-    },
-    {
-     "title": "Архитекторы",
-     "drive": "1_sOInUlJUvc9lGraodDYRkRS2_JzLweX"
-    },
-    {
-     "title": "2,5% - Мирная ставка",
-     "drive": "1PgWjSckU1KEqebMoH_DnooerOEDQQiG3"
-    },
-    {
-     "title": "План Маршала 2.0",
-     "drive": "1H-SG1uFdh-6m1uKDwTHUgXHThkfYSZvo"
-    },
-    {
-     "title": "Мир как перезапуск",
-     "drive": "19fPBmKzCnAbwlKJb6vlKk3Q473jKty9M"
-    }
-   ]
-  },
-  {
    "id": "pomizh-tochkamy-vkhodu",
    "title": "Поміж точками входу. Заповіт живого",
    "lang": "uk",
@@ -598,6 +491,115 @@
      "title": "Дух біржі",
      "drive": "1gTIqq9o6Ji3q65nqrKEj8W7BOWQrC_cQ",
      "clip": "https://youtu.be/QOjAmSlLCCU"
+    }
+   ]
+  }
+ ],
+ "_hidden": [
+  {
+   "id": "matrix-for-trader",
+   "title": "Matrix for trader",
+   "lang": "en",
+   "year": 2026,
+   "cover": "images/matrix-for-trader.jpeg",
+   "tracks": [
+    {
+     "title": "Awakening",
+     "drive": "168Xmf6XiIHQE6CDovva-4e5mX4jM8SXL",
+     "clip": "https://youtu.be/x5qi94VPm2k"
+    },
+    {
+     "title": "Energy of Qatar",
+     "drive": "1USUjZ4VKvbRwDcFFu_dzYR8ktt8m_43V"
+    },
+    {
+     "title": "Overheated system",
+     "drive": "1TaIf5cDMUbkYuGd5OrmeYgFrROPjXT3p"
+    },
+    {
+     "title": "Legitimate inflation",
+     "drive": "1pbhqEHdFWnA9vu87NZPbDOJ4SNKkprIf"
+    },
+    {
+     "title": "Atlantic solidarity",
+     "drive": "1u6rjFcC8bLJnNLyM1l1BpGLHDA3FSFmq"
+    },
+    {
+     "title": "Military vitamin",
+     "drive": "1376TKyqW_dY4SC4L1SgKivjApz4qH788"
+    },
+    {
+     "title": "Controlled enemy",
+     "drive": "1J35pyfSDYr6dVyh5ovQ6DjCIBmU_OrGc"
+    },
+    {
+     "title": "Architect without faces",
+     "drive": "1mVBHOL0A971UbtJaOrhPQ5YAzPj8MdTi"
+    },
+    {
+     "title": "2,5% - The peace rate",
+     "drive": "1lGjo_Ob4oorToL6EomIBL_GmLnzzzZNB"
+    },
+    {
+     "title": "Marshall plan 2.0",
+     "drive": "1sbp9intER06RDktLbNQ7xnyxAihtkuKl"
+    },
+    {
+     "title": "The world as a reboot",
+     "drive": "1KHZnxDzKNi5BomYPX98X9AAKnaoDYPAL"
+    }
+   ]
+  },
+  {
+   "id": "matritsa-treydera",
+   "title": "Матрица трейдера",
+   "lang": "ru",
+   "year": 2026,
+   "cover": "images/matrix_traders.jpeg",
+   "tracks": [
+    {
+     "title": "Пробуждение",
+     "drive": "1HdF4hJchDdwsB17TxinknXo-jXJj-o1E"
+    },
+    {
+     "title": "Энергия Катара",
+     "drive": "1YJTaWOPzPf_0qUbd10KZeZXd77LOtDn8"
+    },
+    {
+     "title": "Система перегрева",
+     "drive": "1aObU62Vin9J9664X3IZR6mH2BMsCOnZd"
+    },
+    {
+     "title": "Легитимная инфляция",
+     "drive": "1oi5uTQkLKPEH2nEvQjTMuOQF--iiHr96"
+    },
+    {
+     "title": "Атлантическая солидарность",
+     "drive": "1cWj54cUU8uE5DLEG38p3zzyCL8TVnbW8"
+    },
+    {
+     "title": "Витамин ВПК",
+     "drive": "1FfiWfiJPRb4M_DPDt-WNRYESrhVPY7ck"
+    },
+    {
+     "title": "Управляемый враг",
+     "drive": "1y51YrnzcXkLPqR-F3V_T7frIcsdVMewu"
+    },
+    {
+     "title": "Архитекторы",
+     "drive": "1_sOInUlJUvc9lGraodDYRkRS2_JzLweX"
+    },
+    {
+     "title": "2,5% - Мирная ставка",
+     "drive": "1PgWjSckU1KEqebMoH_DnooerOEDQQiG3"
+    },
+    {
+     "title": "План Маршала 2.0",
+     "drive": "1H-SG1uFdh-6m1uKDwTHUgXHThkfYSZvo"
+    },
+    {
+     "title": "Мир как перезапуск",
+     "drive": "19fPBmKzCnAbwlKJb6vlKk3Q473jKty9M"
     }
    ]
   }
