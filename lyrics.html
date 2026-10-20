@@ -45,7 +45,13 @@
   <main>
     <h1>Тексти</h1>
     <p class="lead">Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
-    <div class="stats"><span class="stat"><b>51</b> текст</span><span class="stat"><b>5</b> альбомів</span></div>
+    <div class="stats"><span class="stat"><b>65</b> текстів</span><span class="stat"><b>6</b> альбомів</span></div>
+    <div class="filters" id="filters" role="group" aria-label="Мова">
+      <span class="filters-label">Мова пісень:</span>
+      <button type="button" class="chip" data-lang="all" aria-pressed="true">ALL</button>
+      <button type="button" class="chip" data-lang="uk" aria-pressed="false">🇺🇦 UA</button>
+      <button type="button" class="chip" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+    </div>
     <div id="lib">
       <article class="album" id="echo-ua" data-id="echo-ua" data-lang="uk" style="--i:0">
         <button type="button" class="album-head" aria-expanded="false" aria-controls="b-echo-ua">
@@ -224,7 +230,120 @@
           </ol>
         </div>
       </article>
-      <article class="album" id="prosto-zhyvy" data-id="prosto-zhyvy" data-lang="uk" style="--i:2">
+      <article class="album" id="between-entry-points" data-id="between-entry-points" data-lang="en" style="--i:2">
+        <button type="button" class="album-head" aria-expanded="false" aria-controls="b-between-entry-points">
+          <span class="cover"><img src="images/between-entry.jpg" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('EN'))"></span>
+          <span class="album-info">
+            <span class="album-title">Between entry points: Testament of the living</span>
+            <span class="badges"><span class="badge badge-lang">🇬🇧 Англійська</span><span class="badge">2026</span><span class="badge">14 текстів</span></span>
+          </span>
+          <span class="chev" aria-hidden="true"></span>
+        </button>
+        <div class="album-body" id="b-between-entry-points" hidden>
+          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points">♪ Слухати альбом</a></div>
+          <ol class="lib-list">
+            <li class="lib-row" id="between-entry-points--entry-into-exit" data-key="Entry Into Exit">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--entry-into-exit"><span class="num">1.</span><span class="lib-title" lang="en">Entry Into Exit</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=1" aria-label="Слухати: Entry Into Exit">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--entry-into-exit" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/entry-into-exit.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--through-sparks" data-key="Through Sparks">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--through-sparks"><span class="num">2.</span><span class="lib-title" lang="en">Through Sparks</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=2" aria-label="Слухати: Through Sparks">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--through-sparks" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/through-sparks.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--return-from-nonexistence" data-key="Return from Nonexistence">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--return-from-nonexistence"><span class="num">3.</span><span class="lib-title" lang="en">Return from Nonexistence</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=3" aria-label="Слухати: Return from Nonexistence">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--return-from-nonexistence" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/return-from-nonexistence.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--four-sides" data-key="Four Sides">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--four-sides"><span class="num">4.</span><span class="lib-title" lang="en">Four Sides</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=4" aria-label="Слухати: Four Sides">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--four-sides" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/four-sides.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--acceptance-pain-as-a-guide" data-key="Acceptance. Pain as a Guide">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--acceptance-pain-as-a-guide"><span class="num">5.</span><span class="lib-title" lang="en">Acceptance. Pain as a Guide</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=5" aria-label="Слухати: Acceptance. Pain as a Guide">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--acceptance-pain-as-a-guide" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/acceptance-pain-as-a-guide.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--strength-without-force" data-key="Strength Without Force">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--strength-without-force"><span class="num">6.</span><span class="lib-title" lang="en">Strength Without Force</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=6" aria-label="Слухати: Strength Without Force">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--strength-without-force" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/strength-without-force.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--the-return" data-key="The Return">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--the-return"><span class="num">7.</span><span class="lib-title" lang="en">The Return</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=7" aria-label="Слухати: The Return">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--the-return" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/the-return.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--rising" data-key="Rising">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--rising"><span class="num">8.</span><span class="lib-title" lang="en">Rising</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=8" aria-label="Слухати: Rising">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--rising" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/rising.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--spirit-of-the-market" data-key="Spirit of the Market">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--spirit-of-the-market"><span class="num">9.</span><span class="lib-title" lang="en">Spirit of the Market</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=9" aria-label="Слухати: Spirit of the Market">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--spirit-of-the-market" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/spirit-of-the-market.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--home-beyond-time" data-key="Home Beyond Time">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--home-beyond-time"><span class="num">10.</span><span class="lib-title" lang="en">Home Beyond Time</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=10" aria-label="Слухати: Home Beyond Time">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--home-beyond-time" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/home-beyond-time.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--backbone-of-silent-choices" data-key="Backbone of Silent Choices">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--backbone-of-silent-choices"><span class="num">11.</span><span class="lib-title" lang="en">Backbone of Silent Choices</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=11" aria-label="Слухати: Backbone of Silent Choices">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--backbone-of-silent-choices" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/backbone-of-silent-choices.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--life-between-entry-points" data-key="Life Between Entry Points">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--life-between-entry-points"><span class="num">12.</span><span class="lib-title" lang="en">Life Between Entry Points</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=12" aria-label="Слухати: Life Between Entry Points">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--life-between-entry-points" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/life-between-entry-points.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--afterword-gratitude" data-key="Afterword. Gratitude">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--afterword-gratitude"><span class="num">13.</span><span class="lib-title" lang="en">Afterword. Gratitude</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=13" aria-label="Слухати: Afterword. Gratitude">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--afterword-gratitude" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/afterword-gratitude.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+            <li class="lib-row" id="between-entry-points--testament-of-the-living" data-key="Testament of the Living">
+              <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-between-entry-points--testament-of-the-living"><span class="num">14.</span><span class="lib-title" lang="en">Testament of the Living</span><span class="chev" aria-hidden="true"></span></button>
+              <div class="lib-actions"><a class="pill pill-play" href="albums.html?album=between-entry-points&amp;track=14" aria-label="Слухати: Testament of the Living">♪ Слухати</a></div>
+              <div class="lib-text" id="t-between-entry-points--testament-of-the-living" hidden>
+                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="en"></p><p class="lib-links"><a href="songs/between-entry-points/testament-of-the-living.html">Окрема сторінка пісні →</a></p></div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </article>
+      <article class="album" id="prosto-zhyvy" data-id="prosto-zhyvy" data-lang="uk" style="--i:3">
         <button type="button" class="album-head" aria-expanded="false" aria-controls="b-prosto-zhyvy">
           <span class="cover"><img src="images/prostojivi.jpeg" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('UA'))"></span>
           <span class="album-info">
@@ -295,7 +414,7 @@
           </ol>
         </div>
       </article>
-      <article class="album" id="khroniky-khaosu" data-id="khroniky-khaosu" data-lang="uk" style="--i:3">
+      <article class="album" id="khroniky-khaosu" data-id="khroniky-khaosu" data-lang="uk" style="--i:4">
         <button type="button" class="album-head" aria-expanded="false" aria-controls="b-khroniky-khaosu">
           <span class="cover"><img src="images/chronicles.jpeg" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('UA'))"></span>
           <span class="album-info">
@@ -401,7 +520,7 @@
           </ol>
         </div>
       </article>
-      <article class="album" id="pomizh-tochkamy-vkhodu" data-id="pomizh-tochkamy-vkhodu" data-lang="uk" style="--i:4">
+      <article class="album" id="pomizh-tochkamy-vkhodu" data-id="pomizh-tochkamy-vkhodu" data-lang="uk" style="--i:5">
         <button type="button" class="album-head" aria-expanded="false" aria-controls="b-pomizh-tochkamy-vkhodu">
           <span class="cover"><img src="images/pomij-tochkami-vhodu.png" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode('UA'))"></span>
           <span class="album-info">
@@ -480,7 +599,7 @@
         </div>
       </article>
     </div>
-    <noscript><p class="note">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs"><li><a href="songs/echo-ua/malenkyi-chovnyk.html">Маленький човник</a> (Echo UA)</li><li><a href="songs/echo-ua/den-dyakuyu.html">День дякую</a> (Echo UA)</li><li><a href="songs/echo-ua/lvivskyi-tramvai.html">Львівський трамвай</a> (Echo UA)</li><li><a href="songs/echo-ua/moya-lyuba.html">Моя люба</a> (Echo UA)</li><li><a href="songs/echo-ua/moya-lyuba-blues-version.html">Моя люба (Blues version)</a> (Echo UA)</li><li><a href="songs/echo-ua/z-novym-rokom.html">З новим роком!</a> (Echo UA)</li><li><a href="songs/echo-ua/novorichna.html">Новорічна</a> (Echo UA)</li><li><a href="songs/echo-ua/dobryi-vechir-tobi.html">Добрий вечір тобі...</a> (Echo UA)</li><li><a href="songs/echo-ua/novyi-himn-ukrayiny.html">Новий гімн України</a> (Echo UA)</li><li><a href="songs/echo-ua/shchedryi-vechir.html">Щедрий вечір</a> (Echo UA)</li><li><a href="songs/echo-ua/romantic-404.html">Romantic 404</a> (Echo UA)</li><li><a href="songs/tihi-momenty/trymai-moyu-dolon.html">Тримай мою долонь</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/svitlo-na-kukhni.html">Світло на кухні</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/batkovi-doloni.html">Батькові долоні</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/mama-ne-spyt.html">Мама не спить</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/kava-o-pyatii.html">Кава о п&#x27;ятій</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/doroha-pid-fartukhom.html">Дорога під фартухом</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/misto-kriz-viky.html">Місто крізь віки</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/zalezhnist.html">Залежність</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/vsi-divchata-harni.html">Всі дівчата гарні...</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/tykhi-momenty.html">Тихі моменти</a> (Тихі моменти)</li><li><a href="songs/prosto-zhyvy/pyatnytsya.html">П&#x27;ятниця</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/davai-vtechemo.html">Давай втечемо</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/baiduzhe.html">Байдуже</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/shche-bude-vse-bude.html">Ще буде, все буде.</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/do-ranku.html">До ранку</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/napyshy-meni.html">Напиши мені</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/zalyshsya.html">Залишся</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/sohodni-khoroshyi-den.html">Сьогодні хороший день</a> (Просто живи)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-na-mezhi.html">Хроніки хаосу - Світ на межі</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-birzhovyi-shtorm.html">Хроніки хаосу - Біржовий шторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza.html">Хроніки хаосу - Енергокриза</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza-rev2.html">Хроніки хаосу - Енергокриза (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front.html">Хроніки хаосу - Дипломатичний фронт</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front-rev2.html">Хроніки хаосу - Дипломатичний фронт (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-efir-bez-pravyl.html">Хроніки хаосу - Ефір без правил</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-mediashtorm.html">Хроніки хаосу - Медіашторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-novyi-final.html">Хроніки хаосу - Новий фінал</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-shtuchnyi-intelekt.html">Хроніки хаосу - Штучний інтелект</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-povnyi-tsykl.html">Хроніки хаосу - Повний цикл</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-u-vohni.html">Хроніки хаосу - Світ у вогні</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-hlobalnyi-peredil.html">Хроніки хаосу - Глобальний переділ</a> (Хроніки хаосу)</li><li><a href="songs/pomizh-tochkamy-vkhodu/vkhid-u-vykhid.html">Вхід у вихід</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/kriz-iskry.html">Крізь іскри</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/povernennya-iz-nebuttya.html">Повернення із небуття</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/chotyry-storony.html">Чотири сторони</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/pryinyattya-bil-yak-providnyk.html">Прийняття. Біль як провідник</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/syla-bez-syly.html">Сила без сили</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/povernennya.html">Повернення</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/probudzhennya-holosy-vsesvitu.html">Пробудження. Голоси Всесвіту</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/dukh-birzhi.html">Дух біржі</a> (Поміж точками входу. Заповіт живого)</li></ul></noscript>
+    <noscript><p class="note">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs"><li><a href="songs/echo-ua/malenkyi-chovnyk.html">Маленький човник</a> (Echo UA)</li><li><a href="songs/echo-ua/den-dyakuyu.html">День дякую</a> (Echo UA)</li><li><a href="songs/echo-ua/lvivskyi-tramvai.html">Львівський трамвай</a> (Echo UA)</li><li><a href="songs/echo-ua/moya-lyuba.html">Моя люба</a> (Echo UA)</li><li><a href="songs/echo-ua/moya-lyuba-blues-version.html">Моя люба (Blues version)</a> (Echo UA)</li><li><a href="songs/echo-ua/z-novym-rokom.html">З новим роком!</a> (Echo UA)</li><li><a href="songs/echo-ua/novorichna.html">Новорічна</a> (Echo UA)</li><li><a href="songs/echo-ua/dobryi-vechir-tobi.html">Добрий вечір тобі...</a> (Echo UA)</li><li><a href="songs/echo-ua/novyi-himn-ukrayiny.html">Новий гімн України</a> (Echo UA)</li><li><a href="songs/echo-ua/shchedryi-vechir.html">Щедрий вечір</a> (Echo UA)</li><li><a href="songs/echo-ua/romantic-404.html">Romantic 404</a> (Echo UA)</li><li><a href="songs/tihi-momenty/trymai-moyu-dolon.html">Тримай мою долонь</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/svitlo-na-kukhni.html">Світло на кухні</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/batkovi-doloni.html">Батькові долоні</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/mama-ne-spyt.html">Мама не спить</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/kava-o-pyatii.html">Кава о п&#x27;ятій</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/doroha-pid-fartukhom.html">Дорога під фартухом</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/misto-kriz-viky.html">Місто крізь віки</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/zalezhnist.html">Залежність</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/vsi-divchata-harni.html">Всі дівчата гарні...</a> (Тихі моменти)</li><li><a href="songs/tihi-momenty/tykhi-momenty.html">Тихі моменти</a> (Тихі моменти)</li><li><a href="songs/between-entry-points/entry-into-exit.html">Entry Into Exit</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/through-sparks.html">Through Sparks</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/return-from-nonexistence.html">Return from Nonexistence</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/four-sides.html">Four Sides</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/acceptance-pain-as-a-guide.html">Acceptance. Pain as a Guide</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/strength-without-force.html">Strength Without Force</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/the-return.html">The Return</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/rising.html">Rising</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/spirit-of-the-market.html">Spirit of the Market</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/home-beyond-time.html">Home Beyond Time</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/backbone-of-silent-choices.html">Backbone of Silent Choices</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/life-between-entry-points.html">Life Between Entry Points</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/afterword-gratitude.html">Afterword. Gratitude</a> (Between entry points: Testament of the living)</li><li><a href="songs/between-entry-points/testament-of-the-living.html">Testament of the Living</a> (Between entry points: Testament of the living)</li><li><a href="songs/prosto-zhyvy/pyatnytsya.html">П&#x27;ятниця</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/davai-vtechemo.html">Давай втечемо</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/baiduzhe.html">Байдуже</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/shche-bude-vse-bude.html">Ще буде, все буде.</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/do-ranku.html">До ранку</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/napyshy-meni.html">Напиши мені</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/zalyshsya.html">Залишся</a> (Просто живи)</li><li><a href="songs/prosto-zhyvy/sohodni-khoroshyi-den.html">Сьогодні хороший день</a> (Просто живи)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-na-mezhi.html">Хроніки хаосу - Світ на межі</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-birzhovyi-shtorm.html">Хроніки хаосу - Біржовий шторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza.html">Хроніки хаосу - Енергокриза</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-enerhokryza-rev2.html">Хроніки хаосу - Енергокриза (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front.html">Хроніки хаосу - Дипломатичний фронт</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-dyplomatychnyi-front-rev2.html">Хроніки хаосу - Дипломатичний фронт (rev2)</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-efir-bez-pravyl.html">Хроніки хаосу - Ефір без правил</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-mediashtorm.html">Хроніки хаосу - Медіашторм</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-novyi-final.html">Хроніки хаосу - Новий фінал</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-shtuchnyi-intelekt.html">Хроніки хаосу - Штучний інтелект</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-povnyi-tsykl.html">Хроніки хаосу - Повний цикл</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-svit-u-vohni.html">Хроніки хаосу - Світ у вогні</a> (Хроніки хаосу)</li><li><a href="songs/khroniky-khaosu/khroniky-khaosu-hlobalnyi-peredil.html">Хроніки хаосу - Глобальний переділ</a> (Хроніки хаосу)</li><li><a href="songs/pomizh-tochkamy-vkhodu/vkhid-u-vykhid.html">Вхід у вихід</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/kriz-iskry.html">Крізь іскри</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/povernennya-iz-nebuttya.html">Повернення із небуття</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/chotyry-storony.html">Чотири сторони</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/pryinyattya-bil-yak-providnyk.html">Прийняття. Біль як провідник</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/syla-bez-syly.html">Сила без сили</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/povernennya.html">Повернення</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/probudzhennya-holosy-vsesvitu.html">Пробудження. Голоси Всесвіту</a> (Поміж точками входу. Заповіт живого)</li><li><a href="songs/pomizh-tochkamy-vkhodu/dukh-birzhi.html">Дух біржі</a> (Поміж точками входу. Заповіт живого)</li></ul></noscript>
   </main>
 
   <footer>
