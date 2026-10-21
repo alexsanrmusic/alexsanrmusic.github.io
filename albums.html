@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="uk">
+<html lang="uk" data-i18n-title="albums.title" data-i18n-desc="albums.desc">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="i18n.js"></script>
 <title>Альбоми — Alex Sanr</title>
 <meta name="description" content="Альбоми Alex Sanr: слухайте онлайн, завантажуйте треки та дивіться кліпи.">
 <meta name="theme-color" content="#0b0f1f">
@@ -156,19 +157,19 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   <header>
     <a class="brand" href="index.html">ALEX SANR</a>
     <nav>
-      <a href="index.html">Головна</a>
-      <a href="albums.html" aria-current="page">Альбоми</a>
-      <a href="lyrics.html">Тексти</a>
+      <a href="index.html" data-i18n="nav.home">Головна</a>
+      <a href="albums.html" aria-current="page" data-i18n="nav.albums">Альбоми</a>
+      <a href="lyrics.html" data-i18n="nav.lyrics">Тексти</a>
     </nav>
   </header>
 
   <main>
-    <h1>Альбоми</h1>
-    <p class="lead">Слухайте онлайн, завантажуйте треки та дивіться кліпи.</p>
+    <h1 data-i18n="albums.h1">Альбоми</h1>
+    <p class="lead" data-i18n="albums.lead">Слухайте онлайн, завантажуйте треки та дивіться кліпи.</p>
     <div class="stats" id="stats"></div>
-    <div class="filters" id="filters" role="group" aria-label="Мова"></div>
-    <div id="albums"><p class="note">Завантаження…</p></div>
-    <noscript><p class="note">Для перегляду альбомів потрібен JavaScript.</p></noscript>
+    <div class="filters" id="filters" role="group" aria-label="Мова" data-i18n-attr="aria-label:filters.aria"></div>
+    <div id="albums"><p class="note" data-i18n="albums.loading">Завантаження…</p></div>
+    <noscript><p class="note" data-i18n="albums.noscript">Для перегляду альбомів потрібен JavaScript.</p></noscript>
   </main>
 
   <footer>
@@ -181,7 +182,8 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 (function () {
   var LANG_CODES = { uk: 'UA', en: 'EN', ru: 'RU' };
   var FLAGS = { uk: '🇺🇦', en: '🇬🇧', ru: '🇷🇺' };
-  var LANGS = { uk: 'Українська', ru: 'Російська', en: 'Англійська' };
+  var T = I18N.t;
+  var LANGS = { uk: T('lang.uk'), ru: T('lang.ru'), en: T('lang.en') };
   var albumsEl = document.getElementById('albums');
   var filtersEl = document.getElementById('filters');
   var albums = [];
@@ -204,7 +206,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     h.hidden = true;
     h.textContent = '';
     if (h.parentNode) h.parentNode.classList.remove('playing');
-    if (h.btn) h.btn.textContent = '♪ Слухати';
+    if (h.btn) h.btn.textContent = T('track.play');
   }
 
   var lyricsPromise = null;
@@ -223,7 +225,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     if (wasOpen) return;
     var f = document.createElement('iframe');
     f.src = 'https://drive.google.com/file/d/' + encodeURIComponent(t.drive) + '/preview';
-    f.title = 'Плеєр Google Drive — ' + t.title;
+    f.title = T('track.player', { t: t.title });
     f.setAttribute('allow', 'autoplay');
     f.setAttribute('frameborder', '0');
     holder.appendChild(f);
@@ -233,13 +235,13 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     getLyrics().then(function (all) {
       var txt = all[album.id] && all[album.id][t.title];
       if (!txt || !ly.parentNode) return;
-      ly.appendChild(el('span', 'lyrics-label', 'Текст пісні'));
+      ly.appendChild(el('span', 'lyrics-label', T('lyrics.label')));
       ly.appendChild(el('p', 'lyrics-text', txt));
       ly.hidden = false;
     });
     holder.hidden = false;
     if (holder.parentNode) holder.parentNode.classList.add('playing');
-    holder.btn.textContent = '■ Закрити';
+    holder.btn.textContent = T('track.close');
   }
 
   function closeAlbum(card) {
@@ -282,7 +284,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var badges = el('span', 'badges');
     badges.appendChild(el('span', 'badge badge-lang', (FLAGS[album.lang] ? FLAGS[album.lang] + ' ' : '') + (LANGS[album.lang] || album.lang)));
     badges.appendChild(el('span', 'badge', String(album.year)));
-    badges.appendChild(el('span', 'badge', album.tracks.length + ' треків'));
+    badges.appendChild(el('span', 'badge', album.tracks.length + ' ' + I18N.plural('tracks', album.tracks.length)));
     info.appendChild(badges);
     head.appendChild(info);
     head.appendChild(el('span', 'chev'));
@@ -307,25 +309,25 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
       var holder = el('div', 'drive-player');
       holder.hidden = true;
       if (t.drive) {
-        var pb = el('button', 'pill pill-play', '♪ Слухати');
+        var pb = el('button', 'pill pill-play', T('track.play'));
         pb.type = 'button';
-        pb.setAttribute('aria-label', 'Слухати: ' + t.title);
+        pb.setAttribute('aria-label', T('track.playAria', { t: t.title }));
         holder.btn = pb;
         li._play = function () { toggleDrivePlayer(holder, t, album); };
         pb.addEventListener('click', li._play);
         links.appendChild(pb);
-        var d = el('a', 'pill pill-dl', '⬇ Завантажити');
+        var d = el('a', 'pill pill-dl', T('track.download'));
         d.href = driveLink(t.drive); d.rel = 'noopener';
-        d.setAttribute('aria-label', 'Завантажити: ' + t.title);
+        d.setAttribute('aria-label', T('track.downloadAria', { t: t.title }));
         links.appendChild(d);
       }
       if (t.clip) {
-        var c = el('a', 'pill pill-clip', '▶ Дивитись кліп');
+        var c = el('a', 'pill pill-clip', T('track.clip'));
         c.href = t.clip; c.target = '_blank'; c.rel = 'noopener';
-        c.setAttribute('aria-label', 'Дивитись кліп: ' + t.title);
+        c.setAttribute('aria-label', T('track.clipAria', { t: t.title }));
         links.appendChild(c);
       } else {
-        var g = el('span', 'pill pill-ghost', '▶ Дивитись кліп');
+        var g = el('span', 'pill pill-ghost', T('track.clip'));
         g.setAttribute('aria-hidden', 'true');
         links.appendChild(g);
       }
@@ -346,7 +348,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     albumsEl.textContent = '';
     var shown = albums.filter(function (a) { return currentLang === 'all' || a.lang === currentLang; });
     if (!shown.length) {
-      albumsEl.appendChild(el('p', 'note', 'Альбомів цією мовою поки немає.'));
+      albumsEl.appendChild(el('p', 'note', T('albums.empty')));
       return;
     }
     shown.forEach(function (a, i) {
@@ -362,7 +364,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var total = albums.reduce(function (n, a) { return n + a.tracks.length; }, 0);
     var langs = [];
     albums.forEach(function (a) { if (langs.indexOf(a.lang) < 0) langs.push(a.lang); });
-    [[albums.length, 'альбомів'], [total, 'треків'], [langs.length, 'мови']].forEach(function (s) {
+    [[albums.length, I18N.plural('albums', albums.length)], [total, I18N.plural('tracks', total)], [langs.length, I18N.plural('languages', langs.length)]].forEach(function (s) {
       var chip = el('span', 'stat');
       chip.appendChild(el('b', null, String(s[0])));
       chip.appendChild(document.createTextNode(' ' + s[1]));
@@ -375,7 +377,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     albums.forEach(function (a) { if (present.indexOf(a.lang) < 0) present.push(a.lang); });
     filtersEl.textContent = '';
     if (present.length < 2) return;
-    filtersEl.appendChild(el('span', 'filters-label', 'Мова пісень:'));
+    filtersEl.appendChild(el('span', 'filters-label', T('filters.label')));
     var items = [['all', 'ALL']].concat(present.map(function (l) { return [l, (FLAGS[l] ? FLAGS[l] + ' ' : '') + (LANG_CODES[l] || l.toUpperCase())]; }));
     items.forEach(function (it) {
       var b = el('button', 'chip', it[1]);
@@ -429,7 +431,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     })
     .catch(function () {
       albumsEl.textContent = '';
-      albumsEl.appendChild(el('p', 'note', 'Не вдалося завантажити список альбомів. Спробуйте оновити сторінку.'));
+      albumsEl.appendChild(el('p', 'note', T('albums.error')));
     });
 })();
 </script>

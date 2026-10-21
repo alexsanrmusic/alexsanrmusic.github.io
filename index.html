@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="uk">
+<html lang="uk" data-i18n-title="index.title" data-i18n-desc="index.desc">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="i18n.js"></script>
 <meta name="google-site-verification" content="Gc0apcnuD_Ttslu8r5bSY1mh71ofVewPY6jfxFtlLNA" />
 <title>Alex Sanr — AI-музичний проєкт з України</title>
 <meta name="description" content="Alex Sanr — AI-музичний проєкт з України. Пісні, альбоми та музичні історії.">
@@ -257,76 +258,76 @@ nav a.active { color: var(--accent); }
 <body>
 
 
-<a class="skip" href="#top">До змісту</a>
+<a class="skip" href="#top" data-i18n="skip">До змісту</a>
 <div class="wrap">
   <header>
     <a class="brand" href="#top">ALEX SANR</a>
     <nav>
-      <a href="#about">Про проєкт</a>
-      <a href="#author">Про автора</a>
-      <a href="#releases">Релізи</a>
-      <a href="albums.html">Альбоми</a>
-      <a href="lyrics.html">Тексти</a>
-      <a href="#contact">Контакти</a>
+      <a href="#about" data-i18n="nav.about">Про проєкт</a>
+      <a href="#author" data-i18n="nav.author">Про автора</a>
+      <a href="#releases" data-i18n="nav.releases">Релізи</a>
+      <a href="albums.html" data-i18n="nav.albums">Альбоми</a>
+      <a href="lyrics.html" data-i18n="nav.lyrics">Тексти</a>
+      <a href="#contact" data-i18n="nav.contact">Контакти</a>
     </nav>
   </header>
 
   <main id="top">
     <div class="hero">
-      <p class="eyebrow">AI-музичний проєкт з України</p>
+      <p class="eyebrow" data-i18n="hero.eyebrow">AI-музичний проєкт з України</p>
       <h1>Alex <span>Sanr</span></h1>
-      <p class="tagline">Коли ідея перетворюється на музику.</p>
-      <p class="lead">Авторські ідеї й тексти поєднуються з можливостями штучного інтелекту. Так з'являються пісні, альбоми та музичні історії про життя, емоції та настрій.</p>
+      <p class="tagline" data-i18n="hero.tagline">Коли ідея перетворюється на музику.</p>
+      <p data-i18n="hero.lead" class="lead">Авторські ідеї й тексти поєднуються з можливостями штучного інтелекту. Так з'являються пісні, альбоми та музичні історії про життя, емоції та настрій.</p>
       <div class="actions">
         <a class="btn btn-main" href="https://music.youtube.com/@Alexsanrmusic" target="_blank" rel="noopener">YouTube Music</a>
-        <a class="btn btn-ghost" href="https://www.youtube.com/@alexsanrmusic" target="_blank" rel="noopener">Слухати на YouTube</a>
-        <a class="btn btn-ghost" href="https://www.youtube.com/@alexsanrmusic?sub_confirmation=1" target="_blank" rel="noopener">Підписатися</a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@alexsanrmusic" target="_blank" rel="noopener" data-i18n="hero.listen">Слухати на YouTube</a>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@alexsanrmusic?sub_confirmation=1" target="_blank" rel="noopener" data-i18n="hero.subscribe">Підписатися</a>
         <a class="btn btn-ghost" href="https://www.tiktok.com/@alexsanrmusic" target="_blank" rel="noopener">TikTok</a>
       </div>
       <figure class="photo">
-        <img src="images/hero.jpg" alt="Музиканти у студії звукозапису" width="800" height="447">
+        <img src="images/hero.jpg" alt="Музиканти у студії звукозапису" data-i18n-attr="alt:hero.photo" width="800" height="447">
       </figure>
       <div class="bars" id="bars" aria-hidden="true"></div>
     </div>
 
     <section id="about">
-      <h2>Що на каналі</h2>
+      <h2 data-i18n="about.h">Що на каналі</h2>
       <div class="grid">
-        <div><h3><a href="albums.html">Авторські треки та альбоми</a></h3><p>Власні пісні від ідеї до готового релізу.</p></div>
-        <div><h3><a href="lyrics.html">Тексти пісень</a></h3><p>Тексти про кохання, свобода, мрії та все, що поруч.</p></div>
-        <div><h3><a href="install.html">Встановіть застосунок</a></h3><p>Альбоми, тексти й новинки з екрана телефона.</p></div>
-        <div><h3>Експерименти</h3><p>Нове звучання та несподівані поєднання жанрів.</p></div>
+        <div><h3><a href="albums.html" data-i18n="about.1h">Авторські треки та альбоми</a></h3><p data-i18n="about.1p">Власні пісні від ідеї до готового релізу.</p></div>
+        <div><h3><a href="lyrics.html" data-i18n="about.2h">Тексти пісень</a></h3><p data-i18n="about.2p">Тексти про кохання, свобода, мрії та все, що поруч.</p></div>
+        <div><h3><a href="install.html" data-i18n="about.3h">Встановіть застосунок</a></h3><p data-i18n="about.3p">Альбоми, тексти й новинки з екрана телефона.</p></div>
+        <div><h3 data-i18n="about.4h">Експерименти</h3><p data-i18n="about.4p">Нове звучання та несподівані поєднання жанрів.</p></div>
       </div>
-      <ul class="tags" aria-label="Жанри">
-        <li>Українська поп-музика</li>
+      <ul class="tags" aria-label="Жанри" data-i18n-attr="aria-label:tags.label">
+        <li data-i18n="tags.pop">Українська поп-музика</li>
         <li>Pop-rock</li>
         <li>Indie</li>
         <li>Lo-fi</li>
         <li>Chillhop</li>
         <li>Cinematic</li>
-        <li>Український реп</li>
+        <li data-i18n="tags.rap">Український реп</li>
       </ul>
     </section>
 
     <section id="author" class="author">
-      <h2>Про автора</h2>
-      <p>Під псевдонімом Alex Sanr я пишу пісні про кохання, сумніви, надії й прості миті, які часом виявляються найважливішими.</p>
-      <p>Народження дітей змінило мій погляд на життя: я навчився цінувати час і людей поруч. Тому мені важливі не просто красиві звуки, а емоції та історії, у яких можна впізнати себе.</p>
-      <p>Тексти й ідеї — мої, а звучання я створюю за допомогою штучного інтелекту. Я не повчаю й не маю відповідей на все — просто ділюся тим, що мені близьке.</p>
-      <p class="signature">Це Alex Sanr. Моє життя. Мої почуття. Моя музика.</p>
-      <p>Почни знайомство з моєю музикою — «Повернення з небуття» ↓</p>
+      <h2 data-i18n="author.h">Про автора</h2>
+      <p data-i18n="author.1">Під псевдонімом Alex Sanr я пишу пісні про кохання, сумніви, надії й прості миті, які часом виявляються найважливішими.</p>
+      <p data-i18n="author.2">Народження дітей змінило мій погляд на життя: я навчився цінувати час і людей поруч. Тому мені важливі не просто красиві звуки, а емоції та історії, у яких можна впізнати себе.</p>
+      <p data-i18n="author.3">Тексти й ідеї — мої, а звучання я створюю за допомогою штучного інтелекту. Я не повчаю й не маю відповідей на все — просто ділюся тим, що мені близьке.</p>
+      <p class="signature" data-i18n="author.sign">Це Alex Sanr. Моє життя. Мої почуття. Моя музика.</p>
+      <p data-i18n="author.start">Почни знайомство з моєю музикою — «Повернення з небуття» ↓</p>
       <div class="player">
-        <iframe src="https://www.youtube-nocookie.com/embed/yGcdQxw0bl0" title="Alex Sanr — Повернення з небуття" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/yGcdQxw0bl0" title="Alex Sanr — Повернення з небуття" data-i18n-attr="title:author.player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
-      <a class="yt-link" href="https://www.youtube.com/watch?v=yGcdQxw0bl0" target="_blank" rel="noopener">Відкрити на YouTube →</a>
+      <a class="yt-link" href="https://www.youtube.com/watch?v=yGcdQxw0bl0" target="_blank" rel="noopener" data-i18n="author.open">Відкрити на YouTube →</a>
     </section>
 
     <section id="albums">
       <div class="section-head">
-        <h2>Альбоми</h2>
-        <a href="albums.html" id="albums-all">Усі альбоми →</a>
+        <h2 data-i18n="home.albums">Альбоми</h2>
+        <a href="albums.html" id="albums-all" data-i18n="home.allAlbums">Усі альбоми →</a>
       </div>
-      <div class="lang-pick" id="lang-pick" role="group" aria-label="Мова альбомів">
+      <div class="lang-pick" id="lang-pick" role="group" aria-label="Мова альбомів" data-i18n-attr="aria-label:home.langPick">
         <button type="button" data-l="uk" aria-pressed="false" lang="uk">Українська</button>
         <button type="button" data-l="ru" aria-pressed="false" lang="ru">Русский</button>
         <button type="button" data-l="en" aria-pressed="false" lang="en">English</button>
@@ -336,41 +337,41 @@ nav a.active { color: var(--accent); }
 
     <section id="releases">
       <div class="section-head">
-        <h2>Останні релізи</h2>
-        <a href="https://www.youtube.com/@alexsanrmusic/videos" target="_blank" rel="noopener">Усі відео →</a>
+        <h2 data-i18n="rel.h">Останні релізи</h2>
+        <a href="https://www.youtube.com/@alexsanrmusic/videos" target="_blank" rel="noopener" data-i18n="rel.all">Усі відео →</a>
       </div>
       <ul class="releases" id="releases-list" aria-live="polite"></ul>
-      <p class="releases-empty" id="releases-empty" hidden>Свіжі релізи — на <a href="https://www.youtube.com/@alexsanrmusic/videos" target="_blank" rel="noopener">YouTube-каналі</a>.</p>
+      <p class="releases-empty" id="releases-empty" hidden><span data-i18n="rel.empty1">Свіжі релізи — на </span><a data-i18n="rel.empty2" href="https://www.youtube.com/@alexsanrmusic/videos" target="_blank" rel="noopener">YouTube-каналі</a>.</p>
     </section>
 
     <section id="listen">
-      <h2>Слухай зараз</h2>
+      <h2 data-i18n="listen.h">Слухай зараз</h2>
       <div class="player">
-        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UULFcxWasE5LwVCysRA5Dlv5IQ" title="Треки Alex Sanr на YouTube" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UULFcxWasE5LwVCysRA5Dlv5IQ" title="Треки Alex Sanr на YouTube" data-i18n-attr="title:listen.player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </section>
 
     <section id="shorts">
       <h2>Shorts</h2>
       <ul class="shorts" id="shorts-list"></ul>
-      <p class="releases-empty" id="shorts-empty" hidden>Короткі відео — на <a href="https://www.youtube.com/@alexsanrmusic/shorts" target="_blank" rel="noopener">YouTube-каналі</a>.</p>
+      <p class="releases-empty" id="shorts-empty" hidden><span data-i18n="shorts.empty1">Короткі відео — на </span><a data-i18n="rel.empty2" href="https://www.youtube.com/@alexsanrmusic/shorts" target="_blank" rel="noopener">YouTube-каналі</a>.</p>
     </section>
 
     <section id="contact">
-      <h2>Контакти</h2>
+      <h2 data-i18n="nav.contact">Контакти</h2>
       <div class="contact">
         <div>
-          <h3>Співпраця та запити</h3>
-          <p>Пишіть щодо спільних проєктів, використання музики та інших пропозицій.</p>
+          <h3 data-i18n="contact.collab">Співпраця та запити</h3>
+          <p data-i18n="contact.collabP">Пишіть щодо спільних проєктів, використання музики та інших пропозицій.</p>
           <div class="mail">
             <code id="mail">alexsanrmusic@gmail.com</code>
-            <button class="btn btn-ghost" id="copy" type="button">Копіювати</button>
-            <a class="btn btn-ghost" href="mailto:alexsanrmusic@gmail.com">Написати</a>
+            <button class="btn btn-ghost" id="copy" type="button" data-i18n="contact.copy">Копіювати</button>
+            <a class="btn btn-ghost" href="mailto:alexsanrmusic@gmail.com" data-i18n="contact.write">Написати</a>
           </div>
         </div>
         <div>
-          <h3>Мої сторінки</h3>
-          <p>Нові релізи та короткі відео виходять на цих каналах.</p>
+          <h3 data-i18n="contact.pages">Мої сторінки</h3>
+          <p data-i18n="contact.pagesP">Нові релізи та короткі відео виходять на цих каналах.</p>
           <div class="links">
             <a class="btn btn-ghost" href="https://music.youtube.com/@Alexsanrmusic" target="_blank" rel="noopener">YouTube Music</a>
             <a class="btn btn-ghost" href="https://www.youtube.com/@alexsanrmusic" target="_blank" rel="noopener">YouTube</a>
@@ -414,32 +415,23 @@ nav a.active { color: var(--accent); }
     function select() {
       var r = document.createRange(); r.selectNodeContents(mail);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = "Виділено";
+      btn.textContent = I18N.t("contact.selected");
     }
     try {
       navigator.clipboard.writeText(mail.textContent).then(function () {
-        btn.textContent = "Скопійовано";
+        btn.textContent = I18N.t("contact.copied");
       }, select);
     } catch (e) { select(); }
-    setTimeout(function () { btn.textContent = "Копіювати"; }, 2000);
+    setTimeout(function () { btn.textContent = I18N.t("contact.copy"); }, 2000);
   });
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  var TRACKS = { uk: "треків", ru: "треков", en: "tracks" };
   var CODES = ["uk", "ru", "en"];
   var albumsAll = [];
   var pick = document.getElementById("lang-pick");
   var allLink = document.getElementById("albums-all");
-  function store(l) { try { if (l) localStorage.setItem("alexsanr-lang", l); else return localStorage.getItem("alexsanr-lang"); } catch (e) {} }
-  function startLang() {
-    var q = new URLSearchParams(location.search).get("lang");
-    if (CODES.indexOf(q) >= 0) return q;
-    var saved = store();
-    if (CODES.indexOf(saved) >= 0) return saved;
-    var nl = ((navigator.languages && navigator.languages[0]) || navigator.language || "en").slice(0, 2).toLowerCase();
-    return CODES.indexOf(nl) >= 0 ? nl : "en";
-  }
+  function startLang() { return I18N.lang; }
   function showAlbums(lang) {
     var box = document.getElementById("albums-list");
     box.textContent = "";
@@ -455,14 +447,13 @@ nav a.active { color: var(--accent); }
       img.src = al.cover; img.alt = ""; img.loading = "lazy"; img.width = 300; img.height = 300;
       var h = document.createElement("h3"); h.textContent = al.title;
       var s = document.createElement("small");
-      s.textContent = al.year + " · " + al.tracks.length + " " + TRACKS[lang];
+      s.textContent = al.year + " · " + al.tracks.length + " " + I18N.plural("tracks", al.tracks.length);
       a.append(img, h, s); li.appendChild(a); box.appendChild(li);
     });
   }
   pick.addEventListener("click", function (ev) {
     var b = ev.target.closest ? ev.target.closest("button[data-l]") : null;
     if (!b) return;
-    store(b.getAttribute("data-l"));
     showAlbums(b.getAttribute("data-l"));
   });
   fetch("albums.json").then(function (r) {
@@ -477,7 +468,7 @@ nav a.active { color: var(--accent); }
 
   var list = document.getElementById("releases-list");
   var empty = document.getElementById("releases-empty");
-  var fmt = new Intl.DateTimeFormat("uk-UA", { day: "numeric", month: "long", year: "numeric" });
+  var fmt = new Intl.DateTimeFormat(I18N.locale, { day: "numeric", month: "long", year: "numeric" });
   fetch("videos.json").then(function (r) {
     if (!r.ok) throw new Error(r.status);
     return r.json();

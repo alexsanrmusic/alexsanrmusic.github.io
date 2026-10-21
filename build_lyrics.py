@@ -164,11 +164,11 @@ def build_css():
 
 # ---------- общие куски страниц ----------
 def nav_html(rel, current):
-    items = [("index.html", "Головна", ""), ("albums.html", "Альбоми", "albums"), ("lyrics.html", "Тексти", "lyrics")]
+    items = [("index.html", "Головна", "", "nav.home"), ("albums.html", "Альбоми", "albums", "nav.albums"), ("lyrics.html", "Тексти", "lyrics", "nav.lyrics")]
     links = []
-    for href, label, key in items:
+    for href, label, key, i18n in items:
         cur = ' aria-current="page"' if key and key == current else ""
-        links.append(f'      <a href="{rel}{href}"{cur}>{label}</a>')
+        links.append(f'      <a href="{rel}{href}"{cur} data-i18n="{i18n}">{label}</a>')
     return (
         "  <header>\n"
         f'    <a class="brand" href="{rel}index.html">ALEX SANR</a>\n'
@@ -185,17 +185,18 @@ FOOTER = (
 YEAR_JS = "<script>document.getElementById('year').textContent = new Date().getFullYear();</script>"
 
 
-def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=None):
+def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=None, html_attrs=""):
     url = SITE + "/" + path
     og_square = bool(og_image)
     og_image = og_image or OG_IMAGE
     og_size = '<meta property="og:image:width" content="600">\n<meta property="og:image:height" content="600">' if og_square else '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">'
     tw_card = "summary" if og_square else "summary_large_image"
     return f"""<!doctype html>
-<html lang="uk">
+<html lang="uk"{html_attrs}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{rel}i18n.js"></script>
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <meta name="theme-color" content="#0b0f1f">
@@ -233,8 +234,8 @@ def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=
 
 def badges(lang, extra=()):
     flag = FLAGS.get(lang, "")
-    parts = [f'<span class="badge badge-lang">{flag + " " if flag else ""}{e(LANG_NAMES.get(lang, lang))}</span>']
-    parts += [f'<span class="badge">{e(x)}</span>' for x in extra]
+    parts = [f'<span class="badge badge-lang">{flag + " " if flag else ""}<span data-i18n="lang.{e(lang)}">{e(LANG_NAMES.get(lang, lang))}</span></span>']
+    parts += [x if str(x).startswith("<span") else f'<span class="badge">{e(x)}</span>' for x in extra]
     return '<span class="badges">' + "".join(parts) + "</span>"
 
 
@@ -274,8 +275,7 @@ SHARE_JS = """<script>
 (function () {
   var b = document.getElementById('share');
   if (!b) return;
-  var label = b.textContent;
-  function done() { b.textContent = b.getAttribute('data-done'); setTimeout(function () { b.textContent = label; }, 2000); }
+  function done() { var label = b.textContent; b.textContent = I18N.t('song.copied'); setTimeout(function () { b.textContent = label; }, 2000); }
   b.addEventListener('click', function () {
     var data = { title: document.title, url: location.href.split('#')[0] };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
@@ -320,24 +320,24 @@ def song_page(album, tr, prev, nxt, alternates=()):
     if len(alternates) > 1:
         extra_head += "".join(f'<link rel="alternate" hreflang="{l}" href="{e(u)}">\n' for l, u in alternates)
 
-    actions = f'<a class="pill pill-dl" href="{rel}{listen_url(album, tr["n"])}">♪ Слухати</a>'
+    actions = f'<a class="pill pill-dl" href="{rel}{listen_url(album, tr["n"])}" data-i18n="track.play">♪ Слухати</a>'
     if tr.get("clip"):
-        actions += f'\n      <a class="pill pill-clip" href="{e(tr["clip"])}" target="_blank" rel="noopener">▶ Дивитись кліп</a>'
+        actions += f'\n      <a class="pill pill-clip" href="{e(tr["clip"])}" target="_blank" rel="noopener" data-i18n="track.clip">▶ Дивитись кліп</a>'
 
-    actions += '\n      <button class="pill pill-share" type="button" id="share" data-done="Скопійовано">↗ Поділитися</button>'
+    actions += '\n      <button class="pill pill-share" type="button" id="share" data-i18n="song.share">↗ Поділитися</button>'
 
     nav_cards = ""
     if prev:
-        nav_cards += f'<a class="song-link prev" href="{prev["slug"]}.html"><small>← Попередня пісня</small>{e(prev["title"])}</a>'
+        nav_cards += f'<a class="song-link prev" href="{prev["slug"]}.html"><small data-i18n="song.prev">← Попередня пісня</small>{e(prev["title"])}</a>'
     else:
         nav_cards += "<span></span>"
     if nxt:
-        nav_cards += f'<a class="song-link next" href="{nxt["slug"]}.html"><small>Наступна пісня →</small>{e(nxt["title"])}</a>'
+        nav_cards += f'<a class="song-link next" href="{nxt["slug"]}.html"><small data-i18n="song.next">Наступна пісня →</small>{e(nxt["title"])}</a>'
 
     body = nav_html(rel, "lyrics") + f"""
   <main>
-    <nav class="crumbs" aria-label="Навігація">
-      <a href="{rel}lyrics.html">Тексти</a><span>/</span>
+    <nav class="crumbs" aria-label="Навігація" data-i18n-attr="aria-label:song.crumbs">
+      <a href="{rel}lyrics.html" data-i18n="nav.lyrics">Тексти</a><span>/</span>
       <a href="{rel}lyrics.html#{e(album['id'])}">{e(album['title'])}</a>
     </nav>
     <article class="song-card" data-lang="{e(lang)}">
@@ -346,15 +346,15 @@ def song_page(album, tr, prev, nxt, alternates=()):
       <div class="song-actions">
       {actions}
       </div>
-      <section class="lyrics" aria-label="Текст пісні">
-        <span class="lyrics-label">Текст пісні</span>
+      <section class="lyrics" aria-label="Текст пісні" data-i18n-attr="aria-label:lyrics.label">
+        <span class="lyrics-label" data-i18n="lyrics.label">Текст пісні</span>
         <div class="lyrics-text" lang="{e(lang)}">
 {lyrics_paragraphs(tr['text'])}
         </div>
       </section>
     </article>
     <div class="song-nav">{nav_cards}</div>
-    <p class="song-more"><a href="{rel}lyrics.html">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}">Альбом «{e(album['title'])}»</a></p>
+    <p class="song-more"><a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}" data-i18n="song.album" data-vars="{e(json.dumps({'a': album['title']}, ensure_ascii=False))}">Альбом «{e(album['title'])}»</a></p>
   </main>
 """
     return page(rel, title, desc, path, body, extra_head, SHARE_JS, cover)
@@ -394,7 +394,7 @@ LIB_JS = """<script>
     if (!open) return;
     var body = panel.querySelector('.lyrics-text');
     if (body.textContent) return;
-    body.textContent = 'Завантаження…';
+    body.textContent = I18N.t('albums.loading');
     getLyrics().then(function (all) {
       var album = all[row.closest('.album').dataset.id];
       var text = album && album[row.dataset.key];
@@ -452,8 +452,8 @@ def lyrics_page(lib):
         for l in langs:
             chips.append(f'<button type="button" class="chip" data-lang="{l}" aria-pressed="false">{FLAGS.get(l, "")} {CODES.get(l, l.upper())}</button>')
         filters = (
-            '    <div class="filters" id="filters" role="group" aria-label="Мова">\n'
-            '      <span class="filters-label">Мова пісень:</span>\n      ' + "\n      ".join(chips) + "\n    </div>\n"
+            '    <div class="filters" id="filters" role="group" aria-label="Мова" data-i18n-attr="aria-label:filters.aria">\n'
+            '      <span class="filters-label" data-i18n="filters.label">Мова пісень:</span>\n      ' + "\n      ".join(chips) + "\n    </div>\n"
         )
 
     cards, nojs = [], []
@@ -471,9 +471,9 @@ def lyrics_page(lib):
             nojs.append(f'<li><a href="{song_url}">{e(tr["title"])}</a> ({e(a["title"])})</li>')
             rows.append(f"""            <li class="lib-row" id="{rid}" data-key="{e(tr['title'])}">
               <button type="button" class="lib-toggle" aria-expanded="false" aria-controls="t-{rid}"><span class="num">{tr['n']}.</span><span class="lib-title" lang="{lang}">{e(tr['title'])}</span><span class="chev" aria-hidden="true"></span></button>
-              <div class="lib-actions"><a class="pill pill-play" href="{listen_url(a, tr['n'])}" aria-label="Слухати: {e(tr['title'])}">♪ Слухати</a></div>
+              <div class="lib-actions"><a class="pill pill-play" href="{listen_url(a, tr['n'])}" aria-label="Слухати: {e(tr['title'])}" data-i18n-attr="aria-label:track.playAria" data-vars="{e(json.dumps({'t': tr['title']}, ensure_ascii=False))}" data-i18n="track.play">♪ Слухати</a></div>
               <div class="lib-text" id="t-{rid}" hidden>
-                <div class="lyrics"><span class="lyrics-label">Текст пісні</span><p class="lyrics-text" lang="{lang}"></p><p class="lib-links"><a href="{song_url}">Окрема сторінка пісні →</a></p></div>
+                <div class="lyrics"><span class="lyrics-label" data-i18n="lyrics.label">Текст пісні</span><p class="lyrics-text" lang="{lang}"></p><p class="lib-links"><a href="{song_url}" data-i18n="lyrics.songPage">Окрема сторінка пісні →</a></p></div>
               </div>
             </li>""")
         cards.append(f"""      <article class="album" id="{aid}" data-id="{aid}" data-lang="{lang}" style="--i:{i}">
@@ -481,12 +481,12 @@ def lyrics_page(lib):
           <span class="cover">{cover}</span>
           <span class="album-info">
             <span class="album-title">{e(a['title'])}</span>
-            {badges(a['lang'], [a.get('year', ''), f"{len(a['tracks'])} {plural(len(a['tracks']), 'текст', 'тексти', 'текстів')}"])}
+            {badges(a['lang'], [a.get('year', ''), f'<span class="badge" data-i18n-count="texts" data-n="{len(a["tracks"])}">{len(a["tracks"])} {plural(len(a["tracks"]), "текст", "тексти", "текстів")}</span>'])}
           </span>
           <span class="chev" aria-hidden="true"></span>
         </button>
         <div class="album-body" id="b-{aid}" hidden>
-          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album={aid}">♪ Слухати альбом</a></div>
+          <div class="lib-album-actions"><a class="pill pill-play" href="albums.html?album={aid}" data-i18n="lyrics.listenAlbum">♪ Слухати альбом</a></div>
           <ol class="lib-list">
 {chr(10).join(rows)}
           </ol>
@@ -495,17 +495,17 @@ def lyrics_page(lib):
 
     body = nav_html("", "lyrics") + f"""
   <main>
-    <h1>Тексти</h1>
-    <p class="lead">Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
-    <div class="stats"><span class="stat"><b>{total}</b> {plural(total, 'текст', 'тексти', 'текстів')}</span><span class="stat"><b>{len(lib)}</b> {plural(len(lib), 'альбом', 'альбоми', 'альбомів')}</span></div>
+    <h1 data-i18n="lyrics.h1">Тексти</h1>
+    <p class="lead" data-i18n="lyrics.lead">Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.</p>
+    <div class="stats"><span class="stat"><b>{total}</b> <span data-i18n-plural="texts" data-n="{total}">{plural(total, 'текст', 'тексти', 'текстів')}</span></span><span class="stat"><b>{len(lib)}</b> <span data-i18n-plural="albums" data-n="{len(lib)}">{plural(len(lib), 'альбом', 'альбоми', 'альбомів')}</span></span></div>
 {filters}    <div id="lib">
 {chr(10).join(cards)}
     </div>
-    <noscript><p class="note">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs">{''.join(nojs)}</ul></noscript>
+    <noscript><p class="note" data-i18n="lyrics.noscript">Для читання текстів у списку потрібен JavaScript. Тексти є на окремих сторінках пісень:</p><ul class="lib-nojs">{''.join(nojs)}</ul></noscript>
   </main>
 """
     desc = "Тексти пісень Alex Sanr українською, англійською та російською. Читайте онлайн і слухайте пісні на сайті."
-    return page("", "Тексти пісень — Alex Sanr", desc, "lyrics.html", body, "", LIB_JS)
+    return page("", "Тексти пісень — Alex Sanr", desc, "lyrics.html", body, "", LIB_JS, html_attrs=' data-i18n-title="lyrics.title" data-i18n-desc="lyrics.desc"')
 
 
 # ---------- карта сайту ----------

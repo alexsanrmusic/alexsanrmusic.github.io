@@ -21,7 +21,7 @@
           steps: ['Tap the Share button (square with an arrow) at the bottom of the screen.', 'Choose “Add to Home Screen”.', 'Tap “Add”.'],
           close: 'Close' }
   };
-  var code = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').slice(0, 2).toLowerCase();
+  var code = (window.I18N && window.I18N.lang) || ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').slice(0, 2).toLowerCase();
   var t = T[code] || T.en;
 
   function isStandalone() {
