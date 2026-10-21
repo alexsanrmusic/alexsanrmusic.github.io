@@ -102,6 +102,7 @@
     'track.clip': ['▶ Дивитись кліп', '▶ Смотреть клип', '▶ Watch the video'],
     'track.playAria': ['Слухати: {t}', 'Слушать: {t}', 'Listen: {t}'],
     'track.downloadAria': ['Завантажити: {t}', 'Скачать: {t}', 'Download: {t}'],
+    'track.shareAria': ['Поділитися піснею: {t}', 'Поделиться песней: {t}', 'Share the song: {t}'],
     'track.clipAria': ['Дивитись кліп: {t}', 'Смотреть клип: {t}', 'Watch the video: {t}'],
     'track.player': ['Плеєр Google Drive — {t}', 'Плеер Google Drive — {t}', 'Google Drive player — {t}'],
     'lyrics.label': ['Текст пісні', 'Текст песни', 'Lyrics'],
@@ -121,6 +122,7 @@
     'song.next': ['Наступна пісня →', 'Следующая песня →', 'Next song →'],
     'song.allLyrics': ['Усі тексти', 'Все тексты', 'All lyrics'],
     'song.album': ['Альбом «{a}»', 'Альбом «{a}»', 'Album “{a}”'],
+    'song.more': ['Ще з альбому «{a}»', 'Ещё из альбома «{a}»', 'More from “{a}”'],
 
     'lang.uk': ['Українська', 'Украинский', 'Ukrainian'],
     'lang.ru': ['Російська', 'Русский', 'Russian'],

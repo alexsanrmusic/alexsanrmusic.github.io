@@ -125,8 +125,6 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-card[data-lang="en"] { --c1: #7fb2ff; --c2: #8a6bff; }
 .song-card[data-lang="ru"] { --c1: #ff8a5c; --c2: #e8477a; }
 .song-card h1 { margin-bottom: 14px; overflow-wrap: anywhere; }
-.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
-.pill-share:hover { border-color: var(--fg); }
 .song-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 6px; }
 .song-card .lyrics { margin-top: 22px; animation: none; }
 .song-card .lyrics-text { white-space: normal; font-size: 18px; line-height: 1.8; }
@@ -137,12 +135,18 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-link:hover { border-color: var(--muted); }
 .song-link small { display: block; color: var(--muted); font-size: 13px; }
 .song-link.next { text-align: right; }
+.song-also { margin: 28px 0 8px; }
+.song-also h2 { font-size: 1.15rem; margin: 0 0 12px; overflow-wrap: anywhere; }
+.song-also-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.song-also-list .song-link { height: 100%; box-sizing: border-box; overflow-wrap: anywhere; }
+.song-also-list .song-link small { margin-bottom: 2px; }
 .song-more { color: var(--muted); font-size: 15px; }
 .song-more a { color: var(--fg); }
 @media (max-width: 600px) {
   .song-card { padding: 20px 18px 24px; }
   .song-card .lyrics-text { font-size: 17px; }
   .song-nav { grid-template-columns: 1fr; }
+  .song-also-list { grid-template-columns: 1fr; }
   .song-link.next { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -285,7 +289,56 @@ SHARE_JS = """<script>
 })();
 </script>"""
 
-def song_page(album, tr, prev, nxt, alternates=()):
+ALSO_COUNT = 4
+ALSO_JS = """<script>
+(function () {
+  var box = document.getElementById('also-list');
+  var data = document.getElementById('also-data');
+  if (!box || !data) return;
+  var all;
+  try { all = JSON.parse(data.textContent); } catch (e) { return; }
+  var n = parseInt(box.dataset.count, 10) || 4;
+  if (all.length <= n) return;
+  for (var i = all.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = all[i]; all[i] = all[j]; all[j] = t; }
+  all = all.slice(0, n);
+  box.textContent = '';
+  all.forEach(function (x) {
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.className = 'song-link'; a.href = x.u;
+    var s = document.createElement('small'); s.textContent = x.n + '.';
+    a.appendChild(s); a.appendChild(document.createTextNode(x.t));
+    li.appendChild(a); box.appendChild(li);
+  });
+})();
+</script>"""
+
+
+def also_block(album, others, tr):
+    """«Ще з альбому»: без JS показываем 4 песни, равномерно распределённые по альбому,
+    с JS при каждом открытии страницы выбираются случайные."""
+    if not others:
+        return ""
+    if len(others) > ALSO_COUNT:
+        start = tr["n"] % len(others)
+        rot = others[start:] + others[:start]
+        pick = [rot[i * len(rot) // ALSO_COUNT] for i in range(ALSO_COUNT)]
+    else:
+        pick = others
+    items = "".join(
+        f'<li><a class="song-link" href="{p["slug"]}.html"><small>{p["n"]}.</small>{e(p["title"])}</a></li>' for p in pick
+    )
+    data = json.dumps([{"n": p["n"], "t": p["title"], "u": p["slug"] + ".html"} for p in others], ensure_ascii=False).replace("</", "<\\/")
+    vars_ = e(json.dumps({"a": album["title"]}, ensure_ascii=False))
+    return (
+        f'    <section class="song-also">\n'
+        f'      <h2 data-i18n="song.more" data-vars="{vars_}">Ще з альбому «{e(album["title"])}»</h2>\n'
+        f'      <ul class="song-also-list" id="also-list" data-count="{ALSO_COUNT}">{items}</ul>\n'
+        f'      <script type="application/json" id="also-data">{data}</script>\n'
+        f'    </section>\n'
+    )
+
+
+def song_page(album, tr, prev, nxt, alternates=(), others=()):
     lang = album["lang"]
     word = LYRICS_WORD.get(lang, "lyrics")
     title = f"{tr['title']} — {word} | {ARTIST}"
@@ -354,10 +407,10 @@ def song_page(album, tr, prev, nxt, alternates=()):
       </section>
     </article>
     <div class="song-nav">{nav_cards}</div>
-    <p class="song-more"><a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}" data-i18n="song.album" data-vars="{e(json.dumps({'a': album['title']}, ensure_ascii=False))}">Альбом «{e(album['title'])}»</a></p>
+{also_block(album, others, tr)}    <p class="song-more"><a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}" data-i18n="song.album" data-vars="{e(json.dumps({'a': album['title']}, ensure_ascii=False))}">Альбом «{e(album['title'])}»</a></p>
   </main>
 """
-    return page(rel, title, desc, path, body, extra_head, SHARE_JS, cover)
+    return page(rel, title, desc, path, body, extra_head, SHARE_JS + "\n" + (ALSO_JS if others else ""), cover)
 
 
 # ---------- страница «Тексти» ----------
@@ -593,13 +646,14 @@ def main():
             nxt = found[idx + 1] if idx + 1 < len(found) else None
             out = songs_dir / a["id"] / f"{tr['slug']}.html"
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(song_page(a, tr, prev, nxt, alternates_for(a, tr, built)), encoding="utf-8")
+            out.write_text(song_page(a, tr, prev, nxt, alternates_for(a, tr, built), [x for x in found if x is not tr]), encoding="utf-8")
             urls.append(f"{SITE}/songs/{a['id']}/{tr['slug']}.html")
 
     for name in sorted(lyric_dirs - used_dirs):
         report.append(f"  папка lyrics/{name} не привязана ни к одному альбому (проверьте id или lyrics_dir)")
 
     (ROOT / "lyrics.html").write_text(lyrics_page(lib), encoding="utf-8")
+    lyrics_json["_slugs"] = {a["id"]: {t["title"]: t["slug"] for t in found} for a, found in built}
     (ROOT / "lyrics.json").write_text(json.dumps(lyrics_json, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     (ROOT / "sitemap.xml").write_text(sitemap(urls), encoding="utf-8")
 

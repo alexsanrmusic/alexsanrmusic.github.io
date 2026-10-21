@@ -116,6 +116,8 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .track-name { flex: 1 1 200px; min-width: 0; }
 .pill-play { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 .pill-play:hover { background: var(--bg); border-color: var(--fg); }
+.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pill-share:hover { border-color: var(--fg); }
 .drive-player { flex: 1 1 100%; }
 .drive-player[hidden] { display: none; }
 .lyrics { margin-top: 12px; padding: 16px 20px 18px; border-left: 3px solid var(--c1); border-radius: 0 14px 14px 0; background: rgba(255,255,255,.04); animation: unfold .35s ease both; }
@@ -217,6 +219,26 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         .catch(function () { return {}; });
     }
     return lyricsPromise;
+  }
+
+  // Ссылки на страницы песен берём из lyrics.json (ключ _slugs); пока не загрузились — ссылка на плеер альбома.
+  var slugs = {};
+  getLyrics().then(function (all) { slugs = (all && all._slugs) || {}; });
+
+  function shareTrack(btn, t, album, n) {
+    var slug = slugs[album.id] && slugs[album.id][t.title];
+    var base = location.origin + location.pathname.replace(/[^\/]*$/, '');
+    var url = slug ? base + 'songs/' + album.id + '/' + slug + '.html'
+                   : base + 'albums.html?album=' + encodeURIComponent(album.id) + '&track=' + n;
+    var data = { title: t.title + ' — Alex Sanr', url: url };
+    function done() {
+      var label = btn.textContent;
+      btn.textContent = T('song.copied');
+      setTimeout(function () { btn.textContent = label; }, 2000);
+    }
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    try { navigator.clipboard.writeText(url).then(done, function () { window.prompt('', url); }); }
+    catch (e) { window.prompt('', url); }
   }
 
   function toggleDrivePlayer(holder, t, album) {
@@ -331,6 +353,11 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         g.setAttribute('aria-hidden', 'true');
         links.appendChild(g);
       }
+      var sh = el('button', 'pill pill-share', T('song.share'));
+      sh.type = 'button';
+      sh.setAttribute('aria-label', T('track.shareAria', { t: t.title }));
+      sh.addEventListener('click', function () { shareTrack(sh, t, album, idx + 1); });
+      links.appendChild(sh);
       li.appendChild(links);
       li.appendChild(holder);
       ul.appendChild(li);
