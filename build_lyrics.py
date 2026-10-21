@@ -225,6 +225,7 @@ def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Alex Sanr">
 <script src="{rel}pwa.js" defer></script>
+<script src="{rel}search.js" defer></script>
 {extra_head}</head>
 <body>
 <div class="wrap">

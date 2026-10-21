@@ -122,6 +122,13 @@
     'song.next': ['Наступна пісня →', 'Следующая песня →', 'Next song →'],
     'song.allLyrics': ['Усі тексти', 'Все тексты', 'All lyrics'],
     'song.album': ['Альбом «{a}»', 'Альбом «{a}»', 'Album “{a}”'],
+    'search.label': ['Пошук по сайту', 'Поиск по сайту', 'Search the site'],
+    'search.placeholder': ['Назва або рядок із пісні', 'Название или строка из песни', 'Song title or a line from the lyrics'],
+    'search.hint': ['Шукайте за назвою пісні, альбому або рядком тексту', 'Ищите по названию песни, альбома или строке текста', 'Search by song title, album or a line of lyrics'],
+    'search.loading': ['Завантаження…', 'Загрузка…', 'Loading…'],
+    'search.found': ['Знайдено: {n}', 'Найдено: {n}', 'Found: {n}'],
+    'search.more': ['показано перші 8, уточніть запит', 'показаны первые 8, уточните запрос', 'showing the first 8, refine your search'],
+    'search.none': ['Нічого не знайдено', 'Ничего не найдено', 'Nothing found'],
     'song.more': ['Ще з альбому «{a}»', 'Ещё из альбома «{a}»', 'More from “{a}”'],
 
     'lang.uk': ['Українська', 'Украинский', 'Ukrainian'],
