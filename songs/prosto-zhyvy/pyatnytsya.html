@@ -109,6 +109,11 @@
       </section>
     </article>
     <div class="song-nav"><span></span><a class="song-link next" href="davai-vtechemo.html"><small data-i18n="song.next">Наступна пісня →</small>Давай втечемо</a></div>
+    <section class="song-also">
+      <h2 data-i18n="song.more" data-vars="{&quot;a&quot;: &quot;Просто живи&quot;}">Ще з альбому «Просто живи»</h2>
+      <ul class="song-also-list" id="also-list" data-count="4"><li><a class="song-link" href="baiduzhe.html"><small>3.</small>Байдуже</a></li><li><a class="song-link" href="shche-bude-vse-bude.html"><small>4.</small>Ще буде, все буде.</a></li><li><a class="song-link" href="napyshy-meni.html"><small>6.</small>Напиши мені</a></li><li><a class="song-link" href="sohodni-khoroshyi-den.html"><small>8.</small>Сьогодні хороший день</a></li></ul>
+      <script type="application/json" id="also-data">[{"n": 2, "t": "Давай втечемо", "u": "davai-vtechemo.html"}, {"n": 3, "t": "Байдуже", "u": "baiduzhe.html"}, {"n": 4, "t": "Ще буде, все буде.", "u": "shche-bude-vse-bude.html"}, {"n": 5, "t": "До ранку", "u": "do-ranku.html"}, {"n": 6, "t": "Напиши мені", "u": "napyshy-meni.html"}, {"n": 7, "t": "Залишся", "u": "zalyshsya.html"}, {"n": 8, "t": "Сьогодні хороший день", "u": "sohodni-khoroshyi-den.html"}]</script>
+    </section>
     <p class="song-more"><a href="../../lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="../../albums.html?album=prosto-zhyvy" data-i18n="song.album" data-vars="{&quot;a&quot;: &quot;Просто живи&quot;}">Альбом «Просто живи»</a></p>
   </main>
 
@@ -128,6 +133,27 @@
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     try { navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('', data.url); }); }
     catch (e) { window.prompt('', data.url); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById('also-list');
+  var data = document.getElementById('also-data');
+  if (!box || !data) return;
+  var all;
+  try { all = JSON.parse(data.textContent); } catch (e) { return; }
+  var n = parseInt(box.dataset.count, 10) || 4;
+  if (all.length <= n) return;
+  for (var i = all.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = all[i]; all[i] = all[j]; all[j] = t; }
+  all = all.slice(0, n);
+  box.textContent = '';
+  all.forEach(function (x) {
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.className = 'song-link'; a.href = x.u;
+    var s = document.createElement('small'); s.textContent = x.n + '.';
+    a.appendChild(s); a.appendChild(document.createTextNode(x.t));
+    li.appendChild(a); box.appendChild(li);
   });
 })();
 </script></body>

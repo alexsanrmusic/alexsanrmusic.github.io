@@ -110,6 +110,11 @@
       </section>
     </article>
     <div class="song-nav"><a class="song-link prev" href="batkovi-doloni.html"><small data-i18n="song.prev">← Попередня пісня</small>Батькові долоні</a><a class="song-link next" href="kava-o-pyatii.html"><small data-i18n="song.next">Наступна пісня →</small>Кава о п&#x27;ятій</a></div>
+    <section class="song-also">
+      <h2 data-i18n="song.more" data-vars="{&quot;a&quot;: &quot;Тихі моменти&quot;}">Ще з альбому «Тихі моменти»</h2>
+      <ul class="song-also-list" id="also-list" data-count="4"><li><a class="song-link" href="doroha-pid-fartukhom.html"><small>6.</small>Дорога під фартухом</a></li><li><a class="song-link" href="zalezhnist.html"><small>8.</small>Залежність</a></li><li><a class="song-link" href="tykhi-momenty.html"><small>10.</small>Тихі моменти</a></li><li><a class="song-link" href="svitlo-na-kukhni.html"><small>2.</small>Світло на кухні</a></li></ul>
+      <script type="application/json" id="also-data">[{"n": 1, "t": "Тримай мою долонь", "u": "trymai-moyu-dolon.html"}, {"n": 2, "t": "Світло на кухні", "u": "svitlo-na-kukhni.html"}, {"n": 3, "t": "Батькові долоні", "u": "batkovi-doloni.html"}, {"n": 5, "t": "Кава о п'ятій", "u": "kava-o-pyatii.html"}, {"n": 6, "t": "Дорога під фартухом", "u": "doroha-pid-fartukhom.html"}, {"n": 7, "t": "Місто крізь віки", "u": "misto-kriz-viky.html"}, {"n": 8, "t": "Залежність", "u": "zalezhnist.html"}, {"n": 9, "t": "Всі дівчата гарні...", "u": "vsi-divchata-harni.html"}, {"n": 10, "t": "Тихі моменти", "u": "tykhi-momenty.html"}]</script>
+    </section>
     <p class="song-more"><a href="../../lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="../../albums.html?album=tihi-momenty" data-i18n="song.album" data-vars="{&quot;a&quot;: &quot;Тихі моменти&quot;}">Альбом «Тихі моменти»</a></p>
   </main>
 
@@ -129,6 +134,27 @@
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     try { navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('', data.url); }); }
     catch (e) { window.prompt('', data.url); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById('also-list');
+  var data = document.getElementById('also-data');
+  if (!box || !data) return;
+  var all;
+  try { all = JSON.parse(data.textContent); } catch (e) { return; }
+  var n = parseInt(box.dataset.count, 10) || 4;
+  if (all.length <= n) return;
+  for (var i = all.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = all[i]; all[i] = all[j]; all[j] = t; }
+  all = all.slice(0, n);
+  box.textContent = '';
+  all.forEach(function (x) {
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.className = 'song-link'; a.href = x.u;
+    var s = document.createElement('small'); s.textContent = x.n + '.';
+    a.appendChild(s); a.appendChild(document.createTextNode(x.t));
+    li.appendChild(a); box.appendChild(li);
   });
 })();
 </script></body>

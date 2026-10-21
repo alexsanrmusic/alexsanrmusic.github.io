@@ -91,6 +91,8 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .track-name { flex: 1 1 200px; min-width: 0; }
 .pill-play { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 .pill-play:hover { background: var(--bg); border-color: var(--fg); }
+.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.pill-share:hover { border-color: var(--fg); }
 .drive-player { flex: 1 1 100%; }
 .drive-player[hidden] { display: none; }
 .lyrics { margin-top: 12px; padding: 16px 20px 18px; border-left: 3px solid var(--c1); border-radius: 0 14px 14px 0; background: rgba(255,255,255,.04); animation: unfold .35s ease both; }
@@ -151,8 +153,6 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-card[data-lang="en"] { --c1: #7fb2ff; --c2: #8a6bff; }
 .song-card[data-lang="ru"] { --c1: #ff8a5c; --c2: #e8477a; }
 .song-card h1 { margin-bottom: 14px; overflow-wrap: anywhere; }
-.pill-share { background: transparent; color: var(--fg); border: 1.5px solid var(--muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
-.pill-share:hover { border-color: var(--fg); }
 .song-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 6px; }
 .song-card .lyrics { margin-top: 22px; animation: none; }
 .song-card .lyrics-text { white-space: normal; font-size: 18px; line-height: 1.8; }
@@ -163,12 +163,18 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-link:hover { border-color: var(--muted); }
 .song-link small { display: block; color: var(--muted); font-size: 13px; }
 .song-link.next { text-align: right; }
+.song-also { margin: 28px 0 8px; }
+.song-also h2 { font-size: 1.15rem; margin: 0 0 12px; overflow-wrap: anywhere; }
+.song-also-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.song-also-list .song-link { height: 100%; box-sizing: border-box; overflow-wrap: anywhere; }
+.song-also-list .song-link small { margin-bottom: 2px; }
 .song-more { color: var(--muted); font-size: 15px; }
 .song-more a { color: var(--fg); }
 @media (max-width: 600px) {
   .song-card { padding: 20px 18px 24px; }
   .song-card .lyrics-text { font-size: 17px; }
   .song-nav { grid-template-columns: 1fr; }
+  .song-also-list { grid-template-columns: 1fr; }
   .song-link.next { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {

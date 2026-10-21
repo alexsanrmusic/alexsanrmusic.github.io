@@ -114,6 +114,11 @@
       </section>
     </article>
     <div class="song-nav"><a class="song-link prev" href="khroniky-khaosu-svit-u-vohni.html"><small data-i18n="song.prev">← Попередня пісня</small>Хроніки хаосу - Світ у вогні</a></div>
+    <section class="song-also">
+      <h2 data-i18n="song.more" data-vars="{&quot;a&quot;: &quot;Хроніки хаосу&quot;}">Ще з альбому «Хроніки хаосу»</h2>
+      <ul class="song-also-list" id="also-list" data-count="4"><li><a class="song-link" href="khroniky-khaosu-birzhovyi-shtorm.html"><small>2.</small>Хроніки хаосу - Біржовий шторм</a></li><li><a class="song-link" href="khroniky-khaosu-dyplomatychnyi-front.html"><small>5.</small>Хроніки хаосу - Дипломатичний фронт</a></li><li><a class="song-link" href="khroniky-khaosu-mediashtorm.html"><small>8.</small>Хроніки хаосу - Медіашторм</a></li><li><a class="song-link" href="khroniky-khaosu-povnyi-tsykl.html"><small>11.</small>Хроніки хаосу - Повний цикл</a></li></ul>
+      <script type="application/json" id="also-data">[{"n": 1, "t": "Хроніки хаосу - Світ на межі", "u": "khroniky-khaosu-svit-na-mezhi.html"}, {"n": 2, "t": "Хроніки хаосу - Біржовий шторм", "u": "khroniky-khaosu-birzhovyi-shtorm.html"}, {"n": 3, "t": "Хроніки хаосу - Енергокриза", "u": "khroniky-khaosu-enerhokryza.html"}, {"n": 4, "t": "Хроніки хаосу - Енергокриза (rev2)", "u": "khroniky-khaosu-enerhokryza-rev2.html"}, {"n": 5, "t": "Хроніки хаосу - Дипломатичний фронт", "u": "khroniky-khaosu-dyplomatychnyi-front.html"}, {"n": 6, "t": "Хроніки хаосу - Дипломатичний фронт (rev2)", "u": "khroniky-khaosu-dyplomatychnyi-front-rev2.html"}, {"n": 7, "t": "Хроніки хаосу - Ефір без правил", "u": "khroniky-khaosu-efir-bez-pravyl.html"}, {"n": 8, "t": "Хроніки хаосу - Медіашторм", "u": "khroniky-khaosu-mediashtorm.html"}, {"n": 9, "t": "Хроніки хаосу - Новий фінал", "u": "khroniky-khaosu-novyi-final.html"}, {"n": 10, "t": "Хроніки хаосу - Штучний інтелект", "u": "khroniky-khaosu-shtuchnyi-intelekt.html"}, {"n": 11, "t": "Хроніки хаосу - Повний цикл", "u": "khroniky-khaosu-povnyi-tsykl.html"}, {"n": 12, "t": "Хроніки хаосу - Світ у вогні", "u": "khroniky-khaosu-svit-u-vohni.html"}]</script>
+    </section>
     <p class="song-more"><a href="../../lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="../../albums.html?album=khroniky-khaosu" data-i18n="song.album" data-vars="{&quot;a&quot;: &quot;Хроніки хаосу&quot;}">Альбом «Хроніки хаосу»</a></p>
   </main>
 
@@ -133,6 +138,27 @@
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     try { navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('', data.url); }); }
     catch (e) { window.prompt('', data.url); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById('also-list');
+  var data = document.getElementById('also-data');
+  if (!box || !data) return;
+  var all;
+  try { all = JSON.parse(data.textContent); } catch (e) { return; }
+  var n = parseInt(box.dataset.count, 10) || 4;
+  if (all.length <= n) return;
+  for (var i = all.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = all[i]; all[i] = all[j]; all[j] = t; }
+  all = all.slice(0, n);
+  box.textContent = '';
+  all.forEach(function (x) {
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.className = 'song-link'; a.href = x.u;
+    var s = document.createElement('small'); s.textContent = x.n + '.';
+    a.appendChild(s); a.appendChild(document.createTextNode(x.t));
+    li.appendChild(a); box.appendChild(li);
   });
 })();
 </script></body>

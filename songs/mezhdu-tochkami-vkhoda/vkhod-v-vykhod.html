@@ -104,6 +104,11 @@
       </section>
     </article>
     <div class="song-nav"><span></span><a class="song-link next" href="skvoz-iskry.html"><small data-i18n="song.next">Наступна пісня →</small>Сквозь искры</a></div>
+    <section class="song-also">
+      <h2 data-i18n="song.more" data-vars="{&quot;a&quot;: &quot;Между точками входа. Завещание живого&quot;}">Ще з альбому «Между точками входа. Завещание живого»</h2>
+      <ul class="song-also-list" id="also-list" data-count="4"><li><a class="song-link" href="vozvrashchenie-iz-nebytiya.html"><small>3.</small>Возвращение из небытия</a></li><li><a class="song-link" href="sila-bez-sily.html"><small>6.</small>Сила без силы</a></li><li><a class="song-link" href="dukh-birzhi.html"><small>9.</small>Дух биржи</a></li><li><a class="song-link" href="zhizn-mezhdu-tochkami-vkhoda.html"><small>12.</small>Жизнь между точками входа</a></li></ul>
+      <script type="application/json" id="also-data">[{"n": 2, "t": "Сквозь искры", "u": "skvoz-iskry.html"}, {"n": 3, "t": "Возвращение из небытия", "u": "vozvrashchenie-iz-nebytiya.html"}, {"n": 4, "t": "Четыре стороны", "u": "chetyre-storony.html"}, {"n": 5, "t": "Принятие. Боль как проводник", "u": "prinyatie-bol-kak-provodnik.html"}, {"n": 6, "t": "Сила без силы", "u": "sila-bez-sily.html"}, {"n": 7, "t": "Возвращение", "u": "vozvrashchenie.html"}, {"n": 8, "t": "Пробуждение", "u": "probuzhdenie.html"}, {"n": 9, "t": "Дух биржи", "u": "dukh-birzhi.html"}, {"n": 10, "t": "Дом вне времени", "u": "dom-vne-vremeni.html"}, {"n": 11, "t": "Хребет молчаливых решений", "u": "khrebet-molchalivykh-resheniy.html"}, {"n": 12, "t": "Жизнь между точками входа", "u": "zhizn-mezhdu-tochkami-vkhoda.html"}, {"n": 13, "t": "Послесловие. Благодарность", "u": "posleslovie-blagodarnost.html"}, {"n": 14, "t": "Завещание живого", "u": "zaveshchanie-zhivogo.html"}]</script>
+    </section>
     <p class="song-more"><a href="../../lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="../../albums.html?album=mezhdu-tochkami-vkhoda" data-i18n="song.album" data-vars="{&quot;a&quot;: &quot;Между точками входа. Завещание живого&quot;}">Альбом «Между точками входа. Завещание живого»</a></p>
   </main>
 
@@ -123,6 +128,27 @@
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     try { navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('', data.url); }); }
     catch (e) { window.prompt('', data.url); }
+  });
+})();
+</script>
+<script>
+(function () {
+  var box = document.getElementById('also-list');
+  var data = document.getElementById('also-data');
+  if (!box || !data) return;
+  var all;
+  try { all = JSON.parse(data.textContent); } catch (e) { return; }
+  var n = parseInt(box.dataset.count, 10) || 4;
+  if (all.length <= n) return;
+  for (var i = all.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = all[i]; all[i] = all[j]; all[j] = t; }
+  all = all.slice(0, n);
+  box.textContent = '';
+  all.forEach(function (x) {
+    var li = document.createElement('li');
+    var a = document.createElement('a'); a.className = 'song-link'; a.href = x.u;
+    var s = document.createElement('small'); s.textContent = x.n + '.';
+    a.appendChild(s); a.appendChild(document.createTextNode(x.t));
+    li.appendChild(a); box.appendChild(li);
   });
 })();
 </script></body>
