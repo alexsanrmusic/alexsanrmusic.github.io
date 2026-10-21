@@ -498,6 +498,40 @@
      "clip": "https://youtu.be/QOjAmSlLCCU"
     }
    ]
+  },
+  {
+   "id": "petlia-i-svitlo",
+   "title": "Петля і світло",
+   "lang": "uk",
+   "year": 2026,
+   "cover": "images/petliaisvitlo.jpeg",
+   "tracks": [
+    {
+     "title": "Усвідомлення сну",
+     "drive": "1eu3iQJAISUa_QvTLDNXzb_rpjzRMP5tp",
+     "clip": "https://youtu.be/YjjV9OdscEU"
+    },
+    {
+     "title": "Калібрування страхів",
+     "drive": "1K9P2oYmN6sqf8u8uKxyJChgU7WsnySXr",
+     "clip": "https://youtu.be/u6LE33DGzW0"
+    },
+    {
+     "title": "Синхронізація",
+     "drive": "1rdRMKlgC-vReUr0QUPGmZgAOMXMHByt9"
+    },
+    {
+     "title": "Перепрошивка",
+     "drive": "12Fb7fjwLZC-MqGx0f6KtszNqmOC7hqFh",
+     "clip": "https://youtu.be/14dh0KQTFJk"
+    },
+    {
+     "title": "У потік",
+     "drive": "1Ky_jgjx8kYUnSNWdjTt3MoDZkZyccOcu",
+     "clip": "https://youtu.be/UbpzHMT-G7Y"
+    }
+   ],
+   "group": "loop-and-light"
   }
  ],
  "_hidden": [
