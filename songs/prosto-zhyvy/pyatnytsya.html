@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../i18n.js"></script>
 <title>П&#x27;ятниця — текст пісні | Alex Sanr</title>
 <meta name="description" content="Текст пісні «П&#x27;ятниця» — Alex Sanr, альбом «Просто живи». Слухайте на сайті.">
 <meta name="theme-color" content="#0b0f1f">
@@ -35,27 +36,27 @@
   <header>
     <a class="brand" href="../../index.html">ALEX SANR</a>
     <nav>
-      <a href="../../index.html">Головна</a>
-      <a href="../../albums.html">Альбоми</a>
-      <a href="../../lyrics.html" aria-current="page">Тексти</a>
+      <a href="../../index.html" data-i18n="nav.home">Головна</a>
+      <a href="../../albums.html" data-i18n="nav.albums">Альбоми</a>
+      <a href="../../lyrics.html" aria-current="page" data-i18n="nav.lyrics">Тексти</a>
     </nav>
   </header>
 
   <main>
-    <nav class="crumbs" aria-label="Навігація">
-      <a href="../../lyrics.html">Тексти</a><span>/</span>
+    <nav class="crumbs" aria-label="Навігація" data-i18n-attr="aria-label:song.crumbs">
+      <a href="../../lyrics.html" data-i18n="nav.lyrics">Тексти</a><span>/</span>
       <a href="../../lyrics.html#prosto-zhyvy">Просто живи</a>
     </nav>
     <article class="song-card" data-lang="uk">
       <h1>П&#x27;ятниця</h1>
-      <span class="badges"><span class="badge badge-lang">🇺🇦 Українська</span><span class="badge">Просто живи</span><span class="badge">2026</span></span>
+      <span class="badges"><span class="badge badge-lang">🇺🇦 <span data-i18n="lang.uk">Українська</span></span><span class="badge">Просто живи</span><span class="badge">2026</span></span>
       <div class="song-actions">
-      <a class="pill pill-dl" href="../../albums.html?album=prosto-zhyvy&amp;track=1">♪ Слухати</a>
-      <a class="pill pill-clip" href="https://youtu.be/NjkFYmni5qs" target="_blank" rel="noopener">▶ Дивитись кліп</a>
-      <button class="pill pill-share" type="button" id="share" data-done="Скопійовано">↗ Поділитися</button>
+      <a class="pill pill-dl" href="../../albums.html?album=prosto-zhyvy&amp;track=1" data-i18n="track.play">♪ Слухати</a>
+      <a class="pill pill-clip" href="https://youtu.be/NjkFYmni5qs" target="_blank" rel="noopener" data-i18n="track.clip">▶ Дивитись кліп</a>
+      <button class="pill pill-share" type="button" id="share" data-i18n="song.share">↗ Поділитися</button>
       </div>
-      <section class="lyrics" aria-label="Текст пісні">
-        <span class="lyrics-label">Текст пісні</span>
+      <section class="lyrics" aria-label="Текст пісні" data-i18n-attr="aria-label:lyrics.label">
+        <span class="lyrics-label" data-i18n="lyrics.label">Текст пісні</span>
         <div class="lyrics-text" lang="uk">
 <p>Хей!<br>
 Ла-ла-ла-ла-ла-ла-ла<br>
@@ -107,8 +108,8 @@
         </div>
       </section>
     </article>
-    <div class="song-nav"><span></span><a class="song-link next" href="davai-vtechemo.html"><small>Наступна пісня →</small>Давай втечемо</a></div>
-    <p class="song-more"><a href="../../lyrics.html">Усі тексти</a> · <a href="../../albums.html?album=prosto-zhyvy">Альбом «Просто живи»</a></p>
+    <div class="song-nav"><span></span><a class="song-link next" href="davai-vtechemo.html"><small data-i18n="song.next">Наступна пісня →</small>Давай втечемо</a></div>
+    <p class="song-more"><a href="../../lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="../../albums.html?album=prosto-zhyvy" data-i18n="song.album" data-vars="{&quot;a&quot;: &quot;Просто живи&quot;}">Альбом «Просто живи»</a></p>
   </main>
 
   <footer>
@@ -121,8 +122,7 @@
 (function () {
   var b = document.getElementById('share');
   if (!b) return;
-  var label = b.textContent;
-  function done() { b.textContent = b.getAttribute('data-done'); setTimeout(function () { b.textContent = label; }, 2000); }
+  function done() { var label = b.textContent; b.textContent = I18N.t('song.copied'); setTimeout(function () { b.textContent = label; }, 2000); }
   b.addEventListener('click', function () {
     var data = { title: document.title, url: location.href.split('#')[0] };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
