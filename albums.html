@@ -206,6 +206,9 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     return e;
   }
 
+  // Ключ Google Drive API (см. инструкцию). Пока пусто — используется обычная ссылка Drive.
+  var DRIVE_KEY = '';
+
   function driveLink(id) {
     return 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
   }
@@ -292,7 +295,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     a.controls = true; a.preload = 'metadata';
     a.setAttribute('playsinline', '');
     a.setAttribute('aria-label', T('track.player', { t: t.title }));
-    a.src = t.audio || driveLink(t.drive);
+    a.src = t.audio || (DRIVE_KEY ? 'https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(t.drive) + '?alt=media&key=' + DRIVE_KEY : driveLink(t.drive));
     holder.appendChild(a);
     var ly = el('div', 'lyrics');
     ly.hidden = true;
