@@ -7,9 +7,9 @@
   function url(p) { return new URL(p, base).href; }
   var root = document.documentElement;
   var LBL = {
-    uk: { prev: 'Попередній трек', next: 'Наступний трек', play: 'Грати', pause: 'Пауза', close: 'Закрити плеєр', seek: 'Перемотка', vol: 'Гучність', mute: 'Вимкнути звук', unmute: 'Увімкнути звук' },
-    ru: { prev: 'Предыдущий трек', next: 'Следующий трек', play: 'Играть', pause: 'Пауза', close: 'Закрыть плеер', seek: 'Перемотка', vol: 'Громкость', mute: 'Выключить звук', unmute: 'Включить звук' },
-    en: { prev: 'Previous track', next: 'Next track', play: 'Play', pause: 'Pause', close: 'Close player', seek: 'Seek', vol: 'Volume', mute: 'Mute', unmute: 'Unmute' }
+    uk: { prev: 'Попередній трек', next: 'Наступний трек', play: 'Грати', pause: 'Пауза', close: 'Закрити плеєр', seek: 'Перемотка' },
+    ru: { prev: 'Предыдущий трек', next: 'Следующий трек', play: 'Играть', pause: 'Пауза', close: 'Закрыть плеер', seek: 'Перемотка' },
+    en: { prev: 'Previous track', next: 'Next track', play: 'Play', pause: 'Pause', close: 'Close player', seek: 'Seek' }
   };
   var lg = LBL[window.I18N && window.I18N.lang] || LBL.uk;
 
@@ -30,9 +30,9 @@
   var css = document.createElement('style');
   css.setAttribute('data-shared', '');
   css.textContent =
-    '#mp-bar{position:fixed;z-index:900;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));max-width:720px;margin:0 auto;border-radius:16px;background:rgba(20,26,54,.94);border:1px solid var(--line,rgba(255,255,255,.16));box-shadow:0 12px 40px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--fg,#e8ecff)}' +
+    '#mp-bar{position:fixed;z-index:900;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));max-width:720px;margin:0 auto;border-radius:16px;background:rgba(20,26,54,.94);border:1px solid var(--line,rgba(255,255,255,.16));box-shadow:0 12px 40px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--fg,#e8ecff);overflow:hidden}' +
     '#mp-bar[hidden]{display:none}' +
-    '#mp-bar .mp-seek{display:block;width:100%;height:16px;border-radius:16px 16px 0 0;margin:0;padding:0;accent-color:var(--c1,#e0a82e);background:transparent;cursor:pointer}' +
+    '#mp-bar .mp-seek{display:block;width:100%;height:16px;margin:0;padding:0;accent-color:var(--c1,#e0a82e);background:transparent;cursor:pointer}' +
     '#mp-bar .mp-row{display:flex;align-items:center;gap:10px;padding:4px 10px 10px}' +
     '#mp-bar .mp-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;flex:none;background:rgba(255,255,255,.08)}' +
     '#mp-bar .mp-cover[hidden]{display:none}' +
@@ -45,10 +45,6 @@
     '#mp-bar .mp-btn:hover{background:rgba(255,255,255,.08)}' +
     '#mp-bar .mp-btn.mp-main{background:var(--c1,#e0a82e);color:#14121a}' +
     '#mp-bar .mp-btn:focus-visible{outline:2px solid var(--c1,#e0a82e);outline-offset:2px}' +
-    '#mp-bar .mp-volpop{position:absolute;right:8px;bottom:calc(100% + 8px);display:flex;align-items:center;gap:6px;padding:6px 14px 6px 6px;border-radius:14px;background:rgba(20,26,54,.97);border:1px solid var(--line,rgba(255,255,255,.16));box-shadow:0 8px 28px rgba(0,0,0,.45)}' +
-    '#mp-bar .mp-volpop[hidden]{display:none}' +
-    '#mp-bar .mp-vslider{width:150px;height:24px;margin:0;accent-color:var(--c1,#e0a82e);background:transparent;cursor:pointer}' +
-    '@media(max-width:480px){#mp-bar .mp-btn{width:34px;height:34px}#mp-bar .mp-row{gap:6px}}' +
     'html.mp-on body{padding-bottom:96px}';
   document.head.appendChild(css);
 
@@ -57,9 +53,6 @@
     next: '<svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18V6l8.5 6z"/></svg>',
     play: '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>',
     pause: '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
-    vhigh: '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zM16.5 12A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
-    vlow: '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zM16.5 12A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>',
-    mute: '<svg viewBox="0 0 24 24"><path d="M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5zM19 12c0 .9-.2 1.8-.5 2.6l1.5 1.5A8.9 8.9 0 0 0 21 12a9 9 0 0 0-7-8.8v2.1A7 7 0 0 1 19 12zM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.2 4.2c-.7.5-1.4.9-2.2 1.1v2.1a9 9 0 0 0 3.6-1.8l2.1 2.1 1.3-1.3L4.3 3zM12 4 9.9 6.1 12 8.2z"/></svg>',
     close: '<svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round"><path d="M6 6l12 12M18 6 6 18"/></svg>'
   };
   function btn(cls, label, icon) {
@@ -73,9 +66,7 @@
     '<div class="mp-row"><img class="mp-cover" alt="" width="44" height="44" hidden>' +
     '<div class="mp-info"><b class="mp-title"></b><span class="mp-line"></span></div>' +
     btn('mp-prev', lg.prev, ICON.prev) + btn('mp-main mp-toggle', lg.play, ICON.play) +
-    btn('mp-next', lg.next, ICON.next) + btn('mp-vol', lg.vol, ICON.vhigh) + btn('mp-close', lg.close, ICON.close) + '</div>' +
-    '<div class="mp-volpop" hidden>' + btn('mp-vmute', lg.mute, ICON.vhigh) +
-    '<input class="mp-vslider" type="range" min="0" max="100" step="1" aria-label="' + lg.vol + '"></div>';
+    btn('mp-next', lg.next, ICON.next) + btn('mp-close', lg.close, ICON.close) + '</div>';
   root.appendChild(bar);
   var seek = bar.querySelector('.mp-seek'), cover = bar.querySelector('.mp-cover'),
       titleEl = bar.querySelector('.mp-title'), lineEl = bar.querySelector('.mp-line'),
@@ -87,48 +78,6 @@
     toggleBtn.setAttribute('aria-label', p ? lg.play : lg.pause);
     toggleBtn.title = p ? lg.play : lg.pause;
   }
-
-  /* ---------- гучність ---------- */
-  var volBtn = bar.querySelector('.mp-vol'), pop = bar.querySelector('.mp-volpop'),
-      vmute = bar.querySelector('.mp-vmute'), vslider = bar.querySelector('.mp-vslider');
-  // на iOS гучність браузером не змінюється (лише кнопками телефона) — там кнопка просто вмикає/вимикає звук
-  var canVol = (function () {
-    var o = audio.volume;
-    try { audio.volume = 0.5; } catch (e) {}
-    var ok = Math.abs(audio.volume - 0.5) < 0.01;
-    try { audio.volume = o; } catch (e) {}
-    return ok;
-  })();
-  try {
-    var sv = JSON.parse(localStorage.getItem('mp-vol') || 'null');
-    if (sv) { if (canVol && sv.v >= 0 && sv.v <= 1) audio.volume = sv.v; audio.muted = !!sv.m; }
-  } catch (e) {}
-  function volUi() {
-    var off = audio.muted || audio.volume === 0;
-    var ic = off ? ICON.mute : (canVol && audio.volume < 0.5 ? ICON.vlow : ICON.vhigh);
-    volBtn.innerHTML = ic; vmute.innerHTML = ic;
-    vslider.value = off ? 0 : Math.round(audio.volume * 100);
-    vmute.setAttribute('aria-label', off ? lg.unmute : lg.mute);
-    vmute.title = off ? lg.unmute : lg.mute;
-    try { localStorage.setItem('mp-vol', JSON.stringify({ v: audio.volume, m: audio.muted })); } catch (e) {}
-  }
-  audio.addEventListener('volumechange', volUi);
-  volUi();
-  volBtn.addEventListener('click', function () {
-    if (!canVol) { audio.muted = !audio.muted; return; }
-    pop.hidden = !pop.hidden;
-  });
-  vmute.addEventListener('click', function () {
-    if (audio.muted || audio.volume === 0) { audio.muted = false; if (audio.volume === 0) audio.volume = 0.5; }
-    else audio.muted = true;
-  });
-  vslider.addEventListener('input', function () {
-    var v = vslider.value / 100;
-    audio.volume = v;
-    audio.muted = v === 0;
-  });
-  document.addEventListener('click', function (e) { if (!pop.hidden && !bar.contains(e.target)) pop.hidden = true; });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') pop.hidden = true; });
 
   /* ---------- субтитри ---------- */
   function parseSrt(txt) {
@@ -234,7 +183,7 @@
   MP.close = function () {
     audio.pause(); audio.removeAttribute('src'); audio.load();
     MP.queue = []; MP.idx = -1; MP.cur = null; MP.cues = null; MP.active = -1;
-    bar.hidden = true; pop.hidden = true; root.classList.remove('mp-on');
+    bar.hidden = true; root.classList.remove('mp-on');
     try { sessionStorage.removeItem('mp'); } catch (e) {}
     if ('mediaSession' in navigator) { try { navigator.mediaSession.metadata = null; } catch (e) {} }
     emit('track');
