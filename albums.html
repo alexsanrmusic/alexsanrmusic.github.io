@@ -208,7 +208,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   }
 
   // Ключ Google Drive API (см. инструкцию). Пока пусто — используется обычная ссылка Drive.
-  var DRIVE_KEY = 'AIzaSyBitkFL-uqp7Hq7MM5WqLrd5PN0ptuTyJ0';
+  var DRIVE_KEY = '';
 
   function driveLink(id) {
     return 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
@@ -254,6 +254,17 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
   // Звук і субтитри ведуть міні-плеєр (miniplayer.js) — тому музика не зупиняється ні при згортанні
   // альбому, ні при переході на іншу сторінку. Тут лише панель субтитрів під треком.
+  // Якщо miniplayer.js не завантажився — сторінка все одно працює (як раніше, через вбудований програвач Drive).
+  var MP = window.MP || (function () {
+    var fns = [], m = {
+      cur: null, cues: null, active: -1,
+      audio: { paused: true, play: function () { return Promise.resolve(); } },
+      page: function (f) { fns.push(f); return function () {}; },
+      close: function () { m.cur = null; },
+      play: function (q, i) { m.cur = q[i]; setTimeout(function () { fns.forEach(function (f) { f('error'); }); }, 0); }
+    };
+    return m;
+  })();
   var trackRows = {};
   function trackKey(albumId, title) { return albumId + '|' + title; }
   function queueOf(album) {
