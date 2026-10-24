@@ -228,6 +228,7 @@
   },
   {
    "id": "prosto-zhyvy",
+   "group": "just-life",
    "title": "Просто живи",
    "lang": "uk",
    "year": 2026,
@@ -533,6 +534,35 @@
     }
    ],
    "group": "loop-and-light"
+  },
+  {
+   "id": "just-life",
+   "group": "just-life",
+   "title": "Just Life",
+   "lang": "en",
+   "year": 2026,
+   "cover": "images/just-life.jpeg",
+   "tracks": [
+    {
+     "title": "Write to Me",
+     "drive": "1hTMGUsrgqdStK4rw0t9yd8dz4VNvPNW1"
+    },
+    {
+     "title": "Let’s Get Away",
+     "drive": "1hsECCABMBFfUzws6ggAhWD4egawSc1IX",
+     "clip": "https://youtu.be/SO8Lf8ryG0o"
+    },
+    {
+     "title": "I don't care",
+     "drive": "1Hb2Kivv-9BYpRwRiDwhiAZ0R2QbS6hfz",
+     "clip": "https://youtu.be/pUMXeKWtAes"
+    },
+    {
+     "title": "Friday",
+     "drive": "1VPyWHsnsd6a-u3rEu3hv4XxTD7NALyXk",
+     "clip": "https://youtu.be/hi3dSsRd4nc"
+    }
+   ]
   }
  ],
  "_hidden": [
