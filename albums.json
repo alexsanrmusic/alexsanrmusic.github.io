@@ -2,6 +2,7 @@
  "albums": [
   {
    "id": "echo-ua",
+   "group": "echo-ua",
    "title": "Echo UA",
    "lang": "uk",
    "year": 2026,
@@ -101,7 +102,6 @@
   },
   {
    "id": "tihi-momenty",
-   "group": "quite-moments",
    "title": "Тихі моменти",
    "lang": "uk",
    "year": 2026,
@@ -566,12 +566,12 @@
    ]
   },
   {
-   "id": "quite-moments",
-   "group": "quite-moments",
-   "title": "Quiet moments",
+   "id": "echo-ua-en",
+   "group": "echo-ua",
+   "title": "ECHO UA — Echoes of Ukraine (English Version)",
    "lang": "en",
    "year": 2026,
-   "cover": "images/quite-moments.jpg",
+   "cover": "images/echo-ua.jpg",
    "tracks": [
     {
      "title": "Good Evening",
