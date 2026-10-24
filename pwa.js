@@ -2,9 +2,11 @@
 (function () {
   try {
     var cs = document.currentScript, h = document.head, b = document.body;
+    var hd = b.querySelector('header'), hp = hd && hd.parentNode;
     window.__pgOwned = {
       head: [].slice.call(h.querySelectorAll('style:not([data-shared]),link[rel="stylesheet"],script[type^="application"]')),
-      body: [].slice.call(b.children).filter(function (n) { return n.tagName !== 'HEADER'; })
+      body: [].slice.call(b.children).filter(function (n) { return !n.contains(hd); }),
+      inner: hp && hp !== b ? [].slice.call(hp.children).filter(function (n) { return n !== hd; }) : []
     };
     if (!window.MP && cs && cs.src) {
       var m = document.createElement('script');

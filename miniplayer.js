@@ -281,7 +281,7 @@
 
     return Promise.race([Promise.all(waits), new Promise(function (r) { setTimeout(r, 2500); })]).then(function () {
       hold.forEach(function (c) { c.media = 'all'; });
-      owned.body.forEach(rm);
+      owned.body.concat(owned.inner || []).forEach(rm);
       owned.head.forEach(function (n) { if (kept.indexOf(n) < 0) rm(n); });
       hb.setAttribute('href', nbr.getAttribute('href'));
       if (hn && nn) hn.innerHTML = nn.innerHTML;   // меню на головній інше (якорі), тому копіюємо повністю
@@ -290,15 +290,33 @@
         if (v === null) root.removeAttribute(a); else root.setAttribute(a, v);
       });
       document.title = doc.title;
-      var ref = hdr.nextSibling, nb = [];
+      // Шапка стоїть всередині обгортки (.wrap) разом із вмістом сторінки: шапку залишаємо, решту міняємо.
+      var skip = function (n) { return n.tagName === 'SCRIPT' && !/json/.test(n.type); };
+      var topL = hdr, topN = nh, nb = [], ni = [], before = true;
+      while (topL.parentNode && topL.parentNode !== document.body) topL = topL.parentNode;
+      while (topN.parentNode && topN.parentNode !== doc.body) topN = topN.parentNode;
+      var after = topL.nextSibling;
       [].slice.call(doc.body.children).forEach(function (n) {
-        if (n.tagName === 'HEADER' || (n.tagName === 'SCRIPT' && !/json/.test(n.type))) return;
+        if (n === topN) { before = false; return; }
+        if (skip(n)) return;
         var c = document.importNode(n, true);
-        hdr.parentNode.insertBefore(c, ref);
+        document.body.insertBefore(c, before ? topL : after);
         nb.push(c);
       });
+      if (topL !== hdr) {
+        var hp = hdr.parentNode, nhp = nh.parentNode, ib = true, iref = hdr.nextSibling;
+        hp.className = nhp.className;
+        [].slice.call(nhp.children).forEach(function (n) {
+          if (n === nh) { ib = false; return; }
+          if (skip(n)) return;
+          var c = document.importNode(n, true);
+          hp.insertBefore(c, ib ? hdr : iref);
+          ni.push(c);
+        });
+      }
       owned.head = kept.concat(added);
       owned.body = nb;
+      owned.inner = ni;
       window.scrollTo(0, 0);
       scripts.forEach(function (s) {
         var e = document.createElement('script');
