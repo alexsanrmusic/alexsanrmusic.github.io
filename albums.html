@@ -186,6 +186,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   </footer>
 </div>
 
+<script src="miniplayer.js"></script>
 <script>
 (function () {
   var LANG_CODES = { uk: 'UA', en: 'EN', ru: 'RU' };
@@ -207,16 +208,14 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   }
 
   // Ключ Google Drive API (см. инструкцию). Пока пусто — используется обычная ссылка Drive.
-  var DRIVE_KEY = 'AIzaSyBitkFL-uqp7Hq7MM5WqLrd5PN0ptuTyJ0';
+  var DRIVE_KEY = '';
 
   function driveLink(id) {
     return 'https://drive.usercontent.google.com/download?id=' + encodeURIComponent(id) + '&export=download&confirm=t';
   }
 
   function closeDrivePlayer(h) {
-    var au = h.querySelector('audio');
-    if (au) { au.pause(); au.removeAttribute('src'); au.load(); }
-    if (h._stop) h._stop();
+    if (h._off) { h._off(); h._off = null; }
     h.hidden = true;
     h.textContent = '';
     if (h.parentNode) h.parentNode.classList.remove('playing');
@@ -253,140 +252,101 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     catch (e) { window.prompt('', url); }
   }
 
-  // Субтитри: subtitles/<album-id>/<slug>.srt, запасний варіант — subtitles/<slug>.srt
-  function parseSrt(txt) {
-    var out = [];
-    txt.replace(/^\uFEFF/, '').replace(/\r/g, '').split(/\n\s*\n/).forEach(function (blk) {
-      var l = blk.trim().split('\n');
-      var i = l[0].indexOf('-->') > -1 ? 0 : 1;
-      var m = l[i] && l[i].match(/(\d+):(\d+):(\d+)[,.](\d+)\s*-->\s*(\d+):(\d+):(\d+)[,.](\d+)/);
-      if (!m) return;
-      out.push({
-        s: +m[1] * 3600 + +m[2] * 60 + +m[3] + +('0.' + m[4]),
-        e: +m[5] * 3600 + +m[6] * 60 + +m[7] + +('0.' + m[8]),
-        t: l.slice(i + 1).join(' ').replace(/<[^>]+>/g, '').trim()
-      });
-    });
-    return out;
-  }
-
-  function getSubs(album, t) {
-    return getLyrics().then(function () {
-      var slug = slugs[album.id] && slugs[album.id][t.title];
-      if (!slug) return null;
-      var urls = ['subtitles/' + album.id + '/' + slug + '.srt', 'subtitles/' + slug + '.srt'];
-      return urls.reduce(function (p, u) {
-        return p.then(function (r) {
-          return r || fetch(u).then(function (x) { return x.ok ? x.text() : null; }).catch(function () { return null; });
-        });
-      }, Promise.resolve(null)).then(function (txt) {
-        var c = txt && parseSrt(txt);
-        return c && c.length ? c : null;
-      });
+  // Звук і субтитри ведуть міні-плеєр (miniplayer.js) — тому музика не зупиняється ні при згортанні
+  // альбому, ні при переході на іншу сторінку. Тут лише панель субтитрів під треком.
+  var trackRows = {};
+  function trackKey(albumId, title) { return albumId + '|' + title; }
+  function queueOf(album) {
+    return album.tracks.filter(function (x) { return x.drive || x.audio; }).map(function (x) {
+      return {
+        title: x.title, album: album.title, albumId: album.id, drive: x.drive || '',
+        cover: album.cover ? new URL(album.cover, location.href).href : '',
+        src: x.audio || (DRIVE_KEY && x.drive
+          ? 'https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(x.drive) + '?alt=media&key=' + DRIVE_KEY
+          : driveLink(x.drive))
+      };
     });
   }
 
-  function toggleDrivePlayer(holder, t, album) {
-    var wasOpen = !holder.hidden;
+  function openView(holder, t, album) {
     Array.prototype.forEach.call(document.querySelectorAll('.drive-player'), closeDrivePlayer);
-    if (wasOpen) return;
-    var li = holder.parentNode;
-    var a = document.createElement('audio');
-    a.controls = true; a.preload = 'metadata';
-    a.setAttribute('playsinline', '');
-    a.setAttribute('aria-label', T('track.player', { t: t.title }));
-    a.src = t.audio || (DRIVE_KEY ? 'https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(t.drive) + '?alt=media&key=' + DRIVE_KEY : driveLink(t.drive));
-    holder.appendChild(a);
     var ly = el('div', 'lyrics');
-    ly.hidden = true;
     holder.appendChild(ly);
-
-    var cues = null, nodes = [], active = -1, raf = 0, userScroll = 0, box = null;
-    function tick() {
-      cancelAnimationFrame(raf);
-      if (cues) {
-        var tm = a.currentTime, i = -1;
-        for (var k = 0; k < cues.length && cues[k].s <= tm; k++) i = k;
-        if (i >= 0 && tm > cues[i].e + 0.6) i = -1;
-        if (i !== active) {
-          if (nodes[active]) nodes[active].classList.remove('on');
-          active = i;
-          var n = nodes[i];
-          if (n) {
-            n.classList.add('on');
-            if (Date.now() - userScroll > 3000) box.scrollTo({ top: n.offsetTop - box.clientHeight / 2 + n.offsetHeight / 2, behavior: 'smooth' });
-          }
-        }
-      }
-      raf = a.paused ? 0 : requestAnimationFrame(tick);
+    var box = null, nodes = [], act = -1, userScroll = 0, tok = 0;
+    function mark() {
+      if (!box || MP.active === act) return;
+      if (nodes[act]) nodes[act].classList.remove('on');
+      act = MP.active;
+      var n = nodes[act];
+      if (!n) return;
+      n.classList.add('on');
+      if (Date.now() - userScroll > 3000) box.scrollTo({ top: n.offsetTop - box.clientHeight / 2 + n.offsetHeight / 2, behavior: 'smooth' });
     }
-    function go(sib) { var x = li && li[sib]; if (x && x._play) x._play(); }
-
-    a.addEventListener('play', function () {
-      tick();
-      if ('mediaSession' in navigator) {
-        var ms = navigator.mediaSession;
-        try {
-          ms.metadata = new MediaMetadata({ title: t.title, artist: 'Alex Sanr', album: album.title,
-            artwork: album.cover ? [{ src: new URL(album.cover, location.href).href, sizes: '512x512' }] : [] });
-          ms.setActionHandler('play', function () { a.play(); });
-          ms.setActionHandler('pause', function () { a.pause(); });
-          ms.setActionHandler('seekto', function (d) { a.currentTime = d.seekTime; });
-          ms.setActionHandler('previoustrack', function () { go('previousElementSibling'); });
-          ms.setActionHandler('nexttrack', function () { go('nextElementSibling'); });
-        } catch (e) {}
-      }
-    });
-    a.addEventListener('pause', function () { cancelAnimationFrame(raf); });
-    a.addEventListener('seeked', tick);
-    a.addEventListener('ended', function () { go('nextElementSibling'); });
-    holder._stop = function () {
-      cancelAnimationFrame(raf);
-      if ('mediaSession' in navigator) { try { navigator.mediaSession.metadata = null; } catch (e) {} }
-    };
-    // Якщо Google Drive не віддав аудіо напряму — запасний варіант: вбудований програвач Drive (без субтитрів)
-    a.addEventListener('error', function () {
-      if (a.parentNode !== holder || !t.drive) return;
-      var f = document.createElement('iframe');
-      f.src = 'https://drive.google.com/file/d/' + encodeURIComponent(t.drive) + '/preview';
-      f.title = T('track.player', { t: t.title });
-      f.setAttribute('allow', 'autoplay');
-      f.setAttribute('frameborder', '0');
-      holder.replaceChild(f, a);
-      holder._stop();
-      cues = null;
-    });
-
-    getSubs(album, t).then(function (c) {
-      if (!ly.parentNode) return;
+    function build() {
+      var my = ++tok, c = MP.cues;
+      ly.textContent = '';
+      box = null; nodes = []; act = -1;
       ly.appendChild(el('span', 'lyrics-label', T('lyrics.label')));
       if (c) {
-        cues = c;
         box = el('div', 'subs');
         box.addEventListener('wheel', function () { userScroll = Date.now(); }, { passive: true });
         box.addEventListener('touchmove', function () { userScroll = Date.now(); }, { passive: true });
         c.forEach(function (cue) {
           var p = el('p', null, cue.t);
-          p.addEventListener('click', function () { a.currentTime = cue.s; a.play().catch(function () {}); });
+          p.addEventListener('click', function () { MP.audio.currentTime = cue.s; MP.audio.play().catch(function () {}); });
           nodes.push(p); box.appendChild(p);
         });
         ly.appendChild(box);
-        ly.hidden = false;
-        tick();
+        mark();
       } else {
         getLyrics().then(function (all) {
           var txt = all[album.id] && all[album.id][t.title];
-          if (!txt || !ly.parentNode) return;
+          if (my !== tok || !txt) return;
           ly.appendChild(el('p', 'lyrics-text', txt));
-          ly.hidden = false;
         });
       }
+    }
+    holder._off = MP.page(function (ev) {
+      if (ev === 'cues') build(); else if (ev === 'line') mark();
     });
     holder.hidden = false;
-    if (li) li.classList.add('playing');
+    if (holder.parentNode) holder.parentNode.classList.add('playing');
     holder.btn.textContent = T('track.close');
-    a.play().catch(function () {});
+    build();
   }
+
+  function toggleDrivePlayer(holder, t, album) {
+    if (!holder.hidden) { closeDrivePlayer(holder); return; }
+    var q = queueOf(album), c = MP.cur;
+    if (c && c.albumId === album.id && c.title === t.title) {
+      if (MP.audio.paused) MP.audio.play().catch(function () {});
+    } else {
+      MP.play(q, q.map(function (x) { return x.title; }).indexOf(t.title));
+    }
+    openView(holder, t, album);
+  }
+
+  MP.page(function (ev) {
+    if (ev === 'track') {
+      var c = MP.cur, r = c && trackRows[trackKey(c.albumId, c.title)];
+      if (r && r.li.offsetParent !== null) openView(r.holder, r.t, r.album);
+      else Array.prototype.forEach.call(document.querySelectorAll('.drive-player'), closeDrivePlayer);
+    } else if (ev === 'error' && MP.cur && MP.cur.drive) {
+      // Google Drive не віддав аудіо напряму — запасний варіант: вбудований програвач Drive (без субтитрів)
+      var cur = MP.cur, row = trackRows[trackKey(cur.albumId, cur.title)];
+      MP.close();
+      if (!row) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://drive.google.com/file/d/' + encodeURIComponent(cur.drive) + '/preview';
+      f.title = T('track.player', { t: cur.title });
+      f.setAttribute('allow', 'autoplay');
+      f.setAttribute('frameborder', '0');
+      row.holder.appendChild(f);
+      row.holder.hidden = false;
+      row.li.classList.add('playing');
+      row.holder.btn.textContent = T('track.close');
+    }
+  });
 
   function closeAlbum(card) {
     card.classList.remove('open');
@@ -457,6 +417,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
         pb.type = 'button';
         pb.setAttribute('aria-label', T('track.playAria', { t: t.title }));
         holder.btn = pb;
+        trackRows[trackKey(album.id, t.title)] = { li: li, holder: holder, t: t, album: album };
         li._play = function () { toggleDrivePlayer(holder, t, album); };
         pb.addEventListener('click', li._play);
         links.appendChild(pb);

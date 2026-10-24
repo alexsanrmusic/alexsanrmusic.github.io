@@ -207,7 +207,7 @@
     else if (e.key === 'Enter') {
       var rows = list.querySelectorAll('.sx-r');
       var r = rows[active >= 0 ? active : 0];
-      if (r) { e.preventDefault(); location.href = r.href; }
+      if (r) { e.preventDefault(); if (window.MP && window.MP.go) window.MP.go(r.href); else location.href = r.href; }
     }
   }
 

@@ -234,10 +234,11 @@
     '.lang-switch button:hover{color:var(--fg,#edf0f9)}' +
     '.lang-switch button[aria-pressed="true"]{background:var(--accent,#ffc83d);color:var(--accent-ink,#0b0f1f)}' +
     '.lang-switch button:focus-visible{outline:2px solid var(--blue,#8ba4ff);outline-offset:2px}';
+  css.setAttribute('data-shared', '');
   document.head.appendChild(css);
 
   function ready() { switcher(); apply(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready); else ready();
 
-  window.I18N = { lang: lang, locale: LOCALES[lang], t: t, plural: plural };
+  window.I18N = { lang: lang, locale: LOCALES[lang], t: t, plural: plural, apply: apply };
 })();

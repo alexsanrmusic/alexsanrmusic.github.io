@@ -1,3 +1,18 @@
+/* miniplayer: знімок вузлів поточної сторінки (для переходів без перезавантаження) і підключення miniplayer.js */
+(function () {
+  try {
+    var cs = document.currentScript, h = document.head, b = document.body;
+    window.__pgOwned = {
+      head: [].slice.call(h.querySelectorAll('style:not([data-shared]),link[rel="stylesheet"],script[type^="application"]')),
+      body: [].slice.call(b.children).filter(function (n) { return n.tagName !== 'HEADER'; })
+    };
+    if (!window.MP && cs && cs.src) {
+      var m = document.createElement('script');
+      m.src = cs.src.replace(/pwa\.js(\?.*)?$/, 'miniplayer.js');
+      h.appendChild(m);
+    }
+  } catch (e) {}
+})();
 /* Alex Sanr — кнопка «Встановити застосунок» (PWA).
    Показується в шапці сайту. Ховається, якщо застосунок уже встановлено.
    Android / ПК (Chrome, Edge): встановлення в один клік.
