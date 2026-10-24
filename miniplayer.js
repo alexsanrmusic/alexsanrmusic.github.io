@@ -237,8 +237,9 @@
     var doc = new DOMParser().parseFromString(html, 'text/html');
     var nh = doc.querySelector('header'), hdr = document.querySelector('header'), owned = window.__pgOwned;
     if (!doc.body || !nh || !hdr || !owned) throw new Error('shape');
-    var oa = hdr.querySelectorAll('a.brand, nav a'), na = nh.querySelectorAll('a.brand, nav a');
-    if (oa.length !== na.length) throw new Error('header');
+    var hb = hdr.querySelector('a.brand'), nbr = nh.querySelector('a.brand');
+    var hn = hdr.querySelector('nav'), nn = nh.querySelector('nav');
+    if (!hb || !nbr) throw new Error('header');
     var scripts = [].slice.call(doc.querySelectorAll('script')).filter(function (s) { return !/json/.test(s.type); });
     scripts.forEach(function (s) {
       var src = s.getAttribute('src');
@@ -282,11 +283,8 @@
       hold.forEach(function (c) { c.media = 'all'; });
       owned.body.forEach(rm);
       owned.head.forEach(function (n) { if (kept.indexOf(n) < 0) rm(n); });
-      for (var k = 0; k < oa.length; k++) {
-        oa[k].setAttribute('href', na[k].getAttribute('href'));
-        if (na[k].hasAttribute('aria-current')) oa[k].setAttribute('aria-current', na[k].getAttribute('aria-current'));
-        else oa[k].removeAttribute('aria-current');
-      }
+      hb.setAttribute('href', nbr.getAttribute('href'));
+      if (hn && nn) hn.innerHTML = nn.innerHTML;   // меню на головній інше (якорі), тому копіюємо повністю
       ['data-i18n-title', 'data-i18n-desc'].forEach(function (a) {
         var v = doc.documentElement.getAttribute(a);
         if (v === null) root.removeAttribute(a); else root.setAttribute(a, v);
@@ -319,7 +317,10 @@
 
   function go(href, push) {
     var u = new URL(href, location.href);
-    if (!pjaxOk(u) || !window.__pgOwned) { location.href = u.href; return; }
+    if (!pjaxOk(u) || !window.__pgOwned) {
+      if (window.console) console.warn('[MP] повне завантаження сторінки (немає знімка від pwa.js?)');
+      location.href = u.href; return;
+    }
     var id = ++navId;
     fetch(u.href, { credentials: 'same-origin' }).then(function (r) {
       var ct = r.headers.get('content-type') || '';
@@ -328,7 +329,10 @@
     }).then(function (html) {
       if (id !== navId) return;
       return swap(u, html, push);
-    }).catch(function () { if (id === navId) location.href = u.href; });
+    }).catch(function (err) {
+      if (window.console) console.warn('[MP] перехід без перезавантаження не вдався:', err);
+      if (id === navId) location.href = u.href;
+    });
   }
   MP.go = function (href) { go(href, true); };
 
