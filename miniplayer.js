@@ -247,9 +247,62 @@
   audio.addEventListener('ended', function () {
     if (MP.idx + 1 < MP.queue.length) MP.next(); else { setIcon(); save(); }
   });
+  // Помилка звуку: з'ясовуємо причину, двічі пробуємо ще раз (збій мережі), і лише потім запасний плеєр Drive.
+  // Причину видно на екрані, якщо відкрити сторінку з ?debug=1 (далі запам'ятовується до закриття вкладки).
+  var DEBUG = (function () {
+    try { if (/[?&]debug\b/.test(location.search)) sessionStorage.setItem('mpDebug', '1'); return !!sessionStorage.getItem('mpDebug'); }
+    catch (e) { return false; }
+  })();
+  var noteEl = null, noteTimer = 0;
+  function say(text) {
+    if (window.console) console.warn('[MP] ' + text);
+    if (!DEBUG) return;
+    if (!noteEl) {
+      noteEl = document.createElement('div');
+      noteEl.style.cssText = 'position:fixed;z-index:901;left:8px;right:8px;bottom:calc(104px + env(safe-area-inset-bottom,0px));max-width:720px;margin:0 auto;padding:8px 12px;border-radius:10px;background:rgba(70,20,24,.96);color:#ffdede;font:12px/1.4 system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.4)';
+      root.appendChild(noteEl);
+    }
+    noteEl.textContent = text; noteEl.hidden = false;
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(function () { noteEl.hidden = true; }, 20000);
+  }
+  function probe(src) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    return fetch(src, ctrl ? { signal: ctrl.signal } : {}).then(function (r) {
+      if (r.ok) { if (ctrl) ctrl.abort(); return null; }
+      return r.json().then(function (j) {
+        var e = j && j.error, why = e && ((e.errors && e.errors[0] && e.errors[0].reason) || e.status || e.message);
+        return 'HTTP ' + r.status + (why ? ' · ' + why : '');
+      }, function () { return 'HTTP ' + r.status; });
+    }, function () { return 'мережа / запит не пройшов'; });
+  }
+  var retry = { t: null, n: 0 };
+  audio.addEventListener('playing', function () { retry.n = 0; });
   audio.addEventListener('error', function () {
-    if (!audio.getAttribute('src')) return;
-    emit('error');
+    var t = MP.cur;
+    if (!audio.getAttribute('src') || !t) return;
+    if (retry.t !== t) { retry.t = t; retry.n = 0; }
+    var pos = audio.currentTime || 0;
+    probe(t.src).then(function (why) {
+      if (MP.cur !== t) return;
+      var transient = !why || /HTTP 5|rate|мережа/i.test(why);
+      if (transient && retry.n < 2) {
+        retry.n++;
+        say('Збій завантаження' + (why ? ' (' + why + ')' : '') + ' — повторна спроба ' + retry.n + ' з 2');
+        setTimeout(function () {
+          if (MP.cur !== t) return;
+          audio.src = t.src;
+          if (pos > 0) audio.addEventListener('loadedmetadata', function f() {
+            audio.removeEventListener('loadedmetadata', f);
+            try { audio.currentTime = pos; } catch (e) {}
+          });
+          audio.play().catch(function () {});
+        }, 800 * retry.n);
+        return;
+      }
+      say('Звук не завантажився: ' + (why || 'невідома помилка') + ' — вмикаю запасний плеєр Google');
+      emit('error');
+    });
   });
   window.addEventListener('pagehide', save);
 
