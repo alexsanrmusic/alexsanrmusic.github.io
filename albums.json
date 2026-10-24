@@ -101,6 +101,7 @@
   },
   {
    "id": "tihi-momenty",
+   "group": "quite-moments",
    "title": "Тихі моменти",
    "lang": "uk",
    "year": 2026,
@@ -561,6 +562,36 @@
      "title": "Friday",
      "drive": "1VPyWHsnsd6a-u3rEu3hv4XxTD7NALyXk",
      "clip": "https://youtu.be/hi3dSsRd4nc"
+    }
+   ]
+  },
+  {
+   "id": "quite-moments",
+   "group": "quite-moments",
+   "title": "Quite moments",
+   "lang": "en",
+   "year": 2026,
+   "cover": "images/quite-moments.jpg",
+   "tracks": [
+    {
+     "title": "Good Evening",
+     "drive": "1w1golB9d8Pp0il0bqUGE1BgK5sqEVW9i",
+     "clip": "https://youtu.be/dVNRg9ywckI"
+    },
+    {
+     "title": "Thank You Day",
+     "drive": "16v1vFSz-lMV_haM-ZsJG6PT7zmVFdSFB",
+     "clip": "https://youtu.be/BfIGovi-GrE"
+    },
+    {
+     "title": "My Beloved",
+     "drive": "1k5VR5il4-BUn4-rvT1c-tBhcEbAacU_u",
+     "clip": "https://youtu.be/hQ1i6DZPd3o"
+    },
+    {
+     "title": "Romantic 404",
+     "drive": "1-4j_5YUHvEK5UnxzLvhUmQXzmWFsvXJI",
+     "clip": "https://youtu.be/mieGT06DcX8"
     }
    ]
   }
