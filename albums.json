@@ -594,6 +594,71 @@
      "clip": "https://youtu.be/mieGT06DcX8"
     }
    ]
+  },
+  {
+   "id": "mozayka",
+   "title": "Мозайка",
+   "lang": "ru",
+   "year": 2026,
+   "cover": "images/mozayka.jpg",
+   "tracks": [
+    {
+     "title": "В этот день",
+     "drive": "1VOYpbXh9AqeQSLZW4Ier7nuhEkfsTZrt"
+    },
+    {
+     "title": "Единое",
+     "drive": "1e66a12S2cCB8XMkHxPesPulwNpTSFX83"
+    },
+    {
+     "title": "Где растет свобода",
+     "drive": "1bqUdwuEIwnmUbNIh9hCDHjsLCcE50QeO"
+    },
+    {
+     "title": "Держу твою ладонь",
+     "drive": "1PQXKoDZkwJ0Q-ze93wUm9-VIeuLydN_X"
+    },
+    {
+     "title": "Шваб - ковид 2019",
+     "drive": "1yCb3PJHBVhW-pNWcQmwqzummT1oLRbr-"
+    },
+    {
+     "title": "Кругозор",
+     "drive": "1c7Y-Hjrck0yOaeNBc8Lp0iBFKwoUxWIL"
+    },
+    {
+     "title": "Жизнь под фартуком",
+     "drive": "1rxDROsLUJsheg3oYuFq_5slf0Yy15Irc"
+    },
+    {
+     "title": "Дети земли",
+     "drive": "1eUtPUEzGAdXB19zZtRpMDOBq3M_6dyuR"
+    },
+    {
+     "title": "Чаты",
+     "drive": "1EC_IIGMZ_rd3qQ3maS-nvxDeNfFp9EGR"
+    },
+    {
+     "title": "Ты больше чем...",
+     "drive": "18AnqcJs9D-M51p8qpBQPRTGztx4uXA4z"
+    },
+    {
+     "title": "Продавец воздуха",
+     "drive": "1uG2DlsMWUEsrqsM3UjrDKktf8uzqwqF4"
+    },
+    {
+     "title": "День похищенных растений",
+     "drive": "11AUvZ17CKOWdGY7a0FhX4R_cPbEauXw7"
+    },
+    {
+     "title": "Главнее главного",
+     "drive": "11JwbuMYjvqqng-Vsm-lZnJ6J71UasstI"
+    },
+    {
+     "title": "Маленький кораблик",
+     "drive": "108U7qoIzOs8-_AdbkR4obm4lxeRsE-fc"
+    }
+   ]
   }
  ],
  "_hidden": [
