@@ -19,8 +19,8 @@
     'skip': ['До змісту', 'К содержимому', 'Skip to content'],
     'lang.label': ['Мова сайту', 'Язык сайта', 'Site language'],
 
-    'index.title': ['Alex Sanr — AI-музичний проєкт з України', 'Alex Sanr — AI-музыкальный проект из Украины', 'Alex Sanr — AI music project from Ukraine'],
-    'index.desc': ['Alex Sanr — AI-музичний проєкт з України. Пісні, альбоми та музичні історії.', 'Alex Sanr — AI-музыкальный проект из Украины. Песни, альбомы и музыкальные истории.', 'Alex Sanr — an AI music project from Ukraine. Songs, albums and musical stories.'],
+    'index.title': ['Alex Sanr - AI-музичний проєкт з України', 'Alex Sanr - AI-музыкальный проект из Украины', 'Alex Sanr - AI music project from Ukraine'],
+    'index.desc': ['Alex Sanr - AI-музичний проєкт з України. Пісні, альбоми та музичні історії.', 'Alex Sanr - AI-музыкальный проект из Украины. Песни, альбомы и музыкальные истории.', 'Alex Sanr - an AI music project from Ukraine. Songs, albums and musical stories.'],
     'hero.eyebrow': ['AI-музичний проєкт з України', 'AI-музыкальный проект из Украины', 'AI music project from Ukraine'],
     'hero.tagline': ['Коли ідея перетворюється на музику.', 'Когда идея превращается в музыку.', 'When an idea turns into music.'],
     'hero.lead': [
@@ -54,25 +54,25 @@
       'Рождение детей изменило мой взгляд на жизнь: я научился ценить время и людей рядом. Поэтому мне важны не просто красивые звуки, а эмоции и истории, в которых можно узнать себя.',
       'The birth of my children changed the way I see life: I learned to value time and the people around me. That is why what matters to me is not just beautiful sound, but emotions and stories in which you can recognize yourself.'],
     'author.3': [
-      'Тексти й ідеї — мої, а звучання я створюю за допомогою штучного інтелекту. Я не повчаю й не маю відповідей на все — просто ділюся тим, що мені близьке.',
-      'Тексты и идеи — мои, а звучание я создаю с помощью искусственного интеллекта. Я не поучаю и не имею ответов на всё — просто делюсь тем, что мне близко.',
-      'The lyrics and ideas are mine, and I create the sound with the help of artificial intelligence. I don\'t preach and I don\'t have all the answers — I simply share what is close to me.'],
+      'Тексти й ідеї - мої, а звучання я створюю за допомогою штучного інтелекту. Я не повчаю й не маю відповідей на все - просто ділюся тим, що мені близьке.',
+      'Тексты и идеи - мои, а звучание я создаю с помощью искусственного интеллекта. Я не поучаю и не имею ответов на всё - просто делюсь тем, что мне близко.',
+      'The lyrics and ideas are mine, and I create the sound with the help of artificial intelligence. I don\'t preach and I don\'t have all the answers - I simply share what is close to me.'],
     'author.sign': ['Це Alex Sanr. Моє життя. Мої почуття. Моя музика.', 'Это Alex Sanr. Моя жизнь. Мои чувства. Моя музыка.', 'This is Alex Sanr. My life. My feelings. My music.'],
-    'author.start': ['Почни знайомство з моєю музикою — «Повернення з небуття» ↓', 'Начни знакомство с моей музыкой — «Возвращение из небытия» ↓', 'Start getting to know my music — “Return from Nonexistence” ↓'],
-    'author.player': ['Alex Sanr — Повернення з небуття', 'Alex Sanr — Возвращение из небытия', 'Alex Sanr — Return from Nonexistence'],
+    'author.start': ['Почни знайомство з моєю музикою - «Повернення з небуття» ↓', 'Начни знакомство с моей музыкой - «Возвращение из небытия» ↓', 'Start getting to know my music - “Return from Nonexistence” ↓'],
+    'author.player': ['Alex Sanr - Повернення з небуття', 'Alex Sanr - Возвращение из небытия', 'Alex Sanr - Return from Nonexistence'],
     'author.open': ['Відкрити на YouTube →', 'Открыть на YouTube →', 'Open on YouTube →'],
 
     'home.albums': ['Альбоми', 'Альбомы', 'Albums'],
     'home.allAlbums': ['Усі альбоми →', 'Все альбомы →', 'All albums →'],
     'home.langPick': ['Мова альбомів', 'Язык альбомов', 'Album language'],
 
-    'rel.h': ['Останні релізи', 'Последние релизы', 'Latest releases'],
+    'rel.h': ['Останні релізи YouTube', 'Последние релизы YouTube', 'Latest releases YouTube'],
     'rel.all': ['Усі відео →', 'Все видео →', 'All videos →'],
-    'rel.empty1': ['Свіжі релізи — на ', 'Свежие релизы — на ', 'Fresh releases are on the '],
+    'rel.empty1': ['Свіжі релізи - на ', 'Свежие релизы - на ', 'Fresh releases are on the '],
     'rel.empty2': ['YouTube-каналі', 'YouTube-канале', 'YouTube channel'],
     'listen.h': ['Слухай зараз', 'Слушай сейчас', 'Listen now'],
     'listen.player': ['Треки Alex Sanr на YouTube', 'Треки Alex Sanr на YouTube', 'Alex Sanr tracks on YouTube'],
-    'shorts.empty1': ['Короткі відео — на ', 'Короткие видео — на ', 'Short videos are on the '],
+    'shorts.empty1': ['Короткі відео - на ', 'Короткие видео - на ', 'Short videos are on the '],
 
     'contact.h': ['Контакти', 'Контакты', 'Contact'],
     'contact.collab': ['Співпраця та запити', 'Сотрудничество и запросы', 'Collaboration and enquiries'],
@@ -84,8 +84,8 @@
     'contact.pages': ['Мої сторінки', 'Мои страницы', 'My pages'],
     'contact.pagesP': ['Нові релізи та короткі відео виходять на цих каналах.', 'Новые релизы и короткие видео выходят на этих каналах.', 'New releases and short videos come out on these channels.'],
 
-    'albums.title': ['Альбоми — Alex Sanr', 'Альбомы — Alex Sanr', 'Albums — Alex Sanr'],
-    'install.title': ['Встановити застосунок — Alex Sanr', 'Установить приложение — Alex Sanr', 'Install the app — Alex Sanr'],
+    'albums.title': ['Альбоми - Alex Sanr', 'Альбомы - Alex Sanr', 'Albums - Alex Sanr'],
+    'install.title': ['Встановити застосунок - Alex Sanr', 'Установить приложение - Alex Sanr', 'Install the app - Alex Sanr'],
     'install.desc': ['Встановіть застосунок Alex Sanr на телефон або комп\'ютер: слухайте альбоми та читайте тексти без магазину застосунків.', 'Установите приложение Alex Sanr на телефон или компьютер: слушайте альбомы и читайте тексты без магазина приложений.', 'Install the Alex Sanr app on your phone or computer: listen to albums and read lyrics without an app store.'],
     'albums.desc': ['Альбоми Alex Sanr: слухайте онлайн, завантажуйте треки та дивіться кліпи.', 'Альбомы Alex Sanr: слушайте онлайн, скачивайте треки и смотрите клипы.', 'Alex Sanr albums: listen online, download tracks and watch the videos.'],
     'albums.h1': ['Альбоми', 'Альбомы', 'Albums'],
@@ -107,7 +107,7 @@
     'track.player': ['Плеєр Google Drive — {t}', 'Плеер Google Drive — {t}', 'Google Drive player — {t}'],
     'lyrics.label': ['Текст пісні', 'Текст песни', 'Lyrics'],
 
-    'lyrics.title': ['Тексти пісень — Alex Sanr', 'Тексты песен — Alex Sanr', 'Song lyrics — Alex Sanr'],
+    'lyrics.title': ['Тексти пісень - Alex Sanr', 'Тексты песен - Alex Sanr', 'Song lyrics - Alex Sanr'],
     'lyrics.desc': ['Тексти пісень Alex Sanr українською, англійською та російською. Читайте онлайн і слухайте пісні на сайті.', 'Тексты песен Alex Sanr на украинском, английском и русском. Читайте онлайн и слушайте песни на сайте.', 'Alex Sanr\'s song lyrics in Ukrainian, English and Russian. Read online and listen to the songs on the site.'],
     'lyrics.h1': ['Тексти', 'Тексты', 'Lyrics'],
     'lyrics.lead': ['Тексти пісень Alex Sanr. Відкрийте альбом, а потім пісню, щоб прочитати текст, або одразу слухайте її на сторінці альбому.', 'Тексты песен Alex Sanr. Откройте альбом, а затем песню, чтобы прочитать текст, или сразу слушайте её на странице альбома.', 'Alex Sanr\'s song lyrics. Open an album, then a song to read the lyrics, or listen to it right away on the album page.'],
@@ -135,7 +135,7 @@
     'lang.ru': ['Російська', 'Русский', 'Russian'],
     'lang.en': ['Англійська', 'Английский', 'English'],
 
-    'e404.title': ['Сторінку не знайдено — Alex Sanr', 'Страница не найдена — Alex Sanr', 'Page not found — Alex Sanr'],
+    'e404.title': ['Сторінку не знайдено - Alex Sanr', 'Страница не найдена - Alex Sanr', 'Page not found - Alex Sanr'],
     'e404.p': ['Такої сторінки немає. Можливо, посилання застаріло.', 'Такой страницы нет. Возможно, ссылка устарела.', 'There is no such page. The link may be out of date.']
   };
 
