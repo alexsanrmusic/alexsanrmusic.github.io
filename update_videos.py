@@ -8,6 +8,11 @@ FEEDS = [
     "https://www.youtube.com/feeds/videos.xml?channel_id=" + CHANNEL_ID,
 ]
 LIMIT = 4
+
+# Second channel (Alexsanrinternational): two newest videos from its own playlist
+INTL_CHANNEL_ID = "UCxiIwv5QYyWXrwl4p-bMGMw"
+INTL_PLAYLIST_ID = "PLdAAY6HHI5VM"
+INTL_LIMIT = 2
 A = "{http://www.w3.org/2005/Atom}"
 YT = "{http://www.youtube.com/xml/schemas/2015}"
 HEADERS = {
@@ -142,6 +147,31 @@ def latest_shorts():
     return []
 
 
+def latest_international():
+    """Two newest videos of the playlist (by publish date, not playlist order); fallback: channel uploads, then RSS."""
+    key = os.environ.get("YT_API_KEY", "").strip()
+    if key:
+        for pid, shorts_check in ((INTL_PLAYLIST_ID, False), ("UU" + INTL_CHANNEL_ID[2:], True)):
+            try:
+                videos = api_playlist(pid, key, 50)
+                if shorts_check:
+                    videos = [v for v in sorted(videos, key=lambda v: v["published"], reverse=True)[:10]
+                              if not is_short(v["id"])]
+                videos = sorted(videos, key=lambda v: v["published"], reverse=True)[:INTL_LIMIT]
+                if videos:
+                    return videos
+            except Exception as exc:
+                print(f"International API playlist {pid} failed: {exc}")
+    data = fetch("https://www.youtube.com/feeds/videos.xml?playlist_id=" + INTL_PLAYLIST_ID)
+    if data:
+        try:
+            videos = sorted(parse(data, 15), key=lambda v: v["published"], reverse=True)
+            return videos[:INTL_LIMIT]
+        except Exception as exc:
+            print(f"Could not read international feed: {exc}")
+    return []
+
+
 def save(name, videos):
     with open(name, "w", encoding="utf-8") as f:
         json.dump(videos, f, ensure_ascii=False, indent=2)
@@ -159,4 +189,9 @@ if __name__ == "__main__":
         save("shorts.json", shorts)
     else:
         print("::warning::Could not update Shorts, keeping the old list")
+    intl = latest_international()
+    if intl:
+        save("international.json", intl)
+    else:
+        print("::warning::Could not update international videos, keeping the old list")
     sys.exit(0)

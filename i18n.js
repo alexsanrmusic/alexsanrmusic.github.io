@@ -67,6 +67,8 @@
     'home.langPick': ['Мова альбомів', 'Язык альбомов', 'Album language'],
 
     'rel.h': ['Останні релізи YouTube', 'Последние релизы YouTube', 'Latest releases YouTube'],
+    'intl.h': ['Міжнародний канал', 'Международный канал', 'International channel'],
+    'intl.note': ['Кліпи англійською та іншими мовами.', 'Клипы на английском и других языках.', 'Clips in English and other languages.'],
     'rel.all': ['Усі відео →', 'Все видео →', 'All videos →'],
     'rel.empty1': ['Свіжі релізи - на ', 'Свежие релизы - на ', 'Fresh releases are on the '],
     'rel.empty2': ['YouTube-каналі', 'YouTube-канале', 'YouTube channel'],

@@ -384,9 +384,13 @@ nav a.active { color: var(--accent); }
 
     </section>
 
-    <section id="english">
-      <h2 lang="en">For English listeners</h2>
-      <p class="note" lang="en">English-language releases live on a separate channel, including “Chronicles of Chaos – World of Fire”.</p>
+    <section id="international">
+      <div class="section-head">
+        <h2 data-i18n="intl.h">Міжнародний канал</h2>
+        <a href="https://www.youtube.com/playlist?list=PLdAAY6HHI5VM" target="_blank" rel="noopener" data-i18n="rel.all">Усі відео →</a>
+      </div>
+      <p class="note" data-i18n="intl.note">Кліпи англійською та іншими мовами.</p>
+      <div class="intl" id="intl-list"></div>
       <a class="btn btn-ghost" href="https://www.youtube.com/@Alexsanrinternational" target="_blank" rel="noopener">@Alexsanrinternational</a>
     </section>
   </main>
@@ -509,6 +513,22 @@ nav a.active { color: var(--accent); }
       a.append(img, h); li.appendChild(a); sl.appendChild(li);
     });
   }).catch(function () { se.hidden = false; });
+
+  var il = document.getElementById("intl-list");
+  fetch("international.json").then(function (r) {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function (items) {
+    items.slice(0, 2).forEach(function (v) {
+      var box = document.createElement("div"); box.className = "player";
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(v.id);
+      f.title = v.title; f.loading = "lazy";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.referrerPolicy = "strict-origin-when-cross-origin"; f.allowFullscreen = true;
+      box.appendChild(f); il.appendChild(box);
+    });
+  }).catch(function () {});
 
   (function () {
     var links = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
