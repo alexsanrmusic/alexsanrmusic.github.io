@@ -1,188 +1,188 @@
 1
-00:00:00,280 --> 00:00:00,540
+00:00:00,280 --> 00:00:04,820
 Hey!
 
 2
-00:00:00,560 --> 00:00:05,920
+00:00:04,880 --> 00:00:06,340
 La-la-la-la-la-la-la
 
 3
-00:00:05,940 --> 00:00:06,480
+00:00:06,420 --> 00:00:10,741
 O-o-o-o...
 
 4
-00:00:08,481 --> 00:00:11,921
+00:00:10,781 --> 00:00:11,541
 Friday...
 
 5
-00:00:11,941 --> 00:00:15,001
+00:00:11,601 --> 00:00:13,961
 Five days are over - no need to hurry,
 
 6
-00:00:15,101 --> 00:00:17,541
+00:00:14,401 --> 00:00:16,961
 Close my laptop, leave behind the worry.
 
 7
-00:00:17,601 --> 00:00:19,801
+00:00:17,001 --> 00:00:19,361
 My phone is ringing - I won't reply,
 
 8
-00:00:19,821 --> 00:00:23,142
+00:00:19,381 --> 00:00:21,982
 Tonight I'm staying out, just letting life fly.
 
 9
-00:00:23,162 --> 00:00:26,002
+00:00:22,382 --> 00:00:24,842
 The city lights are shining in the streets,
 
 10
-00:00:26,042 --> 00:00:28,482
+00:00:25,102 --> 00:00:27,402
 Someone's already waiting where we meet.
 
 11
-00:00:28,522 --> 00:00:31,822
+00:00:27,782 --> 00:00:30,082
 Tonight there's nowhere we need to run,
 
 12
-00:00:31,902 --> 00:00:36,643
+00:00:30,102 --> 00:00:33,002
 'Cause Friday's here - the weekend's begun.
 
 13
-00:00:36,663 --> 00:00:39,343
+00:00:33,862 --> 00:00:36,042
 Let the work wait until tomorrow,
 
 14
-00:00:39,443 --> 00:00:42,343
+00:00:36,563 --> 00:00:38,763
 Tonight we live, no time for sorrow.
 
 15
-00:00:42,383 --> 00:00:46,363
+00:00:39,263 --> 00:00:41,443
 Forget the tiredness, forget the day,
 
 16
-00:00:46,443 --> 00:00:50,083
+00:00:41,763 --> 00:00:45,543
 Friday is calling - come out and play.
 
 17
-00:00:50,103 --> 00:00:54,364
+00:00:45,983 --> 00:00:50,163
 Friday, Friday - finally no need to hurry.
 
 18
-00:00:54,404 --> 00:01:00,284
+00:00:50,223 --> 00:00:55,944
 Friday, Friday - tonight we're gonna party.
 
 19
-00:01:00,384 --> 00:01:06,345
+00:00:57,284 --> 00:01:02,024
 Friday, Friday - time to sing and dance away.
 
 20
-00:01:06,485 --> 00:01:18,585
+00:01:02,664 --> 00:01:14,185
 Friday, Friday - we'll remember this night someday.
 
 21
-00:01:18,625 --> 00:01:21,506
+00:01:18,345 --> 00:01:21,266
 Headlights are shining, reflected in glass,
 
 22
-00:01:21,746 --> 00:01:24,846
+00:01:21,726 --> 00:01:23,946
 Tonight we're young - let the good times last.
 
 23
-00:01:24,866 --> 00:01:27,006
+00:01:24,426 --> 00:01:26,926
 Tomorrow's waiting, but tonight just play,
 
 24
-00:01:27,026 --> 00:01:29,486
+00:01:26,946 --> 00:01:29,486
 Don't let this crazy night slip away.
 
 25
-00:01:29,506 --> 00:01:32,466
+00:01:29,846 --> 00:01:32,006
 Leave all our worries outside the door,
 
 26
-00:01:32,486 --> 00:01:35,667
+00:01:32,166 --> 00:01:34,727
 Tonight we don't count the hours anymore.
 
 27
-00:01:35,687 --> 00:01:38,347
+00:01:35,207 --> 00:01:37,527
 The night is ours till the morning light,
 
 28
-00:01:38,367 --> 00:01:41,727
+00:01:37,567 --> 00:01:40,427
 We're dancing together all through the night.
 
 29
-00:01:41,827 --> 00:01:44,747
+00:01:41,287 --> 00:01:43,267
 Work is over - and that's just perfect,
 
 30
-00:01:44,847 --> 00:01:47,867
+00:01:43,967 --> 00:01:46,087
 Tonight we're out, having a good time.
 
 31
-00:01:47,887 --> 00:01:50,008
+00:01:46,647 --> 00:01:48,848
 Forget the tiredness, no need to sleep,
 
 32
-00:01:50,028 --> 00:01:54,368
+00:01:49,048 --> 00:01:53,728
 Tonight we sing till the morning comes.
 
 33
-00:01:54,488 --> 00:02:00,408
+00:01:53,908 --> 00:01:57,708
 Friday, Friday - tonight we can just relax.
 
 34
-00:02:00,468 --> 00:02:06,489
+00:01:59,288 --> 00:02:04,049
 Friday, Friday - we're gonna party till the morning.
 
 35
-00:02:06,689 --> 00:02:10,569
+00:02:04,689 --> 00:02:09,809
 Friday, Friday - no need to slow it down.
 
 36
-00:02:10,669 --> 00:02:15,929
+00:02:10,089 --> 00:02:15,269
 Friday, Friday - let the good times shake the town.
 
 37
-00:02:15,969 --> 00:02:21,350
+00:02:15,309 --> 00:02:18,630
 Tomorrow brings the morning, there's time for that,
 
 38
-00:02:21,390 --> 00:02:27,070
+00:02:20,510 --> 00:02:24,010
 But tonight is ours - and that's where we're at.
 
 39
-00:02:27,110 --> 00:02:31,510
+00:02:26,190 --> 00:02:30,030
 Music keeps playing until the dawn,
 
 40
-00:02:31,531 --> 00:02:35,031
+00:02:31,390 --> 00:02:35,371
 We'll keep on dancing till the night is gone.
 
 41
-00:02:35,051 --> 00:02:40,051
+00:02:37,051 --> 00:02:40,811
 Friday, Friday - finally no need to hurry.
 
 42
-00:02:40,171 --> 00:02:45,611
+00:02:40,851 --> 00:02:46,172
 Friday, Friday - tonight we're gonna party.
 
 43
-00:02:45,631 --> 00:02:52,092
+00:02:46,192 --> 00:02:53,152
 Friday, Friday - we sing together, we're alive.
 
 44
-00:02:52,112 --> 00:02:58,652
+00:02:53,232 --> 00:02:57,612
 Friday, Friday - let this night become a celebration!
 
 45
-00:02:58,712 --> 00:03:03,913
+00:02:57,632 --> 00:02:58,212
 Friday...
 
 46
-00:03:04,033 --> 00:03:04,953
+00:02:58,292 --> 00:03:04,153
 Friday...
 
 47
-00:03:05,393 --> 00:03:14,814
+00:03:04,553 --> 00:03:09,973
 Let this night become a celebration!
 
