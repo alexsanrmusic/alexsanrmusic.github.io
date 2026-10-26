@@ -1,224 +1,224 @@
 1
-00:00:12,361 --> 00:00:15,601
+00:00:12,321 --> 00:00:15,401
 Through the sparks of matches, smoke, and ruins,
 
 2
-00:00:15,621 --> 00:00:17,701
+00:00:15,761 --> 00:00:22,302
 Everything was rough, but we kept getting up.
 
 3
-00:00:17,741 --> 00:00:27,102
+00:00:24,682 --> 00:00:27,422
 Childhood smelled of glue, fire, and paper,
 
 4
-00:00:27,122 --> 00:00:29,582
+00:00:27,642 --> 00:00:30,222
 Matches, slingshots, alleys, daring games.
 
 5
-00:00:29,602 --> 00:00:32,982
+00:00:30,842 --> 00:00:33,422
 Climbing gardens where walnuts and plums grew,
 
 6
-00:00:33,002 --> 00:00:35,443
+00:00:33,722 --> 00:00:36,383
 The world was simple - no guilt, no schemes.
 
 7
-00:00:35,483 --> 00:00:38,143
+00:00:36,743 --> 00:00:39,143
 A friend beside me - like a bolt in the engine,
 
 8
-00:00:38,163 --> 00:00:41,023
+00:00:39,443 --> 00:00:42,043
 Life pulled apart, but kept us in the pattern.
 
 9
-00:00:41,083 --> 00:00:43,983
+00:00:42,623 --> 00:00:45,163
 I swam, I healed, became a brother’s keeper,
 
 10
-00:00:44,003 --> 00:00:46,523
+00:00:45,563 --> 00:00:47,963
 The world crumbled, but I stood within it.
 
 11
-00:00:46,543 --> 00:00:48,183
+00:00:48,303 --> 00:00:50,964
 Books, yards, camps, fields,
 
 12
-00:00:48,363 --> 00:00:51,784
+00:00:51,244 --> 00:00:54,144
 Childhood burned bright like a vivid candle.
 
 13
-00:00:51,804 --> 00:00:56,924
+00:00:54,584 --> 00:01:00,024
 Through pain and fear - I walked, never giving in,
 
 14
-00:00:57,024 --> 00:01:01,364
+00:01:00,524 --> 00:01:06,405
 Through darkness and shadow - I found myself within.
 
 15
-00:01:01,764 --> 00:01:04,465
+00:01:06,445 --> 00:01:11,325
 Don’t seek excuses, build your own way,
 
 16
-00:01:04,545 --> 00:01:09,665
+00:01:11,785 --> 00:01:30,166
 From rubble - a building, from ashes - the core.
 
 17
-00:01:09,685 --> 00:01:14,325
+00:01:30,186 --> 00:01:32,427
 The USSR cracked like an old gramophone,
 
 18
-00:01:14,865 --> 00:01:30,306
+00:01:32,667 --> 00:01:35,387
 Chernobyl, coupons, street law unknown.
 
 19
-00:01:30,326 --> 00:01:32,447
+00:01:35,767 --> 00:01:38,487
 Underworld romance, the street was the school,
 
 20
-00:01:32,667 --> 00:01:34,567
+00:01:38,507 --> 00:01:41,107
 Your word was power, your fist a tool.
 
 21
-00:01:34,607 --> 00:01:37,147
+00:01:41,367 --> 00:01:44,287
 Shoemaker at seventeen, glue and rubber,
 
 22
-00:01:37,187 --> 00:01:39,727
+00:01:44,487 --> 00:01:47,088
 Every order - a chance, every winter - a mine.
 
 23
-00:01:39,747 --> 00:01:41,787
+00:01:47,528 --> 00:01:50,228
 Switched firms, built houses,
 
 24
-00:01:41,907 --> 00:01:44,987
+00:01:50,488 --> 00:01:53,248
 Calluses on hands, yet life kept moving.
 
 25
-00:01:45,028 --> 00:01:48,628
+00:01:53,388 --> 00:01:56,128
 Offices, loans, debts, gambling machines,
 
 26
-00:01:48,648 --> 00:01:51,228
+00:01:56,468 --> 00:01:59,129
 Jackpot - a moment, then empty routines.
 
 27
-00:01:51,548 --> 00:01:53,448
+00:01:59,729 --> 00:02:02,029
 Talent faded like spring rain,
 
 28
-00:01:53,548 --> 00:01:57,388
+00:02:02,189 --> 00:02:05,329
 But I remained - not in dirt, but in the flame.
 
 29
-00:01:57,428 --> 00:02:00,989
+00:02:05,729 --> 00:02:11,589
 Through pain and fear - I walked, never giving in,
 
 30
-00:02:01,069 --> 00:02:05,969
+00:02:11,649 --> 00:02:17,510
 Through darkness and shadow - I found myself within.
 
 31
-00:02:06,049 --> 00:02:10,609
+00:02:17,550 --> 00:02:22,470
 Don’t seek excuses, build your own way,
 
 32
-00:02:10,909 --> 00:02:16,750
+00:02:22,890 --> 00:02:38,891
 From rubble - a building, from ashes - the core.
 
 33
-00:02:16,870 --> 00:02:21,590
+00:02:52,792 --> 00:02:55,253
 Illness, loss - mom, dad,
 
 34
-00:02:21,670 --> 00:02:52,932
+00:02:55,533 --> 00:02:58,353
 Life bent me like a pencil with no heart.
 
 35
-00:02:52,952 --> 00:02:55,893
+00:02:58,633 --> 00:03:01,373
 Five years in fog - antidepressants,
 
 36
-00:02:55,913 --> 00:02:59,913
+00:03:01,633 --> 00:03:04,393
 Panic screams, restless nights, constant variants.
 
 37
-00:03:00,113 --> 00:03:02,913
+00:03:04,453 --> 00:03:07,453
 But I climbed out, survived, broke the cycle,
 
 38
-00:03:02,953 --> 00:03:05,113
+00:03:07,933 --> 00:03:10,294
 Pain became a friend, not an enemy.
 
 39
-00:03:05,133 --> 00:03:07,433
+00:03:10,894 --> 00:03:13,174
 Stomach, anxiety, sleepless nights,
 
 40
-00:03:07,453 --> 00:03:10,314
+00:03:13,494 --> 00:03:16,194
 Through pain and darkness - I looked them in the eyes.
 
 41
-00:03:10,394 --> 00:03:13,214
+00:03:16,274 --> 00:03:19,074
 Exchange, charts, life by candles,
 
 42
-00:03:13,234 --> 00:03:16,354
+00:03:19,254 --> 00:03:22,034
 Mistakes hit like beats across my shoulders.
 
 43
-00:03:16,494 --> 00:03:19,674
+00:03:22,374 --> 00:03:25,095
 Wife - my anchor, never left the storm,
 
 44
-00:03:19,694 --> 00:03:21,774
+00:03:25,355 --> 00:03:28,055
 Kids - my purpose, my new home.
 
 45
-00:03:21,814 --> 00:03:25,235
+00:03:28,095 --> 00:03:33,515
 Through pain and fear - I walked, never giving in,
 
 46
-00:03:25,255 --> 00:03:34,895
+00:03:33,575 --> 00:03:39,756
 Through darkness and shadow - I found myself within.
 
 47
-00:03:35,015 --> 00:03:44,096
+00:03:39,816 --> 00:03:45,436
 Don’t seek excuses, build your own way,
 
 48
-00:03:44,116 --> 00:03:52,477
+00:03:45,856 --> 00:03:51,377
 From rubble - a building, from ashes - the core.
 
 49
-00:03:52,497 --> 00:03:55,157
+00:03:51,537 --> 00:03:53,597
 And if tomorrow strikes again,
 
 50
-00:03:55,217 --> 00:03:58,357
+00:03:54,277 --> 00:03:57,477
 Know - nothing was wasted, all was meant.
 
 51
-00:03:58,377 --> 00:04:01,897
+00:03:57,737 --> 00:04:00,597
 Through sparks - the path, through pain - the calm,
 
 52
-00:04:01,997 --> 00:04:05,238
+00:04:01,237 --> 00:04:03,497
 You’re alive, brother, and that’s the fight.
 
 53
-00:04:05,258 --> 00:04:07,898
+00:04:04,257 --> 00:04:06,458
 Not for medals, not for likes,
 
 54
-00:04:07,978 --> 00:04:10,698
+00:04:06,918 --> 00:04:09,978
 But to stay true inside, to keep the fire alive.
 
 55
-00:04:10,738 --> 00:04:14,398
+00:04:09,998 --> 00:04:12,298
 You passed through storm, war, and smoke -
 
 56
-00:04:14,418 --> 00:04:40,000
+00:04:13,878 --> 00:04:17,638
 And became not just strong… but alive.
 

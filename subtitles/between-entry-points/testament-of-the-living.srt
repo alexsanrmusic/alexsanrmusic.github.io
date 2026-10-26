@@ -1,312 +1,312 @@
 1
-00:00:00,720 --> 00:00:08,301
+00:00:00,120 --> 00:00:04,160
 I walked through life where storms meet calm,
 
 2
-00:00:08,601 --> 00:00:16,321
+00:00:04,980 --> 00:00:09,261
 Fell more than once - still stayed who I am.
 
 3
-00:00:16,421 --> 00:00:23,122
+00:00:10,341 --> 00:00:14,821
 Through pain and fear, through nights that screamed,
 
 4
-00:00:23,142 --> 00:00:25,382
+00:00:15,761 --> 00:00:19,901
 I found the living in simple things.
 
 5
-00:00:25,402 --> 00:00:28,202
+00:00:21,001 --> 00:00:23,642
 I’ve been a son, a father, a student in line,
 
 6
-00:00:28,222 --> 00:00:31,862
+00:00:23,822 --> 00:00:26,462
 Walked barefoot first, then learned how to run with time.
 
 7
-00:00:31,882 --> 00:00:34,102
+00:00:26,702 --> 00:00:29,102
 Hit zero hard, then stood up again,
 
 8
-00:00:34,142 --> 00:00:37,143
+00:00:29,162 --> 00:00:31,822
 Not to take from the world - but to understand.
 
 9
-00:00:37,163 --> 00:00:40,223
+00:00:32,342 --> 00:00:34,382
 I’m not a saint, but I know when to pause,
 
 10
-00:00:40,243 --> 00:00:43,443
+00:00:34,562 --> 00:00:37,063
 When silence saves more than burning applause.
 
 11
-00:00:43,603 --> 00:00:45,763
+00:00:37,603 --> 00:00:39,763
 I’m not rich, but I respect every bill,
 
 12
-00:00:45,783 --> 00:00:48,763
+00:00:40,103 --> 00:00:42,283
 Earned with clean hands, steady will.
 
 13
-00:00:48,783 --> 00:00:51,224
+00:00:42,303 --> 00:00:45,023
 I’m alive - and that’s the meaning I keep,
 
 14
-00:00:51,404 --> 00:00:53,724
+00:00:45,043 --> 00:00:47,503
 Didn’t win the game, but escaped the sheet.
 
 15
-00:00:53,864 --> 00:00:55,964
+00:00:47,823 --> 00:00:50,383
 I breathe, I hear, I stand, I stay,
 
 16
-00:00:56,184 --> 00:00:58,724
+00:00:50,603 --> 00:00:53,004
 Alive - that’s my honor every day.
 
 17
-00:00:58,744 --> 00:01:03,024
+00:00:53,104 --> 00:00:55,684
 I’m alive - and that’s my power, my frame,
 
 18
-00:01:03,064 --> 00:01:12,965
+00:00:55,704 --> 00:01:03,104
 Didn’t conquer the world, but forgave the pain.
 
 19
-00:01:13,085 --> 00:01:15,905
+00:01:03,164 --> 00:01:09,065
 Let my scars be a different light,
 
 20
-00:01:15,925 --> 00:01:18,225
+00:01:09,785 --> 00:01:13,865
 I’m alive - and that’s my right.
 
 21
-00:01:18,245 --> 00:01:21,086
+00:01:14,125 --> 00:01:17,045
 I didn’t beat the market - I mastered my mind,
 
 22
-00:01:21,106 --> 00:01:23,266
+00:01:17,065 --> 00:01:19,705
 Didn’t break myself - I rebuilt, aligned.
 
 23
-00:01:23,286 --> 00:01:24,966
+00:01:20,426 --> 00:01:22,306
 Every loss became a candle lit,
 
 24
-00:01:25,006 --> 00:01:28,426
+00:01:22,506 --> 00:01:24,946
 Every drawdown showed the road back to it.
 
 25
-00:01:28,446 --> 00:01:31,326
+00:01:25,586 --> 00:01:27,606
 I learned the market’s not a god or foe,
 
 26
-00:01:31,406 --> 00:01:34,847
+00:01:27,826 --> 00:01:30,246
 It’s a mirror that shows what you don’t want to know.
 
 27
-00:01:34,867 --> 00:01:37,147
+00:01:30,446 --> 00:01:32,946
 Not charts and lines, but fear inside,
 
 28
-00:01:37,167 --> 00:01:40,407
+00:01:33,086 --> 00:01:35,687
 Teaching you to live beyond the numbers’ side.
 
 29
-00:01:40,447 --> 00:01:42,727
+00:01:35,747 --> 00:01:39,027
 I’m alive - not a gambler, not a king,
 
 30
-00:01:42,787 --> 00:01:45,107
+00:01:39,047 --> 00:01:41,647
 Just a man with a soul, walking his ring.
 
 31
-00:01:45,127 --> 00:01:47,927
+00:01:41,667 --> 00:01:44,247
 I don’t chase entries, don’t wait for escape,
 
 32
-00:01:47,947 --> 00:01:50,948
+00:01:44,527 --> 00:01:47,007
 My path is my code, my chosen shape.
 
 33
-00:01:50,968 --> 00:01:53,148
+00:01:47,087 --> 00:01:49,628
 I’m alive - and that’s my joy, my space,
 
 34
-00:01:53,188 --> 00:01:56,788
+00:01:49,708 --> 00:01:54,468
 Not fear, not pain - just presence and grace.
 
 35
-00:01:56,828 --> 00:01:59,268
+00:01:54,528 --> 00:01:58,788
 The world is wide, and I exist,
 
 36
-00:01:59,408 --> 00:02:02,128
+00:01:58,928 --> 00:02:06,069
 Alive - and that’s the gift.
 
 37
-00:02:02,708 --> 00:02:08,469
+00:02:08,429 --> 00:02:10,569
 Every stop-loss draws a human line,
 
 38
-00:02:08,509 --> 00:02:11,569
+00:02:10,989 --> 00:02:13,189
 Where discipline beats desire every time.
 
 39
-00:02:11,589 --> 00:02:14,069
+00:02:13,549 --> 00:02:15,769
 Don’t chase the chance - first find your calm,
 
 40
-00:02:14,129 --> 00:02:16,969
+00:02:15,809 --> 00:02:18,390
 And the market itself will soften its palm.
 
 41
-00:02:17,089 --> 00:02:19,870
+00:02:18,990 --> 00:02:21,050
 I’m not a shadow glued to a screen,
 
 42
-00:02:19,950 --> 00:02:22,630
+00:02:21,530 --> 00:02:23,630
 I’m a man who learned what space can mean.
 
 43
-00:02:22,670 --> 00:02:24,510
+00:02:23,890 --> 00:02:26,170
 My system’s not tricks or holy codes,
 
 44
-00:02:24,530 --> 00:02:27,810
+00:02:26,450 --> 00:02:29,010
 It’s a path where the main thing is not to fold.
 
 45
-00:02:27,830 --> 00:02:29,510
+00:02:29,090 --> 00:02:32,371
 I’m alive - not a gambler, not a king,
 
 46
-00:02:29,550 --> 00:02:32,451
+00:02:32,391 --> 00:02:34,991
 Just a man with a soul, walking his ring.
 
 47
-00:02:32,471 --> 00:02:35,431
+00:02:35,011 --> 00:02:37,571
 I don’t chase entries, don’t wait for escape,
 
 48
-00:02:35,471 --> 00:02:37,211
+00:02:37,851 --> 00:02:40,151
 My path is my code, my chosen shape.
 
 49
-00:02:37,251 --> 00:02:39,551
+00:02:40,251 --> 00:02:42,971
 I’m alive - and that’s my joy, my space,
 
 50
-00:02:39,691 --> 00:02:42,111
+00:02:43,071 --> 00:02:45,831
 Not fear, not pain - just presence and grace.
 
 51
-00:02:42,131 --> 00:02:44,571
+00:02:45,871 --> 00:02:48,172
 The world is wide, and I exist,
 
 52
-00:02:44,631 --> 00:02:46,491
+00:02:49,052 --> 00:02:50,672
 Alive - and that’s the gift.
 
 53
-00:02:46,691 --> 00:02:49,612
+00:02:50,692 --> 00:02:52,972
 I’m alive - and that’s the meaning I keep,
 
 54
-00:02:49,632 --> 00:02:52,152
+00:02:53,052 --> 00:02:55,472
 Didn’t win the game, but escaped the sheet.
 
 55
-00:02:52,192 --> 00:02:54,592
+00:02:55,572 --> 00:02:58,672
 I breathe, I hear, I stand, I stay,
 
 56
-00:02:54,752 --> 00:02:56,952
+00:02:58,692 --> 00:03:01,012
 Alive - that’s my honor every day.
 
 57
-00:02:57,072 --> 00:02:59,672
+00:03:01,092 --> 00:03:03,713
 I’m alive - and that’s my power, my frame,
 
 58
-00:02:59,692 --> 00:03:02,413
+00:03:03,733 --> 00:03:06,273
 Didn’t conquer the world, but forgave the pain.
 
 59
-00:03:02,453 --> 00:03:04,473
+00:03:06,313 --> 00:03:08,273
 Let my scars be a different light,
 
 60
-00:03:04,513 --> 00:03:07,333
+00:03:08,713 --> 00:03:12,153
 I’m alive - and that’s my right.
 
 61
-00:03:07,473 --> 00:03:11,333
+00:03:22,334 --> 00:03:24,514
 Don’t trade when you’re empty inside,
 
 62
-00:03:11,353 --> 00:03:23,574
+00:03:24,654 --> 00:03:27,034
 Find the silence first, then decide.
 
 63
-00:03:23,634 --> 00:03:26,454
+00:03:27,694 --> 00:03:30,054
 Let the market breathe, you stay still,
 
 64
-00:03:26,474 --> 00:03:29,874
+00:03:30,134 --> 00:03:32,355
 Everything you need - gather your will.
 
 65
-00:03:29,954 --> 00:03:33,275
+00:03:33,015 --> 00:03:35,195
 Don’t trade when you’re hollow or torn,
 
 66
-00:03:33,315 --> 00:03:36,195
+00:03:35,255 --> 00:03:37,895
 Soul before numbers, breath before form.
 
 67
-00:03:36,235 --> 00:03:40,175
+00:03:38,395 --> 00:03:41,155
 Let charts make noise, you just breathe slow,
 
 68
-00:03:40,195 --> 00:03:43,635
+00:03:41,235 --> 00:03:43,995
 The main thing is living - let the rest go.
 
 69
-00:03:43,695 --> 00:03:46,436
+00:03:44,956 --> 00:03:47,116
 Not the end - just another start,
 
 70
-00:03:46,516 --> 00:03:49,316
+00:03:47,776 --> 00:03:49,856
 Every day is a brand-new heart.
 
 71
-00:03:49,336 --> 00:03:52,636
+00:03:49,916 --> 00:03:52,436
 The book is closed, but I still write,
 
 72
-00:03:52,656 --> 00:03:55,896
+00:03:52,616 --> 00:03:54,916
 Alive - and grateful for this light.
 
 73
-00:03:55,976 --> 00:03:58,276
+00:03:55,676 --> 00:03:57,756
 I leave, but not into the dark,
 
 74
-00:03:58,356 --> 00:04:01,597
+00:03:57,776 --> 00:04:00,457
 I walk toward spring, toward a spark.
 
 75
-00:04:01,677 --> 00:04:04,737
+00:04:00,517 --> 00:04:03,177
 The book is closed - yet I still breathe,
 
 76
-00:04:04,777 --> 00:04:12,797
+00:04:03,197 --> 00:04:06,037
 The testament of the living - I leave.
 
 77
-00:04:12,817 --> 00:04:19,338
+00:04:06,117 --> 00:04:09,377
 O-o-o...book is closed...
 
 78
-00:04:19,478 --> 00:04:23,498
+00:04:09,457 --> 00:04:11,777
 O-o-o...living — I leave...
 

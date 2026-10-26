@@ -1,248 +1,248 @@
 1
-00:00:17,361 --> 00:00:24,862
+00:00:21,642 --> 00:00:24,322
 When my parents left, the world fell apart,
 
 2
-00:00:24,922 --> 00:00:28,342
+00:00:24,562 --> 00:00:26,982
 I stayed in the silence, cold air in my heart.
 
 3
-00:00:28,462 --> 00:00:31,602
+00:00:27,342 --> 00:00:29,782
 Ground pulled away, only smoke in my hands,
 
 4
-00:00:31,702 --> 00:00:35,603
+00:00:29,862 --> 00:00:32,402
 I stood before life like a stranger who can’t.
 
 5
-00:00:35,623 --> 00:00:37,703
+00:00:32,482 --> 00:00:35,043
 My mother - my light, my quiet shore,
 
 6
-00:00:37,723 --> 00:00:41,863
+00:00:35,063 --> 00:00:37,743
 She believed in the miracle when I spoke no more.
 
 7
-00:00:41,883 --> 00:00:44,643
+00:00:37,803 --> 00:00:40,323
 My father - my stone, my shield inside,
 
 8
-00:00:44,663 --> 00:00:47,604
+00:00:40,483 --> 00:00:42,983
 He spoke with his eyes, that unbreakable light.
 
 9
-00:00:47,684 --> 00:00:50,264
+00:00:43,563 --> 00:00:46,304
 I live by the minutes, I breathe, I stay still,
 
 10
-00:00:50,284 --> 00:00:52,284
+00:00:46,344 --> 00:00:48,704
 Met myself like spring on a frozen hill.
 
 11
-00:00:52,324 --> 00:00:54,584
+00:00:48,784 --> 00:00:51,504
 No loud declarations, no rush, no race,
 
 12
-00:00:54,644 --> 00:00:57,064
+00:00:51,644 --> 00:00:53,664
 Just to be, just to live, just to face.
 
 13
-00:00:57,244 --> 00:00:59,785
+00:00:53,704 --> 00:00:56,164
 Centimeter by centimeter, day after day,
 
 14
-00:00:59,845 --> 00:01:02,325
+00:00:56,244 --> 00:00:58,865
 I rebuild myself, fire showing the way.
 
 15
-00:01:02,365 --> 00:01:04,725
+00:00:58,905 --> 00:01:01,545
 No noise, no slogans, no borrowed pose,
 
 16
-00:01:04,745 --> 00:01:07,965
+00:01:01,645 --> 00:01:04,425
 I live where memory’s stronger than chains and codes.
 
 17
-00:01:07,985 --> 00:01:11,165
+00:01:04,725 --> 00:01:07,425
 Death’s not an ending, it teaches to breathe,
 
 18
-00:01:11,285 --> 00:01:14,666
+00:01:07,445 --> 00:01:10,225
 Love doesn’t vanish, it learns how to leave.
 
 19
-00:01:14,726 --> 00:01:17,266
+00:01:10,305 --> 00:01:12,386
 In every whisper - a lesson, a trace,
 
 20
-00:01:17,306 --> 00:01:19,506
+00:01:12,426 --> 00:01:15,006
 Now I live knowing death has no face.
 
 21
-00:01:19,526 --> 00:01:21,006
+00:01:15,066 --> 00:01:17,706
 They were gone - and I felt erased,
 
 22
-00:01:21,026 --> 00:01:24,607
+00:01:17,866 --> 00:01:20,346
 But love just moves ports, it’s never misplaced.
 
 23
-00:01:24,787 --> 00:01:27,627
+00:01:20,626 --> 00:01:22,906
 I heard them speak quietly deep in my chest,
 
 24
-00:01:27,847 --> 00:01:30,267
+00:01:23,226 --> 00:01:25,727
 Their eyes still alive in my permanent past.
 
 25
-00:01:30,287 --> 00:01:32,867
+00:01:26,267 --> 00:01:29,047
 I live by the minutes, I breathe, I stay still,
 
 26
-00:01:32,887 --> 00:01:35,307
+00:01:29,087 --> 00:01:31,387
 Met myself like spring on a frozen hill.
 
 27
-00:01:35,507 --> 00:01:37,668
+00:01:31,527 --> 00:01:34,227
 No loud declarations, no rush, no race,
 
 28
-00:01:37,688 --> 00:01:39,468
+00:01:34,387 --> 00:01:36,407
 Just to be, just to live, just to face.
 
 29
-00:01:39,488 --> 00:01:42,008
+00:01:36,447 --> 00:01:38,908
 Centimeter by centimeter, day after day,
 
 30
-00:01:42,028 --> 00:01:44,208
+00:01:38,968 --> 00:01:41,588
 I rebuild myself, fire showing the way.
 
 31
-00:01:44,268 --> 00:01:46,368
+00:01:41,608 --> 00:01:44,268
 No noise, no slogans, no borrowed pose,
 
 32
-00:01:46,468 --> 00:02:00,929
+00:01:44,368 --> 00:01:47,128
 I live where memory’s stronger than chains and codes.
 
 33
-00:02:00,949 --> 00:02:02,889
+00:01:58,029 --> 00:02:00,189
 Seven-thirty - wake the soul,
 
 34
-00:02:02,909 --> 00:02:05,570
+00:02:00,789 --> 00:02:02,909
 Eight - hot tea, let the silence roll.
 
 35
-00:02:05,590 --> 00:02:08,230
+00:02:03,009 --> 00:02:05,670
 Thirteen - soup cooked slow with belief,
 
 36
-00:02:08,310 --> 00:02:10,670
+00:02:05,730 --> 00:02:08,390
 Sixteen - body work, honest relief.
 
 37
-00:02:10,730 --> 00:02:13,910
+00:02:08,410 --> 00:02:11,150
 Eighteen - dinner, warmth, no talk required,
 
 38
-00:02:14,030 --> 00:02:17,991
+00:02:11,170 --> 00:02:13,750
 Twenty-three - love while the rain gets tired.
 
 39
-00:02:18,111 --> 00:02:20,531
+00:02:13,790 --> 00:02:16,350
 My wife - my light, my son - my drive,
 
 40
-00:02:20,611 --> 00:02:23,371
+00:02:16,390 --> 00:02:19,131
 My daughter - the laugh that taught me survive.
 
 41
-00:02:23,431 --> 00:02:26,771
+00:02:19,331 --> 00:02:21,731
 The market ain’t money, it’s training the core,
 
 42
-00:02:26,851 --> 00:02:29,011
+00:02:21,751 --> 00:02:24,551
 Where fear burns out, darkness knocks no more.
 
 43
-00:02:29,051 --> 00:02:31,732
+00:02:25,031 --> 00:02:27,791
 I live by the minutes, I breathe, I stay still,
 
 44
-00:02:31,772 --> 00:02:34,052
+00:02:27,811 --> 00:02:30,152
 Met myself like spring on a frozen hill.
 
 45
-00:02:34,212 --> 00:02:36,412
+00:02:30,232 --> 00:02:33,112
 No loud declarations, no rush, no race,
 
 46
-00:02:36,552 --> 00:02:39,072
+00:02:33,132 --> 00:02:35,152
 Just to be, just to live, just to face.
 
 47
-00:02:39,132 --> 00:02:41,232
+00:02:35,172 --> 00:02:37,632
 Centimeter by centimeter, day after day,
 
 48
-00:02:41,252 --> 00:02:42,953
+00:02:37,712 --> 00:02:40,352
 I rebuild myself, fire showing the way.
 
 49
-00:02:43,013 --> 00:02:54,133
+00:02:40,372 --> 00:02:42,993
 No noise, no slogans, no borrowed pose,
 
 50
-00:02:56,534 --> 00:03:00,294
+00:02:43,093 --> 00:02:46,053
 I live where memory’s stronger than chains and codes.
 
 51
-00:03:00,314 --> 00:03:03,154
+00:02:56,474 --> 00:02:59,254
 Yeah, I smoked - not to run, just to pause,
 
 52
-00:03:03,174 --> 00:03:05,054
+00:02:59,794 --> 00:03:01,714
 Watched the smoke like a basic law.
 
 53
-00:03:05,114 --> 00:03:08,034
+00:03:02,194 --> 00:03:04,414
 Life ain’t speed, ain’t outer sound,
 
 54
-00:03:08,054 --> 00:03:11,255
+00:03:04,474 --> 00:03:07,114
 It’s the inner light - that’s how I’m bound.
 
 55
-00:03:11,315 --> 00:03:14,295
+00:03:07,274 --> 00:03:09,895
 I returned - not to crowds, but to me,
 
 56
-00:03:14,395 --> 00:03:16,795
+00:03:10,435 --> 00:03:12,075
 Not for fame, but for clarity.
 
 57
-00:03:16,835 --> 00:03:19,075
+00:03:13,095 --> 00:03:15,015
 Pain is gone, but it left me sense,
 
 58
-00:03:19,095 --> 00:03:20,735
+00:03:15,275 --> 00:03:17,775
 I’m alive - and that’s the recompense.
 
 59
-00:03:20,775 --> 00:03:23,616
+00:03:18,335 --> 00:03:20,435
 You stopped chasing. You learned to stand.
 
 60
-00:03:23,636 --> 00:03:26,036
+00:03:20,455 --> 00:03:23,196
 You endured, understood, forgave, unplanned.
 
 61
-00:03:26,056 --> 00:03:30,136
+00:03:23,236 --> 00:03:25,916
 And in that calm, no trophies, no fight,
 
 62
-00:03:33,596 --> 00:04:19,960
+00:03:25,936 --> 00:03:28,536
 You finally felt it — life has light.
 
