@@ -434,6 +434,7 @@
         var tg = document.getElementById(decodeURIComponent(u.hash.slice(1)));
         if (tg) tg.scrollIntoView();
       }
+      try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: u.pathname + u.search }); } catch (e) {}   // статистика GoatCounter
     });
   }
 

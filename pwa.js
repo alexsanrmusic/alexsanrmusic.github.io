@@ -1,3 +1,18 @@
+/* GoatCounter — статистика без cookies (alexsanrmusic.goatcounter.com).
+   Перегляди рахуємо вручну: першу сторінку — тут, переходи без перезавантаження — у miniplayer.js (swap). */
+(function () {
+  try {
+    if (window.__gcLoaded) return;
+    window.__gcLoaded = 1;
+    window.goatcounter = { no_onload: true };
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://gc.zgo.at/count.js';
+    g.setAttribute('data-goatcounter', 'https://alexsanrmusic.goatcounter.com/count');
+    g.onload = function () { try { window.goatcounter.count(); } catch (e) {} };
+    document.head.appendChild(g);
+  } catch (e) {}
+})();
 /* miniplayer: знімок вузлів поточної сторінки (для переходів без перезавантаження) і підключення miniplayer.js */
 (function () {
   try {
