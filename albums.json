@@ -660,10 +660,8 @@
      "clip": "https://youtu.be/LaHZgt7a7vA?si=0t6-yPPEebkEAzTG"
     }
    ]
-  }
- ],
- "_hidden": [
-  {
+  },
+   {
    "id": "matrix-for-trader",
    "group": "trader-matrix",
    "title": "Matrix for trader",
@@ -772,5 +770,8 @@
     }
    ]
   }
+ ],
+ "_hidden": [
+ 
  ]
 }
