@@ -64,7 +64,10 @@ def welcome():
         [btn("🎵 YouTube Music", YTM), btn("📱 TikTok", TT)],
         [btn("🌐 Сайт", SITE)],
     ]
-    send_photo(SITE + "/images/tg-cover.png", cap, rows)
+    r = send_photo(SITE + "/images/tg-cover.png", cap, rows)
+    mid = (r.get("result") or {}).get("message_id")
+    if mid:  # закріпити без сповіщення (боту потрібне право закріплювати/редагувати повідомлення)
+        api("pinChatMessage", {"chat_id": chat(), "message_id": mid, "disable_notification": True})
 
 
 def album(aid):
@@ -113,7 +116,7 @@ def new_videos():
 
 
 if __name__ == "__main__":
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    args = [a.strip().lower() if i == 0 else a.strip() for i, a in enumerate(a for a in sys.argv[1:] if not a.startswith("--"))]
     if not args:
         sys.exit(__doc__)
     {"welcome": welcome, "new-videos": new_videos}.get(args[0], lambda: album(args[1]) if args[0] == "album" and len(args) > 1 else sys.exit(__doc__))()
