@@ -14,6 +14,7 @@ import json, os, sys, html, urllib.request, urllib.parse
 SITE = "https://alexsanrmusic.github.io"
 YT = "https://www.youtube.com/@alexsanrmusic"
 TT = "https://www.tiktok.com/@alexsanrmusic"
+APP = "https://t.me/AlexSanrMusic_bot/music"
 YTM = "https://music.youtube.com/@Alexsanrmusic"
 STATE = "tg_sent.json"
 DRY = "--dry-run" in sys.argv
@@ -59,6 +60,7 @@ def welcome():
            "🎧 Почни з «Повернення з небуття»\n\n"
            "<i>Це Alex Sanr. Моє життя. Мої почуття. Моя музика.</i>")
     rows = [
+        [btn("🚀 Відкрити додаток", APP)],
         [btn("🎧 Слухати на YouTube", YT)],
         [btn("💿 Альбоми", SITE + "/albums.html"), btn("📝 Тексти", SITE + "/lyrics.html")],
         [btn("🎵 YouTube Music", YTM), btn("📱 TikTok", TT)],
@@ -81,7 +83,7 @@ def album(aid):
            + "\n".join(f"{i}. {html.escape(n)}" for i, n in enumerate(names, 1))
            + "\n\n<i>Alex Sanr</i>")
     rows = [[btn("▶️ Слухати", f"{SITE}/albums.html#{aid}"), btn("📝 Тексти", f"{SITE}/lyrics.html#{aid}")],
-            [btn("🎧 YouTube", YT)]]
+            [btn("🚀 Відкрити додаток", APP), btn("🎧 YouTube", YT)]]
     send_photo(f"{SITE}/{a['cover']}", cap, rows)
 
 
