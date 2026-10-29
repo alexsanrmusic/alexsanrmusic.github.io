@@ -1,0 +1,33 @@
+name: Telegram
+
+on:
+  schedule:
+    - cron: "20 */6 * * *"   # через 20 хв після update-videos
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "welcome | album | new-videos"
+        default: "new-videos"
+      album_id:
+        description: "id альбому (для album), напр. tihi-momenty"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
+        run: python3 telegram_post.py "${{ github.event.inputs.mode || 'new-videos' }}" "${{ github.event.inputs.album_id }}"
+      - name: Commit state
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add tg_sent.json
+          git diff --cached --quiet || (git commit -m "Telegram: update sent list" && git push)
