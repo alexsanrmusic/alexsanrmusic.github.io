@@ -13,6 +13,9 @@ import json, os, sys, html, urllib.request, urllib.parse
 
 SITE = "https://alexsanrmusic.github.io"
 YT = "https://www.youtube.com/@alexsanrmusic"
+IG = "https://www.instagram.com/alexsanrmusic"
+TH = "https://www.threads.com/@alexsanrmusic"
+FB = "https://www.facebook.com/share/1EBAjdqdBt/"
 TT = "https://www.tiktok.com/@alexsanrmusic"
 APP = "https://t.me/AlexSanrMusic_bot/music"
 YTM = "https://music.youtube.com/@Alexsanrmusic"
@@ -64,6 +67,7 @@ def welcome():
         [btn("🎧 Слухати на YouTube", YT)],
         [btn("💿 Альбоми", SITE + "/albums.html"), btn("📝 Тексти", SITE + "/lyrics.html")],
         [btn("🎵 YouTube Music", YTM), btn("📱 TikTok", TT)],
+        [btn("📸 Instagram", IG), btn("🧵 Threads", TH), btn("👍 Facebook", FB)],
         [btn("🌐 Сайт", SITE)],
     ]
     r = send_photo(SITE + "/images/tg-cover.png", cap, rows)
