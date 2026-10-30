@@ -74,6 +74,7 @@
       <p class="inst-state" data-state="done" hidden>✅ Застосунок уже встановлено на цьому пристрої.</p>
       <div class="inst-main">
         <button type="button" class="inst-btn" data-act="install" hidden>Встановити</button>
+        <button type="button" class="inst-btn" data-act="install-ios" hidden>Встановити на iPhone</button>
         <button type="button" class="inst-btn ghost" data-act="share">Поділитися</button>
       </div>
       <div class="inst-grid">
@@ -92,6 +93,7 @@
       <p class="inst-state" data-state="done" hidden>✅ Приложение уже установлено на этом устройстве.</p>
       <div class="inst-main">
         <button type="button" class="inst-btn" data-act="install" hidden>Установить</button>
+        <button type="button" class="inst-btn" data-act="install-ios" hidden>Установить на iPhone</button>
         <button type="button" class="inst-btn ghost" data-act="share">Поделиться</button>
       </div>
       <div class="inst-grid">
@@ -110,6 +112,7 @@
       <p class="inst-state" data-state="done" hidden>✅ The app is already installed on this device.</p>
       <div class="inst-main">
         <button type="button" class="inst-btn" data-act="install" hidden>Install</button>
+        <button type="button" class="inst-btn" data-act="install-ios" hidden>Install on iPhone</button>
         <button type="button" class="inst-btn ghost" data-act="share">Share</button>
       </div>
       <div class="inst-grid">
@@ -138,6 +141,8 @@
   var ua = navigator.userAgent;
   var isIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /android/i.test(ua);
+  // вбудовані браузери (Instagram, Facebook, TikTok, Telegram…): там меню «Поділитися» не дає додати на екран «Додому»
+  var inApp = isIOS && (/FBAN|FBAV|Instagram|TikTok|musical_ly|Bytedance|Telegram|Snapchat|Line\/|GSA\/|Twitter/i.test(ua) || !/Safari\//i.test(ua));
   var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
   var deferred = null;
 
@@ -150,6 +155,7 @@
   }
   function refresh() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-act="install"]'), function (b) { b.hidden = !deferred || standalone; });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-act="install-ios"]'), function (b) { b.hidden = !(isIOS && !standalone && navigator.share && !inApp); });
     Array.prototype.forEach.call(document.querySelectorAll('[data-state="done"]'), function (b) { b.hidden = !standalone; });
     Array.prototype.forEach.call(document.querySelectorAll('.inst-card'), function (c) {
       var os = c.getAttribute('data-os');
@@ -169,6 +175,10 @@
       var p = deferred; deferred = null; refresh();
       p.prompt();
       p.userChoice.then(function (r) { if (r.outcome === 'accepted') { standalone = true; refresh(); } }).catch(function () {});
+    }
+    if (b.getAttribute('data-act') === 'install-ios' && navigator.share) {
+      // системне меню «Поділитися» Safari/Chrome: в ньому обираємо «На екран “Додому”»
+      navigator.share({ title: MSG[lang].title, url: location.href.split('#')[0] }).catch(function () {});
     }
     if (b.getAttribute('data-act') === 'share') {
       var m = MSG[lang];

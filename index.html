@@ -6,7 +6,7 @@
 <script src="i18n.js"></script>
 <script>
 /* Усередині Telegram Mini App ховаємо все, що пов'язано зі встановленням застосунку */
-(function(){try{var t=/tgWebApp/.test(location.hash+location.search)||!!window.TelegramWebviewProxy||!!(window.Telegram&&window.Telegram.WebView)||/Telegram/i.test(navigator.userAgent);if(t)sessionStorage.setItem('tg','1');
+(function(){try{var t=/tgWebApp/.test(location.hash+location.search)||/[?&](ref|utm_source)=telegram(&|$)/i.test(location.search)||!!window.TelegramWebviewProxy||!!(window.Telegram&&window.Telegram.WebView)||/Telegram/i.test(navigator.userAgent);if(t)sessionStorage.setItem('tg','1');
 if(t||sessionStorage.getItem('tg')==='1')document.documentElement.classList.add('in-tg');}catch(e){}})();
 </script>
 <style>.in-tg .pwa-only{display:none!important}</style>

@@ -12,6 +12,7 @@ Env: TG_BOT_TOKEN (токен от @BotFather), TG_CHANNEL (@username канал
 import json, os, sys, html, urllib.request, urllib.parse
 
 SITE = "https://alexsanrmusic.github.io"
+REF = "?ref=telegram"   # мітка: сайт розпізнає перехід із Telegram, а GoatCounter показує джерело
 YT = "https://www.youtube.com/@alexsanrmusic"
 IG = "https://www.instagram.com/alexsanrmusic"
 TH = "https://www.threads.com/@alexsanrmusic"
@@ -66,10 +67,10 @@ def welcome():
     rows = [
         [btn("🚀 Відкрити додаток", APP)],
         [btn("🎧 Слухати на YouTube", YT)],
-        [btn("💿 Альбоми", SITE + "/albums.html"), btn("📝 Тексти", SITE + "/lyrics.html")],
+        [btn("💿 Альбоми", SITE + "/albums.html" + REF), btn("📝 Тексти", SITE + "/lyrics.html" + REF)],
         [btn("🎵 YouTube Music", YTM), btn("📱 TikTok", TT)],
         [btn("📸 Instagram", IG), btn("🧵 Threads", TH), btn("👍 Facebook", FB)],
-        [btn("💬 Чат", CHAT), btn("🌐 Сайт", SITE)],
+        [btn("💬 Чат", CHAT), btn("🌐 Сайт", SITE + "/" + REF)],
     ]
     r = send_photo(SITE + "/images/tg-cover.png", cap, rows)
     mid = (r.get("result") or {}).get("message_id")
@@ -87,7 +88,7 @@ def album(aid):
            f"{len(names)} треків · {a['year']}\n\n"
            + "\n".join(f"{i}. {html.escape(n)}" for i, n in enumerate(names, 1))
            + "\n\n<i>Alex Sanr</i>")
-    rows = [[btn("▶️ Слухати", f"{SITE}/albums.html#{aid}"), btn("📝 Тексти", f"{SITE}/lyrics.html#{aid}")],
+    rows = [[btn("▶️ Слухати", f"{SITE}/albums.html{REF}#{aid}"), btn("📝 Тексти", f"{SITE}/lyrics.html{REF}#{aid}")],
             [btn("🚀 Відкрити додаток", APP), btn("🎧 YouTube", YT)]]
     send_photo(f"{SITE}/{a['cover']}", cap, rows)
 
@@ -115,7 +116,7 @@ def new_videos():
         url = (f"https://www.youtube.com/shorts/{v['id']}" if kind == "shorts"
                else f"https://www.youtube.com/watch?v={v['id']}")
         cap = f"{label}\n\n<b>{html.escape(v['title'].strip())}</b>"
-        rows = [[btn("▶️ Дивитись", url)], [btn("🌐 Усі пісні й тексти", SITE), btn("➕ Ще", more)]]
+        rows = [[btn("▶️ Дивитись", url)], [btn("🌐 Усі пісні й тексти", SITE + "/" + REF), btn("➕ Ще", more)]]
         send_photo(f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg", cap, rows)
         sent.add(v["id"])
     if not DRY:
