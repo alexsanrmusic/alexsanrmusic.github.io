@@ -16,6 +16,7 @@ YT = "https://www.youtube.com/@alexsanrmusic"
 IG = "https://www.instagram.com/alexsanrmusic"
 TH = "https://www.threads.com/@alexsanrmusic"
 FB = "https://www.facebook.com/share/1EBAjdqdBt/"
+CHAT = "https://t.me/alexsanrmusic_group"
 TT = "https://www.tiktok.com/@alexsanrmusic"
 APP = "https://t.me/AlexSanrMusic_bot/music"
 YTM = "https://music.youtube.com/@Alexsanrmusic"
@@ -68,7 +69,7 @@ def welcome():
         [btn("💿 Альбоми", SITE + "/albums.html"), btn("📝 Тексти", SITE + "/lyrics.html")],
         [btn("🎵 YouTube Music", YTM), btn("📱 TikTok", TT)],
         [btn("📸 Instagram", IG), btn("🧵 Threads", TH), btn("👍 Facebook", FB)],
-        [btn("🌐 Сайт", SITE)],
+        [btn("💬 Чат", CHAT), btn("🌐 Сайт", SITE)],
     ]
     r = send_photo(SITE + "/images/tg-cover.png", cap, rows)
     mid = (r.get("result") or {}).get("message_id")
