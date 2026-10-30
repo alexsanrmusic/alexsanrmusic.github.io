@@ -774,7 +774,57 @@
      "drive": "19fPBmKzCnAbwlKJb6vlKk3Q473jKty9M"
     }
    ]
-  }
+  },
+ {
+  "id": "good-morning",
+   "instrumental": true,
+  "title": "Good morning",
+  "lang": "en",
+  "year": 2026,
+  "cover": "images/good-morning.jpg",
+  "tracks": [
+   {
+    "title": "Wonderful",
+    "drive": "1ZT_xRrzsIJN-aw9eOvyiAylcpj_Wbft8"
+   },
+   {
+    "title": "Go",
+    "drive": "1RD-a5Hk7IdyjVebpjxefTnTufKvXFkSp"
+   },
+   {
+    "title": "Rise",
+    "drive": "1VV28eOpYZRPa70wdWFdWuGQDVOuUpW3u"
+   },
+   {
+    "title": "Remember",
+    "drive": "1rrrKrR7qQ5JyZsfp2uWivkt8_tfOYSXC"
+   },
+   {
+    "title": "Sunrise",
+    "drive": "12UqNk0t3qotoxdynAAYW0OG3NdeVmrWR"
+   },
+   {
+    "title": "O-o-o",
+    "drive": "1mcWfky_cx8syQQCAuNOzFNKxo1h47cNf"
+   },
+   {
+    "title": "Perfect",
+    "drive": "1irzalBpoLSHbdteUR6bGTxjp-7dXFfua"
+   },
+   {
+    "title": "Sun",
+    "drive": "10Iv5tLtjQPJqgC1EI0FdE65PNAN0I7oS"
+   },
+   {
+    "title": "Day",
+    "drive": "1dFx6Z-LX7OjdXdRpz1wOph7B46PSFoBc"
+   },
+   {
+    "title": "Good morning",
+    "drive": "1udNI8jKMJKDGBId71mJUw_m5WuF8TiEE"
+   }
+  ]
+ }
  ],
  "_hidden": [
  

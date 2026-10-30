@@ -86,6 +86,7 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .badge { font-size: 12.5px; line-height: 1; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid transparent; }
 .badge-lang { color: var(--accent-ink); background: var(--c1); font-weight: 600; }
+.badge-inst { color: var(--c1); border-color: var(--c1); font-weight: 600; }
 .album-info { flex: 1; min-width: 0; }
 .album-title { display: block; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.05rem, 3.4vw, 1.35rem); line-height: 1.25; }
 .album-meta { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
@@ -399,6 +400,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var badges = el('span', 'badges');
     badges.appendChild(el('span', 'badge badge-lang', (FLAGS[album.lang] ? FLAGS[album.lang] + ' ' : '') + (LANGS[album.lang] || album.lang)));
     badges.appendChild(el('span', 'badge', String(album.year)));
+    if (album.instrumental) badges.appendChild(el('span', 'badge badge-inst', '🎼 Instrumental'));
     badges.appendChild(el('span', 'badge', album.tracks.length + ' ' + I18N.plural('tracks', album.tracks.length)));
     info.appendChild(badges);
     head.appendChild(info);
