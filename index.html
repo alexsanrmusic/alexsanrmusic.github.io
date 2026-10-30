@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="i18n.js"></script>
+<script>
+/* Усередині Telegram Mini App ховаємо все, що пов'язано зі встановленням застосунку */
+(function(){try{var t=/tgWebApp/.test(location.hash+location.search)||!!window.TelegramWebviewProxy||!!(window.Telegram&&window.Telegram.WebView)||/Telegram/i.test(navigator.userAgent);if(t)sessionStorage.setItem('tg','1');
+if(t||sessionStorage.getItem('tg')==='1')document.documentElement.classList.add('in-tg');}catch(e){}})();
+</script>
+<style>.in-tg .pwa-only{display:none!important}</style>
 <meta name="google-site-verification" content="Gc0apcnuD_Ttslu8r5bSY1mh71ofVewPY6jfxFtlLNA" />
 <title>Alex Sanr - AI-музичний проєкт з України</title>
 <meta name="description" content="Alex Sanr - AI-музичний проєкт з України. Пісні, альбоми та музичні історії.">
@@ -301,7 +307,7 @@ nav a.active { color: var(--accent); }
       <div class="grid">
         <div><h3><a href="albums.html" data-i18n="about.1h">Авторські треки та альбоми</a></h3><p data-i18n="about.1p">Власні пісні від ідеї до готового релізу.</p></div>
         <div><h3><a href="lyrics.html" data-i18n="about.2h">Тексти пісень</a></h3><p data-i18n="about.2p">Тексти про кохання, свободу, мрії та все, що поруч.</p></div>
-        <div><h3><a href="install.html" data-i18n="about.3h">Встановіть застосунок</a></h3><p data-i18n="about.3p">Альбоми, тексти й новинки з екрана телефона.</p></div>
+        <div class="pwa-only"><h3><a href="install.html" data-i18n="about.3h">Встановіть застосунок</a></h3><p data-i18n="about.3p">Альбоми, тексти й новинки з екрана телефона.</p></div>
         <div><h3 data-i18n="about.4h">Експерименти</h3><p data-i18n="about.4p">Нове звучання та несподівані поєднання жанрів.</p></div>
       </div>
       <ul class="tags" aria-label="Жанри" data-i18n-attr="aria-label:tags.label">

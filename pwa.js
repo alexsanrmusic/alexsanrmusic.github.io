@@ -70,6 +70,12 @@
 
   if (isStandalone()) return;
 
+  // Усередині Telegram Mini App кнопку встановлення не показуємо
+  try {
+    if (/tgWebApp/.test(location.hash + location.search) || window.TelegramWebviewProxy || (window.Telegram && window.Telegram.WebView) || /Telegram/i.test(navigator.userAgent)) sessionStorage.setItem('tg', '1');
+    if (sessionStorage.getItem('tg') === '1') return;
+  } catch (e) {}
+
   var deferred = null, btn = null, pop = null, brand = null, nav = null;
 
   function css() {
