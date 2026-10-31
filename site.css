@@ -176,7 +176,27 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-also-list .song-link small { margin-bottom: 2px; }
 .song-more { color: var(--muted); font-size: 15px; }
 .song-more a { color: var(--fg); }
+/* страницы альбомов */
+.album-hero { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 8px; }
+.album-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; }
+.album-hero h1 { margin-top: 0; }
+.album-tracks-h { font-size: 1.15rem; margin: 26px 0 0; }
+.album-tracks { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.album-tracks li { border-bottom: 1px solid var(--line); }
+.album-tracks a, .album-tracks .t-plain { display: flex; gap: 14px; align-items: baseline; padding: 12px 0; color: inherit; text-decoration: none; }
+.album-tracks a:hover { color: var(--c1); }
+.album-tracks .num { flex: none; min-width: 2.4ch; color: var(--muted); }
+.album-tracks .t-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.album-tracks .t-go { flex: none; color: var(--muted); font-size: 14px; }
+
+/* блок «Міжнародний канал» на главной (два видео) */
+.intl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 16px 0 20px; }
+.intl:empty { display: none; }
+.intl .player iframe { height: auto; aspect-ratio: 16 / 9; }
 @media (max-width: 600px) {
+  .album-hero { grid-template-columns: 1fr; }
+  .album-hero img { max-width: 220px; }
+  .intl { grid-template-columns: 1fr; }
   .song-card { padding: 20px 18px 24px; }
   .song-card .lyrics-text { font-size: 17px; }
   .song-nav { grid-template-columns: 1fr; }
