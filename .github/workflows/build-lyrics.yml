@@ -26,7 +26,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Make cover thumbnails
+        continue-on-error: true   # нет Pillow или сбой: сайт покажет полные обложки
+        run: |
+          pip install --quiet pillow
+          python3 tools/make_thumbs.py
       - name: Build pages
         run: python3 build_lyrics.py
       - name: Commit changes
-        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums lyrics.html lyrics.json site.css favicon.png sitemap.xml
+        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums images/thumbs lyrics.html lyrics.json site.css favicon.png sitemap.xml
