@@ -119,8 +119,8 @@ def new_videos():
         rows = [[btn("▶️ Дивитись", url)], [btn("🌐 Усі пісні й тексти", SITE + "/" + REF), btn("➕ Ще", more)]]
         send_photo(f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg", cap, rows)
         sent.add(v["id"])
-    if not DRY:
-        json.dump(sorted(sent), open(STATE, "w"))
+        if not DRY:  # зберігаємо після кожного поста: якщо далі щось впаде, уже надіслане не дублюється
+            json.dump(sorted(sent), open(STATE, "w"))
 
 
 if __name__ == "__main__":
