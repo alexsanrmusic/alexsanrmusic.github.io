@@ -638,7 +638,11 @@ def lyrics_page(lib):
         aid, lang = e(a["id"]), e(a["lang"])
         code = CODES.get(a["lang"], a["lang"].upper())
         if a.get("cover"):
-            cover = f'<img src="{e(a["cover"])}" alt="" width="128" height="128" loading="lazy" onerror="this.replaceWith(document.createTextNode(\'{code}\'))">'
+            # маленькая копия из images/thumbs/ (tools/make_thumbs.py); нет её - полная обложка; нет и её - код языка
+            thumb = "images/thumbs/" + Path(a["cover"]).stem + ".jpg"
+            cover = (f'<img src="{e(thumb)}" alt="" width="128" height="128" loading="lazy" '
+                     f'onerror="if(!this.dataset.f){{this.dataset.f=1;this.src=\'{e(a["cover"])}\'}}'
+                     f'else{{this.replaceWith(document.createTextNode(\'{code}\'))}}">')
         else:
             cover = code
         rows = []

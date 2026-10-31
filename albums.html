@@ -398,8 +398,12 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
       img.addEventListener('load', function () {
         if (cover.firstChild && cover.firstChild.nodeType === 3) cover.removeChild(cover.firstChild);
       });
-      img.addEventListener('error', function () { img.remove(); });
-      img.src = album.cover;
+      // В списке берём маленькую копию (images/thumbs/*.jpg, 176 px); нет её - полная обложка; нет и её - заглушка
+      var thumb = album.cover.replace(/^images\//, 'images/thumbs/').replace(/\.[a-z0-9]+$/i, '.jpg');
+      img.addEventListener('error', function () {
+        if (img.getAttribute('src') !== album.cover) img.src = album.cover; else img.remove();
+      });
+      img.src = thumb;
       cover.appendChild(img);
     }
     head.appendChild(cover);
