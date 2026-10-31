@@ -29,5 +29,5 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add -A songs lyrics.html lyrics.json site.css favicon.png sitemap.xml
+          git add -A songs albums lyrics.html lyrics.json site.css favicon.png sitemap.xml
           git diff --cached --quiet || (git commit -m "Build lyrics pages" && git pull --rebase && git push)
