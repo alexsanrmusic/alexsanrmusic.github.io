@@ -15,19 +15,25 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
 jobs:
   post:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Post
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
-        run: python3 telegram_post.py "${{ github.event.inputs.mode || 'new-videos' }}" "${{ github.event.inputs.album_id }}"
+          MODE: ${{ github.event.inputs.mode || 'new-videos' }}
+          ALBUM_ID: ${{ github.event.inputs.album_id }}
+        run: python3 telegram_post.py "$MODE" "$ALBUM_ID"
+      # always(): если пост частично ушёл, а скрипт упал, список отправленных всё равно сохраняем,
+      # иначе при следующем запуске видео продублируются в канале.
       - name: Commit state
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git add tg_sent.json
-          git diff --cached --quiet || (git commit -m "Telegram: update sent list" && git push)
+        if: always()
+        run: bash .github/scripts/commit-push.sh "Telegram - update sent list" tg_sent.json

@@ -8,16 +8,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
 jobs:
   fonts:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Download fonts
         run: python3 tools/fetch_fonts.py
       - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git add fonts
-          git diff --cached --quiet || (git commit -m "Add self-hosted fonts" && git pull --rebase && git push)
+        run: bash .github/scripts/commit-push.sh "Add self-hosted fonts" fonts
