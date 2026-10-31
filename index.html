@@ -257,6 +257,12 @@ nav a.active { color: var(--accent); }
   header { padding-block: 12px; gap: 6px 16px; }
   nav { gap: 6px 14px; font-size: 14px; }
 }
+
+/* блок «Міжнародний канал»: два видео 16:9 */
+.intl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 16px 0 20px; }
+.intl:empty { display: none; }
+.intl .player iframe { height: auto; aspect-ratio: 16 / 9; }
+@media (max-width: 600px) { .intl { grid-template-columns: 1fr; } }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
