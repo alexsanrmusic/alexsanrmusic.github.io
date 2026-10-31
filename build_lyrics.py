@@ -10,6 +10,7 @@
 
 Что создаёт (всё перезаписывается при каждом запуске):
   songs/<id альбома>/<название-латиницей>.html   страница каждой песни
+  albums/<id альбома>.html                        страница каждого альбома (обложка, треки, MusicAlbum)
   lyrics.html                                     список всех текстов
   lyrics.json                                     тексты для блока под плеером
   site.css                                        общее оформление новых страниц
@@ -142,7 +143,27 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .song-also-list .song-link small { margin-bottom: 2px; }
 .song-more { color: var(--muted); font-size: 15px; }
 .song-more a { color: var(--fg); }
+/* страницы альбомов */
+.album-hero { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: start; margin-bottom: 8px; }
+.album-hero img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; }
+.album-hero h1 { margin-top: 0; }
+.album-tracks-h { font-size: 1.15rem; margin: 26px 0 0; }
+.album-tracks { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.album-tracks li { border-bottom: 1px solid var(--line); }
+.album-tracks a, .album-tracks .t-plain { display: flex; gap: 14px; align-items: baseline; padding: 12px 0; color: inherit; text-decoration: none; }
+.album-tracks a:hover { color: var(--c1); }
+.album-tracks .num { flex: none; min-width: 2.4ch; color: var(--muted); }
+.album-tracks .t-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.album-tracks .t-go { flex: none; color: var(--muted); font-size: 14px; }
+
+/* блок «Міжнародний канал» на главной (два видео) */
+.intl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 16px 0 20px; }
+.intl:empty { display: none; }
+.intl .player iframe { height: auto; aspect-ratio: 16 / 9; }
 @media (max-width: 600px) {
+  .album-hero { grid-template-columns: 1fr; }
+  .album-hero img { max-width: 220px; }
+  .intl { grid-template-columns: 1fr; }
   .song-card { padding: 20px 18px 24px; }
   .song-card .lyrics-text { font-size: 17px; }
   .song-nav { grid-template-columns: 1fr; }
@@ -408,10 +429,112 @@ def song_page(album, tr, prev, nxt, alternates=(), others=()):
       </section>
     </article>
     <div class="song-nav">{nav_cards}</div>
-{also_block(album, others, tr)}    <p class="song-more"><a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}" data-i18n="song.album" data-vars="{e(json.dumps({'a': album['title']}, ensure_ascii=False))}">Альбом «{e(album['title'])}»</a></p>
+{also_block(album, others, tr)}    <p class="song-more"><a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a> · <a href="{rel}albums.html?album={e(album['id'])}" data-i18n="song.album" data-vars="{e(json.dumps({'a': album['title']}, ensure_ascii=False))}">Альбом «{e(album['title'])}»</a> · <a href="{rel}albums/{e(album['id'])}.html" data-i18n="song.albumPage">Сторінка альбому</a></p>
   </main>
 """
     return page(rel, title, desc, path, body, extra_head, SHARE_JS + "\n" + (ALSO_JS if others else ""), cover)
+
+
+# ---------- страница альбома ----------
+def album_alternates(album, albums):
+    """Переводы альбома: альбомы с тем же \"group\" и разными языками. [(язык, адрес), ...] включая сам альбом."""
+    group = album.get("group")
+    if not group:
+        return []
+    res, langs = [], set()
+    for a in albums:
+        if a.get("group") != group or a["lang"] in langs:
+            continue
+        langs.add(a["lang"])
+        res.append((a["lang"], f"{SITE}/albums/{a['id']}.html"))
+    return res if len(res) > 1 else []
+
+
+def album_page(album, slugs, albums):
+    lang = album["lang"]
+    tracks = album["tracks"]
+    n = len(tracks)
+    year = album.get("year", "")
+    instr = bool(album.get("instrumental"))
+    path = f"albums/{album['id']}.html"
+    rel = "../"
+    cover = SITE + "/" + album["cover"] if album.get("cover") else None
+    t_ = album["title"]
+    if lang == "ru":
+        kind = "инструментальный альбом" if instr else "альбом"
+        title = f"«{t_}» — {kind} | {ARTIST}"
+        desc = f"{kind.capitalize()} «{t_}» ({year}) — {ARTIST}: {n} {plural(n, 'трек', 'трека', 'треков')}. Слушайте на сайте."
+    elif lang == "en":
+        kind = "instrumental album" if instr else "album"
+        title = f"“{t_}” — {kind} | {ARTIST}"
+        desc = f"{kind.capitalize()} “{t_}” ({year}) by {ARTIST}: {n} track{'s' if n != 1 else ''}. Listen on the site."
+    else:
+        kind = "інструментальний альбом" if instr else "альбом"
+        title = f"«{t_}» — {kind} | {ARTIST}"
+        desc = f"{kind.capitalize()} «{t_}» ({year}) — {ARTIST}: {n} {plural(n, 'трек', 'треки', 'треків')}. Слухайте на сайті."
+
+    def track_url(i, tr):
+        slug = slugs.get(tr["title"])
+        return f"{SITE}/songs/{album['id']}/{slug}.html" if slug else f"{SITE}/albums.html?album={album['id']}&track={i}"
+
+    ld = {
+        "@context": "https://schema.org",
+        "@type": "MusicAlbum",
+        "name": t_,
+        "url": SITE + "/" + path,
+        "inLanguage": lang,
+        "image": cover or OG_IMAGE,
+        "byArtist": {"@type": "MusicGroup", "name": ARTIST, "url": SITE + "/"},
+        "numTracks": n,
+        "track": [{"@type": "MusicRecording", "position": i, "name": tr["title"], "url": track_url(i, tr)}
+                  for i, tr in enumerate(tracks, 1)],
+    }
+    if year:
+        ld["datePublished"] = str(year)
+    ld_json = json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")
+    extra_head = f'<script type="application/ld+json">{ld_json}</script>\n'
+    alts = album_alternates(album, albums)
+    if len(alts) > 1:
+        extra_head += "".join(f'<link rel="alternate" hreflang="{l}" href="{e(u)}">\n' for l, u in alts)
+
+    extra = [year, f'<span class="badge" data-i18n-count="tracks" data-n="{n}">{n} {plural(n, "трек", "треки", "треків")}</span>']
+    if instr:
+        extra.append('<span class="badge badge-inst" data-i18n="album.instrumental">🎼 Інструментал</span>')
+    rows = []
+    for i, tr in enumerate(tracks, 1):
+        slug = slugs.get(tr["title"])
+        if slug:
+            rows.append(f'<li><a href="{rel}songs/{e(album["id"])}/{e(slug)}.html"><span class="num">{i}</span><span class="t-name">{e(tr["title"])}</span><span class="t-go" data-i18n="album.lyricsLink">текст →</span></a></li>')
+        else:
+            rows.append(f'<li><a href="{rel}albums.html?album={e(album["id"])}&amp;track={i}"><span class="num">{i}</span><span class="t-name">{e(tr["title"])}</span><span class="t-go" data-i18n="track.play">♪ Слухати</span></a></li>')
+    img = f'<img src="{rel}{e(album["cover"])}" alt="{e(t_)}" width="200" height="200" loading="lazy">' if album.get("cover") else ""
+    body = nav_html(rel, "albums") + f"""
+  <main>
+    <nav class="crumbs" aria-label="Навігація" data-i18n-attr="aria-label:song.crumbs">
+      <a href="{rel}albums.html" data-i18n="nav.albums">Альбоми</a><span>/</span>
+      <span>{e(t_)}</span>
+    </nav>
+    <article class="song-card" data-lang="{e(lang)}">
+      <div class="album-hero">
+        {img}
+        <div>
+          <h1>{e(t_)}</h1>
+          {badges(lang, extra)}
+          <div class="song-actions">
+            <a class="pill pill-dl" href="{rel}albums.html?album={e(album['id'])}" data-i18n="track.play">♪ Слухати</a>
+            <button class="pill pill-share" type="button" id="share" data-i18n="song.share">↗ Поділитися</button>
+          </div>
+        </div>
+      </div>
+      <h2 class="album-tracks-h" data-i18n="albumpage.tracks">Треки</h2>
+      <ol class="album-tracks">
+        {chr(10).join(rows)}
+      </ol>
+    </article>
+    <p class="song-more"><a href="{rel}albums.html" data-i18n="albumpage.all">Усі альбоми</a> · <a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a></p>
+  </main>
+"""
+    return page(rel, title, desc, path, body, extra_head, SHARE_JS, cover)
 
 
 # ---------- страница «Тексти» ----------
@@ -650,6 +773,16 @@ def main():
             out.write_text(song_page(a, tr, prev, nxt, alternates_for(a, tr, built), [x for x in found if x is not tr]), encoding="utf-8")
             urls.append(f"{SITE}/songs/{a['id']}/{tr['slug']}.html")
 
+    # страницы альбомов: для всех альбомов, в том числе без текстов (например, инструментальных)
+    albums_dir = ROOT / "albums"
+    if albums_dir.exists():
+        shutil.rmtree(albums_dir)
+    albums_dir.mkdir(parents=True, exist_ok=True)
+    slug_map = {a["id"]: {t["title"]: t["slug"] for t in found} for a, found in built}
+    for a in data["albums"]:
+        (albums_dir / f"{a['id']}.html").write_text(album_page(a, slug_map.get(a["id"], {}), data["albums"]), encoding="utf-8")
+        urls.append(f"{SITE}/albums/{a['id']}.html")
+
     for name in sorted(lyric_dirs - used_dirs):
         report.append(f"  папка lyrics/{name} не привязана ни к одному альбому (проверьте id или lyrics_dir)")
 
@@ -659,7 +792,7 @@ def main():
     (ROOT / "sitemap.xml").write_text(sitemap(urls), encoding="utf-8")
 
     n_songs = sum(len(a["tracks"]) for a in lib)
-    print(f"Готово: {n_songs} страниц песен, {len(lib)} альбомов с текстами.")
+    print(f"Готово: {n_songs} страниц песен, {len(lib)} альбомов с текстами, {len(data["albums"])} страниц альбомов.")
     if report:
         print("Замечания:")
         print("\n".join(report))

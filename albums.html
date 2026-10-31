@@ -400,7 +400,11 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var badges = el('span', 'badges');
     badges.appendChild(el('span', 'badge badge-lang', (FLAGS[album.lang] ? FLAGS[album.lang] + ' ' : '') + (LANGS[album.lang] || album.lang)));
     badges.appendChild(el('span', 'badge', String(album.year)));
-    if (album.instrumental) badges.appendChild(el('span', 'badge badge-inst', '🎼 Instrumental'));
+    if (album.instrumental) {
+      var ib = el('span', 'badge badge-inst', T('album.instrumental'));
+      ib.setAttribute('data-i18n', 'album.instrumental');
+      badges.appendChild(ib);
+    }
     badges.appendChild(el('span', 'badge', album.tracks.length + ' ' + I18N.plural('tracks', album.tracks.length)));
     info.appendChild(badges);
     head.appendChild(info);

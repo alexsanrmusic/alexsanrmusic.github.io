@@ -88,7 +88,7 @@ def album(aid):
            f"{len(names)} треків · {a['year']}\n\n"
            + "\n".join(f"{i}. {html.escape(n)}" for i, n in enumerate(names, 1))
            + "\n\n<i>Alex Sanr</i>")
-    rows = [[btn("▶️ Слухати", f"{SITE}/albums.html{REF}#{aid}"), btn("📝 Тексти", f"{SITE}/lyrics.html{REF}#{aid}")],
+    rows = [[btn("▶️ Слухати", f"{SITE}/albums.html?album={aid}&ref=telegram"), btn("📝 Тексти", f"{SITE}/lyrics.html{REF}#{aid}")],
             [btn("🚀 Відкрити додаток", APP), btn("🎧 YouTube", YT)]]
     send_photo(f"{SITE}/{a['cover']}", cap, rows)
 
