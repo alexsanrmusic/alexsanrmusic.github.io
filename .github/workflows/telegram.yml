@@ -3,10 +3,11 @@ name: Telegram
 on:
   schedule:
     - cron: "20 */6 * * *"   # через 20 хв після update-videos
+    - cron: "0 15 * * *"     # щодня о 15:00 UTC (17:00/18:00 за Києвом): «Рядок дня»
   workflow_dispatch:
     inputs:
       mode:
-        description: "welcome | album | new-videos"
+        description: "welcome | album | new-videos | line"
         default: "new-videos"
       album_id:
         description: "id альбому (для album), напр. tihi-momenty"
@@ -29,11 +30,11 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
-          MODE: ${{ github.event.inputs.mode || 'new-videos' }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 15 * * *' && 'line' || 'new-videos') }}
           ALBUM_ID: ${{ github.event.inputs.album_id }}
         run: python3 telegram_post.py "$MODE" "$ALBUM_ID"
       # always(): если пост частично ушёл, а скрипт упал, список отправленных всё равно сохраняем,
       # иначе при следующем запуске видео продублируются в канале.
       - name: Commit state
         if: always()
-        run: bash .github/scripts/commit-push.sh "Telegram - update sent list" tg_sent.json
+        run: bash .github/scripts/commit-push.sh "Telegram - update sent list" tg_sent.json tg_lines.json
