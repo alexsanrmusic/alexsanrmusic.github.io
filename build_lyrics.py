@@ -210,16 +210,6 @@ FOOTER = (
 YEAR_JS = "<script>document.getElementById('year').textContent = new Date().getFullYear();</script>"
 
 
-def font_preload(rel):
-    """<link rel=preload> для всех шрифтов из fonts/fonts.css (имена берём оттуда, чтобы не устарели после «Fetch fonts»)."""
-    try:
-        css = (ROOT / "fonts" / "fonts.css").read_text(encoding="utf-8")
-    except OSError:
-        return ""
-    names = sorted(set(re.findall(r"url\(([^)]+\.woff2)\)", css)))
-    return "".join(f'<link rel="preload" href="{rel}fonts/{n}" as="font" type="font/woff2" crossorigin>\n' for n in names)
-
-
 def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=None, html_attrs=""):
     url = SITE + "/" + path
     og_square = bool(og_image)
@@ -248,7 +238,7 @@ def page(rel, title, desc, path, body, extra_head="", extra_script="", og_image=
 <meta property="og:image:alt" content="{ARTIST} — AI-музичний проєкт з України">
 <meta name="twitter:card" content="{tw_card}">
 <meta name="twitter:image" content="{e(og_image)}">
-{font_preload(rel)}<link rel="stylesheet" href="{rel}fonts/fonts.css">
+<link rel="stylesheet" href="{rel}fonts/fonts.css">
 <link rel="stylesheet" href="{rel}site.css">
 <link rel="manifest" href="{rel}manifest.webmanifest">
 <link rel="apple-touch-icon" href="{rel}icons/apple-touch-icon.png">
