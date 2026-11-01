@@ -7,9 +7,10 @@ Env: TG_BOT_TOKEN (токен от @BotFather), TG_CHANNEL (@username канал
   python3 telegram_post.py welcome            # приветственный пост с кнопками (потом закрепить)
   python3 telegram_post.py album tihi-momenty # пост про альбом из albums.json
   python3 telegram_post.py new-videos         # новые видео из videos.json/shorts.json/international.json
+  python3 telegram_post.py line               # «Рядок дня»: случайная строфа из текстов песен (без повторов)
   python3 telegram_post.py ... --dry-run      # только показать, что отправится
 """
-import json, os, sys, html, urllib.request, urllib.parse
+import json, os, random, re, sys, html, urllib.request, urllib.parse
 
 SITE = "https://alexsanrmusic.github.io"
 REF = "?ref=telegram"   # мітка: сайт розпізнає перехід із Telegram, а GoatCounter показує джерело
@@ -22,6 +23,9 @@ TT = "https://www.tiktok.com/@alexsanrmusic"
 APP = "https://t.me/AlexSanrMusic_bot/music"
 YTM = "https://music.youtube.com/@Alexsanrmusic"
 STATE = "tg_sent.json"
+LINES_STATE = "tg_lines.json"   # какие строфы уже публиковались (чтобы не повторять, пока не пройдут все)
+LINE_LANGS = ("uk", "en")        # языки для «Рядка дня»; добавь "ru", если нужно
+LINE_SKIP_ALBUMS = ()            # id альбомов, которые не брать, напр. ("matrix-for-trader",)
 DRY = "--dry-run" in sys.argv
 
 
@@ -123,8 +127,64 @@ def new_videos():
             json.dump(sorted(sent), open(STATE, "w"))
 
 
+_VOCALISE = re.compile(r"(ла|la|о|o|а|a|е|e|у|u|ну|na|хей|hey|ой|oh|ооо|yeah|yeh|мм|mm|ого)+")
+
+
+def _is_vocalise(line):
+    """«Ла-ла-ла», «О-о-о», «Hey!» и т.п. - не годятся как строка дня."""
+    return bool(_VOCALISE.fullmatch(re.sub(r"[\W_]+", "", line.lower())))
+
+
+def _stanzas(text):
+    """Строфы: блоки из 2-6 строк, без пометок [Куплет] и без распевок."""
+    out = []
+    for block in re.split(r"\n\s*\n", text.replace("\r", "")):
+        lines = [l.strip() for l in block.split("\n") if l.strip() and not re.fullmatch(r"\[[^\]]*\]|\([^)]*\)", l.strip())]
+        if not 2 <= len(lines) <= 6 or any(_is_vocalise(l) for l in lines):
+            continue
+        body = "\n".join(lines)
+        if 40 <= len(body) <= 380:
+            out.append(body)
+    return out
+
+
+def line_of_day():
+    albums = {a["id"]: a for a in json.load(open("albums.json", encoding="utf-8"))["albums"]}
+    lyrics = json.load(open("lyrics.json", encoding="utf-8"))
+    slugs = lyrics.get("_slugs", {})
+    pool = []   # (ключ, альбом, номер трека, название, строфа)
+    for aid, songs in lyrics.items():
+        a = albums.get(aid)
+        if aid.startswith("_") or not a or aid in LINE_SKIP_ALBUMS or a.get("lang") not in LINE_LANGS or not isinstance(songs, dict):
+            continue
+        for n, tr in enumerate(a["tracks"], 1):
+            for i, st in enumerate(_stanzas(songs.get(tr["title"], ""))):
+                pool.append((f"{aid}|{tr['title']}|{i}", a, n, tr["title"], st))
+    if not pool:
+        sys.exit("Немає строф для «Рядка дня».")
+    try:
+        used = set(json.load(open(LINES_STATE, encoding="utf-8")))
+    except (OSError, ValueError):
+        used = set()
+    fresh = [x for x in pool if x[0] not in used]
+    if not fresh:   # всё перебрали - начинаем новый круг
+        used, fresh = set(), pool
+    key, a, n, title, stanza = random.choice(fresh)
+    slug = slugs.get(a["id"], {}).get(title)
+    full = f"{SITE}/songs/{a['id']}/{slug}.html{REF}" if slug else f"{SITE}/lyrics.html{REF}#{a['id']}"
+    cap = (f"🎵 <b>Рядок дня</b>\n\n<blockquote>{html.escape(stanza)}</blockquote>\n\n"
+           f"— «{html.escape(title)}», <i>Alex Sanr</i>")
+    rows = [[btn("📝 Весь текст", full), btn("▶️ Слухати", f"{SITE}/albums.html?album={a['id']}&track={n}&ref=telegram")],
+            [btn("🚀 Відкрити додаток", APP)]]
+    send_photo(f"{SITE}/{a['cover']}", cap, rows)
+    if not DRY:
+        used.add(key)
+        json.dump(sorted(used), open(LINES_STATE, "w", encoding="utf-8"), ensure_ascii=False)
+    print(f"Рядок дня: {title} ({a['id']}); у пулі {len(pool)}, залишилось {len(fresh) - 1}")
+
+
 if __name__ == "__main__":
     args = [a.strip().lower() if i == 0 else a.strip() for i, a in enumerate(a for a in sys.argv[1:] if not a.startswith("--"))]
     if not args:
         sys.exit(__doc__)
-    {"welcome": welcome, "new-videos": new_videos}.get(args[0], lambda: album(args[1]) if args[0] == "album" and len(args) > 1 else sys.exit(__doc__))()
+    {"welcome": welcome, "new-videos": new_videos, "line": line_of_day}.get(args[0], lambda: album(args[1]) if args[0] == "album" and len(args) > 1 else sys.exit(__doc__))()
