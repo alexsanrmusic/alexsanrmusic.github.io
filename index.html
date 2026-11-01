@@ -49,6 +49,11 @@ if(t||sessionStorage.getItem('tg')==='1')document.documentElement.classList.add(
   ]
 }
 </script>
+<!-- preload: имена файлов из fonts/fonts.css; после «Fetch fonts» сверить -->
+<link rel="preload" href="fonts/onest-cyrillic-dea2c9.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-latin-f5814c.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/unbounded-cyrillic-92a538.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/unbounded-latin-f2b2b2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
 /* Layout: one-column landing page. Wide name, studio photo, sound-bar strip, then channel info, player, contacts. */
@@ -471,7 +476,16 @@ nav a.active { color: var(--accent); }
       var a = document.createElement("a");
       a.href = "albums.html?album=" + encodeURIComponent(al.id);
       var img = document.createElement("img");
-      img.src = al.cover; img.alt = ""; img.loading = "lazy"; img.width = 300; img.height = 300;
+      // маленькие копии из images/thumbs (tools/make_thumbs.py): браузер сам берёт подходящую по ширине и плотности экрана
+      var stem = al.cover.replace(/^images\//, "").replace(/\.[a-z0-9]+$/i, "");
+      var t176 = "images/thumbs/" + stem + ".jpg", t360 = "images/thumbs/" + stem + "-360.jpg";
+      img.src = t360;
+      img.srcset = t176 + " 176w, " + t360 + " 360w, " + al.cover + " 600w";
+      img.sizes = "(max-width: 540px) calc(100vw - 74px), (max-width: 760px) 250px, 180px";
+      img.addEventListener("error", function () {   // нет миниатюры - показываем полную обложку
+        if (img.getAttribute("src") !== al.cover) { img.removeAttribute("srcset"); img.src = al.cover; }
+      });
+      img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.width = 300; img.height = 300;
       var h = document.createElement("h3"); h.textContent = al.title;
       var s = document.createElement("small");
       s.textContent = al.year + " · " + al.tracks.length + " " + I18N.plural("tracks", al.tracks.length);
