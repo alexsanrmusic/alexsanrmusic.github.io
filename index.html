@@ -189,7 +189,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 12px; display: f
   .player { padding: 10px; }
   .player iframe { height: 320px; }
 }
-.shorts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 0 auto; padding: 0; list-style: none; max-width: 574px; }
+.shorts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 44px; margin: 0 auto; padding: 0; list-style: none; max-width: 652px; }
+@media (max-width: 760px) { .shorts { gap: 24px; } }
 @media (max-width: 560px) { .shorts { gap: 8px; } .shorts h3 { font-size: 11px; } }
 .shorts a { display: block; text-decoration: none; }
 .shorts .th { aspect-ratio: 9 / 16; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
