@@ -5,6 +5,7 @@ on:
     paths:
       - "lyrics/**"
       - "albums.json"
+      - "genres.json"
       - "albums.html"
       - "build_lyrics.py"
       - "tools/make_thumbs.py"
@@ -37,4 +38,4 @@ jobs:
       - name: Build pages
         run: python3 build_lyrics.py
       - name: Commit changes
-        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums images/thumbs lyrics.html lyrics.json site.css favicon.png sitemap.xml
+        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums genres images/thumbs lyrics.html lyrics.json site.css favicon.png sitemap.xml
