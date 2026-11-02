@@ -189,13 +189,14 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 12px; display: f
   .player { padding: 10px; }
   .player iframe { height: 320px; }
 }
-.shorts { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin: 0; padding: 0; list-style: none; }
-.shorts li { width: 88px; }
-@media (max-width: 480px) { .shorts { gap: 10px; } .shorts li { width: calc((100% - 30px) / 4); } }
+.shorts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 0 auto; padding: 0; list-style: none; max-width: 734px; }
+@media (max-width: 560px) { .shorts { gap: 8px; } .shorts h3 { font-size: 11px; } }
 .shorts a { display: block; text-decoration: none; }
-.shorts img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); transition: transform .2s ease; }
-.shorts a:hover img { transform: scale(1.03); }
-.shorts h3 { font-size: 12px; font-weight: 500; line-height: 1.3; margin: 6px 0 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.shorts .th { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+/* превью Shorts - вертикальное видео в рамке 4:3; увеличиваем, чтобы показать середину кадра без чёрных полос */
+.shorts img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(2.38); transition: transform .2s ease; }
+.shorts a:hover img { transform: scale(2.5); }
+.shorts h3 { font-size: 14px; font-weight: 500; line-height: 1.35; margin: 8px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .author p { margin: 0 0 18px; color: var(--muted); max-width: 62ch; }
 .author p:first-of-type { color: var(--fg); font-size: 1.15em; font-weight: 500; }
@@ -239,7 +240,8 @@ main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--
 .player { background: rgba(0,0,0,.18); border: 1px solid var(--line); }
 .photo img { border: 1px solid var(--line); box-shadow: 0 18px 50px -22px var(--accent); }
 .releases img { border-radius: 16px; border: 1px solid var(--line); }
-.releases a:hover img, .shorts a:hover img { box-shadow: 0 12px 32px -14px var(--accent); }
+.releases a:hover img { box-shadow: 0 12px 32px -14px var(--accent); }
+.shorts a:hover .th { box-shadow: 0 12px 32px -14px var(--accent); }
 .btn { font-size: 14px; font-weight: 600; padding: 10px 20px; }
 .btn-ghost { border: 1.5px solid var(--fg); }
 .btn-ghost:hover { background: var(--bg); }
@@ -545,9 +547,10 @@ nav a.active { color: var(--accent); }
       a.target = "_blank"; a.rel = "noopener";
       var img = document.createElement("img");
       img.src = "https://i.ytimg.com/vi/" + encodeURIComponent(v.id) + "/hqdefault.jpg";
-      img.alt = ""; img.loading = "lazy"; img.width = 270; img.height = 480;
+      img.alt = ""; img.loading = "lazy"; img.width = 480; img.height = 360;
       var h = document.createElement("h3"); h.textContent = v.title;
-      a.append(img, h); li.appendChild(a); sl.appendChild(li);
+      var th = document.createElement("div"); th.className = "th"; th.appendChild(img);
+      a.append(th, h); li.appendChild(a); sl.appendChild(li);
     });
   }).catch(function () { se.hidden = false; });
 
