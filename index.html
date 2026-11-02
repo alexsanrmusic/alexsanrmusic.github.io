@@ -238,6 +238,10 @@ main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--
 .grid > div { border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: rgba(255,255,255,.03); transition: background .2s ease, border-color .2s ease; }
 .grid > div:hover { background: rgba(255,255,255,.06); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
 .tags li { background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--muted); font-size: 13.5px; padding: 6px 12px; }
+.tags a { display: block; text-decoration: none; color: inherit; }
+.tags li:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.tags li:hover a { color: var(--fg); }
+.tags .tags-all { background: transparent; border-style: dashed; }
 .player { background: rgba(0,0,0,.18); border: 1px solid var(--line); }
 .photo img { border: 1px solid var(--line); box-shadow: 0 18px 50px -22px var(--accent); }
 .releases img { border-radius: 16px; border: 1px solid var(--line); }
@@ -323,16 +327,19 @@ nav a.active { color: var(--accent); }
         <div><h3><a href="albums.html" data-i18n="about.1h">Авторські треки та альбоми</a></h3><p data-i18n="about.1p">Власні пісні від ідеї до готового релізу.</p></div>
         <div><h3><a href="lyrics.html" data-i18n="about.2h">Тексти пісень</a></h3><p data-i18n="about.2p">Тексти про кохання, свободу, мрії та все, що поруч.</p></div>
         <div class="pwa-only"><h3><a href="install.html" data-i18n="about.3h">Встановіть застосунок</a></h3><p data-i18n="about.3p">Альбоми, тексти й новинки з екрана телефона.</p></div>
-        <div><h3 data-i18n="about.4h">Експерименти</h3><p data-i18n="about.4p">Нове звучання та несподівані поєднання жанрів.</p></div>
+        <div><h3><a href="genres/experimental.html" data-i18n="about.4h">Експерименти</a></h3><p data-i18n="about.4p">Нове звучання та несподівані поєднання жанрів.</p></div>
       </div>
       <ul class="tags" aria-label="Жанри" data-i18n-attr="aria-label:tags.label">
-        <li data-i18n="tags.pop">Українська поп-музика</li>
-        <li>Pop-rock</li>
-        <li>Indie</li>
-        <li>Lo-fi</li>
-        <li>Chillhop</li>
-        <li>Cinematic</li>
-        <li data-i18n="tags.rap">Український реп</li>
+        <li><a href="genres/pop-rock.html" data-i18n="genre.pop-rock">Поп-рок і рок</a></li>
+        <li><a href="genres/indie.html" data-i18n="genre.indie">Інді</a></li>
+        <li><a href="genres/pop.html" data-i18n="genre.pop">Поп</a></li>
+        <li><a href="genres/hip-hop.html" data-i18n="genre.hip-hop">Реп і хіп-хоп</a></li>
+        <li><a href="genres/electronic.html" data-i18n="genre.electronic">Електроніка</a></li>
+        <li><a href="genres/cinematic.html" data-i18n="genre.cinematic">Кінематограф і ембієнт</a></li>
+        <li><a href="genres/folk.html" data-i18n="genre.folk">Фолк, шансон і блюз</a></li>
+        <li><a href="genres/experimental.html" data-i18n="genre.experimental">Експерименти</a></li>
+        <li><a href="genres/instrumental.html" data-i18n="genre.instrumental">Інструментал</a></li>
+        <li class="tags-all"><a href="genres/index.html" data-i18n="genres.all">Усі жанри →</a></li>
       </ul>
     </section>
 

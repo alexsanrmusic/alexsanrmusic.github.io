@@ -1,0 +1,169 @@
+{
+ "_comment": "Жанры. genres - список жанров сайта. albums - для каждого альбома теги всего альбома (all) и, если у песни другие, теги песни (tracks, ключ - название трека из albums.json). Теги в свободной форме; к жанрам сайта они сводятся функцией canon() в build_lyrics.py.",
+ "genres": [
+  {
+   "id": "pop-rock",
+   "uk": "Поп-рок і рок",
+   "ru": "Поп-рок и рок",
+   "en": "Pop rock & rock"
+  },
+  {
+   "id": "indie",
+   "uk": "Інді",
+   "ru": "Инди",
+   "en": "Indie"
+  },
+  {
+   "id": "pop",
+   "uk": "Поп",
+   "ru": "Поп",
+   "en": "Pop"
+  },
+  {
+   "id": "hip-hop",
+   "uk": "Реп і хіп-хоп",
+   "ru": "Рэп и хип-хоп",
+   "en": "Rap & hip-hop"
+  },
+  {
+   "id": "electronic",
+   "uk": "Електроніка",
+   "ru": "Электроника",
+   "en": "Electronic"
+  },
+  {
+   "id": "cinematic",
+   "uk": "Кінематограф і ембієнт",
+   "ru": "Кинематограф и эмбиент",
+   "en": "Cinematic & ambient"
+  },
+  {
+   "id": "folk",
+   "uk": "Фолк, шансон і блюз",
+   "ru": "Фолк, шансон и блюз",
+   "en": "Folk, chanson & blues"
+  },
+  {
+   "id": "experimental",
+   "uk": "Експерименти",
+   "ru": "Эксперименты",
+   "en": "Experimental"
+  },
+  {
+   "id": "instrumental",
+   "uk": "Інструментал",
+   "ru": "Инструментал",
+   "en": "Instrumental"
+  }
+ ],
+ "albums": {
+  "echo-ua": {
+   "all": "Pop, Pop-rock, Indie",
+   "tracks": {
+    "Маленький човник": "Pop, Pop-rock, Indie",
+    "Щедрий вечір": "Folk, Pop, Ballad",
+    "Romantic 404": "Pop, Chanson, Ballad",
+    "День дякую": "Pop, Pop-rock, Indie",
+    "Львівський трамвай": "Pop, Indie, Folk",
+    "Моя люба": "Pop, Indie, Folk",
+    "Моя люба (Blues version)": "Pop, Blues",
+    "З новим роком!": "Pop-Rock",
+    "Новорічна": "Pop-Rock",
+    "Добрий вечір тобі...": "Folk, Singer-Songwriter, Pop-Rap",
+    "Новий гімн України": "Synth-Pop"
+   }
+  },
+  "petlia-i-svet": {
+   "all": "Ambient hip-hop, Alternative Rap, Atmospheric Electronic, Upbeat"
+  },
+  "tihi-momenty": {
+   "all": "Pop Rock, Lyrical Rock, Singer-Songwriter",
+   "tracks": {
+    "Всі дівчата гарні...": "Pop Rock, Indie Pop, Singer-Songwriter",
+    "Залежність": "Pop Rock, Alternative Rock, Indie Pop",
+    "Кава о п'ятій": "Pop Rock, Alternative Rock, Indie Pop",
+    "Місто крізь віки": "Epic Rock, Atmospheric Rock, Symphonic Rock, Cinematic",
+    "Світло на кухні": "Pop Rock, Indie Pop, Singer-Songwriter"
+   }
+  },
+  "between-entry-points": {
+   "all": "Alternative Rap, Hip-Hop, Atmospheric Electronic"
+  },
+  "prosto-zhyvy": {
+   "all": "Pop Rock, Indie Pop, Singer-Songwriter",
+   "tracks": {
+    "Байдуже": "Pop Rock, Indie Pop, Alternative Pop",
+    "Давай втечемо": "Pop Rock, Indie Pop, Alternative Rock",
+    "До ранку": "Pop Rock, Synth-Pop, Indie Pop",
+    "Залишся": "Pop Rock, Indie Pop, Alternative Rock",
+    "Напиши мені": "Pop Rock, Synth-Pop, Indie Pop",
+    "П'ятниця": "Pop Rock, Indie Pop, Upbeat Rock",
+    "Ще буде, все буде.": "Pop Rock, Indie Pop, Upbeat Rock"
+   }
+  },
+  "zeroing-return-to-self": {
+   "all": "Alternative Rap, Atmospheric Electronic, Upbeat"
+  },
+  "khroniky-khaosu": {
+   "all": "Alternative Rap, Boom-Bap, Hip-Hop",
+   "tracks": {
+    "Хроніки хаосу - Ефір без правил": "Alternative Hip-Hop, Blues Rock, Breakbeat, Electronic Rap, Experimental"
+   }
+  },
+  "mezhdu-tochkami-vkhoda": {
+   "all": "Alternative Rap, Atmospheric Electronic, Upbeat"
+  },
+  "pomizh-tochkamy-vkhodu": {
+   "all": "Alternative Rap, Hip-Hop, Atmospheric Electronic",
+   "tracks": {
+    "Вхід у вихід": "Alternative Rap, Hip-Hop",
+    "Дух біржі": "Alternative Rap, Hip-Hop, Electronic Rap",
+    "Крізь іскри": "Alternative Rap, Hip-Hop, Electronic Rap"
+   }
+  },
+  "petlia-i-svitlo": {
+   "all": "Alternative Hip-Hop, Rap, Cinematic",
+   "tracks": {
+    "Калібрування страхів": "Pop Rock, Indie"
+   }
+  },
+  "just-life": {
+   "all": "Pop-Rock, Indie-Rock, Atmospheric Electronic"
+  },
+  "echo-ua-en": {
+   "all": "Pop-Rock, Indie-Rock, Atmospheric Electronic",
+   "tracks": {
+    "Good Evening": "Alternative Rap, Hip-Hop, Atmospheric Electronic",
+    "My Beloved": "Pop-Rock, Indie-Pop, Atmospheric Electronic"
+   }
+  },
+  "mozayka": {
+   "all": "Alternative Rap, Upbeat Electronic, Hip-Hop",
+   "tracks": {
+    "В этот день": "Melodic Pop-Rock, Indie-Pop",
+    "Держу твою ладонь": "Melodic Pop-Rock, Indie-Pop",
+    "Маленький кораблик": "Melodic Pop-Rock, Indie-Pop",
+    "Дети Земли": "Cinematic Techno, Rap-Techno",
+    "Жизнь под фартуком": "Chanson, Singer-Songwriter",
+    "Единое": "Dark Ambient, Electronic Spoken Word, Cinematic",
+    "Продавец воздуха": "Dark Ambient, Electronic Spoken Word, Cinematic",
+    "Ты больше чем...": "Dark Ambient, Electronic Spoken Word, Cinematic",
+    "Шваб - Ковид 2019": "Alternative Rock, Indie Rock",
+    "Кругозор": "Alternative Rap, Hip-Hop",
+    "Чаты": "Alternative Rap, Atmospheric Electronic, Upbeat, Hip-Hop"
+   }
+  },
+  "matrix-for-trader": {
+   "all": "Alternative Rap, Hip-Hop"
+  },
+  "matritsa-treydera": {
+   "all": "Alternative Rap, Experimental Rap, Upbeat"
+  },
+  "good-morning": {
+   "all": "Instrumental"
+  },
+  "duality": {
+   "all": "Instrumental"
+  }
+ }
+}

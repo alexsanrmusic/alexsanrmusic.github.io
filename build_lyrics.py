@@ -160,10 +160,28 @@ a.pill-play:hover { background: var(--bg); border-color: var(--fg); }
 .intl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 16px 0 20px; }
 .intl:empty { display: none; }
 .intl .player iframe { height: auto; aspect-ratio: 16 / 9; }
+/* жанры: метки, список жанров, страница жанра */
+a.badge-genre { text-decoration: none; color: var(--fg); border-color: var(--line); transition: border-color .15s, background .15s; }
+a.badge-genre:hover { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); background: rgba(255,255,255,.1); }
+.genre-chips { margin: 14px 0 0; }
+.genres-lead { color: var(--muted); margin: 0 0 22px; }
+.genre-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.genre-grid li { display: flex; }
+.genre-grid a { display: block; flex: 1; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.03); text-decoration: none; transition: border-color .15s, background .15s; }
+.genre-grid a:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); background: rgba(255,255,255,.06); }
+.genre-grid b { display: block; font-size: 17px; font-weight: 600; }
+.genre-album { margin-top: 28px; }
+.genre-album-head { display: flex; align-items: center; gap: 14px; }
+.genre-album-head img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; flex: none; }
+.genre-album-head h2 { font-size: 1.15rem; margin: 0; }
+.genre-album-head h2 a { text-decoration: none; }
+.genre-album-head h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
 @media (max-width: 600px) {
   .album-hero { grid-template-columns: 1fr; }
   .album-hero img { max-width: 220px; }
   .intl { grid-template-columns: 1fr; }
+  .genre-grid { grid-template-columns: 1fr; }
   .song-card { padding: 20px 18px 24px; }
   .song-card .lyrics-text { font-size: 17px; }
   .song-nav { grid-template-columns: 1fr; }
@@ -428,6 +446,7 @@ def song_page(album, tr, prev, nxt, alternates=(), others=()):
     <article class="song-card" data-lang="{e(lang)}">
       <h1>{e(tr['title'])}</h1>
       {badges(lang, [album['title'], album.get('year', '')])}
+      {genre_chips(TRACK_GENRES.get((album['id'], tr['title']), []), rel)}
       <div class="song-actions">
       {actions}
       </div>
@@ -530,6 +549,7 @@ def album_page(album, slugs, albums):
         <div>
           <h1>{e(t_)}</h1>
           {badges(lang, extra)}
+          {genre_chips(album_genre_ids(album), rel)}
           <div class="song-actions">
             <a class="pill pill-dl" href="{rel}albums.html?album={e(album['id'])}" data-i18n="track.play">♪ Слухати</a>
             <button class="pill pill-share" type="button" id="share" data-i18n="song.share">↗ Поділитися</button>
@@ -545,6 +565,185 @@ def album_page(album, slugs, albums):
   </main>
 """
     return page(rel, title, desc, path, body, extra_head, SHARE_JS, cover)
+
+
+# ---------- жанры ----------
+# genres.json: список жанров сайта и теги по альбомам/песням. Теги свободные («Pop Rock, Indie Pop»),
+# к жанрам сайта их сводит canon(). Нет файла - сайт собирается без жанров.
+GENRES = []          # [{"id", "uk", "ru", "en"}, ...] в порядке показа
+TRACK_GENRES = {}    # (id альбома, название трека) -> [id жанра, ...]
+
+
+def canon(raw, valid):
+    """Свободные теги -> id жанров сайта (в порядке списка genres)."""
+    got = set()
+    for t in re.split(r"[,/]", raw.lower()):
+        t = t.strip()
+        if not t:
+            continue
+        if "instrumental" in t:
+            got.add("instrumental")
+        if "rock" in t:
+            got.add("pop-rock")
+        if t.startswith("indie") or "indie-" in t or t == "alternative pop":
+            got.add("indie")
+        if t in ("pop", "synth-pop"):
+            got.add("pop")
+        if "rap" in t or "hip-hop" in t or "hip hop" in t or "boom-bap" in t:
+            got.add("hip-hop")
+        if "electronic" in t or "techno" in t or "synth" in t or "breakbeat" in t:
+            got.add("electronic")
+        if "cinematic" in t or "ambient" in t:
+            got.add("cinematic")
+        if any(w in t for w in ("folk", "chanson", "ballad")) or ("blues" in t and "rock" not in t):
+            got.add("folk")
+        if "experimental" in t:
+            got.add("experimental")
+    return [g["id"] for g in GENRES if g["id"] in got and g["id"] in valid]
+
+
+def load_genres(albums):
+    GENRES.clear()
+    TRACK_GENRES.clear()
+    try:
+        data = json.loads((ROOT / "genres.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    GENRES.extend(data.get("genres", []))
+    valid = {g["id"] for g in GENRES}
+    problems = []
+    for a in albums:
+        spec = data.get("albums", {}).get(a["id"])
+        if not spec:
+            problems.append(f"  жанры: у альбома {a['id']} нет записи в genres.json")
+            continue
+        per = spec.get("tracks", {})
+        for t in a["tracks"]:
+            ids = canon(per.get(t["title"], spec.get("all", "")), valid)
+            if not ids:
+                problems.append(f"  жанры: {a['id']} / {t['title']}: теги не сопоставились ни с одним жанром")
+            TRACK_GENRES[(a["id"], t["title"])] = ids
+        for k in per:
+            if k not in {t["title"] for t in a["tracks"]}:
+                problems.append(f"  жанры: {a['id']}: в genres.json трека «{k}» нет в albums.json")
+    return problems
+
+
+def genre_by_id(gid):
+    return next((g for g in GENRES if g["id"] == gid), None)
+
+
+def genre_chips(ids, rel):
+    """Кликабельные метки жанров (ссылки на genres/<id>.html)."""
+    out = []
+    for gid in ids:
+        g = genre_by_id(gid)
+        if g:
+            out.append(f'<a class="badge badge-genre" href="{rel}genres/{e(gid)}.html" data-i18n="genre.{e(gid)}">{e(g["uk"])}</a>')
+    return '<div class="badges genre-chips">' + "".join(out) + "</div>" if out else ""
+
+
+def album_genre_ids(album):
+    cnt = {}
+    for t in album["tracks"]:
+        for gid in TRACK_GENRES.get((album["id"], t["title"]), []):
+            cnt[gid] = cnt.get(gid, 0) + 1
+    order = {g["id"]: i for i, g in enumerate(GENRES)}
+    return sorted(cnt, key=lambda x: (-cnt[x], order[x]))
+
+
+def genre_stats(albums):
+    """{id жанра: [(альбом, [(номер, название), ...]), ...]} в порядке albums.json."""
+    res = {g["id"]: [] for g in GENRES}
+    for a in albums:
+        for g in GENRES:
+            rows = [(i, t["title"]) for i, t in enumerate(a["tracks"], 1) if g["id"] in TRACK_GENRES.get((a["id"], t["title"]), [])]
+            if rows:
+                res[g["id"]].append((a, rows))
+    return res
+
+
+def genre_page(g, entries, slug_map):
+    gid = g["id"]
+    rel = "../"
+    n_tr = sum(len(r) for _, r in entries)
+    n_al = len(entries)
+    title = f"{g['uk']} — пісні й альбоми | {ARTIST}"
+    desc = f"Жанр «{g['uk']}»: {n_tr} {plural(n_tr, 'пісня', 'пісні', 'пісень')} у {n_al} {plural(n_al, 'альбомі', 'альбомах', 'альбомах')} {ARTIST}. Слухайте на сайті."
+    path = f"genres/{gid}.html"
+    blocks = []
+    for a, rows in entries:
+        slugs = slug_map.get(a["id"], {})
+        lis = []
+        for i, name in rows:
+            slug = slugs.get(name)
+            if slug:
+                href = f'{rel}songs/{e(a["id"])}/{e(slug)}.html'
+                go = '<span class="t-go" data-i18n="album.lyricsLink">текст →</span>'
+            else:
+                href = f'{rel}albums.html?album={e(a["id"])}&amp;track={i}'
+                go = '<span class="t-go" data-i18n="track.play">♪ Слухати</span>'
+            lis.append(f'<li><a href="{href}"><span class="num">{i}</span><span class="t-name">{e(name)}</span>{go}</a></li>')
+        stem = Path(a["cover"]).stem if a.get("cover") else ""
+        img = f'<img src="{rel}images/thumbs/{e(stem)}.jpg" alt="" width="64" height="64" loading="lazy">' if stem else ""
+        blocks.append(
+            f'<section class="genre-album">\n'
+            f'  <div class="genre-album-head">{img}<h2><a href="{rel}albums/{e(a["id"])}.html">{e(a["title"])}</a></h2></div>\n'
+            f'  <ol class="album-tracks">\n    {chr(10).join("    " + l for l in lis).strip()}\n  </ol>\n</section>'
+        )
+    others = "".join(
+        f'<a class="badge badge-genre" href="{x["id"]}.html" data-i18n="genre.{e(x["id"])}">{e(x["uk"])}</a>'
+        for x in GENRES if x["id"] != gid)
+    body = nav_html(rel, "") + f"""
+  <main>
+    <nav class="crumbs" aria-label="Навігація" data-i18n-attr="aria-label:song.crumbs">
+      <a href="{rel}genres/index.html" data-i18n="genres.h">Жанри</a><span>/</span>
+      <span data-i18n="genre.{e(gid)}">{e(g['uk'])}</span>
+    </nav>
+    <article class="song-card">
+      <h1 data-i18n="genre.{e(gid)}">{e(g['uk'])}</h1>
+      <span class="badges"><span class="badge" data-i18n-count="tracks" data-n="{n_tr}">{n_tr} {plural(n_tr, "трек", "треки", "треків")}</span><span class="badge" data-i18n-count="albums" data-n="{n_al}">{n_al} {plural(n_al, "альбом", "альбоми", "альбомів")}</span></span>
+      {chr(10).join(blocks)}
+    </article>
+    <p class="song-more" data-i18n="genres.other">Інші жанри:</p>
+    <div class="badges genre-chips">{others}</div>
+    <p class="song-more"><a href="{rel}albums.html" data-i18n="albumpage.all">Усі альбоми</a> · <a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a></p>
+  </main>
+"""
+    return page(rel, title, desc, path, body)
+
+
+def genres_index_page(stats):
+    rel = "../"
+    title = f"Жанри — поп-рок, реп, електроніка, інструментал | {ARTIST}"
+    desc = f"Музика {ARTIST} за жанрами: " + ", ".join(g["uk"].lower() for g in GENRES) + "."
+    cards = []
+    for g in GENRES:
+        ents = stats.get(g["id"], [])
+        if not ents:
+            continue
+        nt, na = sum(len(r) for _, r in ents), len(ents)
+        cards.append(
+            f'<li><a href="{e(g["id"])}.html"><b data-i18n="genre.{e(g["id"])}">{e(g["uk"])}</b>'
+            f'<span class="badges"><span class="badge" data-i18n-count="tracks" data-n="{nt}">{nt} {plural(nt, "трек", "треки", "треків")}</span>'
+            f'<span class="badge" data-i18n-count="albums" data-n="{na}">{na} {plural(na, "альбом", "альбоми", "альбомів")}</span></span></a></li>')
+    body = nav_html(rel, "") + f"""
+  <main>
+    <nav class="crumbs" aria-label="Навігація" data-i18n-attr="aria-label:song.crumbs">
+      <a href="{rel}index.html" data-i18n="nav.home">Головна</a><span>/</span>
+      <span data-i18n="genres.h">Жанри</span>
+    </nav>
+    <article class="song-card">
+      <h1 data-i18n="genres.h">Жанри</h1>
+      <p class="genres-lead" data-i18n="genres.lead">Усю музику Alex Sanr можна відкрити за жанром. Одна пісня може належати кільком жанрам.</p>
+      <ul class="genre-grid">
+        {chr(10).join(cards)}
+      </ul>
+    </article>
+    <p class="song-more"><a href="{rel}albums.html" data-i18n="albumpage.all">Усі альбоми</a> · <a href="{rel}lyrics.html" data-i18n="song.allLyrics">Усі тексти</a></p>
+  </main>
+"""
+    return page(rel, title, desc, "genres/", body)
 
 
 # ---------- страница «Тексти» ----------
@@ -737,6 +936,7 @@ def main():
         shutil.rmtree(songs_dir)
 
     report, lib, lyrics_json, urls = [], [], {}, [SITE + "/", SITE + "/albums.html", SITE + "/lyrics.html", SITE + "/install.html"]
+    report += load_genres(data["albums"])
     lyric_dirs = {p.name for p in (ROOT / "lyrics").iterdir() if p.is_dir()} if (ROOT / "lyrics").is_dir() else set()
     used_dirs = set()
     built = []
@@ -796,6 +996,20 @@ def main():
     for a in data["albums"]:
         (albums_dir / f"{a['id']}.html").write_text(album_page(a, slug_map.get(a["id"], {}), data["albums"]), encoding="utf-8")
         urls.append(f"{SITE}/albums/{a['id']}.html")
+
+    # страницы жанров (папка пересоздаётся целиком, как songs и albums)
+    genres_dir = ROOT / "genres"
+    if genres_dir.exists():
+        shutil.rmtree(genres_dir)
+    if GENRES:
+        genres_dir.mkdir(parents=True, exist_ok=True)
+        stats = genre_stats(data["albums"])
+        (genres_dir / "index.html").write_text(genres_index_page(stats), encoding="utf-8")
+        urls.append(f"{SITE}/genres/index.html")
+        for g in GENRES:
+            if stats.get(g["id"]):
+                (genres_dir / f"{g['id']}.html").write_text(genre_page(g, stats[g["id"]], slug_map), encoding="utf-8")
+                urls.append(f"{SITE}/genres/{g['id']}.html")
 
     for name in sorted(lyric_dirs - used_dirs):
         report.append(f"  папка lyrics/{name} не привязана ни к одному альбому (проверьте id или lyrics_dir)")
