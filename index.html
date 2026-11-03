@@ -238,6 +238,9 @@ main > section:nth-of-type(even):hover { border-color: color-mix(in srgb, var(--
 .grid > div { border: 1px solid var(--line); border-radius: 16px; padding: 18px; background: rgba(255,255,255,.03); transition: background .2s ease, border-color .2s ease; }
 .grid > div:hover { background: rgba(255,255,255,.06); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
 .tags li { background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--muted); font-size: 13.5px; padding: 6px 12px; }
+.lod-text { margin: 0 0 10px; padding-left: 12px; border-left: 3px solid var(--accent); color: var(--fg); font-style: italic; white-space: pre-line; }
+.lod-src { margin: 0; font-size: 15px; }
+.lod-src a { text-underline-offset: 3px; }
 .tags a { display: block; text-decoration: none; color: inherit; }
 .tags li:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
 .tags li:hover a { color: var(--fg); }
@@ -327,7 +330,7 @@ nav a.active { color: var(--accent); }
         <div><h3><a href="albums.html" data-i18n="about.1h">Авторські треки та альбоми</a></h3><p data-i18n="about.1p">Власні пісні від ідеї до готового релізу.</p></div>
         <div><h3><a href="lyrics.html" data-i18n="about.2h">Тексти пісень</a></h3><p data-i18n="about.2p">Тексти про кохання, свободу, мрії та все, що поруч.</p></div>
         <div class="pwa-only"><h3><a href="install.html" data-i18n="about.3h">Встановіть застосунок</a></h3><p data-i18n="about.3p">Альбоми, тексти й новинки з екрана телефона.</p></div>
-        <div><h3><a href="genres/experimental.html" data-i18n="about.4h">Експерименти</a></h3><p data-i18n="about.4p">Нове звучання та несподівані поєднання жанрів.</p></div>
+        <div id="lod"><h3 data-i18n="about.4h">Рядок дня</h3><p data-i18n="about.4p">Щодня - один рядок із моїх пісень.</p></div>
       </div>
       <ul class="tags" aria-label="Жанри" data-i18n-attr="aria-label:tags.label">
         <li><a href="genres/pop-rock.html" data-i18n="genre.pop-rock">Поп-рок і рок</a></li>
@@ -590,6 +593,58 @@ nav a.active { color: var(--accent); }
     }, { rootMargin: '-30% 0px -60% 0px' });
     map.forEach(function (x) { io.observe(x.s); });
   })();
+})();
+</script>
+
+<script>
+/* «Рядок дня» на главной: строфа из песен, каждый день новая (выбор по дате, без сервера) */
+(function () {
+  var box = document.getElementById('lod');
+  if (!box) return;
+  function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw 0; return r.json(); }); }
+  var VOC = /^(ла|la|о|o|а|a|е|e|у|u|ну|na|хей|hey|ой|oh|ооо|yeah|yeh|мм|mm|ого)+$/;
+  function stanzas(text) {
+    var out = [];
+    String(text || '').replace(/\r/g, '').split(/\n\s*\n/).forEach(function (block) {
+      var lines = block.split('\n').map(function (l) { return l.trim(); }).filter(function (l) { return l && !/^(\[[^\]]*\]|\([^)]*\))$/.test(l); });
+      if (lines.length < 2 || lines.length > 4) return;
+      if (lines.some(function (l) { return VOC.test(l.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '')); })) return;
+      var body = lines.join('\n');
+      if (body.length >= 40 && body.length <= 220) out.push(body);
+    });
+    return out;
+  }
+  function render(st, lang, title, album, slug) {
+    var q = document.createElement('blockquote'); q.className = 'lod-text'; q.lang = lang || 'uk'; q.textContent = st;
+    var src = document.createElement('p'); src.className = 'lod-src';
+    var link = document.createElement('a'); link.href = 'songs/' + encodeURIComponent(album) + '/' + encodeURIComponent(slug) + '.html'; link.textContent = '«' + title + '»';
+    src.append('— ', link);
+    var old = box.querySelector('p'); if (old) old.remove();
+    box.append(q, src);
+  }
+  /* строфа дня берётся из line.json: её записывает бот при публикации в Telegram, так что на сайте и в канале она одна */
+  get('line.json').then(function (l) {
+    if (!l || !l.stanza || !l.album || !l.slug) throw 0;
+    render(l.stanza, l.lang, l.title, l.album, l.slug);
+  }).catch(fallback);
+  function fallback() {
+  Promise.all([get('lyrics.json'), get('albums.json')]).then(function (r) {
+    var lyrics = r[0], albums = r[1].albums, slugs = lyrics._slugs || {}, pool = [];
+    albums.forEach(function (a) {
+      var songs = lyrics[a.id];
+      if (!songs || typeof songs !== 'object') return;
+      a.tracks.forEach(function (t) {
+        var slug = slugs[a.id] && slugs[a.id][t.title];
+        if (!slug) return;
+        stanzas(songs[t.title]).forEach(function (st) { pool.push({ a: a, title: t.title, slug: slug, st: st }); });
+      });
+    });
+    if (!pool.length) return;
+    var day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 6e4) / 864e5);
+    var x = pool[(day * 997) % pool.length];
+    render(x.st, x.a.lang, x.title, x.a.id, x.slug);
+  }).catch(function () {});
+  }
 })();
 </script>
 

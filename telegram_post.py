@@ -10,7 +10,7 @@ Env: TG_BOT_TOKEN (токен от @BotFather), TG_CHANNEL (@username канал
   python3 telegram_post.py line               # «Рядок дня»: случайная строфа из текстов песен (без повторов)
   python3 telegram_post.py ... --dry-run      # только показать, что отправится
 """
-import json, os, random, re, sys, html, urllib.request, urllib.parse
+import datetime, json, os, random, re, sys, html, urllib.request, urllib.parse
 
 SITE = "https://alexsanrmusic.github.io"
 REF = "?ref=telegram"   # мітка: сайт розпізнає перехід із Telegram, а GoatCounter показує джерело
@@ -24,6 +24,7 @@ APP = "https://t.me/AlexSanrMusic_bot/music"
 YTM = "https://music.youtube.com/@Alexsanrmusic"
 STATE = "tg_sent.json"
 LINES_STATE = "tg_lines.json"   # какие строфы уже публиковались (чтобы не повторять, пока не пройдут все)
+LINE_FILE = "line.json"         # строфа дня для главной страницы сайта
 LINE_LANGS = ("uk", "en")        # языки для «Рядка дня»; добавь "ru", если нужно
 LINE_SKIP_ALBUMS = ()            # id альбомов, которые не брать, напр. ("matrix-for-trader",)
 DRY = "--dry-run" in sys.argv
@@ -180,6 +181,9 @@ def line_of_day():
     if not DRY:
         used.add(key)
         json.dump(sorted(used), open(LINES_STATE, "w", encoding="utf-8"), ensure_ascii=False)
+        # та же строфа показывается на главной сайте (блок «Рядок дня»)
+        json.dump({"date": datetime.date.today().isoformat(), "album": a["id"], "slug": slug, "title": title, "lang": a.get("lang", "uk"), "stanza": stanza},
+                  open(LINE_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"Рядок дня: {title} ({a['id']}); у пулі {len(pool)}, залишилось {len(fresh) - 1}")
 
 
