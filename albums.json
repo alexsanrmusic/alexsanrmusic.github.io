@@ -835,6 +835,60 @@
    }
   ]
  },
+   {
+  "id": "impulse",
+  "instrumental": true,
+  "title": "Імпульс",
+  "lang": "uk",
+  "year": 2026,
+  "cover": "images/impulse.jpg",
+  "tracks": [
+   {
+    "title": "Імпульс",
+    "drive": "1WmFQ8ASI72x95wTgh0cwn6UprERW7CMv"
+   },
+   {
+    "title": "Точка перетину",
+    "drive": "1ud-EB2qZNYuYmA_lLPOF8Di6KJCH2lAC"
+   },
+   {
+    "title": "Резонанс",
+    "drive": "1ZiKmxCVxMvBnFbPkXf7W31Mv7nYofuBo"
+   },
+   {
+    "title": "Код",
+    "drive": "14WSn0HFkPBkjHx5VIru8rskImenJuAUQ"
+   },
+   {
+    "title": "Частота",
+    "drive": "13O4kL0QY5dCT8VgPn4hRL7lqtfxiHdSn"
+   },
+   {
+    "title": "Меридіан",
+    "drive": "1mX-z8R220hgi6ptOZRAEmkgmbDDn5m95"
+   },
+   {
+    "title": "Амплітуда",
+    "drive": "1uLTHQy-ibUNhQdCwvqyP0qE1s9cfCcM1"
+   },
+   {
+    "title": "Внутрішній поштовх",
+    "drive": "1sru7RFdwxnqVDyIF7fsaV20dSGlhBvto"
+   },
+   {
+    "title": "Вектор",
+    "drive": "1qY80FxSHG0R4Jh95l4wxQ9eRypxwmsXL"
+   },
+   {
+    "title": "На межі",
+    "drive": "1MS6dhaD2w09JItmbQJbRLj5vHlwFq033"
+   },
+{
+    "title": "Затухання",
+    "drive": "13zQ_Qsl04Fw9nNT_dA5y_0HzFo0oNMO-"
+   }
+  ]
+ },
  {
   "id": "duality",
   "instrumental": true,
