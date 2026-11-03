@@ -73,6 +73,9 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 28px; }
 .filters-label { color: var(--muted); font-size: 15px; margin-right: 4px; }
+.filters + .filters { margin-top: -14px; }
+.chip:disabled { opacity: .35; cursor: default; }
+.chip:disabled:hover { color: var(--muted); border-color: var(--line); }
 .chip { border: 1.5px solid var(--line); background: transparent; color: var(--muted); padding: 8px 18px; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; }
 .chip:hover { color: var(--fg); border-color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
@@ -183,6 +186,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     <p class="lead" data-i18n="albums.lead">Слухайте онлайн, завантажуйте треки та дивіться кліпи.</p>
     <div class="stats" id="stats"></div>
     <div class="filters" id="filters" role="group" aria-label="Мова" data-i18n-attr="aria-label:filters.aria"></div>
+    <div class="filters" id="genre-filters" role="group" aria-label="Жанри" data-i18n-attr="aria-label:genres.h"></div>
     <div id="albums"><p class="note" data-i18n="albums.loading">Завантаження…</p></div>
     <noscript><p class="note" data-i18n="albums.noscript">Для перегляду альбомів потрібен JavaScript.</p></noscript>
   </main>
@@ -204,6 +208,9 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   var filtersEl = document.getElementById('filters');
   var albums = [];
   var currentLang = 'all';
+  var currentGenre = 'all';
+  var genreFiltersEl = document.getElementById('genre-filters');
+  var genreInfo = null;   // {genres:[{id,...}], albums:{id:[genre ids]}} из genres-map.json
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -521,9 +528,30 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     return card;
   }
 
+  // жанры, которых нет среди альбомов выбранного языка, выключаем (иначе получится пустой список)
+  function syncGenreChips() {
+    if (!genreInfo) return;
+    var avail = {};
+    albums.forEach(function (a) {
+      if (currentLang !== 'all' && a.lang !== currentLang) return;
+      (genreInfo.albums[a.id] || []).forEach(function (g) { avail[g] = true; });
+    });
+    if (currentGenre !== 'all' && !avail[currentGenre]) currentGenre = 'all';
+    Array.prototype.forEach.call(genreFiltersEl.querySelectorAll('.chip'), function (x) {
+      var g = x.getAttribute('data-g');
+      x.disabled = g !== 'all' && !avail[g];
+      x.setAttribute('aria-pressed', String(g === currentGenre));
+    });
+  }
+
   function render() {
     albumsEl.textContent = '';
-    var shown = albums.filter(function (a) { return currentLang === 'all' || a.lang === currentLang; });
+    syncGenreChips();
+    var shown = albums.filter(function (a) {
+      if (currentLang !== 'all' && a.lang !== currentLang) return false;
+      if (currentGenre !== 'all' && genreInfo && (genreInfo.albums[a.id] || []).indexOf(currentGenre) < 0) return false;
+      return true;
+    });
     if (!shown.length) {
       albumsEl.appendChild(el('p', 'note', T('albums.empty')));
       return;
@@ -571,6 +599,32 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     });
   }
 
+  function buildGenreFilters() {
+    genreFiltersEl.textContent = '';
+    if (!genreInfo || !genreInfo.genres || !genreInfo.genres.length) return;
+    var used = {};
+    albums.forEach(function (a) { (genreInfo.albums[a.id] || []).forEach(function (g) { used[g] = true; }); });
+    var list = genreInfo.genres.filter(function (g) { return used[g.id]; });
+    if (list.length < 2) return;
+    if (currentGenre !== 'all' && !used[currentGenre]) currentGenre = 'all';
+    genreFiltersEl.appendChild(el('span', 'filters-label', T('genres.h') + ':'));
+    var items = [['all', T('filters.all')]].concat(list.map(function (g) { return [g.id, T('genre.' + g.id)]; }));
+    items.forEach(function (it) {
+      var b = el('button', 'chip', it[1]);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(it[0] === currentGenre));
+      b.setAttribute('data-g', it[0]);
+      b.addEventListener('click', function () {
+        currentGenre = it[0];
+        Array.prototype.forEach.call(genreFiltersEl.querySelectorAll('.chip'), function (x, i) {
+          x.setAttribute('aria-pressed', String(items[i][0] === currentGenre));
+        });
+        render();
+      });
+      genreFiltersEl.appendChild(b);
+    });
+  }
+
   function openFromQuery() {
     var p = new URLSearchParams(location.search);
     var id = (p.get('album') || '').replace(/[^\w-]/g, '');
@@ -596,13 +650,23 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   if (q) currentLang = q;
   if (new URLSearchParams(location.search).get('album')) currentLang = 'all';
 
+  var gq = (new URLSearchParams(location.search).get('genre') || '').replace(/[^\w-]/g, '');
+  if (gq) currentGenre = gq;
+  if (new URLSearchParams(location.search).get('album')) currentGenre = 'all';
+  // жанры - дополнение: если genres-map.json нет или не загрузился, страница работает как раньше
+  var genresReq = fetch('genres-map.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+
   fetch('albums.json')
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      return genresReq.then(function (g) { genreInfo = g; return data; });
+    })
     .then(function (data) {
       albums = data.albums || [];
       if (currentLang !== 'all' && !albums.some(function (a) { return a.lang === currentLang; })) currentLang = 'all';
       buildStats();
       buildFilters();
+      buildGenreFilters();
       render();
       openFromQuery();
     })

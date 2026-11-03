@@ -115,6 +115,7 @@
     'albums.empty': ['Альбомів цією мовою поки немає.', 'Альбомов на этом языке пока нет.', 'No albums in this language yet.'],
     'albums.error': ['Не вдалося завантажити список альбомів. Спробуйте оновити сторінку.', 'Не удалось загрузить список альбомов. Попробуйте обновить страницу.', 'Couldn\'t load the album list. Please try refreshing the page.'],
     'filters.label': ['Мова пісень:', 'Язык песен:', 'Song language:'],
+    'filters.all': ['Усі', 'Все', 'All'],
     'filters.aria': ['Мова', 'Язык', 'Language'],
     'track.play': ['♪ Слухати', '♪ Слушать', '♪ Listen'],
     'track.close': ['■ Закрити', '■ Закрыть', '■ Close'],

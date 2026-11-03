@@ -1012,6 +1012,13 @@ def main():
     (ROOT / "lyrics.html").write_text(lyrics_page(lib), encoding="utf-8")
     lyrics_json["_slugs"] = {a["id"]: {t["title"]: t["slug"] for t in found} for a, found in built}
     (ROOT / "lyrics.json").write_text(json.dumps(lyrics_json, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    # жанры альбомов для фильтра на странице альбомов (albums.html)
+    gmap = ROOT / "genres-map.json"
+    if GENRES:
+        gmap.write_text(json.dumps({"genres": GENRES, "albums": {a["id"]: album_genre_ids(a) for a in data["albums"]}},
+                                   ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    elif gmap.exists():
+        gmap.unlink()
     (ROOT / "sitemap.xml").write_text(sitemap(urls), encoding="utf-8")
 
     n_songs = sum(len(a["tracks"]) for a in lib)
