@@ -38,4 +38,4 @@ jobs:
       - name: Build pages
         run: python3 build_lyrics.py
       - name: Commit changes
-        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums genres images/thumbs lyrics.html lyrics.json site.css favicon.png sitemap.xml
+        run: bash .github/scripts/commit-push.sh "Build lyrics pages" songs albums genres images/thumbs lyrics.html lyrics.json genres-map.json site.css favicon.png sitemap.xml
