@@ -74,6 +74,7 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 28px; }
 .filters-label { color: var(--muted); font-size: 15px; margin-right: 4px; }
 .filters + .filters { margin-top: -14px; }
+.track.is-off { display: none; }
 .chip:disabled { opacity: .35; cursor: default; }
 .chip:disabled:hover { color: var(--muted); border-color: var(--line); }
 .chip { border: 1.5px solid var(--line); background: transparent; color: var(--muted); padding: 8px 18px; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; }
@@ -293,7 +294,11 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   var trackRows = {};
   function trackKey(albumId, title) { return albumId + '|' + title; }
   function queueOf(album) {
-    return album.tracks.filter(function (x) { return x.drive || x.audio; }).map(function (x) {
+    // при выбранном жанре играем только его треки (номера из genres-map.json)
+    var tg = currentGenre !== 'all' && genreInfo && genreInfo.tracks && genreInfo.tracks[album.id];
+    return album.tracks.filter(function (x, i) {
+      return (x.drive || x.audio) && (!tg || (tg[i] || []).indexOf(currentGenre) >= 0);
+    }).map(function (x) {
       return {
         title: x.title, album: album.title, albumId: album.id, drive: x.drive || '',
         cover: album.cover ? new URL(album.cover, location.href).href : '',
@@ -544,6 +549,17 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     });
   }
 
+  // при выбранном жанре в раскрытом альбоме остаются только его треки (номера - настоящие номера в альбоме)
+  function applyTrackFilter(card, album) {
+    var tg = genreInfo && genreInfo.tracks && genreInfo.tracks[album.id];
+    var on = currentGenre !== 'all' && tg;
+    Array.prototype.forEach.call(card.querySelectorAll('.track'), function (li) {
+      var n = parseInt(li.dataset.n, 10);
+      li.classList.toggle('is-off', !!on && (tg[n - 1] || []).indexOf(currentGenre) < 0);
+      if (on) li.style.setProperty('counter-set', 't ' + (n - 1)); else li.style.removeProperty('counter-set');
+    });
+  }
+
   function render() {
     albumsEl.textContent = '';
     syncGenreChips();
@@ -559,6 +575,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     shown.forEach(function (a, i) {
       var card = buildCard(a);
       card.style.setProperty('--i', i);
+      applyTrackFilter(card, a);
       albumsEl.appendChild(card);
     });
   }

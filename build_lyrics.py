@@ -1015,7 +1015,8 @@ def main():
     # жанры альбомов для фильтра на странице альбомов (albums.html)
     gmap = ROOT / "genres-map.json"
     if GENRES:
-        gmap.write_text(json.dumps({"genres": GENRES, "albums": {a["id"]: album_genre_ids(a) for a in data["albums"]}},
+        gmap.write_text(json.dumps({"genres": GENRES, "albums": {a["id"]: album_genre_ids(a) for a in data["albums"]},
+                                    "tracks": {a["id"]: [TRACK_GENRES.get((a["id"], t["title"]), []) for t in a["tracks"]] for a in data["albums"]}},
                                    ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     elif gmap.exists():
         gmap.unlink()
