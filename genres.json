@@ -26,12 +26,6 @@
    "en": "Rap & hip-hop"
   },
   {
-   "id": "electronic",
-   "uk": "Електроніка",
-   "ru": "Электроника",
-   "en": "Electronic"
-  },
-  {
    "id": "cinematic",
    "uk": "Кінематограф і ембієнт",
    "ru": "Кинематограф и эмбиент",
@@ -42,12 +36,6 @@
    "uk": "Фолк, шансон і блюз",
    "ru": "Фолк, шансон и блюз",
    "en": "Folk, chanson & blues"
-  },
-  {
-   "id": "experimental",
-   "uk": "Експерименти",
-   "ru": "Эксперименты",
-   "en": "Experimental"
   },
   {
    "id": "instrumental",
