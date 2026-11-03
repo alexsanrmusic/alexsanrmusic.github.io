@@ -673,22 +673,17 @@ def genre_page(g, entries, slug_map):
     path = f"genres/{gid}.html"
     blocks = []
     for a, rows in entries:
-        slugs = slug_map.get(a["id"], {})
         lis = []
         for i, name in rows:
-            slug = slugs.get(name)
-            if slug:
-                href = f'{rel}songs/{e(a["id"])}/{e(slug)}.html'
-                go = '<span class="t-go" data-i18n="album.lyricsLink">текст →</span>'
-            else:
-                href = f'{rel}albums.html?album={e(a["id"])}&amp;track={i}'
-                go = '<span class="t-go" data-i18n="track.play">♪ Слухати</span>'
+            # жанр ведёт к прослушиванию: открываем трек в плеере, а не страницу с текстом
+            href = f'{rel}albums.html?album={e(a["id"])}&amp;track={i}'
+            go = '<span class="t-go" data-i18n="track.play">♪ Слухати</span>'
             lis.append(f'<li><a href="{href}"><span class="num">{i}</span><span class="t-name">{e(name)}</span>{go}</a></li>')
         stem = Path(a["cover"]).stem if a.get("cover") else ""
         img = f'<img src="{rel}images/thumbs/{e(stem)}.jpg" alt="" width="64" height="64" loading="lazy">' if stem else ""
         blocks.append(
             f'<section class="genre-album">\n'
-            f'  <div class="genre-album-head">{img}<h2><a href="{rel}albums/{e(a["id"])}.html">{e(a["title"])}</a></h2></div>\n'
+            f'  <div class="genre-album-head">{img}<h2><a href="{rel}albums.html?album={e(a["id"])}">{e(a["title"])}</a></h2></div>\n'
             f'  <ol class="album-tracks">\n    {chr(10).join("    " + l for l in lis).strip()}\n  </ol>\n</section>'
         )
     others = "".join(
