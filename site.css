@@ -43,6 +43,9 @@ h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.8rem
 
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 28px; }
 .filters-label { color: var(--muted); font-size: 15px; margin-right: 4px; }
+.filters + .filters { margin-top: -14px; }
+.chip:disabled { opacity: .35; cursor: default; }
+.chip:disabled:hover { color: var(--muted); border-color: var(--line); }
 .chip { border: 1.5px solid var(--line); background: transparent; color: var(--muted); padding: 8px 18px; border-radius: 999px; font: inherit; font-size: 15px; cursor: pointer; }
 .chip:hover { color: var(--fg); border-color: var(--muted); }
 .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
