@@ -150,6 +150,15 @@ def _stanzas(text):
 
 
 def line_of_day():
+    # запуск по расписанию (TG_AUTO=1): если рядок за сьогодні вже опублікований - нічого не робимо.
+    # Ручний запуск цієї перевірки не робить, тож можна надіслати ще один.
+    if os.environ.get("TG_AUTO") == "1":
+        try:
+            if json.load(open(LINE_FILE, encoding="utf-8")).get("date") == datetime.date.today().isoformat():
+                print("Рядок дня за сьогодні вже опубліковано - пропускаю.")
+                return
+        except (OSError, ValueError):
+            pass
     albums = {a["id"]: a for a in json.load(open("albums.json", encoding="utf-8"))["albums"]}
     lyrics = json.load(open("lyrics.json", encoding="utf-8"))
     slugs = lyrics.get("_slugs", {})
