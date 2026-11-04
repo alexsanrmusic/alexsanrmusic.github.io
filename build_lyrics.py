@@ -575,7 +575,9 @@ TRACK_GENRES = {}    # (id альбома, название трека) -> [id �
 
 
 def canon(raw, valid):
-    """Свободные теги -> id жанров сайта (в порядке списка genres)."""
+    """Свободные теги («Pop Rock, Indie Pop») -> id жанров сайта (в порядке списка genres).
+    pop-rock: поп, поп-рок, рок, инди; hip-hop: рэп и хип-хоп; epic: эпик и кино-звучание;
+    folk: фолк, шансон, баллада, блюз; instrumental: без слов."""
     got = set()
     for t in re.split(r"[,/]", raw.lower()):
         t = t.strip()
@@ -583,22 +585,14 @@ def canon(raw, valid):
             continue
         if "instrumental" in t:
             got.add("instrumental")
-        if "rock" in t:
+        if "rock" in t or "indie" in t or t in ("pop", "synth-pop", "alternative pop"):
             got.add("pop-rock")
-        if t.startswith("indie") or "indie-" in t or t == "alternative pop":
-            got.add("indie")
-        if t in ("pop", "synth-pop"):
-            got.add("pop")
         if "rap" in t or "hip-hop" in t or "hip hop" in t or "boom-bap" in t:
             got.add("hip-hop")
-        if "electronic" in t or "techno" in t or "synth" in t or "breakbeat" in t:
-            got.add("electronic")
-        if "cinematic" in t or "ambient" in t:
-            got.add("cinematic")
+        if "epic" in t or "cinematic" in t or "symphonic" in t:
+            got.add("epic")
         if any(w in t for w in ("folk", "chanson", "ballad")) or ("blues" in t and "rock" not in t):
             got.add("folk")
-        if "experimental" in t:
-            got.add("experimental")
     return [g["id"] for g in GENRES if g["id"] in got and g["id"] in valid]
 
 

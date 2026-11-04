@@ -3,21 +3,9 @@
  "genres": [
   {
    "id": "pop-rock",
-   "uk": "Поп-рок і рок",
-   "ru": "Поп-рок и рок",
-   "en": "Pop rock & rock"
-  },
-  {
-   "id": "indie",
-   "uk": "Інді",
-   "ru": "Инди",
-   "en": "Indie"
-  },
-  {
-   "id": "pop",
-   "uk": "Поп",
-   "ru": "Поп",
-   "en": "Pop"
+   "uk": "Поп і поп-рок",
+   "ru": "Поп и поп-рок",
+   "en": "Pop & pop rock"
   },
   {
    "id": "hip-hop",
@@ -26,10 +14,10 @@
    "en": "Rap & hip-hop"
   },
   {
-   "id": "cinematic",
-   "uk": "Кінематограф",
-   "ru": "Кинематограф",
-   "en": "Cinematic"
+   "id": "epic",
+   "uk": "Епік",
+   "ru": "Эпик",
+   "en": "Epic"
   },
   {
    "id": "folk",
@@ -62,7 +50,7 @@
    }
   },
   "petlia-i-svet": {
-   "all": "Ambient hip-hop, Alternative Rap"
+   "all": "Alternative Hip-Hop, Rap"
   },
   "tihi-momenty": {
    "all": "Pop Rock, Lyrical Rock",
@@ -141,7 +129,9 @@
     "Чаты": "Alternative Rap, Upbeat, Hip-Hop"
    }
   },
-  "impulse": { "all": "Instrumental" },
+  "impulse": {
+   "all": "Instrumental"
+  },
   "matrix-for-trader": {
    "all": "Alternative Rap, Hip-Hop"
   },
