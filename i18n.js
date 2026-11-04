@@ -50,7 +50,7 @@
     'genre.pop': ['Поп', 'Поп', 'Pop'],
     'genre.hip-hop': ['Реп і хіп-хоп', 'Рэп и хип-хоп', 'Rap & hip-hop'],
     'genre.electronic': ['Електроніка', 'Электроника', 'Electronic'],
-    'genre.cinematic': ['Кінематограф і ембієнт', 'Кинематограф и эмбиент', 'Cinematic & ambient'],
+    'genre.cinematic': ['Кінематограф', 'Кинематограф', 'Cinematic'],
     'genre.folk': ['Фолк, шансон і блюз', 'Фолк, шансон и блюз', 'Folk, chanson & blues'],
     'genre.experimental': ['Експерименти', 'Эксперименты', 'Experimental'],
     'genre.instrumental': ['Інструментал', 'Инструментал', 'Instrumental'],
