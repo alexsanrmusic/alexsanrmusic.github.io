@@ -27,9 +27,9 @@
   },
   {
    "id": "cinematic",
-   "uk": "Кінематограф і ембієнт",
-   "ru": "Кинематограф и эмбиент",
-   "en": "Cinematic & ambient"
+   "uk": "Кінематограф",
+   "ru": "Кинематограф",
+   "en": "Cinematic"
   },
   {
    "id": "folk",
@@ -50,35 +50,35 @@
    "tracks": {
     "Маленький човник": "Pop, Pop-rock, Indie",
     "Щедрий вечір": "Folk, Pop, Ballad",
-    "Romantic 404": "Pop, Chanson, Ballad",
+    "Romantic 404": "Pop, Chanson, Folk",
     "День дякую": "Pop, Pop-rock, Indie",
     "Львівський трамвай": "Pop, Indie, Folk",
     "Моя люба": "Pop, Indie, Folk",
     "Моя люба (Blues version)": "Pop, Blues",
     "З новим роком!": "Pop-Rock",
     "Новорічна": "Pop-Rock",
-    "Добрий вечір тобі...": "Folk, Singer-Songwriter, Pop-Rap",
+    "Добрий вечір тобі...": "Folk, Pop-Rap",
     "Новий гімн України": "Synth-Pop"
    }
   },
   "petlia-i-svet": {
-   "all": "Ambient hip-hop, Alternative Rap, Atmospheric Electronic, Upbeat"
+   "all": "Ambient hip-hop, Alternative Rap"
   },
   "tihi-momenty": {
-   "all": "Pop Rock, Lyrical Rock, Singer-Songwriter",
+   "all": "Pop Rock, Lyrical Rock",
    "tracks": {
-    "Всі дівчата гарні...": "Pop Rock, Indie Pop, Singer-Songwriter",
-    "Залежність": "Pop Rock, Alternative Rock, Indie Pop",
-    "Кава о п'ятій": "Pop Rock, Alternative Rock, Indie Pop",
+    "Всі дівчата гарні...": "Pop Rock, Indie Pop, Pop",
+    "Залежність": "Pop Rock, Pop, Indie Pop",
+    "Кава о п'ятій": "Pop Rock, Pop, Indie Pop",
     "Місто крізь віки": "Epic Rock, Atmospheric Rock, Symphonic Rock, Cinematic",
-    "Світло на кухні": "Pop Rock, Indie Pop, Singer-Songwriter"
+    "Світло на кухні": "Pop Rock, Indie Pop, Blues"
    }
   },
   "between-entry-points": {
-   "all": "Alternative Rap, Hip-Hop, Atmospheric Electronic"
+   "all": "Alternative Rap, Hip-Hop"
   },
   "prosto-zhyvy": {
-   "all": "Pop Rock, Indie Pop, Singer-Songwriter",
+   "all": "Pop Rock, Indie Pop, Pop",
    "tracks": {
     "Байдуже": "Pop Rock, Indie Pop, Alternative Pop",
     "Давай втечемо": "Pop Rock, Indie Pop, Alternative Rock",
@@ -90,19 +90,19 @@
    }
   },
   "zeroing-return-to-self": {
-   "all": "Alternative Rap, Atmospheric Electronic, Upbeat"
+   "all": "Alternative Rap, Hip-Hop"
   },
   "khroniky-khaosu": {
    "all": "Alternative Rap, Boom-Bap, Hip-Hop",
    "tracks": {
-    "Хроніки хаосу - Ефір без правил": "Alternative Hip-Hop, Blues Rock, Breakbeat, Electronic Rap, Experimental"
+    "Хроніки хаосу - Ефір без правил": "Alternative Hip-Hop, Blues Rock, Electronic Rap"
    }
   },
   "mezhdu-tochkami-vkhoda": {
-   "all": "Alternative Rap, Atmospheric Electronic, Upbeat"
+   "all": "Alternative Rap, Hip-Hop, Upbeat"
   },
   "pomizh-tochkamy-vkhodu": {
-   "all": "Alternative Rap, Hip-Hop, Atmospheric Electronic",
+   "all": "Alternative Rap, Hip-Hop",
    "tracks": {
     "Вхід у вихід": "Alternative Rap, Hip-Hop",
     "Дух біржі": "Alternative Rap, Hip-Hop, Electronic Rap",
@@ -110,19 +110,19 @@
    }
   },
   "petlia-i-svitlo": {
-   "all": "Alternative Hip-Hop, Rap, Cinematic",
+   "all": "Alternative Hip-Hop, Rap",
    "tracks": {
     "Калібрування страхів": "Pop Rock, Indie"
    }
   },
   "just-life": {
-   "all": "Pop-Rock, Indie-Rock, Atmospheric Electronic"
+   "all": "Pop-Rock, Indie-Rock"
   },
   "echo-ua-en": {
-   "all": "Pop-Rock, Indie-Rock, Atmospheric Electronic",
+   "all": "Pop-Rock, Indie-Rock",
    "tracks": {
-    "Good Evening": "Alternative Rap, Hip-Hop, Atmospheric Electronic",
-    "My Beloved": "Pop-Rock, Indie-Pop, Atmospheric Electronic"
+    "Good Evening": "Alternative Rap, Hip-Hop",
+    "My Beloved": "Pop-Rock, Indie-Pop"
    }
   },
   "mozayka": {
@@ -132,13 +132,13 @@
     "Держу твою ладонь": "Melodic Pop-Rock, Indie-Pop",
     "Маленький кораблик": "Melodic Pop-Rock, Indie-Pop",
     "Дети Земли": "Cinematic Techno, Rap-Techno",
-    "Жизнь под фартуком": "Chanson, Singer-Songwriter",
-    "Единое": "Dark Ambient, Electronic Spoken Word, Cinematic",
-    "Продавец воздуха": "Dark Ambient, Electronic Spoken Word, Cinematic",
-    "Ты больше чем...": "Dark Ambient, Electronic Spoken Word, Cinematic",
+    "Жизнь под фартуком": "Chanson",
+    "Единое": "Cinematic",
+    "Продавец воздуха": "Cinematic",
+    "Ты больше чем...": "Cinematic",
     "Шваб - Ковид 2019": "Alternative Rock, Indie Rock",
     "Кругозор": "Alternative Rap, Hip-Hop",
-    "Чаты": "Alternative Rap, Atmospheric Electronic, Upbeat, Hip-Hop"
+    "Чаты": "Alternative Rap, Upbeat, Hip-Hop"
    }
   },
   "impulse": { "all": "Instrumental" },
