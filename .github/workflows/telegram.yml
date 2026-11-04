@@ -3,7 +3,11 @@ name: Telegram
 on:
   schedule:
     - cron: "20 */6 * * *"   # через 20 хв після update-videos
-    - cron: "3 7 * * *"      # щодня о 07:03 UTC (09:03 взимку / 10:03 влітку за Києвом): «Рядок дня»
+    # «Рядок дня»: щодня о 07:03 UTC (09:03 взимку / 10:03 влітку за Києвом).
+    # GitHub інколи запізнюється або пропускає запуск, тому є два запасних; скрипт не опублікує рядок двічі за день.
+    - cron: "3 7 * * *"
+    - cron: "33 7 * * *"
+    - cron: "3 8 * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -30,7 +34,8 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHANNEL: ${{ secrets.TG_CHANNEL }}
-          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '3 7 * * *' && 'line' || 'new-videos') }}
+          MODE: ${{ github.event.inputs.mode || (contains('3 7 * * *|33 7 * * *|3 8 * * *', github.event.schedule) && 'line' || 'new-videos') }}
+          TG_AUTO: ${{ github.event_name == 'schedule' && '1' || '' }}
           ALBUM_ID: ${{ github.event.inputs.album_id }}
         run: python3 telegram_post.py "$MODE" "$ALBUM_ID"
       # always(): если пост частично ушёл, а скрипт упал, список отправленных всё равно сохраняем,
