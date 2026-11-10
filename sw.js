@@ -2,7 +2,7 @@
    Спочатку мережа (завжди свіжий сайт), кеш лише як запасний варіант без інтернету.
    Чужі запити (YouTube, Google Drive, шрифти) не чіпає. */
 const CACHE = 'alexsanr-v7';
-const SHELL = ['./', 'index.html', 'links.html', 'albums.html', 'lyrics.html', 'albums.json', 'lyrics.json', 'videos.json', 'shorts.json', 'international.json', 'favicon.png', 'icons/icon-192.png', 'site.css', 'i18n.js', 'miniplayer.js', 'search.js', 'fonts/fonts.css', 'images/hero.jpg'];
+const SHELL = ['./', 'index.html', 'links.html', 'albums.html', 'lyrics.html', 'albums.json', 'lyrics.json', 'videos.json', 'shorts.json', 'international.json', 'favicon.png', 'icons/icon-192.png', 'site.css', 'i18n.js', 'miniplayer.js', 'winter.js', 'search.js', 'fonts/fonts.css', 'images/hero.jpg'];
 
 self.addEventListener('install', (e) => {
   // каждый файл отдельно: если одного нет, остальные всё равно кэшируются

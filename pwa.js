@@ -28,6 +28,13 @@
       m.src = cs.src.replace(/pwa\.js(\?.*)?$/, 'miniplayer.js');
       h.appendChild(m);
     }
+    /* зимове оформлення (winter.js саме вмикається 1 грудня - 27 лютого) */
+    if (!window.__winter && cs && cs.src) {
+      var w = document.createElement('script');
+      w.src = cs.src.replace(/pwa\.js(\?.*)?$/, 'winter.js');
+      w.async = true;
+      h.appendChild(w);
+    }
   } catch (e) {}
 })();
 /* Alex Sanr — кнопка «Встановити застосунок» (PWA).
