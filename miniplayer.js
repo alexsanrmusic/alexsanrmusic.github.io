@@ -206,16 +206,64 @@
       });
     } catch (e) {}
   }
+  /* ---------- фон: без паузи між треками ----------
+     Наступний трек підвантажується в пам'ять, поки грає поточний, і на «ended» стартує миттєво (без запиту до Drive).
+     Без цього у фоні (екран вимкнено) пауза на мережевий запит між треками могла зупинити відтворення. */
+  var pre = { i: -1, src: '', url: '', ctrl: null }, curBlob = '', wantPlay = false;
+  function dropPre() {
+    if (pre.ctrl) { try { pre.ctrl.abort(); } catch (e) {} }
+    if (pre.url) { try { URL.revokeObjectURL(pre.url); } catch (e) {} }
+    pre = { i: -1, src: '', url: '', ctrl: null };
+  }
+  function preloadNext() {
+    var i = MP.idx + 1, t = MP.queue[i];
+    if (!t || !window.fetch || !window.URL || !URL.createObjectURL) return;
+    if (navigator.connection && navigator.connection.saveData) return;
+    if (pre.i === i && pre.src === t.src) return;
+    dropPre();
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var mine = pre = { i: i, src: t.src, url: '', ctrl: ctrl };
+    fetch(t.src, ctrl ? { signal: ctrl.signal } : {}).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.blob();
+    }).then(function (b) {
+      if (pre !== mine) return;
+      if (!b || !b.size) throw new Error('empty');
+      mine.url = URL.createObjectURL(b);
+    }).catch(function (e) { if (pre === mine) say('Не вдалося підвантажити наступний трек: ' + (e && e.message || e)); });
+  }
+  function setState(st) { try { if ('mediaSession' in navigator) navigator.mediaSession.playbackState = st; } catch (e) {} }
+  // play() без мовчазного проковтування помилки: якщо відхилено - ще кілька спроб
+  function playNow(t, tries) {
+    var p;
+    try { p = audio.play(); } catch (e) { return; }
+    if (p && p.catch) p.catch(function (e) {
+      var name = e && e.name;
+      say('play() відхилено: ' + (name || e));
+      if (name === 'AbortError' || MP.cur !== t || !wantPlay || tries >= 3) return;
+      setTimeout(function () { if (MP.cur === t && wantPlay && audio.paused) playNow(t, tries + 1); }, 700 * (tries + 1));
+    });
+  }
+  document.addEventListener('visibilitychange', function () {
+    // повернулися на вкладку, а звук мав грати, але став на паузу
+    if (!document.hidden && wantPlay && MP.cur && audio.paused && !audio.ended) audio.play().catch(function () {});
+  });
+
   function load(i, autoplay, time) {
     var t = MP.queue[i];
     if (!t) return;
     MP.idx = i; MP.cur = t; MP.cues = null; MP.active = -1;
-    audio.src = t.src;
+    var src = t.src;
+    if (pre.i === i && pre.src === t.src && pre.url) { src = pre.url; pre = { i: -1, src: '', url: '', ctrl: null }; }   // наступний трек уже в пам'яті
+    else dropPre();
+    if (curBlob && curBlob !== src) { try { URL.revokeObjectURL(curBlob); } catch (e) {} }
+    curBlob = src !== t.src ? src : '';
+    audio.src = src;
     if (time > 0) audio.addEventListener('loadedmetadata', function f() {
       audio.removeEventListener('loadedmetadata', f);
       try { audio.currentTime = time; } catch (e) {}
     });
-    if (autoplay) audio.play().catch(function () {});
+    if (autoplay) { wantPlay = true; setState('playing'); playNow(t, 0); }
     titleEl.textContent = t.title;
     lineEl.textContent = t.album;
     cover.hidden = !t.cover;
@@ -232,6 +280,8 @@
     else load(MP.idx - 1, true);
   };
   MP.close = function () {
+    wantPlay = false; dropPre();
+    if (curBlob) { try { URL.revokeObjectURL(curBlob); } catch (e) {} curBlob = ''; }
     audio.pause(); audio.removeAttribute('src'); audio.load();
     MP.queue = []; MP.idx = -1; MP.cur = null; MP.cues = null; MP.active = -1;
     bar.hidden = true; pop.hidden = true; root.classList.remove('mp-on');
@@ -240,8 +290,12 @@
     emit('track');
   };
 
-  audio.addEventListener('play', function () { setIcon(); tick(); meta(); });
-  audio.addEventListener('pause', function () { setIcon(); cancelAnimationFrame(raf); save(); });
+  audio.addEventListener('play', function () { setIcon(); tick(); meta(); setState('playing'); });
+  audio.addEventListener('pause', function () { setIcon(); cancelAnimationFrame(raf); save(); if (!audio.ended) setState('paused'); });
+  audio.addEventListener('playing', function () {
+    var t = MP.cur;
+    setTimeout(function () { if (MP.cur === t && !audio.paused) preloadNext(); }, 2500);
+  });
   audio.addEventListener('seeked', tick);
   audio.addEventListener('durationchange', tick);
   audio.addEventListener('ended', function () {
@@ -306,7 +360,7 @@
   });
   window.addEventListener('pagehide', save);
 
-  toggleBtn.addEventListener('click', function () { if (audio.paused) audio.play().catch(function () {}); else audio.pause(); });
+  toggleBtn.addEventListener('click', function () { if (audio.paused) { wantPlay = true; audio.play().catch(function () {}); } else { wantPlay = false; audio.pause(); } });
   bar.querySelector('.mp-prev').addEventListener('click', MP.prev);
   bar.querySelector('.mp-next').addEventListener('click', MP.next);
   bar.querySelector('.mp-close').addEventListener('click', MP.close);
@@ -320,7 +374,7 @@
 
   if ('mediaSession' in navigator) {
     var ms = navigator.mediaSession;
-    [['play', function () { audio.play(); }], ['pause', function () { audio.pause(); }],
+    [['play', function () { wantPlay = true; audio.play(); }], ['pause', function () { wantPlay = false; audio.pause(); }],
      ['previoustrack', MP.prev], ['nexttrack', MP.next],
      ['seekto', function (d) { audio.currentTime = d.seekTime; }]].forEach(function (h) {
       try { ms.setActionHandler(h[0], h[1]); } catch (e) {}
