@@ -940,6 +940,107 @@
    }
   ]
  }
+,
+ {
+  "id": "electric-dreams",
+  "instrumental": true,
+  "title": "Electric Dreams",
+  "lang": "uk",
+  "year": 2026,
+  "cover": "images/electricdreams.jpg",
+  "tracks": [
+   {
+    "title": "Neon Highway",
+    "drive": "1lSIElBFUSNmJIIwdsmTfXiTdaTVYDh0o"
+   },
+   {
+    "title": "Endless Horizon",
+    "drive": "1Q_sGgKOD6VxCnOc8eIGr5N_7c2solemZ"
+   },
+   {
+    "title": "Electric Riot",
+    "drive": "16uJdeDanvWIUtF9biPNn_nbhZz2spGav"
+   },
+   {
+    "title": "Midnight Groove",
+    "drive": "1DOB6fn9__-u9Wx1741yEq-QcvSLPg_KC"
+   },
+   {
+    "title": "Beyond The Clouds",
+    "drive": "18nZxJLAMNQvehueUxuybE05v2z9bxtgK"
+   },
+   {
+    "title": "Moving Shadows",
+    "drive": "1Bbbs-4r_9sIUhdbMQersZdDHgT_fYuL5"
+   },
+   {
+    "title": "Black Circuit",
+    "drive": "1144mTphEnpiCCVpsEPL21Y1gYp3L216a"
+   },
+   {
+    "title": "Funky Machine",
+    "drive": "1glhR4K5x_Y6PIH4pnfXUa2pJeE8KP-jo"
+   },
+   {
+    "title": "Summer Forever",
+    "drive": "1IaQmFJGSMeCUpZ_LIMdvY0hQwTUSY18R"
+   },
+   {
+    "title": "The Last Dimension",
+    "drive": "1CC4jdmldsum2-GBk-S1gU9aOEzafb28u"
+   }
+  ]
+ },
+ {
+  "id": "electric-dreams-vol-2",
+  "instrumental": true,
+  "title": "Electric Dreams vol 2",
+  "lang": "uk",
+  "year": 2026,
+  "cover": "images/electricdreamsvol2.jpeg",
+  "tracks": [
+   {
+    "title": "Lost In Tomorrow",
+    "drive": "147hEPDSutL4AYkM7Ig9BAmH3PrQrrBlN"
+   },
+   {
+    "title": "Silent Memories",
+    "drive": "1NKJVpJ40xSCzXkQNiD79lzafzytx6z9A"
+   },
+   {
+    "title": "Higher Voltage",
+    "drive": "1zDNgyoBwKEGpn7iJcCjKVJboH1TiDI5p"
+   },
+   {
+    "title": "Smooth Operator",
+    "drive": "1cjyCnZsufvrHTAtxg1NhpokiO_uoJ4q7"
+   },
+   {
+    "title": "Ocean Of Light",
+    "drive": "1CNuFrHByuNcoS3Hkb1gUGnWf1TNLoR4k"
+   },
+   {
+    "title": "Infinite Motion",
+    "drive": "1Osd1_sbDTsTN809w0Cyupx_Bx4oUFrn0"
+   },
+   {
+    "title": "Dark Matter",
+    "drive": "1E9CEhX8rDrvqu_DWZMP04IfqI8uoBob4"
+   },
+   {
+    "title": "Rhythm Driver",
+    "drive": "16yGEU4pSvatzkhgxwOhVDFrbNPje-nt5"
+   },
+   {
+    "title": "Take Me Higher",
+    "drive": "1qIPlFE676-rNgNVjQfoauJ0ar-99czbw"
+   },
+   {
+    "title": "Beyond Reality",
+    "drive": "17n3sChrl0eQX1lrW7CHR8AB3_96QbxTC"
+   }
+  ]
+ }
  ],
  "_hidden": [
  
