@@ -309,6 +309,22 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     });
   }
 
+  // Кінець альбому: плеєр сам переходить до наступного альбому зі списку (з урахуванням вибраних мови й жанру), по колу
+  MP.nextQueue = function (albumId) {
+    var list = albums.filter(function (x) {
+      if (currentLang !== 'all' && x.lang !== currentLang) return false;
+      if (currentGenre !== 'all' && genreInfo && (genreInfo.albums[x.id] || []).indexOf(currentGenre) < 0) return false;
+      return true;
+    });
+    var at = -1, i, j, q;
+    for (i = 0; i < list.length; i++) if (list[i].id === albumId) at = i;
+    for (j = 1; j <= list.length; j++) {
+      q = queueOf(list[(at + j + list.length) % list.length]);
+      if (q.length) return q;
+    }
+    return null;
+  };
+
   function openView(holder, t, album) {
     Array.prototype.forEach.call(document.querySelectorAll('.drive-player'), closeDrivePlayer);
     var ly = el('div', 'lyrics');

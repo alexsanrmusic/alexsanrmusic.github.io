@@ -274,7 +274,44 @@
     meta(); setIcon(); emit('track'); loadCues(t); save();
   }
   MP.play = function (queue, idx) { MP.queue = queue; load(idx, true); };
-  MP.next = function () { if (MP.idx + 1 < MP.queue.length) load(MP.idx + 1, true); };
+  // Кінець черги: не зупиняємось, а продовжуємо з наступного альбому (по колу).
+  // На albums.html порядок і фільтри (мова, жанр) підказує MP.nextQueue(albumId); на інших сторінках — порядок albums.json.
+  var advancing = false;
+  function defaultNext(albumId, cb) {
+    var key = (/[?&]key=([^&]+)/.exec((MP.queue[MP.idx] || {}).src || '') || [])[1] || '';
+    if (!window.fetch || !key) return cb(null);
+    fetch(url('albums.json')).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+      var list = (d && d.albums) || [], at = -1, i, j, a, q;
+      for (i = 0; i < list.length; i++) if (list[i].id === albumId) at = i;
+      for (j = 1; j <= list.length; j++) {
+        a = list[(at + j + list.length) % list.length];
+        q = (a.tracks || []).filter(function (x) { return x.drive || x.audio; }).map(function (x) {
+          return {
+            title: x.title, album: a.title, albumId: a.id, drive: x.drive || '',
+            cover: a.cover ? url(a.cover) : '',
+            src: x.audio || 'https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(x.drive) + '?alt=media&key=' + key
+          };
+        });
+        if (q.length) return cb(q);
+      }
+      cb(null);
+    }).catch(function () { cb(null); });
+  }
+  MP.advance = function () {
+    if (advancing || !MP.cur) return;
+    advancing = true;
+    var t = MP.cur, id = t.albumId;
+    function done(q) {
+      advancing = false;
+      if (MP.cur !== t) return;                       // плеєр закрили або запустили інше, поки шукали альбом
+      if (q && q.length) { MP.queue = q; load(0, true); } else { setIcon(); save(); }
+    }
+    var r = null;
+    try { r = MP.nextQueue ? MP.nextQueue(id) : null; } catch (e) {}
+    if (r && r.length) return done(r);
+    defaultNext(id, done);
+  };
+  MP.next = function () { if (MP.idx + 1 < MP.queue.length) load(MP.idx + 1, true); else MP.advance(); };
   MP.prev = function () {
     if (audio.currentTime > 3 || MP.idx <= 0) { audio.currentTime = 0; tick(); }
     else load(MP.idx - 1, true);
@@ -299,7 +336,7 @@
   audio.addEventListener('seeked', tick);
   audio.addEventListener('durationchange', tick);
   audio.addEventListener('ended', function () {
-    if (MP.idx + 1 < MP.queue.length) MP.next(); else { setIcon(); save(); }
+    MP.next();
   });
   // Помилка звуку: з'ясовуємо причину, двічі пробуємо ще раз (збій мережі), і лише потім запасний плеєр Drive.
   // Причину видно на екрані, якщо відкрити сторінку з ?debug=1 (далі запам'ятовується до закриття вкладки).
