@@ -206,76 +206,6 @@
       });
     } catch (e) {}
   }
-  /* ---------- журнал для діагностики (?log=1 вмикає й показує, ?log=0 вимикає) ----------
-     Пишеться в localStorage, тож переживає згортання й вимкнений екран. Потрібен, щоб побачити, що саме стається у фоні. */
-  var LOGON = (function () {
-    try {
-      var m = /[?&]log=(0|1)\b/.exec(location.search);
-      if (m) localStorage.setItem('mpLog', m[1]);
-      return localStorage.getItem('mpLog') === '1';
-    } catch (e) { return false; }
-  })();
-  function z2(n) { n = String(n); return n.length < 2 ? '0' + n : n; }
-  function mlog(msg) {
-    if (!LOGON) return;
-    try {
-      var d = new Date(), arr = JSON.parse(localStorage.getItem('mpLogData') || '[]');
-      arr.push(z2(d.getHours()) + ':' + z2(d.getMinutes()) + ':' + z2(d.getSeconds()) + (document.hidden ? ' [фон] ' : ' ') + msg);
-      if (arr.length > 200) arr = arr.slice(-200);
-      localStorage.setItem('mpLogData', JSON.stringify(arr));
-    } catch (e) {}
-  }
-  function pos() {
-    var d = audio.duration;
-    return audio.currentTime.toFixed(1) + '/' + (isFinite(d) ? d.toFixed(0) : '?') + ' rs' + audio.readyState + ' ns' + audio.networkState;
-  }
-  if (LOGON) {
-    var beat = 0;
-    mlog('--- сторінка ' + location.pathname + (matchMedia('(display-mode: standalone)').matches ? ' (застосунок)' : ' (браузер)') + ' | ' + navigator.userAgent.replace(/^Mozilla\/5\.0 /, '').slice(0, 90));
-    ['loadstart', 'loadedmetadata', 'canplay', 'playing', 'waiting', 'stalled', 'abort', 'emptied', 'ended'].forEach(function (ev) {
-      audio.addEventListener(ev, function () { mlog(ev + ' ' + pos()); });
-    });
-    audio.addEventListener('pause', function () {
-      mlog('pause ' + pos() + (!audio.ended && wantPlay ? '  <-- ПАУЗА НЕ ВІД КОРИСТУВАЧА' : ''));
-    });
-    audio.addEventListener('error', function () {
-      var e = audio.error;
-      mlog('ПОМИЛКА ЗВУКУ code=' + (e && e.code) + ' ' + ((e && e.message) || '') + ' ' + pos());
-    });
-    audio.addEventListener('timeupdate', function () {
-      if (Date.now() - beat > 30000) { beat = Date.now(); mlog('грає ' + pos()); }
-    });
-    document.addEventListener('visibilitychange', function () { mlog('видимість: ' + (document.hidden ? 'сховано' : 'видно') + ' paused=' + audio.paused + ' ' + pos()); });
-    document.addEventListener('freeze', function () { mlog('FREEZE (вкладку заморожено)'); });
-    document.addEventListener('resume', function () { mlog('RESUME (розморожено)'); });
-    window.addEventListener('pagehide', function () { mlog('pagehide'); });
-    window.addEventListener('online', function () { mlog('мережа: онлайн'); });
-    window.addEventListener('offline', function () { mlog('мережа: ОФЛАЙН'); });
-  }
-  // Панель журналу: сторінка з ?log=1, або довге натискання (~1 с) на назву альбому в плеєрі (для застосунку без адресного рядка)
-  function showLog(note) {
-    var old = document.getElementById('mp-logbox');
-    if (old) old.remove();
-    var box = document.createElement('div');
-    box.id = 'mp-logbox';
-    box.style.cssText = 'position:fixed;z-index:2000;left:0;right:0;top:0;max-height:70vh;display:flex;flex-direction:column;background:#10131f;color:#dfe6ff;font:12px/1.4 monospace;border-bottom:2px solid #ffc83d';
-    var pre = document.createElement('pre');
-    pre.style.cssText = 'margin:0;padding:8px;overflow:auto;white-space:pre-wrap;word-break:break-word;flex:1';
-    var arr = []; try { arr = JSON.parse(localStorage.getItem('mpLogData') || '[]'); } catch (e) {}
-    pre.textContent = (note ? note + '\n\n' : '') + (arr.length ? arr.join('\n') : 'Журнал порожній.');
-    var row = document.createElement('div');
-    row.style.cssText = 'display:flex;gap:8px;padding:6px 8px;background:#1b2038';
-    function btn(t, f) { var x = document.createElement('button'); x.textContent = t; x.style.cssText = 'padding:8px 12px;border-radius:8px;border:1px solid #3a466f;background:#252c4d;color:#fff;font:13px system-ui'; x.onclick = f; row.appendChild(x); }
-    btn('Копіювати', function () { try { navigator.clipboard.writeText(pre.textContent); } catch (e) {} });
-    btn('Очистити', function () { try { localStorage.removeItem('mpLogData'); } catch (e) {} pre.textContent = '(очищено)'; });
-    btn('Закрити', function () { box.remove(); });
-    box.appendChild(pre); box.appendChild(row);
-    document.body.appendChild(box);
-    pre.scrollTop = pre.scrollHeight;
-  }
-  if (/[?&]log=1\b/.test(location.search)) {
-    if (document.body) showLog(); else document.addEventListener('DOMContentLoaded', function () { showLog(); });
-  }
   // ?preload=0 вимикає підвантаження наступного треку в пам'ять (і запам'ятовує), ?preload=1 вмикає назад
   var PRE_ON = (function () {
     try {
@@ -303,7 +233,6 @@
     if (!cur) return;
     resolveNext(function (q) {
       if (MP.cur !== cur || !q || !q.length) return;
-      mlog('готуємо стик альбомів: наступний альбом «' + q[0].album + '»');
       startPre(0, q[0]);
     });
   }
@@ -314,8 +243,6 @@
     dropPre();
     var ctrl = window.AbortController ? new AbortController() : null;
     var mine = pre = { i: i, src: t.src, url: '', ctrl: ctrl };
-    var t0 = Date.now();
-    mlog('підвантаження наступного: старт «' + t.title + '»');
     fetch(t.src, ctrl ? { signal: ctrl.signal, priority: 'low' } : { priority: 'low' }).then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.blob();
@@ -323,8 +250,7 @@
       if (pre !== mine) return;
       if (!b || !b.size) throw new Error('empty');
       mine.url = URL.createObjectURL(b);
-      mlog('підвантаження наступного: готово ' + Math.round(b.size / 1024) + ' КБ за ' + Math.round((Date.now() - t0) / 1000) + ' с');
-    }).catch(function (e) { if (pre === mine) mlog('підвантаження наступного: ПОМИЛКА ' + (e && e.message || e)); if (pre === mine) say('Не вдалося підвантажити наступний трек: ' + (e && e.message || e)); });
+    }).catch(function (e) { if (pre === mine) say('Не вдалося підвантажити наступний трек: ' + (e && e.message || e)); });
   }
   function setState(st) { try { if ('mediaSession' in navigator) navigator.mediaSession.playbackState = st; } catch (e) {} }
   // play() без мовчазного проковтування помилки: якщо відхилено - ще кілька спроб
@@ -334,7 +260,6 @@
     if (p && p.catch) p.catch(function (e) {
       var name = e && e.name;
       say('play() відхилено: ' + (name || e));
-      mlog('play() відхилено: ' + (name || e) + ' спроба ' + tries);
       if (name === 'AbortError' || MP.cur !== t || !wantPlay || tries >= 3) return;
       setTimeout(function () { if (MP.cur === t && wantPlay && audio.paused) playNow(t, tries + 1); }, 700 * (tries + 1));
     });
@@ -353,7 +278,6 @@
     else dropPre();
     if (curBlob && curBlob !== src) { try { URL.revokeObjectURL(curBlob); } catch (e) {} }
     curBlob = src !== t.src ? src : '';
-    mlog('load #' + i + ' «' + t.title + '» ' + (src !== t.src ? 'з пам\'яті' : 'з мережі') + (autoplay ? ' (автоплей)' : ''));
     audio.src = src;
     if (time > 0) audio.addEventListener('loadedmetadata', function f() {
       audio.removeEventListener('loadedmetadata', f);
@@ -406,7 +330,6 @@
   MP.advance = function () {
     if (advancing || !MP.cur) return;
     advancing = true;
-    mlog('кінець черги, наступний альбом');
     var t = MP.cur;
     resolveNext(function (q) {
       advancing = false; nextCache = null;
@@ -501,38 +424,7 @@
   });
   window.addEventListener('pagehide', save);
 
-  toggleBtn.addEventListener('click', function () { mlog('кнопка пауза/грати'); if (audio.paused) { wantPlay = true; audio.play().catch(function () {}); } else { wantPlay = false; audio.pause(); } });
-  // довге натискання на назву альбому в плеєрі: вмикає журнал (якщо вимкнений) і показує його
-  (function () {
-    var tm = 0, last = 0, sx = 0, sy = 0;
-    function fire() {
-      if (Date.now() - last < 1500) return;
-      last = Date.now();
-      var was = LOGON;
-      try { localStorage.setItem('mpLog', '1'); } catch (e) {}
-      showLog(was ? '' : 'Журнал увімкнено. Повністю закрийте застосунок, відкрийте знову, увімкніть музику й перевірте, чи зупиняється. Потім так само натисніть і потримайте назву альбому - тут з\'явиться журнал.');
-    }
-    function stop() { clearTimeout(tm); }
-    [lineEl, cover].forEach(function (n) {
-      if (!n) return;
-      n.style.cssText += ';-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent';
-      n.addEventListener('touchstart', function (e) {
-        var t = e.touches[0]; sx = t.clientX; sy = t.clientY;
-        clearTimeout(tm); tm = setTimeout(fire, 900);
-      }, { passive: true });
-      n.addEventListener('touchmove', function (e) {
-        var t = e.touches[0];
-        if (Math.abs(t.clientX - sx) > 12 || Math.abs(t.clientY - sy) > 12) stop();
-      }, { passive: true });
-      n.addEventListener('touchend', stop);
-      n.addEventListener('touchcancel', stop);
-      n.addEventListener('mousedown', function () { clearTimeout(tm); tm = setTimeout(fire, 1000); });
-      n.addEventListener('mouseup', stop);
-      n.addEventListener('mouseleave', stop);
-      // у Chrome довге натискання на Android зазвичай породжує contextmenu - ловимо й його
-      n.addEventListener('contextmenu', function (e) { e.preventDefault(); fire(); });
-    });
-  })();
+  toggleBtn.addEventListener('click', function () { if (audio.paused) { wantPlay = true; audio.play().catch(function () {}); } else { wantPlay = false; audio.pause(); } });
   bar.querySelector('.mp-prev').addEventListener('click', MP.prev);
   bar.querySelector('.mp-next').addEventListener('click', MP.next);
   bar.querySelector('.mp-close').addEventListener('click', MP.close);
@@ -546,8 +438,8 @@
 
   if ('mediaSession' in navigator) {
     var ms = navigator.mediaSession;
-    [['play', function () { mlog('mediaSession: play'); wantPlay = true; audio.play(); }], ['pause', function () { mlog('mediaSession: pause'); wantPlay = false; audio.pause(); }],
-     ['previoustrack', function () { mlog('mediaSession: previoustrack'); MP.prev(); }], ['nexttrack', function () { mlog('mediaSession: nexttrack'); MP.next(); }],
+    [['play', function () { wantPlay = true; audio.play(); }], ['pause', function () { wantPlay = false; audio.pause(); }],
+     ['previoustrack', MP.prev], ['nexttrack', MP.next],
      ['seekto', function (d) { audio.currentTime = d.seekTime; }]].forEach(function (h) {
       try { ms.setActionHandler(h[0], h[1]); } catch (e) {}
     });
