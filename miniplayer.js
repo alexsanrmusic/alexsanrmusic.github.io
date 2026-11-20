@@ -252,26 +252,29 @@
     window.addEventListener('online', function () { mlog('мережа: онлайн'); });
     window.addEventListener('offline', function () { mlog('мережа: ОФЛАЙН'); });
   }
-  // Панель журналу: відкрийте сторінку з ?log=1
+  // Панель журналу: сторінка з ?log=1, або довге натискання (~1 с) на назву альбому в плеєрі (для застосунку без адресного рядка)
+  function showLog(note) {
+    var old = document.getElementById('mp-logbox');
+    if (old) old.remove();
+    var box = document.createElement('div');
+    box.id = 'mp-logbox';
+    box.style.cssText = 'position:fixed;z-index:2000;left:0;right:0;top:0;max-height:70vh;display:flex;flex-direction:column;background:#10131f;color:#dfe6ff;font:12px/1.4 monospace;border-bottom:2px solid #ffc83d';
+    var pre = document.createElement('pre');
+    pre.style.cssText = 'margin:0;padding:8px;overflow:auto;white-space:pre-wrap;word-break:break-word;flex:1';
+    var arr = []; try { arr = JSON.parse(localStorage.getItem('mpLogData') || '[]'); } catch (e) {}
+    pre.textContent = (note ? note + '\n\n' : '') + (arr.length ? arr.join('\n') : 'Журнал порожній.');
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:8px;padding:6px 8px;background:#1b2038';
+    function btn(t, f) { var x = document.createElement('button'); x.textContent = t; x.style.cssText = 'padding:8px 12px;border-radius:8px;border:1px solid #3a466f;background:#252c4d;color:#fff;font:13px system-ui'; x.onclick = f; row.appendChild(x); }
+    btn('Копіювати', function () { try { navigator.clipboard.writeText(pre.textContent); } catch (e) {} });
+    btn('Очистити', function () { try { localStorage.removeItem('mpLogData'); } catch (e) {} pre.textContent = '(очищено)'; });
+    btn('Закрити', function () { box.remove(); });
+    box.appendChild(pre); box.appendChild(row);
+    document.body.appendChild(box);
+    pre.scrollTop = pre.scrollHeight;
+  }
   if (/[?&]log=1\b/.test(location.search)) {
-    var showLog = function () {
-      var box = document.createElement('div');
-      box.style.cssText = 'position:fixed;z-index:2000;left:0;right:0;top:0;max-height:70vh;display:flex;flex-direction:column;background:#10131f;color:#dfe6ff;font:12px/1.4 monospace;border-bottom:2px solid #ffc83d';
-      var pre = document.createElement('pre');
-      pre.style.cssText = 'margin:0;padding:8px;overflow:auto;white-space:pre-wrap;word-break:break-word;flex:1';
-      var arr = []; try { arr = JSON.parse(localStorage.getItem('mpLogData') || '[]'); } catch (e) {}
-      pre.textContent = arr.length ? arr.join('\n') : 'Журнал порожній. Увімкнено. Увімкніть музику, згорніть, а потім знову відкрийте сторінку з ?log=1.';
-      var row = document.createElement('div');
-      row.style.cssText = 'display:flex;gap:8px;padding:6px 8px;background:#1b2038';
-      function btn(t, f) { var b = document.createElement('button'); b.textContent = t; b.style.cssText = 'padding:8px 12px;border-radius:8px;border:1px solid #3a466f;background:#252c4d;color:#fff;font:13px system-ui'; b.onclick = f; row.appendChild(b); }
-      btn('Копіювати', function () { try { navigator.clipboard.writeText(pre.textContent); } catch (e) {} });
-      btn('Очистити', function () { try { localStorage.removeItem('mpLogData'); } catch (e) {} pre.textContent = '(очищено)'; });
-      btn('Закрити', function () { box.remove(); });
-      box.appendChild(pre); box.appendChild(row);
-      document.body.appendChild(box);
-      pre.scrollTop = pre.scrollHeight;
-    };
-    if (document.body) showLog(); else document.addEventListener('DOMContentLoaded', showLog);
+    if (document.body) showLog(); else document.addEventListener('DOMContentLoaded', function () { showLog(); });
   }
   // ?preload=0 вимикає підвантаження наступного треку в пам'ять (і запам'ятовує), ?preload=1 вмикає назад
   var PRE_ON = (function () {
@@ -481,6 +484,22 @@
   window.addEventListener('pagehide', save);
 
   toggleBtn.addEventListener('click', function () { mlog('кнопка пауза/грати'); if (audio.paused) { wantPlay = true; audio.play().catch(function () {}); } else { wantPlay = false; audio.pause(); } });
+  // довге натискання на назву альбому в плеєрі: вмикає журнал (якщо вимкнений) і показує його
+  (function () {
+    var tm = 0;
+    function start() { clearTimeout(tm); tm = setTimeout(function () {
+      var was = LOGON;
+      try { localStorage.setItem('mpLog', '1'); } catch (e) {}
+      showLog(was ? '' : 'Журнал увімкнено. Повністю закрийте застосунок, відкрийте знову, увімкніть музику й перевірте, чи зупиняється. Потім так само натисніть і потримайте назву альбому — тут з\'явиться журнал.');
+    }, 1000); }
+    function stop() { clearTimeout(tm); }
+    [lineEl, cover].forEach(function (n) {
+      if (!n) return;
+      n.addEventListener('pointerdown', start);
+      ['pointerup', 'pointerleave', 'pointercancel', 'pointermove'].forEach(function (ev) { n.addEventListener(ev, stop); });
+      n.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
+  })();
   bar.querySelector('.mp-prev').addEventListener('click', MP.prev);
   bar.querySelector('.mp-next').addEventListener('click', MP.next);
   bar.querySelector('.mp-close').addEventListener('click', MP.close);
