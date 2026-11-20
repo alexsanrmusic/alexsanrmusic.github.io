@@ -486,18 +486,33 @@
   toggleBtn.addEventListener('click', function () { mlog('кнопка пауза/грати'); if (audio.paused) { wantPlay = true; audio.play().catch(function () {}); } else { wantPlay = false; audio.pause(); } });
   // довге натискання на назву альбому в плеєрі: вмикає журнал (якщо вимкнений) і показує його
   (function () {
-    var tm = 0;
-    function start() { clearTimeout(tm); tm = setTimeout(function () {
+    var tm = 0, last = 0, sx = 0, sy = 0;
+    function fire() {
+      if (Date.now() - last < 1500) return;
+      last = Date.now();
       var was = LOGON;
       try { localStorage.setItem('mpLog', '1'); } catch (e) {}
-      showLog(was ? '' : 'Журнал увімкнено. Повністю закрийте застосунок, відкрийте знову, увімкніть музику й перевірте, чи зупиняється. Потім так само натисніть і потримайте назву альбому — тут з\'явиться журнал.');
-    }, 1000); }
+      showLog(was ? '' : 'Журнал увімкнено. Повністю закрийте застосунок, відкрийте знову, увімкніть музику й перевірте, чи зупиняється. Потім так само натисніть і потримайте назву альбому - тут з\'явиться журнал.');
+    }
     function stop() { clearTimeout(tm); }
     [lineEl, cover].forEach(function (n) {
       if (!n) return;
-      n.addEventListener('pointerdown', start);
-      ['pointerup', 'pointerleave', 'pointercancel', 'pointermove'].forEach(function (ev) { n.addEventListener(ev, stop); });
-      n.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      n.style.cssText += ';-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent';
+      n.addEventListener('touchstart', function (e) {
+        var t = e.touches[0]; sx = t.clientX; sy = t.clientY;
+        clearTimeout(tm); tm = setTimeout(fire, 900);
+      }, { passive: true });
+      n.addEventListener('touchmove', function (e) {
+        var t = e.touches[0];
+        if (Math.abs(t.clientX - sx) > 12 || Math.abs(t.clientY - sy) > 12) stop();
+      }, { passive: true });
+      n.addEventListener('touchend', stop);
+      n.addEventListener('touchcancel', stop);
+      n.addEventListener('mousedown', function () { clearTimeout(tm); tm = setTimeout(fire, 1000); });
+      n.addEventListener('mouseup', stop);
+      n.addEventListener('mouseleave', stop);
+      // у Chrome довге натискання на Android зазвичай породжує contextmenu - ловимо й його
+      n.addEventListener('contextmenu', function (e) { e.preventDefault(); fire(); });
     });
   })();
   bar.querySelector('.mp-prev').addEventListener('click', MP.prev);
