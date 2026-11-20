@@ -294,8 +294,20 @@
     if (pre.url) { try { URL.revokeObjectURL(pre.url); } catch (e) {} }
     pre = { i: -1, src: '', url: '', ctrl: null };
   }
+  // Наступний трек у черзі; якщо це кінець черги - перший трек наступного альбому (щоб на стику альбомів не було запиту в мережу)
   function preloadNext() {
+    if (!PRE_ON) return;
     var i = MP.idx + 1, t = MP.queue[i];
+    if (t) return startPre(i, t);
+    var cur = MP.cur;
+    if (!cur) return;
+    resolveNext(function (q) {
+      if (MP.cur !== cur || !q || !q.length) return;
+      mlog('готуємо стик альбомів: наступний альбом «' + q[0].album + '»');
+      startPre(0, q[0]);
+    });
+  }
+  function startPre(i, t) {
     if (!PRE_ON || !t || !window.fetch || !window.URL || !URL.createObjectURL) return;
     if (navigator.connection && navigator.connection.saveData) return;
     if (pre.i === i && pre.src === t.src) return;
@@ -357,7 +369,7 @@
     root.classList.add('mp-on');
     meta(); setIcon(); emit('track'); loadCues(t); save();
   }
-  MP.play = function (queue, idx) { MP.queue = queue; load(idx, true); };
+  MP.play = function (queue, idx) { nextCache = null; MP.queue = queue; load(idx, true); };
   // Кінець черги: не зупиняємось, а продовжуємо з наступного альбому (по колу).
   // На albums.html порядок і фільтри (мова, жанр) підказує MP.nextQueue(albumId); на інших сторінках — порядок albums.json.
   var advancing = false;
@@ -381,20 +393,26 @@
       cb(null);
     }).catch(function () { cb(null); });
   }
+  var nextCache = null;
+  function resolveNext(cb) {
+    var t = MP.cur;
+    if (!t) return cb(null);
+    if (nextCache && nextCache.id === t.albumId) return cb(nextCache.q);
+    var r = null;
+    try { r = MP.nextQueue ? MP.nextQueue(t.albumId) : null; } catch (e) {}
+    if (r && r.length) { nextCache = { id: t.albumId, q: r }; return cb(r); }
+    defaultNext(t.albumId, function (q) { if (q && q.length) nextCache = { id: t.albumId, q: q }; cb(q); });
+  }
   MP.advance = function () {
     if (advancing || !MP.cur) return;
     advancing = true;
-    mlog('кінець черги, шукаю наступний альбом');
-    var t = MP.cur, id = t.albumId;
-    function done(q) {
-      advancing = false;
+    mlog('кінець черги, наступний альбом');
+    var t = MP.cur;
+    resolveNext(function (q) {
+      advancing = false; nextCache = null;
       if (MP.cur !== t) return;                       // плеєр закрили або запустили інше, поки шукали альбом
       if (q && q.length) { MP.queue = q; load(0, true); } else { setIcon(); save(); }
-    }
-    var r = null;
-    try { r = MP.nextQueue ? MP.nextQueue(id) : null; } catch (e) {}
-    if (r && r.length) return done(r);
-    defaultNext(id, done);
+    });
   };
   MP.next = function () { if (MP.idx + 1 < MP.queue.length) load(MP.idx + 1, true); else MP.advance(); };
   MP.prev = function () {
