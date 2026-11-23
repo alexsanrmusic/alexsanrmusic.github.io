@@ -1049,6 +1049,88 @@
     "drive": "17n3sChrl0eQX1lrW7CHR8AB3_96QbxTC"
    }
   ]
+ },
+ {
+  "id": "names-and-birthday-stories",
+  "title": "Names & Birthday Stories",
+  "lang": "ru",
+  "langs": ["ru", "uk", "en"],
+  "year": 2026,
+  "cover": "images/birthday-stories.jpg",
+  "tracks": [
+   {
+    "title": "Ты - Наша звезда",
+    "drive": "1YTS47DVFf24k9SYUgOq61z73tYzCIOZI"
+   },
+   {
+    "title": "Толян - Оnline (English version)",
+    "drive": "1TJSnrEdECPVMn3zEN91CjDqBqXQAe-TS"
+   },
+   {
+    "title": "Веронике девятнадцать",
+    "drive": "1DoAls9_wl0Ls_4f5_i8UjyAC3ZO_2dHA"
+   },
+   {
+    "title": "Павлик - Всегда рядом",
+    "drive": "124ZF3TAP0LVwygYWsim3q-5hLVd8Zmtk"
+   },
+   {
+    "title": "Кокс - Своя дорога",
+    "drive": "1N--AFOMLHjAgC-1TaJJ35AUHKkYZvAlx"
+   },
+   {
+    "title": "Олег - Назло всем бедам",
+    "drive": "1nAo0_yeQV6MD3XNZJZ_N5px-sR08uhGB"
+   },
+   {
+    "title": "Сева - Рейс жизни",
+    "drive": "1CNFP1GwSe8avSAJVlkwgF8RVHnO1EC3O"
+   },
+   {
+    "title": "Яна - Королева басейнів і пластиліну",
+    "drive": "1yROL7D2MoqRiDKt4l5oilPG26XQaNI-b"
+   },
+   {
+    "title": "Таня - Усе від душі",
+    "drive": "1jhKpTkXJ_jszkCO8CHUo0-wc_xp_DxLQ"
+   },
+   {
+    "title": "Витя - Пусть тебе прёт!",
+    "drive": "14j5TOwjv90n6fLYE9Dcp-3ecHf4IUTGX"
+   },
+   {
+    "title": "Оксана - Королева свята",
+    "drive": "1zOkOBeRBvg5wOwweah5WuyKnIagz8OI2"
+   },
+   {
+    "title": "Ира - Наше всё",
+    "drive": "1zuiT0f1BtNMYXq15r5zA2vlN2S3EXEn4"
+   },
+   {
+    "title": "Олег - Без лишних слов",
+    "drive": "1AkyhlKk1dgjzJK12kWpTAluecap65MYS"
+   },
+   {
+    "title": "Тарік - Людина справи",
+    "drive": "1OF4n9E3-ca_cLOC0MVGYVPeR5AjGPwsO"
+   },
+   {
+    "title": "Александр - Человек с характером",
+    "drive": "1qs4e1xl-LRqrOA4xL4dhbeTfb8MZhIw6"
+   },
+   {
+    "title": "Димон - Свой парень",
+    "drive": "1519ySW0eooaCHQGQ79RtVM1GWQ9_LWth"
+   },
+   {
+    "title": "Таня - Особенная",
+    "drive": "1tl7DOv77ZBYYClZTznFrRGXohz41xc3K"
+   },
+   {
+    "title": "Толян - online",
+    "drive": "1cE2NUYyWoQugXhLEQI3p5BNjqq1Lf4H9"
+   }
+  ]
  }
  ],
  "_hidden": [

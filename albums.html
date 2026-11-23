@@ -312,7 +312,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
   // Кінець альбому: плеєр сам переходить до наступного альбому зі списку (з урахуванням вибраних мови й жанру), по колу
   MP.nextQueue = function (albumId) {
     var list = albums.filter(function (x) {
-      if (currentLang !== 'all' && x.lang !== currentLang) return false;
+      if (currentLang !== 'all' && langsOf(x).indexOf(currentLang) < 0) return false;
       if (currentGenre !== 'all' && genreInfo && (genreInfo.albums[x.id] || []).indexOf(currentGenre) < 0) return false;
       return true;
     });
@@ -423,9 +423,12 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     body.hidden = false;
   }
 
+  // Альбом может быть на нескольких языках: поле "langs" в albums.json (иначе один язык из "lang")
+  function langsOf(a) { return (a.langs && a.langs.length) ? a.langs : [a.lang]; }
+
   function buildCard(album) {
     var card = el('article', 'album');
-    card.dataset.lang = album.lang;
+    card.dataset.lang = langsOf(album).join(' ');
     card.dataset.id = album.id;
 
     var head = el('button', 'album-head');
@@ -455,7 +458,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     var info = el('span', 'album-info');
     info.appendChild(el('span', 'album-title', album.title));
     var badges = el('span', 'badges');
-    badges.appendChild(el('span', 'badge badge-lang', (FLAGS[album.lang] ? FLAGS[album.lang] + ' ' : '') + (LANGS[album.lang] || album.lang)));
+    badges.appendChild(el('span', 'badge badge-lang', langsOf(album).map(function (l) { return (FLAGS[l] ? FLAGS[l] + ' ' : '') + (LANGS[l] || l); }).join(' · ')));
     badges.appendChild(el('span', 'badge', String(album.year)));
     if (album.instrumental) {
       var ib = el('span', 'badge badge-inst', T('album.instrumental'));
@@ -554,7 +557,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     if (!genreInfo) return;
     var avail = {};
     albums.forEach(function (a) {
-      if (currentLang !== 'all' && a.lang !== currentLang) return;
+      if (currentLang !== 'all' && langsOf(a).indexOf(currentLang) < 0) return;
       (genreInfo.albums[a.id] || []).forEach(function (g) { avail[g] = true; });
     });
     if (currentGenre !== 'all' && !avail[currentGenre]) currentGenre = 'all';
@@ -580,7 +583,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     albumsEl.textContent = '';
     syncGenreChips();
     var shown = albums.filter(function (a) {
-      if (currentLang !== 'all' && a.lang !== currentLang) return false;
+      if (currentLang !== 'all' && langsOf(a).indexOf(currentLang) < 0) return false;
       if (currentGenre !== 'all' && genreInfo && (genreInfo.albums[a.id] || []).indexOf(currentGenre) < 0) return false;
       return true;
     });
@@ -601,7 +604,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     if (!statsEl) return;
     var total = albums.reduce(function (n, a) { return n + a.tracks.length; }, 0);
     var langs = [];
-    albums.forEach(function (a) { if (langs.indexOf(a.lang) < 0) langs.push(a.lang); });
+    albums.forEach(function (a) { langsOf(a).forEach(function (l) { if (langs.indexOf(l) < 0) langs.push(l); }); });
     [[albums.length, I18N.plural('albums', albums.length)], [total, I18N.plural('tracks', total)], [langs.length, I18N.plural('languages', langs.length)]].forEach(function (s) {
       var chip = el('span', 'stat');
       chip.appendChild(el('b', null, String(s[0])));
@@ -612,7 +615,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
 
   function buildFilters() {
     var present = [];
-    albums.forEach(function (a) { if (present.indexOf(a.lang) < 0) present.push(a.lang); });
+    albums.forEach(function (a) { langsOf(a).forEach(function (l) { if (present.indexOf(l) < 0) present.push(l); }); });
     filtersEl.textContent = '';
     if (present.length < 2) return;
     filtersEl.appendChild(el('span', 'filters-label', T('filters.label')));
@@ -696,7 +699,7 @@ footer { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-b
     })
     .then(function (data) {
       albums = data.albums || [];
-      if (currentLang !== 'all' && !albums.some(function (a) { return a.lang === currentLang; })) currentLang = 'all';
+      if (currentLang !== 'all' && !albums.some(function (a) { return langsOf(a).indexOf(currentLang) >= 0; })) currentLang = 'all';
       buildStats();
       buildFilters();
       buildGenreFilters();

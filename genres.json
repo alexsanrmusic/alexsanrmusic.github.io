@@ -150,6 +150,14 @@
   },
   "electric-dreams-vol-2": {
    "all": "Instrumental"
+  },
+  "names-and-birthday-stories": {
+   "all": "Pop Rap",
+   "tracks": {
+    "Ты - Наша звезда": "Pop Rock",
+    "Сева - Рейс жизни": "Rock",
+    "Таня - Усе від душі": "Pop, Folk"
+   }
   }
  }
 }
